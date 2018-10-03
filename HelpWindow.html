@@ -30,11 +30,15 @@
 <li><a href="#remove-registration-from-event-code-unregister-code">3.15. Remove registration from event : <code>unregister</code></a></li>
 <li><a href="#view-participant-list-code-viewparticipants-code">3.16. View participant list : <code>viewParticipants</code></a></li>
 <li><a href="#set-reminders-code-setreminder-code">3.17. Set reminders : <code>setReminder</code></a></li>
-<li><a href="#clear-reminders-code-setreminder-code">3.18. Clear reminders : <code>setReminder</code></a></li>
+<li><a href="#clear-reminders-code-removereminder-code">3.18. Clear reminders : <code>removeReminder</code></a></li>
 <li><a href="#clear-reminders-code-showreminders-code">3.19. Clear reminders : <code>showReminders</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.20. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.21. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.22. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#view-comments-code-showcomments-code">3.20. View Comments : <code>showComments</code></a></li>
+<li><a href="#adds-comment-code-addcomment-code">3.21. Adds Comment : <code>addComment</code></a></li>
+<li><a href="#reply-comment-code-replycomment-code">3.22. Reply Comment : <code>replyComment</code></a></li>
+<li><a href="#delete-comment-code-deletecomment-code">3.23. Delete Comment : <code>deleteComment</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.24. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.25. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.26. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -498,7 +502,7 @@ Format: <code>setReminder INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clear-reminders-code-setreminder-code"><a class="link" href="#clear-reminders-code-setreminder-code">3.18. Clear reminders : <code>setReminder</code></a></h3>
+<h3 id="clear-reminders-code-removereminder-code"><a class="link" href="#clear-reminders-code-removereminder-code">3.18. Clear reminders : <code>removeReminder</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Removes the reminder for the event identified by the index number used in the displayed event list.<br>
 Format: <code>removeReminder INDEX</code></p>
@@ -512,21 +516,49 @@ Format: <code>showReminders</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.20. Exiting the program : <code>exit</code></a></h3>
+<h3 id="view-comments-code-showcomments-code"><a class="link" href="#view-comments-code-showcomments-code">3.20. View Comments : <code>showComments</code></a></h3>
+<div class="paragraph">
+<p>Admin/User: Show event comment section<br>
+Format: <code>showComments INDEX</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adds-comment-code-addcomment-code"><a class="link" href="#adds-comment-code-addcomment-code">3.21. Adds Comment : <code>addComment</code></a></h3>
+<div class="paragraph">
+<p>Admin/User: Add comment into event comment section<br>
+Format: <code>addComment INDEX STRING</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.22. Reply Comment : <code>replyComment</code></a></h3>
+<div class="paragraph">
+<p>Admin/User: Replies a comment<br>
+Format: <code>replyComments EVENTINDEX LINEINDEX STRING</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-comment-code-deletecomment-code"><a class="link" href="#delete-comment-code-deletecomment-code">3.23. Delete Comment : <code>deleteComment</code></a></h3>
+<div class="paragraph">
+<p>Admin: Deletes a comment<br>
+Format: <code>deleteComment EVENTINDEX LINEINDEX</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.24. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.21. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.25. Saving the data</a></h3>
 <div class="paragraph">
 <p>Event Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.22. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.26. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -547,6 +579,12 @@ There is no need to save manually.</p>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
+<li>
+<p><strong>Sign up</strong> : <code>signup n/USERNAME p/PASSWORD c/CONFIRM_PASSWORD</code></p>
+</li>
+<li>
+<p><strong>Login</strong> : <code>login n/USERNAME p/PASSWORD</code></p>
+</li>
 <li>
 <p><strong>Add</strong> <code>add n/EVENT p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/Sports Day p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
@@ -585,7 +623,31 @@ e.g.<code>select 2</code></p>
 <li>
 <p><strong>Redo</strong> : <code>redo</code></p>
 </li>
+<li>
+<p><strong>Register</strong> : <code>register INDEX</code></p>
+</li>
+<li>
+<p><strong>Unregister</strong> : <code>unregister INDEX</code></p>
+</li>
+<li>
+<p><strong>Set Reminders</strong> : <code>setReminder INDEX</code></p>
+</li>
+<li>
+<p><strong>View Reminders</strong> : <code>reminders</code></p>
+</li>
+<li>
+<p><strong>showComments</strong> : <code>showComments INDEX</code></p>
+</li>
+<li>
+<p><strong>addComment</strong> : <code>addCeomment INDEX STRING</code></p>
+</li>
+<li>
+<p><strong>replyComment</strong> : <code>replyComment EVENTINDEX LINEINDEX STRING</code></p>
+</li>
+<li>
+<p><strong>deleteComment</strong> : <code>deleteComment EVENT INDEX LINEINDEX STRING</code></p>
+</li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-03 11:39:06 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-03 11:57:48 UTC</div></div></div></body></html>
