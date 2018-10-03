@@ -13,20 +13,21 @@
 <li><a href="#quick-start">2. Quick Start</a></li>
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-event-code-add-code">3.2. Adding a event: <code>add</code></a></li>
-<li><a href="#listing-all-events-code-list-code">3.3. Listing all events : <code>list</code></a></li>
-<li><a href="#editing-a-event-code-edit-code">3.4. Editing a event : <code>edit</code></a></li>
-<li><a href="#locating-events-by-name-code-find-code">3.5. Locating events by name: <code>find</code></a></li>
-<li><a href="#deleting-a-event-code-delete-code">3.6. Deleting a event : <code>delete</code></a></li>
-<li><a href="#selecting-a-event-code-select-code">3.7. Selecting a event : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.13. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.14. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#signing-up-for-an-account-code-signup-code">3.1. Signing up for an account : <code>signup</code></a></li>
+<li><a href="#viewing-help-code-help-code">3.2. Viewing help : <code>help</code></a></li>
+<li><a href="#adding-a-event-code-add-code">3.3. Adding a event: <code>add</code></a></li>
+<li><a href="#listing-all-events-code-list-code">3.4. Listing all events : <code>list</code></a></li>
+<li><a href="#editing-a-event-code-edit-code">3.5. Editing a event : <code>edit</code></a></li>
+<li><a href="#locating-events-by-name-code-find-code">3.6. Locating events by name: <code>find</code></a></li>
+<li><a href="#deleting-a-event-code-delete-code">3.7. Deleting a event : <code>delete</code></a></li>
+<li><a href="#selecting-a-event-code-select-code">3.8. Selecting a event : <code>select</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.9. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.10. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.11. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.12. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.13. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.14. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.15. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -121,13 +122,22 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+<h3 id="signing-up-for-an-account-code-signup-code"><a class="link" href="#signing-up-for-an-account-code-signup-code">3.1. Signing up for an account : <code>signup</code></a></h3>
+<div class="paragraph">
+<p>User: Creates a <strong>user</strong> account</p>
+</div>
+<div class="paragraph">
+<p>Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.2. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-event-code-add-code"><a class="link" href="#adding-a-event-code-add-code">3.2. Adding a event: <code>add</code></a></h3>
+<h3 id="adding-a-event-code-add-code"><a class="link" href="#adding-a-event-code-add-code">3.3. Adding a event: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a event to the Event Manager<br>
 Format: <code>add n/EVENT p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
@@ -159,14 +169,14 @@ A event can have any number of tags (including 0)
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-events-code-list-code"><a class="link" href="#listing-all-events-code-list-code">3.3. Listing all events : <code>list</code></a></h3>
+<h3 id="listing-all-events-code-list-code"><a class="link" href="#listing-all-events-code-list-code">3.4. Listing all events : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all events in the Event Manager.<br>
 Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-event-code-edit-code"><a class="link" href="#editing-a-event-code-edit-code">3.4. Editing a event : <code>edit</code></a></h3>
+<h3 id="editing-a-event-code-edit-code"><a class="link" href="#editing-a-event-code-edit-code">3.5. Editing a event : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing event in the Event Manager.<br>
 Format: <code>edit INDEX [n/EVENT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
@@ -211,7 +221,7 @@ Edits the name of the 2nd event to be <code>Sports Day</code> and clears all exi
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-events-by-name-code-find-code"><a class="link" href="#locating-events-by-name-code-find-code">3.5. Locating events by name: <code>find</code></a></h3>
+<h3 id="locating-events-by-name-code-find-code"><a class="link" href="#locating-events-by-name-code-find-code">3.6. Locating events by name: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds events whose names contain any of the given keywords.<br>
 Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
@@ -256,7 +266,7 @@ Returns any event having names <code>Sports Day</code>, <code>Comp Sci Workshop<
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-event-code-delete-code"><a class="link" href="#deleting-a-event-code-delete-code">3.6. Deleting a event : <code>delete</code></a></h3>
+<h3 id="deleting-a-event-code-delete-code"><a class="link" href="#deleting-a-event-code-delete-code">3.7. Deleting a event : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified event from the Event Manager.<br>
 Format: <code>delete INDEX</code></p>
@@ -297,7 +307,7 @@ Deletes the 1st event in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-event-code-select-code"><a class="link" href="#selecting-a-event-code-select-code">3.7. Selecting a event : <code>select</code></a></h3>
+<h3 id="selecting-a-event-code-select-code"><a class="link" href="#selecting-a-event-code-select-code">3.8. Selecting a event : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the event identified by the index number used in the displayed event list.<br>
 Format: <code>select INDEX</code></p>
@@ -338,7 +348,7 @@ Selects the 1st event in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.9. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -359,7 +369,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.10. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -404,7 +414,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.11. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -436,28 +446,28 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.12. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the Event Manager.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.13. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.13. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.14. Saving the data</a></h3>
 <div class="paragraph">
 <p>Event Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.14. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.15. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -519,4 +529,4 @@ e.g.<code>select 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-03 11:18:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-03 11:22:49 UTC</div></div></div></body></html>
