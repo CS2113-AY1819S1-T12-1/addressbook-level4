@@ -50,7 +50,7 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Event Manager is made with the residents of the Residential Colleges(RC) of the National University of Singapore(NUS). This application is for those who prefer to use a desktop application for managing events and guests. Moreover, the Event Manager offers a faster workflow <strong>for those who prefer working with a Command Line Interface</strong> while still retaining the benefits of having a Graphical User Interface. If you can type fast, you can work even faster with Event Manager to manager the various events in your RC, all you need is a laptop/computer to run this application. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
+<p>Event Manager is made for the residents of the Residential Colleges (RC) in the National University of Singapore (NUS). This application is build for those who prefer to use a desktop application for managing events and attendees. Moreover, the Event Manager offers a faster workflow <strong>for those who prefer working with a Command Line Interface</strong> while still retaining the benefits of having a Graphical User Interface. If you can type fast, you can work even faster with Event Manager to manage the various events in your RC! All you need is a laptop/computer to run this application. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
 </div>
 </div>
 </div>
@@ -88,7 +88,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all events</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/Computer Science Workshop p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>Computer Science</code> to the Event Manager.</p>
+<p><strong><code>add</code></strong><code>n/Computer Science Workshop c/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>Computer Science</code> to the Event Manager.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd event shown in the current list</p>
@@ -136,7 +136,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="signing-up-for-an-account-code-signup-code"><a class="link" href="#signing-up-for-an-account-code-signup-code">3.1. Signing up for an account : <code>signup</code></a></h3>
 <div class="paragraph">
 <p>User: Creates a <strong>user</strong> account<br>
-Format: <code>signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD</code>+
+Format: <code>signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD</code><br>
 Examples:</p>
 </div>
 <div class="ulist">
@@ -156,7 +156,7 @@ Creates account for James Yaputra</p>
 <h3 id="signing-up-for-an-account-code-login-code"><a class="link" href="#signing-up-for-an-account-code-login-code">3.2. Signing up for an account : <code>login</code></a></h3>
 <div class="paragraph">
 <p>User: Logs in to account<br>
-Format: <code>login n/USERNAME p/PASSWORD</code>+
+Format: <code>login n/USERNAME p/PASSWORD</code><br>
 Examples:
 * <code>login n/Gerald Chua p/password12345</code><br>
 Logs in Gerald Chua
@@ -179,7 +179,7 @@ User: Shows User commands</p>
 <div class="paragraph">
 <p>Admin: Adds an event to tthe Event Manager<br>
 Adds a event to the Event Manager<br>
-Format: <code>add n/EVENT p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -199,10 +199,10 @@ An event can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/Com Sci Workshop p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
+<p><code>add n/Com Sci Workshop c/John Doe cp/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
 </li>
 <li>
-<p><code>add n/Sports Day t/Sports e/betsycrowe@example.com a/COM2 #02-01 p/1234567 t/leisure</code></p>
+<p><code>add n/Sports Day c/Betsy Crow t/Sports e/betsycrowe@example.com a/COM2 #02-01 p/1234567 t/leisure</code></p>
 </li>
 </ul>
 </div>
@@ -218,7 +218,7 @@ Format: <code>list</code></p>
 <h3 id="editing-a-event-code-edit-code"><a class="link" href="#editing-a-event-code-edit-code">3.6. Editing a event : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Admin: Edits an existing event in the Event Manager.<br>
-Format: <code>edit INDEX [n/EVENT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>edit INDEX [n/EVENT] [c/CONTACT NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -591,11 +591,11 @@ Format: <code>removeReminder INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>removesReminder 1</code><br>
+<p><code>removeReminder 1</code><br>
 Removes a reminder for user for event 1</p>
 </li>
 <li>
-<p><code>removesReminder 5</code><br>
+<p><code>removeReminder 5</code><br>
 Removes a reminder for user for event 5</p>
 </li>
 </ul>
@@ -642,11 +642,11 @@ Format: <code>addComment INDEX STRING</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>addComments 1 "What is the attire to wear for the event?</code><br>
+<p><code>addComment 1 "What is the attire to wear for the event?</code><br>
 Adds "What is the attire to wear for the event?" into event 1 comment section</p>
 </li>
 <li>
-<p><code>addComments 5 "What is the attire to wear for this event?</code><br>
+<p><code>addComment 5 "What is the attire to wear for this event?</code><br>
 Adds "What is the attire to wear for this event?" into event 5 comment section</p>
 </li>
 </ul>
@@ -656,7 +656,7 @@ Adds "What is the attire to wear for this event?" into event 5 comment section</
 <h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.22. Reply Comment : <code>replyComment</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Replies a comment<br>
-Format: <code>replyComments EVENTINDEX LINEINDEX STRING</code></p>
+Format: <code>replyComment EVENTINDEX LINEINDEX STRING</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -664,12 +664,12 @@ Format: <code>replyComments EVENTINDEX LINEINDEX STRING</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>replyComments 1 5 "What is the attire to wear for the event?</code><br>
-Adds "What is the attire to wear for the event?" into event 1 comment section at line 5</p>
+<p><code>replyComment 1 5 "What is the attire to wear for the event?</code><br>
+Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5</p>
 </li>
 <li>
-<p><code>replyComments 2 2 "What is the attire to wear for the event?</code><br>
-Adds "What is the attire to wear for the event?" into event 2 comment section at line 2</p>
+<p><code>replyComment 2 2 "What is the attire to wear for the event?</code><br>
+Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2</p>
 </li>
 </ul>
 </div>
@@ -741,8 +741,8 @@ e.g. <code>signup n/Gerald Chua p/password12345 c/password12345</code></p>
 e.g. <code>login n/Gerald Chua p/password12345</code></p>
 </li>
 <li>
-<p><strong>Add</strong> <code>add n/EVENT p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/Sports Day p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
+<p><strong>Add</strong> <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/Sports Day c/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
@@ -787,7 +787,7 @@ e.g. <code>register 1</code></p>
 e.g. <code>unregister 1</code></p>
 </li>
 <li>
-<p><strong>Set reminders</strong> : <code>setReminder INDEX</code>+
+<p><strong>Set reminders</strong> : <code>setReminder INDEX</code><br>
 e.g. <code>setReminder 1</code></p>
 </li>
 <li>
@@ -813,4 +813,4 @@ e.g. <code>deleteComment 1 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-03 15:45:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-03 16:18:18 UTC</div></div></div></body></html>
