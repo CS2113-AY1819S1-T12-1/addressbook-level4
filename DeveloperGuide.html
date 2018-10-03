@@ -2105,6 +2105,75 @@ for <code>RemarkCommandParser</code>.</p>
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix D: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>For all the use cases below, System refers to the EventManager, Actor refers to the admin/user.</p>
+</div>
+<div class="paragraph">
+<p><strong>Use Case: Authentication</strong><br>
+MSS (main system success):<br>
+1. EventManager prompts user for username and password.<br>
+2. User inputs correct username and password.<br>
+3. EventManager grants access to User and displays welcome message.<br>
+Use case ends.</p>
+</div>
+<div class="paragraph">
+<p>Extensions:<br>
+     2a. User inputs incorrect password.<br>
+	2a1. EventManager denies access to user and displays error message.<br>
+Use Case resumes at step 1.</p>
+</div>
+<div class="paragraph">
+<p><strong>Use Case: View events, RSVP and Reminders</strong><br>
+MSS (main system success):<br>
+1. User requests for list of events.<br>
+2. EventManager displays list of events.<br>
+3. User selects event.<br>
+4. EventManager displays details of selected event.<br>
+5. User indicates attendance.<br>
+6. EventManager records attendance and displays confirmation message<br>
+Use case ends</p>
+</div>
+<div class="paragraph">
+<p>Extensions:<br>
+     1a) Display by filter:<br>
+	1a1) User selected filter (Date and time, Tags of events).<br>
+	1a2) Apply filter in the list.<br>
+     4a) User requests for list of attendees.<br>
+	4a1) EventManager displays list of attendees in alphabetical order<br>
+     5a) User sets reminder for event.<br>
+5a1) Reminder will alert user 1 hour before the commencement of the event if the user is logged in.<br>
+5a2) User removes reminder for event.<br>
+Use Case resumes at step 5.</p>
+</div>
+<div class="paragraph">
+<p><strong>Use Case: View event with reminders and remove reminder</strong><br>
+MSS (main system success):<br>
+1. User requests for list of events with reminder set.<br>
+2. EventManager displays list of events.<br>
+3. User selects event.<br>
+4. EventManager displays details of selected event.<br>
+5. User removes reminder on event.<br>
+6. EventManager removes reminder for the event and displays confirmation message.<br>
+Use case ends</p>
+</div>
+<div class="paragraph">
+<p><strong>Use Case: Comments</strong>:<br>
+MSS (main system success):<br>
+1. User views the event information and types in “comment view” on CLI<br>
+2. EventManager displays a comment section<br>
+3. User inputs command of “comment x”<br>
+4. EventManager executes command based on what user keys in<br>
+5. Repeat 3 and 4 until User types “comment exit”<br>
+Use case ends</p>
+</div>
+<div class="paragraph">
+<p>Extensions:<br>
+3a) The commands used in comments:<br>
+     	   3a1) “comment reply INDEX STRING ” will reply to the comment at INDEX<br>
+     	   3a2) “comment add STRING “ will adds the STRING to the list of comments<br>
+   3a3) “comment delete INDEX”  (only for admin) it will delete the comment at            INDEX<br>
+Resume use case at step 4</p>
+</div>
+<div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
 <h3 id="use-case-delete-event" class="discrete">Use case: Delete event</h3>
@@ -2345,4 +2414,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-03 12:58:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-03 13:07:07 UTC</div></div></div></body></html>
