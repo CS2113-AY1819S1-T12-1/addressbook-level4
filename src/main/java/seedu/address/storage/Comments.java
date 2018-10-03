@@ -69,7 +69,7 @@ public class Comments {
     }
 
     /**
-     * Test code.
+     * Test code for development
      */
     public static void main(String[] args) {
         Comments comment = new Comments();
