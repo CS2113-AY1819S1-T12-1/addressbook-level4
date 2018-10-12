@@ -20,6 +20,10 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        if (!hasLoggedIn) {
+            throw new CommandException(MESSAGE_NO_LOGIN);
+        }
+
         if (!model.canRedoEventManager()) {
             throw new CommandException(MESSAGE_FAILURE);
         }

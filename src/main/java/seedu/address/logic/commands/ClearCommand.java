@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 
@@ -16,8 +17,13 @@ public class ClearCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!hasLoggedIn) {
+            throw new CommandException(MESSAGE_NO_LOGIN);
+        }
+
         model.resetData(new EventManager());
         model.commitEventManager();
         return new CommandResult(MESSAGE_SUCCESS);
