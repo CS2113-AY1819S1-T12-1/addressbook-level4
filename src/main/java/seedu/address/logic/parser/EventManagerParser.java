@@ -59,7 +59,6 @@ public class EventManagerParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
-
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 

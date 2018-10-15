@@ -63,7 +63,7 @@ Creates account for Gerald Chua
 * `signup u/James Yaputra p/drowssap12345 c/drowssap12345` +
 Creates account for James Yaputra
 
-=== Signing up for an account : `login`
+=== Logging into an account : `login`
 
 User: Logs in to account +
 Format: `login u/USERNAME p/PASSWORD` +
@@ -73,6 +73,28 @@ Examples:
 Logs in Gerald Chua +
 * `login u/James Yaputra p/drowssap12345` +
 Logs in James Yaputra
+
+=== Logging out of an account : `logout`
+
+User: Logs out of an account +
+Format: `logout` +
+Examples:
+
+* `login n/Gerald Chua p/password12345` +
+Logs in Gerald Chua +
+* `logout` +
+Logs out from Gerald Chua
+
+=== Signing up for an account : `signup`
+
+User: Creates a new account +
+Format: `signup u/USERNAME p/PASSWORD` +
+Examples:
+
+* `signup n/Gerald Chua p/password12345` +
+Creates Gerald Chua +
+* `signup u/James Yaputra p/drowssap12345` +
+Creates James Yaputra
 
 === Viewing help : `help`
 
@@ -310,52 +332,40 @@ Removes a reminder for user for event 5
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
 
-=== View Comments : `showComments`
-
-Admin/User: Show event comment section +
-Format: `showComments INDEX`
-
-Examples:
-
-* `showComments 1` +
-Shows comments section for event 1
-* `showComments 5` +
-Shows comments section for event 5
-
 === Adds Comment : `addComment`
 
 Admin/User: Add comment into event comment section +
-Format: `addComment INDEX STRING`
+Format: `addComment INDEX C/STRING`
 
 Examples:
 
-* `addComment 1 "What is the attire to wear for the event?` +
+* `addComment 1 C/What is the attire to wear for the event?` +
 Adds "What is the attire to wear for the event?" into event 1 comment section
-* `addComment 5 "What is the attire to wear for this event?` +
+* `addComment 5 C/What is the attire to wear for this event?` +
 Adds "What is the attire to wear for this event?" into event 5 comment section
 
 === Reply Comment : `replyComment`
 
 Admin/User: Replies a comment +
-Format: `replyComment EVENTINDEX LINEINDEX STRING`
+Format: `replyComment INDEX LINE STRING`
 
 Examples:
 
-* `replyComment 1 5 "What is the attire to wear for the event?` +
+* `replyComment 1 L/5 C/What is the attire to wear for the event?` +
 Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5
-* `replyComment 2 2 "What is the attire to wear for the event?` +
+* `replyComment 2 L/2 C/What is the attire to wear for the event?` +
 Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2
 
 === Delete Comment : `deleteComment`
 
 Admin: Deletes a comment +
-Format: `deleteComment EVENTINDEX LINEINDEX`
+Format: `deleteComment INDEX LINE`
 
 Examples:
 
-* `deleteComment 1 5` +
+* `deleteComment 1 L/5` +
 Deletes comment of event 1 at line 5
-* `deleteComment 2 2` +
+* `deleteComment 2 L/2` +
 Deletes comment of event 2 at line 2
 
 === Exiting the program : `exit`

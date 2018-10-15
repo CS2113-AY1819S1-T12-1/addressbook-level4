@@ -1,5 +1,4 @@
 package seedu.address.storage;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -52,5 +51,6 @@ public class JsonUserStorage {
         FileWriter file = new FileWriter(folderPathString);
         file.write(object.toJSONString());
         file.flush();
+
     }
 }
