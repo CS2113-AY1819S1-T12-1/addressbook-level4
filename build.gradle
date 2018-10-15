@@ -66,7 +66,6 @@ dependencies {
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0'
     implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0'
     implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
-    implementation group: 'org.jsoup', name:'jsoup', version: '1.11.3'
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion, {
