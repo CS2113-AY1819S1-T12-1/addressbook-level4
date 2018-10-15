@@ -58,7 +58,6 @@ public class ReplyCommentCommand extends Command {
         this.comment = comment;
         this.editCommentDescriptor = new EditCommand.EditPersonDescriptor();
         editCommentDescriptor.setName(name);
-        System.out.println(editCommentDescriptor.getTags());
     }
 
     public String getComment() {
@@ -86,8 +85,6 @@ public class ReplyCommentCommand extends Command {
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
 
-        System.out.println(editedEvent.getTags());
-        //replyComment 1 n/Gerald L/2 C/djsd
         return new CommandResult(String.format(MESSAGE_REPLY_COMMENT, getComment(), index.getOneBased(), getLine()));
     }
 

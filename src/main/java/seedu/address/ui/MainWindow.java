@@ -122,7 +122,7 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        eventListPanel = new EventListPanel(logic.getFilteredPersonList());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
         personListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();

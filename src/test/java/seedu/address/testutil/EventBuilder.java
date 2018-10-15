@@ -94,7 +94,7 @@ public class EventBuilder {
     /**
      * Sets the {@code Attendance} of the {@code Event} that we are building.
      */
-    public EventBuilder withAttendance(String attendance) {
+    public EventBuilder withAttendance(Boolean attendance) {
         this.attendance = new Attendance(attendance);
         return this;
     }

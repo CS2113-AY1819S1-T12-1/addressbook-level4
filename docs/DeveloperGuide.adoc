@@ -319,66 +319,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::comments[]
-=== Comments
-==== Current Implementation
-`
-The Comments feature is facilitated by `Comments` class in the Logic/Comments folder. `AddComment`, `DeleteComment` and `ReplyComment` classes extend the `Comments` class. The features of the following classes are as such:
-
-* `Comments` -- Handles storage of commenents, contains `parseCommentSection()` to retrieve the comment section from eventmanager.xml and `rewrite()` to store the edited comment section into the eventmanager.xml.
-
-* `AddComment` -- Adds a new comment to the end of the comment section with the `addComment(String comment)` function.
-
-* `DeleteComment` -- Deletes a comment given the line parameter in `deleteComment(int line)` function.
-
-* `ReplyComment` -- Replies a comment given the line parameter in `replyComment(String comment, int line)`.
-
-
-Given below is an example usage scenario and how the Comments mechanism behaves at each step.
-
-Step 1. The user launches the application, click on an event or types `select INDEX` into the CLI. The comment section will be seen.
-
-Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. The addComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `addComment("May I ask, what is the attire for the event?")`. The new comment is added to the end of the comment section for event 1 and is stored into `eventmanager.xml`.
-
-Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. The replyComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `replyComment("Athletic attire", 1)`. The comment will be added to event 1 at line 1 of the comments section and is stored into `eventmanager.xml`.
-
-Step 4. The admin executes `deleteComment 1 L/1` to reply the comment in step 2. The deleteComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `deleteComment(1)`. The comment at event 1 line 1 will be removed and the comments section is stored in the `eventmanager.xml`.
-
-
-[NOTE]
-If a command's syntax is wrong, it will prompt the user to try again and suggest a relevant format to abide to. In the case a false indexed event is not present, the functions will return an invalid index message.
-
-The following sequence diagram shows how the addComment operation works:
-
-image::addCommentSequenceDiagram.png[width="650"]
-
-The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
-
-[NOTE]
-If the user uses the `find` command, the following functions will follow the indexing of the `find` command.
-
-==== Design Considerations
-
-===== Aspect: How comment functions executes
-
-* **Alternative 1 (current choice):** Comment section stored in eventmanager.xml.
-** Pros: Easy to parse because one field is used for comment section.
-** Cons: If a developer wants to manipulate specific comments through eventmanager.xml file there is no functions created for it.
-* **Alternative 2:** Store each comment as a seperate field and extract each comment individually.
-** Pros: No html tags will be stored in the field
-** Cons: New methods will need to be implemented to make many fields for comments.
-
-===== Aspect: Data structure to support the comment function commands
-
-* **Alternative 1 (current choice):** Vector is used to store the comment section.
-** Pros: A simple data structure that has vector.add() and vector.delete() to help add comments easily.
-** Cons: Additional code is needed to parse the comment section into a vector.
-* **Alternative 2:** An arrayList or List
-** Pros: Library functions can help parse the comment section into the arrayList.
-** Cons: More code is neede to simple insert or delete elements inside the data structure.
-// end::comments[]
-
-
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 

@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -52,7 +54,7 @@ public class BrowserPanel extends UiPart<Region> {
      * Formats HTML file path into string
      */
     private String formatEventPageUrl(Event event) {
-        URL searchPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
+        URL searchPage = getSearchPageUrlWithoutName();
         String searchPageString = searchPage.toString()
                 + "?name=" + event.getName();
 
@@ -63,8 +65,15 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads a HTML file with variables passed into it
      */
     private void loadEventPage(Event event) throws MalformedURLException {
-        URL searchPage = new URL(formatEventPageUrl(event));
-        loadPage(searchPage.toExternalForm());
+        try {
+            EventPageFormatter.formatEvent(event);
+            URL searchPage = new URL(formatEventPageUrl(event));
+            loadPage(searchPage.toExternalForm());
+        } catch (IOException e) {
+            //TODO
+        } catch (URISyntaxException e) {
+            //TODO
+        }
     }
 
     public void loadPage(String url) {

@@ -10,7 +10,7 @@ We are a team of Y2 Computer Engineering undergraduate students based in the htt
 == Project Team
 
 === Chia Xiang Rong
-image::xr_photo.jpg[width="150", align="left"]
+image::chiaxr.png[width="150", align="left"]
 {empty}[http://github.com/chiaxr[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -37,7 +37,7 @@ Responsibilities: User Authentication
 '''
 
 === Chuang Qin Kai
-image::QK_photo.png[width="150", align="left"]
+image::cqinkai.png[width="150", align="left"]
 {empty}[http://github.com/cqinkai[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
