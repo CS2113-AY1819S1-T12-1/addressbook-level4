@@ -808,35 +808,43 @@ The Comments feature is facilitated by <code>Comments</code> class in the Logic/
 <p><code>DeleteComment</code>&#8201;&#8212;&#8201;Deletes a comment given the line parameter in <code>deleteComment(int line)</code> function.</p>
 </li>
 <li>
-<p><code>ReplyComment</code>&#8201;&#8212;&#8201;Replies a comment given the line parameter in `replyComment(String comment, int line).</p>
+<p><code>ReplyComment</code>&#8201;&#8212;&#8201;Replies a comment given the line parameter in <code>replyComment(String comment, int line)</code>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+<p>Given below is an example usage scenario and how the Comments mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>Step 1. The user launches the application, click on an event or types <code>select INDEX</code> into the CLI. The comment section will be shown as such.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
+<img src="images/ShowCommentSection.png" alt="ShowCommentSection" width="">
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th event in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
+<p>Step 2. The user/admin executes <code>addComment 1 C/May I ask, what is the attire for the event?</code> to add a comment to the first event in the Event Manager. The addComment command calls <code>Comments</code> to parse the comments section from <code>eventmanager.xml</code> and runs <code>addComment("May I ask, what is the attire for the event?")</code>. The new comment is added to the end of the comment section for event 1 and is stored into <code>eventmanager.xml</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
+<img src="images/AddComment.png" alt="AddComment" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new event. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
+<p>Step 3. The user/admin executes <code>replyComment 1 L/1 C/Athletic attire</code> to reply the comment in step 2. The replyComment command calls <code>Comments</code> to parse the comments section from <code>eventmanager.xml</code> and runs <code>replyComment("Athletic attire", 1)</code>. The comment will be added to event 1 at line 1 of the comments section and is stored into <code>eventmanager.xml</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
+<img src="images/ReplyComment.png" alt="ReplyComment" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 4. The admin executes <code>deleteComment 1 L/1</code> to reply the comment in step 2. The deleteComment command calls <code>Comments</code> to parse the comments section from <code>eventmanager.xml</code> and runs <code>deleteComment(1)</code>. The comment at event 1 line 1 will be removed and the comments section is stored in the <code>eventmanager.xml</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteComment.png" alt="DeleteComment" width="800">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -846,18 +854,21 @@ The Comments feature is facilitated by <code>Comments</code> class in the Logic/
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
+If a command&#8217;s syntax is wrong, it will prompt the user to try again and suggest a relevant format to abide to. In the case a false indexed event is not present, the functions will return an invalid index message.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the event was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
+<p>The following sequence diagram shows how the addComment operation works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
+<img src="images/addCommentSequenceDiagram.png" alt="addCommentSequenceDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p>The <code>replyComment</code> and <code>deleteComment</code> command does similar methods and need not be elaborated.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -866,87 +877,40 @@ If a command fails its execution, it will not call <code>Model#commitAddressBook
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the user uses the <code>find</code> command, the following functions will follow the indexing of the <code>find</code> command.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
-</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-undo-redo-executes-2"><a class="link" href="#aspect-how-undo-redo-executes-2">Aspect: How undo &amp; redo executes</a></h5>
+<h5 id="aspect-how-comment-functions-executes"><a class="link" href="#aspect-how-comment-functions-executes">Aspect: How comment functions executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Comment section stored in eventmanager.xml.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: Easy to parse because one field is used for comment section.</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
+<p>Cons: If a developer wants to manipulate specific comments through eventmanager.xml file there is no functions created for it.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<p><strong>Alternative 2:</strong> Store each comment as a seperate field and extract each comment individually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the event being deleted).</p>
+<p>Pros: No html tags will be stored in the field</p>
 </li>
 <li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
+<p>Cons: New methods will need to be implemented to make many fields for comments.</p>
 </li>
 </ul>
 </div>
@@ -955,31 +919,31 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands-2"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands-2">Aspect: Data structure to support the undo/redo commands</a></h5>
+<h5 id="aspect-data-structure-to-support-the-comment-function-commands"><a class="link" href="#aspect-data-structure-to-support-the-comment-function-commands">Aspect: Data structure to support the comment function commands</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
+<p><strong>Alternative 1 (current choice):</strong> Vector is used to store the comment section.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+<p>Pros: A simple data structure that has vector.add() and vector.delete() to help add comments easily.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
+<p>Cons: Additional code is needed to parse the comment section into a vector.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
+<p><strong>Alternative 2:</strong> An arrayList or List</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
+<p>Pros: Library functions can help parse the comment section into the arrayList.</p>
 </li>
 <li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+<p>Cons: More code is neede to simple insert or delete elements inside the data structure.</p>
 </li>
 </ul>
 </div>
@@ -2616,4 +2580,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-15 03:43:53 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-15 06:29:17 UTC</div></div></div></body></html>
