@@ -34,13 +34,12 @@
 <li><a href="#set-reminders-code-setreminder-code">3.19. Set reminders : <code>setReminder</code></a></li>
 <li><a href="#clear-reminders-code-removereminder-code">3.20. Clear reminders : <code>removeReminder</code></a></li>
 <li><a href="#show-reminders-code-showreminders-code">3.21. show reminders : <code>showReminders</code></a></li>
-<li><a href="#view-comments-code-showcomments-code">3.22. View Comments : <code>showComments</code></a></li>
-<li><a href="#adds-comment-code-addcomment-code">3.23. Adds Comment : <code>addComment</code></a></li>
-<li><a href="#reply-comment-code-replycomment-code">3.24. Reply Comment : <code>replyComment</code></a></li>
-<li><a href="#delete-comment-code-deletecomment-code">3.25. Delete Comment : <code>deleteComment</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.26. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.27. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.28. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#adds-comment-code-addcomment-code">3.22. Adds Comment : <code>addComment</code></a></li>
+<li><a href="#reply-comment-code-replycomment-code">3.23. Reply Comment : <code>replyComment</code></a></li>
+<li><a href="#delete-comment-code-deletecomment-code">3.24. Delete Comment : <code>deleteComment</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.25. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.26. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -659,32 +658,10 @@ Format: <code>showReminders</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-comments-code-showcomments-code"><a class="link" href="#view-comments-code-showcomments-code">3.22. View Comments : <code>showComments</code></a></h3>
-<div class="paragraph">
-<p>Admin/User: Show event comment section<br>
-Format: <code>showComments INDEX</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>showComments 1</code><br>
-Shows comments section for event 1</p>
-</li>
-<li>
-<p><code>showComments 5</code><br>
-Shows comments section for event 5</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="adds-comment-code-addcomment-code"><a class="link" href="#adds-comment-code-addcomment-code">3.23. Adds Comment : <code>addComment</code></a></h3>
+<h3 id="adds-comment-code-addcomment-code"><a class="link" href="#adds-comment-code-addcomment-code">3.22. Adds Comment : <code>addComment</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Add comment into event comment section<br>
-Format: <code>addComment INDEX STRING</code></p>
+Format: <code>addComment INDEX C/STRING</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -692,21 +669,21 @@ Format: <code>addComment INDEX STRING</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>addComment 1 "What is the attire to wear for the event?</code><br>
+<p><code>addComment 1 C/What is the attire to wear for the event?</code><br>
 Adds "What is the attire to wear for the event?" into event 1 comment section</p>
 </li>
 <li>
-<p><code>addComment 5 "What is the attire to wear for this event?</code><br>
+<p><code>addComment 5 C/What is the attire to wear for this event?</code><br>
 Adds "What is the attire to wear for this event?" into event 5 comment section</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.24. Reply Comment : <code>replyComment</code></a></h3>
+<h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.23. Reply Comment : <code>replyComment</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Replies a comment<br>
-Format: <code>replyComment EVENTINDEX LINEINDEX STRING</code></p>
+Format: <code>replyComment INDEX LINE STRING</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -714,21 +691,21 @@ Format: <code>replyComment EVENTINDEX LINEINDEX STRING</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>replyComment 1 5 "What is the attire to wear for the event?</code><br>
+<p><code>replyComment 1 L/5 C/What is the attire to wear for the event?</code><br>
 Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5</p>
 </li>
 <li>
-<p><code>replyComment 2 2 "What is the attire to wear for the event?</code><br>
+<p><code>replyComment 2 L/2 C/What is the attire to wear for the event?</code><br>
 Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-comment-code-deletecomment-code"><a class="link" href="#delete-comment-code-deletecomment-code">3.25. Delete Comment : <code>deleteComment</code></a></h3>
+<h3 id="delete-comment-code-deletecomment-code"><a class="link" href="#delete-comment-code-deletecomment-code">3.24. Delete Comment : <code>deleteComment</code></a></h3>
 <div class="paragraph">
 <p>Admin: Deletes a comment<br>
-Format: <code>deleteComment EVENTINDEX LINEINDEX</code></p>
+Format: <code>deleteComment INDEX LINE</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -736,32 +713,32 @@ Format: <code>deleteComment EVENTINDEX LINEINDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>deleteComment 1 5</code><br>
+<p><code>deleteComment 1 L/5</code><br>
 Deletes comment of event 1 at line 5</p>
 </li>
 <li>
-<p><code>deleteComment 2 2</code><br>
+<p><code>deleteComment 2 L/2</code><br>
 Deletes comment of event 2 at line 2</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.26. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.25. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.27. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.26. Saving the data</a></h3>
 <div class="paragraph">
 <p>Event Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.28. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -863,4 +840,4 @@ e.g. <code>deleteComment 1 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-15 03:29:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-15 03:32:50 UTC</div></div></div></body></html>
