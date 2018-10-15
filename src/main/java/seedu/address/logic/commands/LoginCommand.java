@@ -22,6 +22,7 @@ public class LoginCommand extends Command {
             + PREFIX_PASSWORD + "PASSWORD";
 
     public static final String MESSAGE_SUCCESS = "Logged in: %1$s";
+    public static final String MESSAGE_LOGGED = "Already logged in!";
     public static final String MESSAGE_FAILURE = "Incorrect account credentials!";
 
     private final User toLogin;
@@ -34,15 +35,13 @@ public class LoginCommand extends Command {
         toLogin = user;
     }
 
-    //TODO LINK TO MODEL AND STORAGE
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        String username = toLogin.getUsername().toString();
-        String password = toLogin.getPassword().toString();
-
-        if (!(username.equals("admin") && password.equals("root"))) {
+        if (!model.userExists(toLogin)) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin));
+
+        setCurrentUser(toLogin);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin.getUsername().toString()));
     }
 }
