@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.EventManagerChangedEvent;
 import seedu.address.model.event.Event;
+import seedu.address.model.user.User;
 
 /**
  * Represents the in-memory model of the event manager data.
@@ -22,6 +23,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedEventManager versionedEManager;
     private final FilteredList<Event> filteredEvents;
+    private final UserAccount userAccount;
 
     /**
      * Initializes a ModelManager with the given eventManager and userPrefs.
@@ -32,6 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + eventManager + " and user prefs " + userPrefs);
 
+        userAccount = new UserAccount();
         versionedEManager = new VersionedEventManager(eventManager);
         filteredEvents = new FilteredList<>(versionedEManager.getEventList());
     }
@@ -54,6 +57,12 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateEManagerChanged() {
         raise(new EventManagerChangedEvent(versionedEManager));
+    }
+
+    @Override
+    public boolean userExists(User user) {
+        requireNonNull(user);
+        return userAccount.userExists(user);
     }
 
     @Override
