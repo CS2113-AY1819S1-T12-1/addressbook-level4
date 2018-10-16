@@ -31,10 +31,9 @@
 <ul class="sectlevel2">
 <li><a href="#authentication">3.1. Authentication</a></li>
 <li><a href="#undo-redo-feature">3.2. Undo/Redo feature</a></li>
-<li><a href="#comments">3.3. Comments</a></li>
-<li><a href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
+<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.4. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -878,165 +877,20 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="comments"><a class="link" href="#comments">3.3. Comments</a></h3>
-<div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
-<div class="paragraph">
-<p>`
-The Comments feature is facilitated by <code>Comments</code> class in the Logic/Comments folder. <code>AddComment</code>, <code>DeleteComment</code> and <code>ReplyComment</code> classes extend the <code>Comments</code> class. The features of the following classes are as such:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Comments</code>&#8201;&#8212;&#8201;Handles storage of commenents, contains <code>parseCommentSection()</code> to retrieve the comment section from eventmanager.xml and <code>rewrite()</code> to store the edited comment section into the eventmanager.xml.</p>
-</li>
-<li>
-<p><code>AddComment</code>&#8201;&#8212;&#8201;Adds a new comment to the end of the comment section with the <code>addComment(String comment)</code> function.</p>
-</li>
-<li>
-<p><code>DeleteComment</code>&#8201;&#8212;&#8201;Deletes a comment given the line parameter in <code>deleteComment(int line)</code> function.</p>
-</li>
-<li>
-<p><code>ReplyComment</code>&#8201;&#8212;&#8201;Replies a comment given the line parameter in <code>replyComment(String comment, int line)</code>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the Comments mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application, click on an event or types <code>select INDEX</code> into the CLI. The comment section will be seen.</p>
-</div>
-<div class="paragraph">
-<p>Step 2. The user/admin executes <code>addComment 1 C/May I ask, what is the attire for the event?</code> to add a comment to the first event in the Event Manager. The addComment command calls <code>Comments</code> to parse the comments section from <code>eventmanager.xml</code> and runs <code>addComment("May I ask, what is the attire for the event?")</code>. The new comment is added to the end of the comment section for event 1 and is stored into <code>eventmanager.xml</code>.</p>
-</div>
-<div class="paragraph">
-<p>Step 3. The user/admin executes <code>replyComment 1 L/1 C/Athletic attire</code> to reply the comment in step 2. The replyComment command calls <code>Comments</code> to parse the comments section from <code>eventmanager.xml</code> and runs <code>replyComment("Athletic attire", 1)</code>. The comment will be added to event 1 at line 1 of the comments section and is stored into <code>eventmanager.xml</code>.</p>
-</div>
-<div class="paragraph">
-<p>Step 4. The admin executes <code>deleteComment 1 L/1</code> to reply the comment in step 2. The deleteComment command calls <code>Comments</code> to parse the comments section from <code>eventmanager.xml</code> and runs <code>deleteComment(1)</code>. The comment at event 1 line 1 will be removed and the comments section is stored in the <code>eventmanager.xml</code>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command&#8217;s syntax is wrong, it will prompt the user to try again and suggest a relevant format to abide to. In the case a false indexed event is not present, the functions will return an invalid index message.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the addComment operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/addCommentSequenceDiagram.png" alt="addCommentSequenceDiagram" width="650">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>replyComment</code> and <code>deleteComment</code> command does similar methods and need not be elaborated.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the user uses the <code>find</code> command, the following functions will follow the indexing of the <code>find</code> command.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-comment-functions-executes"><a class="link" href="#aspect-how-comment-functions-executes">Aspect: How comment functions executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Comment section stored in eventmanager.xml.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to parse because one field is used for comment section.</p>
-</li>
-<li>
-<p>Cons: If a developer wants to manipulate specific comments through eventmanager.xml file there is no functions created for it.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Store each comment as a seperate field and extract each comment individually.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: No html tags will be stored in the field</p>
-</li>
-<li>
-<p>Cons: New methods will need to be implemented to make many fields for comments.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-comment-function-commands"><a class="link" href="#aspect-data-structure-to-support-the-comment-function-commands">Aspect: Data structure to support the comment function commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Vector is used to store the comment section.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: A simple data structure that has vector.add() and vector.delete() to help add comments easily.</p>
-</li>
-<li>
-<p>Cons: Additional code is needed to parse the comment section into a vector.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> An arrayList or List</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Library functions can help parse the comment section into the arrayList.</p>
-</li>
-<li>
-<p>Cons: More code is neede to simple insert or delete elements inside the data structure.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1067,7 +921,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2649,4 +2503,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 04:32:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 12:48:33 UTC</div></div></div></body></html>
