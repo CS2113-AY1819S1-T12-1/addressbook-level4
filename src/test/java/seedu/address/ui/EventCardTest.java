@@ -5,9 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
+import guitests.guihandles.EventCardHandle;
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EventBuilder;
 
@@ -61,12 +61,12 @@ public class EventCardTest extends GuiUnitTest {
     private void assertCardDisplay(EventCard eventCard, Event expectedEvent, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(eventCard.getRoot());
+        EventCardHandle eventCardHandle = new EventCardHandle(eventCard.getRoot());
 
         // verify id is displayed correctly
-        assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());
+        assertEquals(Integer.toString(expectedId) + ". ", eventCardHandle.getId());
 
         // verify event details are displayed correctly
-        assertCardDisplaysPerson(expectedEvent, personCardHandle);
+        assertCardDisplaysPerson(expectedEvent, eventCardHandle);
     }
 }

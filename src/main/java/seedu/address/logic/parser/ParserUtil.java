@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.Address;
-import seedu.address.model.event.Email;
-import seedu.address.model.event.Name;
-import seedu.address.model.event.Phone;
+import seedu.address.model.event.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Username;
@@ -141,10 +138,25 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parse a{@code String datetimeAsString into an {@code DateTime}}
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code datetimeAsString} is invalid.
+     */
+    public static DateTime parseDateTime(String datetimeAsString) throws ParseException {
+        requireNonNull(datetimeAsString);
+        String trimmedDateTime = datetimeAsString.trim();
+        if(!DateTime.isValidDateTime(datetimeAsString)) {
+            throw new ParseException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        }
+        return new DateTime(trimmedDateTime);
+    }
+
+    /**
+     * Parses a {@code String comment} into an {@code Comment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code comment} is invalid.
      */
     public static String parseComment(String comment) throws ParseException {
         requireNonNull(comment);

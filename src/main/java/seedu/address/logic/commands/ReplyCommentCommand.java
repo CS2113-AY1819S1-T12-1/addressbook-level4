@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -39,24 +40,21 @@ public class ReplyCommentCommand extends Command {
     public static final String MESSAGE_REPLY_COMMENT = "Comment [%1$s] replied for Event %2$s at Line %3$s";
 
     private final Index index;
-    private final EditCommand.EditPersonDescriptor editCommentDescriptor;
+    private final EditCommand.EditEventDescriptor editCommentDescriptor;
     private int line = 0;
     private String comment = null;
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editPersonDescriptor details to edit the event with
+     * @param comment details to edit the event with
      */
     public ReplyCommentCommand(Index index, int line, String comment, Name name) {
-        requireNonNull(index);
-        requireNonNull(line);
-        requireNonNull(comment);
-        requireNonNull(name);
+        requireAllNonNull(index, line, comment, name);
 
         this.index = index;
         this.line = line;
         this.comment = comment;
-        this.editCommentDescriptor = new EditCommand.EditPersonDescriptor();
+        this.editCommentDescriptor = new EditCommand.EditEventDescriptor ();
         editCommentDescriptor.setName(name);
     }
 
@@ -80,7 +78,7 @@ public class ReplyCommentCommand extends Command {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        Event editedEvent = EditCommand.createEditedPerson(eventToEdit, editCommentDescriptor);
+        Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();

@@ -11,24 +11,24 @@ import seedu.address.model.event.Event;
 /**
  * Provides a handle for {@code EventListPanel} containing the list of {@code EventCard}.
  */
-public class PersonListPanelHandle extends NodeHandle<ListView<Event>> {
+public class EventListPanelHandle extends NodeHandle<ListView<Event>> {
     public static final String PERSON_LIST_VIEW_ID = "#personListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
     private Optional<Event> lastRememberedSelectedPersonCard;
 
-    public PersonListPanelHandle(ListView<Event> personListPanelNode) {
+    public EventListPanelHandle(ListView<Event> personListPanelNode) {
         super(personListPanelNode);
     }
 
     /**
-     * Returns a handle to the selected {@code PersonCardHandle}.
+     * Returns a handle to the selected {@code EventCardHandle}.
      * A maximum of 1 item can be selected at any time.
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getHandleToSelectedCard() {
+    public EventCardHandle getHandleToSelectedCard() {
         List<Event> selectedEventList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedEventList.size() != 1) {
@@ -36,7 +36,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Event>> {
         }
 
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
+                .map(EventCardHandle::new)
                 .filter(handle -> handle.equals(selectedEventList.get(0)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
@@ -101,9 +101,9 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Event>> {
      * Returns the event card handle of a event associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getPersonCardHandle(int index) {
+    public EventCardHandle getPersonCardHandle(int index) {
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
+                .map(EventCardHandle::new)
                 .filter(handle -> handle.equals(getPerson(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);

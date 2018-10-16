@@ -23,7 +23,7 @@ public class EventListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
     @FXML
-    private ListView<Event> personListView;
+    private ListView<Event> eventListView;
 
     public EventListPanel(ObservableList<Event> eventList) {
         super(FXML);
@@ -32,13 +32,13 @@ public class EventListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Event> eventList) {
-        personListView.setItems(eventList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        eventListView.setItems(eventList);
+        eventListView.setCellFactory(listView -> new EventListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        eventListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in event list panel changed to : '" + newValue + "'");
@@ -52,8 +52,8 @@ public class EventListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            eventListView.scrollTo(index);
+            eventListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -66,7 +66,7 @@ public class EventListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
      */
-    class PersonListViewCell extends ListCell<Event> {
+    class EventListViewCell extends ListCell<Event> {
         @Override
         protected void updateItem(Event event, boolean empty) {
             super.updateItem(event, empty);

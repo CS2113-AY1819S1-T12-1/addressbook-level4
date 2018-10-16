@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.Comparators.DateTimeComparator;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.EventManagerChangedEvent;
@@ -25,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given eventManager and userPrefs.
+     * FilteredEvents will be default to be automatically sorted by DateTime
      */
     public ModelManager(ReadOnlyEventManager eventManager, UserPrefs userPrefs) {
         super();
@@ -33,7 +35,15 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + eventManager + " and user prefs " + userPrefs);
 
         versionedEManager = new VersionedEventManager(eventManager);
-        filteredEvents = new FilteredList<>(versionedEManager.getEventList());
+        filteredEvents = new FilteredList<>(sortEventList(versionedEManager.getEventList()));
+    }
+
+    //Todo: check if list is sorted by DateTime by default
+    private ObservableList<Event> sortEventList(ObservableList<Event> eventList) {
+        ObservableList<Event> sortedList = FXCollections.observableArrayList();
+        sortedList.addAll(eventList);
+        sortedList.sort(new DateTimeComparator());
+        return FXCollections.unmodifiableObservableList(sortedList);
     }
 
     public ModelManager() {

@@ -10,13 +10,10 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
-import seedu.address.model.event.Email;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
-import seedu.address.model.event.Phone;
+import seedu.address.model.event.*;
 import seedu.address.model.tag.Tag;
+
+import static seedu.address.model.event.DateTime.MESSAGE_DATETIME_CONSTRAINTS;
 
 /**
  * JAXB-friendly version of the Event.
@@ -35,6 +32,8 @@ public class XmlAdaptedEvent {
     private String address;
     @XmlElement(required = true)
     private String attendance;
+    @XmlElement(required = true)
+    private String dateTime;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -48,13 +47,14 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
-    public XmlAdaptedEvent(String name, String phone, String email, String address, Attendance attendance,
+    public XmlAdaptedEvent(String name, String phone, String email, String address, Attendance attendance, DateTime datetime,
                            List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.attendance = attendance.toString();
+        this.dateTime = datetime.toString();
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -71,6 +71,7 @@ public class XmlAdaptedEvent {
         email = source.getEmail().value;
         address = source.getAddress().value;
         attendance = Boolean.toString(source.getAttendance().value);
+        dateTime = source.getDateTime().toString();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -126,10 +127,18 @@ public class XmlAdaptedEvent {
         if (!Attendance.isValidAttendance(attendance)) {
             throw new IllegalValueException(Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
         }
+
         final Attendance modelAttendance = new Attendance(attendance);
 
+        if (!DateTime.isValidDateTime(dateTime)) {
+            throw new IllegalValueException(Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
+        }
+        final DateTime modelDateTime = new DateTime(dateTime);
+        if (attendance == null) {
+            throw new IllegalValueException(String.format(MESSAGE_DATETIME_CONSTRAINTS));
+        }
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Event(modelName, modelPhone, modelEmail, modelAddress, modelAttendance, modelTags);
+        return new Event(modelName, modelPhone, modelEmail, modelAddress, modelAttendance, modelDateTime, modelTags);
     }
 
     @Override

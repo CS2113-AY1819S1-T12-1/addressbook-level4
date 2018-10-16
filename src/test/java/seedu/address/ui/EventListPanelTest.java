@@ -4,18 +4,18 @@ import static java.time.Duration.ofMillis;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+import static seedu.address.testutil.TypicalEvents.getTypicalEvents;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import guitests.guihandles.EventCardHandle;
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.EventListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
@@ -26,24 +26,24 @@ import seedu.address.storage.XmlSerializableEManager;
 
 public class EventListPanelTest extends GuiUnitTest {
     private static final ObservableList<Event> TYPICAL_EVENTS =
-            FXCollections.observableList(getTypicalPersons());
+            FXCollections.observableList(getTypicalEvents());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
+    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_EVENT);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
-    private PersonListPanelHandle personListPanelHandle;
+    private EventListPanelHandle eventListPanelHandle;
 
     @Test
     public void display() {
         initUi(TYPICAL_EVENTS);
 
         for (int i = 0; i < TYPICAL_EVENTS.size(); i++) {
-            personListPanelHandle.navigateToCard(TYPICAL_EVENTS.get(i));
+            eventListPanelHandle.navigateToCard(TYPICAL_EVENTS.get(i));
             Event expectedEvent = TYPICAL_EVENTS.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+            EventCardHandle actualCard = eventListPanelHandle.getPersonCardHandle(i);
 
             assertCardDisplaysPerson(expectedEvent, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
@@ -56,8 +56,8 @@ public class EventListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
+        EventCardHandle expectedPerson = eventListPanelHandle.getPersonCardHandle(INDEX_SECOND_EVENT.getZeroBased());
+        EventCardHandle selectedPerson = eventListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
 
@@ -111,14 +111,14 @@ public class EventListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code EventListPanel} backed by {@code backingList}.
+     * Initializes {@code eventListPanelHandle} with a {@code EventListPanel} backed by {@code backingList}.
      * Also shows the {@code Stage} that displays only {@code EventListPanel}.
      */
     private void initUi(ObservableList<Event> backingList) {
         EventListPanel eventListPanel = new EventListPanel(backingList);
         uiPartRule.setUiPart(eventListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(eventListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        eventListPanelHandle = new EventListPanelHandle(getChildNode(eventListPanel.getRoot(),
+                EventListPanelHandle.PERSON_LIST_VIEW_ID));
     }
 }

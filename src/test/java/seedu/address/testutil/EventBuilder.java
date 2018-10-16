@@ -3,12 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
-import seedu.address.model.event.Email;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
-import seedu.address.model.event.Phone;
+import seedu.address.model.event.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,6 +17,7 @@ public class EventBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final Boolean DEFAULT_ATTENDANCE = false;
+    public static final String DEFAULT_DATETIME = "31/12/2018 12:00";
 
     private Name name;
     private Phone phone;
@@ -29,6 +25,7 @@ public class EventBuilder {
     private Address address;
     private Attendance attendance;
     private Set<Tag> tags;
+    private DateTime datetime;
 
     public EventBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -36,6 +33,7 @@ public class EventBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         attendance = new Attendance(DEFAULT_ATTENDANCE);
+        datetime = new DateTime(DEFAULT_DATETIME);
         tags = new HashSet<>();
     }
 
@@ -48,6 +46,7 @@ public class EventBuilder {
         email = eventToCopy.getEmail();
         address = eventToCopy.getAddress();
         attendance = eventToCopy.getAttendance();
+        datetime = eventToCopy.getDateTime();
         tags = new HashSet<>(eventToCopy.getTags());
     }
 
@@ -99,8 +98,13 @@ public class EventBuilder {
         return this;
     }
 
+    public EventBuilder withDateTime(String datetimeAsString) {
+        this.datetime = new DateTime(datetimeAsString);
+        return this;
+    }
+
     public Event build() {
-        return new Event(name, phone, email, address, attendance, tags);
+        return new Event(name, phone, email, address, attendance, datetime, tags);
     }
 
 }

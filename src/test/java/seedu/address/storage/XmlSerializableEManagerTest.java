@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.EventManager;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalEvents;
 
 public class XmlSerializableEManagerTest {
 
@@ -29,7 +29,7 @@ public class XmlSerializableEManagerTest {
         XmlSerializableEManager dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableEManager.class);
         EventManager eventManagerFromFile = dataFromFile.toModelType();
-        EventManager typicalPersonsEventManager = TypicalPersons.getTypicalAddressBook();
+        EventManager typicalPersonsEventManager = TypicalEvents.getTypicalEventManager();
         assertEquals(eventManagerFromFile, typicalPersonsEventManager);
     }
 

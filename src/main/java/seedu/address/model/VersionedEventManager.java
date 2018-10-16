@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedEventManager extends EventManager {
 
-    private final List<ReadOnlyEventManager> addressBookStateList;
+    private final List<ReadOnlyEventManager> eventManagerStateList;
     private int currentStatePointer;
 
     public VersionedEventManager(ReadOnlyEventManager initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new EventManager(initialState));
+        eventManagerStateList = new ArrayList<>();
+        eventManagerStateList.add(new EventManager(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,12 +25,12 @@ public class VersionedEventManager extends EventManager {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new EventManager(this));
+        eventManagerStateList.add(new EventManager(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        eventManagerStateList.subList(currentStatePointer + 1, eventManagerStateList.size()).clear();
     }
 
     /**
@@ -41,7 +41,7 @@ public class VersionedEventManager extends EventManager {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(eventManagerStateList.get(currentStatePointer));
     }
 
     /**
@@ -52,7 +52,7 @@ public class VersionedEventManager extends EventManager {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(eventManagerStateList.get(currentStatePointer));
     }
 
     /**
@@ -66,7 +66,7 @@ public class VersionedEventManager extends EventManager {
      * Returns true if {@code redo()} has address book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < eventManagerStateList.size() - 1;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class VersionedEventManager extends EventManager {
 
         // state check
         return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
+                && eventManagerStateList.equals(otherVersionedAddressBook.eventManagerStateList)
                 && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
     }
 

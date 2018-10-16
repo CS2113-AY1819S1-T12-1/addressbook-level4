@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.EventListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.event.Event;
 
@@ -17,7 +17,7 @@ public class GuiTestAssert {
     /**
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
      */
-    public static void assertCardEquals(PersonCardHandle expectedCard, PersonCardHandle actualCard) {
+    public static void assertCardEquals(EventCardHandle expectedCard, EventCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
         assertEquals(expectedCard.getAddress(), actualCard.getAddress());
         assertEquals(expectedCard.getEmail(), actualCard.getEmail());
@@ -29,7 +29,7 @@ public class GuiTestAssert {
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedEvent}.
      */
-    public static void assertCardDisplaysPerson(Event expectedEvent, PersonCardHandle actualCard) {
+    public static void assertCardDisplaysPerson(Event expectedEvent, EventCardHandle actualCard) {
         assertEquals(expectedEvent.getName().fullName, actualCard.getName());
         assertEquals(expectedEvent.getPhone().value, actualCard.getPhone());
         assertEquals(expectedEvent.getEmail().value, actualCard.getEmail());
@@ -39,29 +39,29 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code events} correctly and
+     * Asserts that the list in {@code eventListPanelHandle} displays the details of {@code events} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, Event... events) {
+    public static void assertListMatching(EventListPanelHandle eventListPanelHandle, Event... events) {
         for (int i = 0; i < events.length; i++) {
-            personListPanelHandle.navigateToCard(i);
-            assertCardDisplaysPerson(events[i], personListPanelHandle.getPersonCardHandle(i));
+            eventListPanelHandle.navigateToCard(i);
+            assertCardDisplaysPerson(events[i], eventListPanelHandle.getPersonCardHandle(i));
         }
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code events} correctly and
+     * Asserts that the list in {@code eventListPanelHandle} displays the details of {@code events} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Event> events) {
-        assertListMatching(personListPanelHandle, events.toArray(new Event[0]));
+    public static void assertListMatching(EventListPanelHandle eventListPanelHandle, List<Event> events) {
+        assertListMatching(eventListPanelHandle, events.toArray(new Event[0]));
     }
 
     /**
-     * Asserts the size of the list in {@code personListPanelHandle} equals to {@code size}.
+     * Asserts the size of the list in {@code eventListPanelHandle} equals to {@code size}.
      */
-    public static void assertListSize(PersonListPanelHandle personListPanelHandle, int size) {
-        int numberOfPeople = personListPanelHandle.getListSize();
+    public static void assertListSize(EventListPanelHandle eventListPanelHandle, int size) {
+        int numberOfPeople = eventListPanelHandle.getListSize();
         assertEquals(size, numberOfPeople);
     }
 

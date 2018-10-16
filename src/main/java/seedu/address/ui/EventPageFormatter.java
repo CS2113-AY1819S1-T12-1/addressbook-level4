@@ -8,14 +8,11 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 
-import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
-import seedu.address.model.event.Email;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
-import seedu.address.model.event.Phone;
+import seedu.address.model.event.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,7 +22,7 @@ public class EventPageFormatter {
 
     private static URI SEARCH_PAGE_PATH;
     private static String SEARCH_PAGE_STRING;
-
+    private static final DateFormat pageDateFormat = new SimpleDateFormat("EEEEE dd-MMMMM-yyyy 'at' HH:mm a");
     public EventPageFormatter() {
 
     }
@@ -54,32 +51,12 @@ public class EventPageFormatter {
     public static void formatEvent(Event event) throws IOException, URISyntaxException {
         SEARCH_PAGE_PATH = BrowserPanel.getSearchPageUrlWithoutName().toURI();
         SEARCH_PAGE_STRING = readFile(SEARCH_PAGE_PATH);
-        //formatName(event.getName());
+        SEARCH_PAGE_STRING = SEARCH_PAGE_STRING.replace(SEARCH_PAGE_STRING,
+                        event.getName().toString() + "<br/>" +
+                        " Venue: " + event.getAddress().toString() + "<br/>" +
+                        " Time: " + pageDateFormat.format(event.getDateTime().dateTime) + "<br/>" +
+                        " Phone: " + event.getPhone().toString() +
+                        " Email: " + event.getEmail().toString() + "<br/>");
         writeFile(SEARCH_PAGE_PATH);
-    }
-
-    private static void formatName(Name name) {
-        SEARCH_PAGE_STRING =
-                SEARCH_PAGE_STRING.replaceAll("(<!-- Name -->)[^]*(<!-- /Name -->)", name.toString());
-    }
-
-    private static void formatPhone(Phone phone) {
-
-    }
-
-    private static void formatEmail(Email email) {
-
-    }
-
-    private static void formatAddress(Address address) {
-
-    }
-
-    private static void formatAttendance(Attendance attendance) {
-
-    }
-
-    private static void formatTags(Set<Tag> tags) {
-
     }
 }

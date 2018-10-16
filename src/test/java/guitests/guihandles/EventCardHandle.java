@@ -1,24 +1,24 @@
 package guitests.guihandles;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.google.common.collect.ImmutableMultiset;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
- * Provides a handle to a event card in the event list panel.
+ * Provides a handle to a person card in the person list panel.
  */
-public class PersonCardHandle extends NodeHandle<Node> {
+public class EventCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
+    private static final String DATETIME_FIELD_ID = "#datetime";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
@@ -26,9 +26,10 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private final Label addressLabel;
     private final Label phoneLabel;
     private final Label emailLabel;
+    private final Label datetimeLabel;
     private final List<Label> tagLabels;
 
-    public PersonCardHandle(Node cardNode) {
+    public EventCardHandle(Node cardNode) {
         super(cardNode);
 
         idLabel = getChildNode(ID_FIELD_ID);
@@ -36,6 +37,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
+        datetimeLabel = getChildNode(DATETIME_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -65,6 +67,8 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return emailLabel.getText();
     }
 
+    public String getDatetime() { return datetimeLabel.getText(); }
+
     public List<String> getTags() {
         return tagLabels
                 .stream()
@@ -80,6 +84,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 && getAddress().equals(event.getAddress().value)
                 && getPhone().equals(event.getPhone().value)
                 && getEmail().equals(event.getEmail().value)
+                && getDatetime().equals(event.getDateTime())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(event.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
