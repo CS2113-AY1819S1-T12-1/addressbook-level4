@@ -29,10 +29,11 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
+<li><a href="#authentication">3.1. Authentication</a></li>
+<li><a href="#undo-redo-feature">3.2. Undo/Redo feature</a></li>
+<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.4. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -586,9 +587,97 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.1. Undo/Redo feature</a></h3>
+<h3 id="authentication"><a class="link" href="#authentication">3.1. Authentication</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The authentication mechanism is facilitated by the <code>Command</code> class and the <code>UserAccount</code> class.
+It stores the user information, which includes username and password, using a JSON file.</p>
+</div>
+<div class="paragraph">
+<p>A new method is added in the <code>Model</code> interface to check whether a user account exists in the JSON file.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, a <code>JsonUserStorage</code> class has been created to handle the reading, parsing and writing of the JSON file.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how authentication behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application for the first time. The <code>JsonUserStorage</code> class will create a default JSON file in <code>data/users.json</code> that stores the basic <code>admin</code> account information.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes the command <code>login u/USERNAME p/PASSWORD</code>. This will trigger the method <code>userExists(user)</code> in the <code>ModelManager</code> class, which is linked to <code>UserAccount</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. <code>UserAccount</code> will prompt <code>JsonUserStorage</code> to read the JSON file and return to it the JSONObject parsed from the file.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. <code>UserAccount</code> will then compare the logged username and password with the ones stored in the JSON file. If the comparisons return true, the <code>userExists</code> method will return true.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. The <code>currentUser</code> in the <code>Command</code> class will then be set and the login flag will be set to true. If the user is an admin, the admin flag will be set to true as well.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. After authentication, the user can now start using the application.</p>
+</div>
+<div class="paragraph">
+<p>Step 7. The user can choose to log out of the application as well with the <code>logout</code> command. This command sets the login flag to false and clears <code>currentUser</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If an authentication fails, i.e. credentials are wrong or do not exist in the JSON file, the <code>login</code> command will throw a <code>CommandException</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-improvements"><a class="link" href="#future-improvements">3.1.2. Future Improvements</a></h4>
+<div class="sect4">
+<h5 id="adding-of-the-code-signup-u-username-p-password-code-command"><a class="link" href="#adding-of-the-code-signup-u-username-p-password-code-command">Adding of the <code>signup u/USERNAME p/PASSWORD</code> command.</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Will allow users to create new user accounts.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="making-code-jsonuserstorage-code-more-ocp-compliant"><a class="link" href="#making-code-jsonuserstorage-code-more-ocp-compliant">Making <code>JsonUserStorage</code> more OCP-compliant</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>As of now, <code>JsonUserStorage</code> does not abide to the Open-Closed Principle.</p>
+</li>
+<li>
+<p>In the future, <code>Storage</code> will implement <code>JsonUserStorage</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="password-encryption"><a class="link" href="#password-encryption">Password encryption</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Stores encrypted password instead of plain text.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.2. Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
 It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
@@ -718,7 +807,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -788,20 +877,20 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -832,7 +921,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2414,4 +2503,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-15 21:45:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 02:19:40 UTC</div></div></div></body></html>
