@@ -2,56 +2,56 @@
 <!-- EventManager save file which contains the same Event values as in TypicalPersons#getTypicalAddressBook() -->
 <eventmanager>
     <events>
-        <name>Alice Pauline</name>
+        <name>Inter Neighbourhood Cooking Competition</name>
+        <contact>Alice Pauline</contact>
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
-        <attendance>false</attendance>
         <tagged>friends</tagged>
     </events>
     <events>
-        <name>Benson Meier</name>
+        <name>Dancing Tryouts</name>
+        <contact>Benson Meier</contact>
         <phone>98765432</phone>
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
-        <attendance>true</attendance>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </events>
     <events>
-        <name>Carl Kurz</name>
+        <name>Frisbee Competition</name>
+        <contact>Carl Kurz</contact>
         <phone>95352563</phone>
         <email>heinz@example.com</email>
         <address>wall street</address>
-        <attendance>false</attendance>
     </events>
     <events>
-        <name>Daniel Meier</name>
+        <name>Art and Crafts</name>
+        <contact>Daniel Meier</contact>
         <phone>87652533</phone>
         <email>cornelia@example.com</email>
         <address>10th street</address>
-        <attendance>false</attendance>
         <tagged>friends</tagged>
     </events>
     <events>
-        <name>Elle Meyer</name>
+        <name>Music Tryouts</name>
+        <contact>Elle Meyer</contact>
         <phone>9482224</phone>
         <email>werner@example.com</email>
         <address>michegan ave</address>
-        <attendance>true</attendance>
     </events>
     <events>
-        <name>Fiona Kunz</name>
+        <name>Dining In The Dark</name>
+        <contact>Fiona Kunz</contact>
         <phone>9482427</phone>
         <email>lydia@example.com</email>
         <address>little tokyo</address>
-        <attendance>false</attendance>
     </events>
     <events>
-        <name>George Best</name>
+        <name>College Games</name>
+        <contact>George Best</contact>
         <phone>9482442</phone>
         <email>anna@example.com</email>
         <address>4th street</address>
-        <attendance>true</attendance>
     </events>
 </eventmanager>

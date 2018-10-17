@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -36,22 +37,28 @@ public class EventTest {
         // null -> returns false
         assertFalse(ALICE.isSameEvent(null));
 
-        // different phone and email -> returns false
-        Event editedAlice = new EventBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        // different contact, phone and email -> returns false
+        Event editedAlice = new EventBuilder(ALICE).withContact(VALID_CONTACT_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameEvent(editedAlice));
 
         // different name -> returns false
         editedAlice = new EventBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameEvent(editedAlice));
 
+        // same name, same contact, different attributes -> returns true
+        editedAlice = new EventBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSameEvent(editedAlice));
+
         // same name, same phone, different attributes -> returns true
-        editedAlice = new EventBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new EventBuilder(ALICE).withContact(VALID_CONTACT_BOB).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameEvent(editedAlice));
 
         // same name, same email, different attributes -> returns true
-        editedAlice = new EventBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new EventBuilder(ALICE).withContact(VALID_CONTACT_BOB).withPhone(VALID_PHONE_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameEvent(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
@@ -79,6 +86,10 @@ public class EventTest {
 
         // different name -> returns false
         Event editedAlice = new EventBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different contact -> returns false
+        editedAlice = new EventBuilder(ALICE).withContact(VALID_CONTACT_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false

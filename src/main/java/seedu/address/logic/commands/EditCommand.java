@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -21,7 +22,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
+import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
@@ -40,6 +41,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_CONTACT + "CONTACT] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -97,13 +99,13 @@ public class EditCommand extends Command {
         assert eventToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(eventToEdit.getName());
+        Contact updatedContact = editPersonDescriptor.getContact().orElse(eventToEdit.getContact());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(eventToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(eventToEdit.getAddress());
-        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(eventToEdit.getAttendance());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(eventToEdit.getTags());
 
-        return new Event(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAttendance, updatedTags);
+        return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -130,10 +132,10 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Contact contact;
         private Phone phone;
         private Email email;
         private Address address;
-        private Attendance attendance;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -144,10 +146,10 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setContact(toCopy.contact);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setAttendance(toCopy.attendance);
             setTags(toCopy.tags);
         }
 
@@ -155,7 +157,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, contact, phone, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -164,6 +166,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setContact(Contact contact) {
+            this.contact = contact;
+        }
+
+        public Optional<Contact> getContact() {
+            return Optional.ofNullable(contact);
         }
 
         public void setPhone(Phone phone) {
@@ -188,14 +198,6 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
-        }
-
-        public void setAttendance(Attendance attendance) {
-            this.attendance = attendance;
-        }
-
-        public Optional<Attendance> getAttendance() {
-            return Optional.ofNullable(attendance);
         }
 
         /**
@@ -231,6 +233,7 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
+                    && getContact().equals(e.getContact())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())

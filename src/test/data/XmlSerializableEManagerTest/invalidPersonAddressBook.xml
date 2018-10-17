@@ -3,6 +3,7 @@
     <!-- Event with invalid email field -->
     <events>
         <name>Hans Muster</name>
+        <contact isPrivate="true">Hans Muster</contact>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@exam!32ple</email>
         <address isPrivate="false">4th street</address>

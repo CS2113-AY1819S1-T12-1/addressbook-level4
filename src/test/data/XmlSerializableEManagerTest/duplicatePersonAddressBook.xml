@@ -2,21 +2,21 @@
 <eventmanager>
 
     <events>
-        <name>Alice Pauline</name>
+        <name>Inter Neighbourhood Cooking Competition</name>
+        <contact>Alice Pauline</contact>
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
-        <attendance>false</attendance>
         <tagged>friends</tagged>
     </events>
 
     <!-- Event with same identity as Alice Pauline -->
     <events>
-        <name>Alice Pauline</name>
+        <name>Inter Neighbourhood Cooking Competition</name>
+        <contact>Alice Pauline</contact>
         <phone>94351253</phone>
         <email>pauline@example.com</email>
         <address>4th street</address>
-        <attendance>false</attendance>
     </events>
 
 </eventmanager>

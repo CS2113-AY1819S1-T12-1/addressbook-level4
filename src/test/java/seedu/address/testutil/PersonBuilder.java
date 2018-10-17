@@ -15,9 +15,9 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Event objects.
  */
-public class EventBuilder {
+public class PersonBuilder {
 
-    public static final String DEFAULT_NAME = "Halloween Party";
+    public static final String DEFAULT_NAME = "Table Tennis Tryouts";
     public static final String DEFAULT_CONTACT = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
@@ -30,7 +30,7 @@ public class EventBuilder {
     private Address address;
     private Set<Tag> tags;
 
-    public EventBuilder() {
+    public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         contact = new Contact(DEFAULT_CONTACT);
         phone = new Phone(DEFAULT_PHONE);
@@ -40,9 +40,9 @@ public class EventBuilder {
     }
 
     /**
-     * Initializes the EventBuilder with the data of {@code eventToCopy}.
+     * Initializes the PersonBuilder with the data of {@code eventToCopy}.
      */
-    public EventBuilder(Event eventToCopy) {
+    public PersonBuilder(Event eventToCopy) {
         name = eventToCopy.getName();
         contact = eventToCopy.getContact();
         phone = eventToCopy.getPhone();
@@ -54,7 +54,7 @@ public class EventBuilder {
     /**
      * Sets the {@code Name} of the {@code Event} that we are building.
      */
-    public EventBuilder withName(String name) {
+    public PersonBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -62,7 +62,7 @@ public class EventBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Event} that we are building.
      */
-    public EventBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -70,7 +70,7 @@ public class EventBuilder {
     /**
      * Sets the {@code Address} of the {@code Event} that we are building.
      */
-    public EventBuilder withAddress(String address) {
+    public PersonBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -78,7 +78,7 @@ public class EventBuilder {
     /**
      * Sets the {@code Phone} of the {@code Event} that we are building.
      */
-    public EventBuilder withPhone(String phone) {
+    public PersonBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -86,7 +86,7 @@ public class EventBuilder {
     /**
      * Sets the {@code Email} of the {@code Event} that we are building.
      */
-    public EventBuilder withEmail(String email) {
+    public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
@@ -94,7 +94,7 @@ public class EventBuilder {
     /**
      * Sets the {@code Contact} of the {@code Event} that we are building.
      */
-    public EventBuilder withContact(String contact) {
+    public PersonBuilder withContact(String contact) {
         this.contact = new Contact(contact);
         return this;
     }

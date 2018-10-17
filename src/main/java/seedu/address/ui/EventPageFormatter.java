@@ -12,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.model.event.Address;
 import seedu.address.model.event.Attendance;
+import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
@@ -72,6 +73,10 @@ public class EventPageFormatter {
     }
 
     private static void formatAddress(Address address) {
+
+    }
+
+    private static void formatContact(Contact contact) {
 
     }
 
