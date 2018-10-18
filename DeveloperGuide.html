@@ -32,9 +32,10 @@
 <li><a href="#authentication">3.1. Authentication</a></li>
 <li><a href="#undo-redo-feature">3.2. Undo/Redo feature</a></li>
 <li><a href="#comments">3.3. Comments</a></li>
-<li><a href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#configuration">3.6. Configuration</a></li>
+<li><a href="#rsvp">3.4. RSVP</a></li>
+<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#configuration">3.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1023,13 +1024,48 @@ If the user uses the <code>find</code> command, the following functions will fol
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></h3>
+<h3 id="rsvp"><a class="link" href="#rsvp">3.4. RSVP</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The RSVP feature consists the <code>register</code> command. Attendees of an event are stored in the <code>eventmanager.xml</code> file, in a similar fashion to the storage of tags.
+ Below is an example usage scenario and how the RSVP mechanism behaves:
+ Step 1: The user launches the application, clicks on an event or types <code>select 2</code> into the CLI. Details of the 2nd event including event attendance are displayed.
+ Step 2: The user executes <code>register 2</code> to register for the 2nd event. The <code>register</code> command gets the username of the current user, and adds it into the event data.
+ Step 3: An <code>EventManagerChangedEvent</code> event is raised by <code>Model</code>. <code>EventCenter</code> handles the event, calling for <code>Storage</code> to update <code>eventmanager.xml</code>.
+ Step 4: The event page is reloaded to display the new event attendance.
+ ==== Design Considerations
+===== Aspect: How to display attendance
+* <strong>Alternative 1 (current choice):</strong> Display event attendance list
+<strong> Pros: Can see which other users are attending the event
+</strong> Cons: More complex to implement
+* <strong>Alternative 2:</strong> Display whether current user is registered for an event
+<strong> Pros: Easier to implement, user can easily see whether they are registered
+</strong> Cons: New methods will need to be implemented to make many fields for comments.
+ ===== Aspect: How to store attendance
+* <strong>Alternative 1 (current choice):</strong> Attendance stored in <code>eventmanager.xml</code> in similar fashion to tags.
+<strong> Pros: Methods for parsing tags can be applied to parse attendance
+</strong> Cons: Inefficient to retrieve list of events which a user has registered for
+* <strong>Alternative 2:</strong> Store with user details
+<strong> Pros: Can easily check which events a user has registered for.
+</strong> Cons: Inefficient to check which users are attending an event.
+ ==== Future Improvements
+===== Adding <code>unregister</code> command.
+* Allows users to unregister for events.
+ ===== Adding <code>listAttending</code> command.
+* Allows users to view events they have registered for.
+ // end::rsvp[]</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1067,7 +1103,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.6. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2649,4 +2685,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 15:59:44 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 04:24:54 UTC</div></div></div></body></html>
