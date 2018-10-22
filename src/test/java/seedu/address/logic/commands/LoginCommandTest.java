@@ -5,12 +5,12 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.function.Predicate;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
