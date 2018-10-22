@@ -14,7 +14,7 @@ import com.google.gson.JsonParser;
 /**
  * A class to access UserAccount stored in the hard disk as a JSON file
  */
-public class JsonUserStorage {
+public class JsonUserStorage implements UserStorage {
 
     private Path folderPath;
     private String filePathString;
@@ -28,9 +28,7 @@ public class JsonUserStorage {
         }
     }
 
-    /**
-     * Adds a new property in the JSON file.
-     */
+    @Override
     public void createUser(String username, String password) throws IOException {
         Gson gson = new Gson();
         JsonObject jsonObject = getUserAccounts();
@@ -39,9 +37,7 @@ public class JsonUserStorage {
         writeJson(gson, jsonObject);
     }
 
-    /**
-     * Returns the user account JSON as a hash map JSON object.
-     */
+    @Override
     public JsonObject getUserAccounts() throws IOException {
         JsonParser parser = new JsonParser();
         JsonElement jsonElement = parser.parse(new FileReader(filePathString));
