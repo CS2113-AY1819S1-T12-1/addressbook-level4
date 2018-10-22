@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 
+import java.util.function.Predicate;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.junit.Rule;
@@ -18,8 +20,6 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.storage.UserStorage;
-
-import java.util.function.Predicate;
 
 public class LoginCommandTest {
 
