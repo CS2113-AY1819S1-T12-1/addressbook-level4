@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject
+import com.google.gson.JsonObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;;
