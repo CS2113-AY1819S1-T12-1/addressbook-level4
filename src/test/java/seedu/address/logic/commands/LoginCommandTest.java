@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 
@@ -14,6 +15,7 @@ import com.google.gson.JsonObject;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
@@ -44,15 +46,51 @@ public class LoginCommandTest {
         User user = new User(username, password);
 
         JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
-        ModelStubWithUser modelStubWithUser;
+        ModelStubAcceptUser modelStubAcceptUser;
 
         jsonUserStorageStub.createUser(username.toString(), password.toString());
-        modelStubWithUser = new ModelStubWithUser(user, jsonUserStorageStub);
+        modelStubAcceptUser = new ModelStubAcceptUser(user, jsonUserStorageStub);
 
-        CommandResult commandResult = new LoginCommand(user).execute(modelStubWithUser, commandHistory);
+        CommandResult commandResult = new LoginCommand(user).execute(modelStubAcceptUser, commandHistory);
 
         assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS, username.toString()), commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_failedLogin_noUser() throws Exception {
+        Username username = new Username("admin");
+        Password password = new Password("root");
+        User user = new User(username, password);
+
+        JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
+        ModelStubAcceptUser modelStubAcceptUser;
+
+        modelStubAcceptUser = new ModelStubAcceptUser(user, jsonUserStorageStub);
+
+        LoginCommand loginCommand = new LoginCommand(user);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(LoginCommand.MESSAGE_FAILURE);
+        loginCommand.execute(modelStubAcceptUser, commandHistory);
+    }
+
+    @Test
+    public void execute_failedLogin_alreadyLogged() throws Exception {
+        Username username = new Username("admin");
+        Password password = new Password("root");
+        User user = new User(username, password);
+
+        JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
+        ModelStubWithUser modelStubWithUser;
+
+        jsonUserStorageStub.createUser(username.toString(), password.toString());
+        modelStubWithUser = new ModelStubWithUser();
+        LoginCommand loginCommand = new LoginCommand(user);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(LoginCommand.MESSAGE_LOGGED);
+        loginCommand.execute(modelStubWithUser, commandHistory);
     }
 
     /**
@@ -178,11 +216,12 @@ public class LoginCommandTest {
     /**
      * A Model stub that simulates a login.
      */
-    private class ModelStubWithUser extends ModelStub {
+    private class ModelStubAcceptUser extends ModelStub {
         private JsonUserStorageStub jsonUserStorage;
         private User user;
+        private boolean isLogged = false;
 
-        ModelStubWithUser(User user, JsonUserStorageStub jsonUserStorage) {
+        ModelStubAcceptUser(User user, JsonUserStorageStub jsonUserStorage) {
             requireNonNull(user);
             this.user = user;
             this.jsonUserStorage = jsonUserStorage;
@@ -206,11 +245,33 @@ public class LoginCommandTest {
         @Override
         public void logUser(User user) {
             assertEquals(this.user, user);
+            isLogged = true;
         }
 
         @Override
         public boolean authenticate() {
-            return false;
+            return isLogged;
+        }
+    }
+
+    private class ModelStubWithUser extends ModelStub {
+        private boolean isLogged;
+        private boolean isPresent;
+
+        ModelStubWithUser() {
+            isLogged = true;
+            isPresent = true;
+        }
+
+        @Override
+        public boolean userExists(User user) {
+            requireNonNull(user);
+            return isPresent;
+        }
+
+        @Override
+        public boolean authenticate() {
+            return isLogged;
         }
     }
 }
