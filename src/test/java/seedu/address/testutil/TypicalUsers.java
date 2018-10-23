@@ -10,13 +10,13 @@ import seedu.address.model.user.User;
  */
 public class TypicalUsers {
 
-    public static final User ALICE =  new UserBuilder().withUsername("alice")
+    public static final User ALICE =  new UserBuilder().withUsername("Alice Williams")
             .withPassword("in_Wond3rl4nD!").build();
 
-    public static final User CARL =  new UserBuilder().withUsername("c4rl")
+    public static final User CARL =  new UserBuilder().withUsername("Carl Sagan")
             .withPassword("is_4_*star*").build();
 
-    public static final User DARYL =  new UserBuilder().withUsername("daryl.daryl")
+    public static final User DARYL =  new UserBuilder().withUsername("Daryl Jones")
             .withPassword("likes-to-eat").build();
 
     public static final User BOB =  new UserBuilder().withUsername(VALID_USERNAME)

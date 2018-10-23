@@ -9,15 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Username {
 
     public static final String MESSAGE_USERNAME_CONSTRAINTS =
-            "Usernames should adhere to the following constraints:\n"
-            + "1. Begin and end with alphanumeric characters.\n"
-            + "2. Be at least 2 characters long.\n"
-            + "3. Special characters can only include underscores and fullstops.";
-    private static final String FIRST_CHARACTER_REGEX = "[^\\W_]";  // alphanumeric except underscores
-    private static final String MIDDLE_REGEX = "[a-zA-Z0-9.-_-]*";   // alphanumeric, period, hyphen, underscore
-    private static final String LAST_CHARACTER_REGEX = "[^\\W_]";
-    public static final String USERNAME_VALIDATION_REGEX = FIRST_CHARACTER_REGEX
-            + MIDDLE_REGEX + LAST_CHARACTER_REGEX;
+            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
 

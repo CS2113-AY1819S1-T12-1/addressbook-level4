@@ -28,17 +28,15 @@ public class UsernameTest {
         // invalid usernames
         assertFalse(Username.isValidUsername("")); // empty string
         assertFalse(Username.isValidUsername(" ")); // spaces only
-        assertFalse(Username.isValidUsername("j")); // one character
-        assertFalse(Username.isValidUsername("_j")); // begins with non-alphanumeric
-        assertFalse(Username.isValidUsername("j_")); // ends with non-alphanumeric
-        assertFalse(Username.isValidUsername("_j_")); // begins and ends with non-alphanumeric
-        assertFalse(Username.isValidUsername("my name")); // has space
+        assertFalse(Username.isValidUsername("*")); // only non-alphanumeric
+        assertFalse(Username.isValidUsername("_j_")); // contains non-alphanumeric
 
         // valid usernames
-        assertTrue(Username.isValidUsername("james"));
-        assertTrue(Username.isValidUsername("la")); // two characters
-        assertTrue(Username.isValidUsername("my.name")); // with period
-        assertTrue(Username.isValidUsername("my-name")); // with hyphen
-        assertTrue(Username.isValidUsername("my_name")); // with underscore
+        assertTrue(Username.isValidUsername("James Yaputra")); // with upper-case
+        assertTrue(Username.isValidUsername("james yaputra")); // lower-case only
+        assertTrue(Username.isValidUsername("J")); // one character
+        assertTrue(Username.isValidUsername("12345")); // numbers only
+        assertTrue(Username.isValidUsername("Richard the 2nd")); // letters and numbers
+
     }
 }

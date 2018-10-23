@@ -30,8 +30,8 @@ import seedu.address.testutil.EditEventDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_USERNAME = "bob";
-    public static final String VALID_PASSWORD = "pass";
+    public static final String VALID_USERNAME = "James Yaputra";
+    public static final String VALID_PASSWORD = "pass123";
     public static final String VALID_NAME_AMY = "Night Cycling";
     public static final String VALID_NAME_BOB = "House Movie Screening";
     public static final String VALID_CONTACT_AMY = "Amy Bee";
@@ -64,7 +64,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "_james_"; // Incorrect format
+    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "_james_"; // has special characters
     public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "hello world"; // cannot contain space
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_CONTACT_DESC = " " + PREFIX_CONTACT + "James&"; // '&' not allowed in contact
