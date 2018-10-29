@@ -647,7 +647,7 @@ Format: <code>addComment INDEX C/STRING</code></p>
 <p>Adds comment at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>String can be empty but no comment will be added.</p>
+<p>Comment cannot be blank,. For C/String, String cannot be empty</p>
 </li>
 </ul>
 </div>
@@ -683,7 +683,10 @@ Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 <p>Replies a comment to the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>Comment</p>
+<p>Comment cannot be blank. For C/String, String cannot be empty</p>
+</li>
+<li>
+<p>Line has to be a non-zero integer and exist within the comment section</p>
 </li>
 </ul>
 </div>
@@ -719,16 +722,7 @@ Format: <code>deleteComment INDEX L/LINE</code></p>
 <p>Edits the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-<li>
-<p>When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.</p>
-</li>
-<li>
-<p>You can remove all the event&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+<p>Line has to be a non-zero integer and exist within the comment section</p>
 </li>
 </ul>
 </div>
@@ -863,4 +857,4 @@ e.g. <code>deleteComment 1 L/2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 08:52:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 08:53:29 UTC</div></div></div></body></html>
