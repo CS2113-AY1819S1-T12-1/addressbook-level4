@@ -639,6 +639,20 @@ Format: <code>showReminders</code></p>
 <p>Admin/User: Add comment into event comment section<br>
 Format: <code>addComment INDEX C/STRING</code></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Adds comment at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>String can be empty but no comment will be added.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -661,6 +675,20 @@ Adds "What is the attire to wear for this event?" into event 5 comment section</
 <p>Admin/User: Replies a comment<br>
 Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Replies a comment to the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>Comment</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -682,6 +710,29 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 <div class="paragraph">
 <p>Admin: Deletes a comment<br>
 Format: <code>deleteComment INDEX L/LINE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can remove all the event&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -803,7 +854,7 @@ e.g. <code>add Comments 1 C/HELLO</code></p>
 </li>
 <li>
 <p><strong>replyComment</strong> : <code>replyComment INDEX L/LINEINDEX C/STRING</code><br>
-e.g. `replyComment 1 L/2 C/Hello</p>
+e.g. <code>replyComment 1 L/2 C/Hello</code></p>
 </li>
 <li>
 <p><strong>deleteComment</strong> : <code>deleteComment INDEX L/LINEINDEX</code><br>
@@ -812,4 +863,4 @@ e.g. <code>deleteComment 1 L/2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 08:03:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 08:19:47 UTC</div></div></div></body></html>
