@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.FileCryptoException;
 import seedu.address.commons.util.PasswordUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.user.Password;
@@ -41,8 +42,8 @@ public class UserSession {
 
         try {
             userStorage = new JsonUserStorage(cryptoKey, userFilePath, lockedFilePath);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | FileCryptoException e) {
+            logger.warning("Error while initializing User JSON : " + StringUtil.getDetails(e));
         }
 
         createUser(user);
@@ -73,7 +74,7 @@ public class UserSession {
             try {
                 passwordsMatch = PasswordUtil.validatePassword(loggedPassword, storedPassword);
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-                logger.warning("PasswordUtil could not validate password : " + StringUtil.getDetails(e));
+                logger.severe("PasswordUtil could not validate password : " + StringUtil.getDetails(e));
             }
 
             if (passwordsMatch) {
@@ -95,11 +96,13 @@ public class UserSession {
             String encryptedPassword = PasswordUtil.getEncryptedPassword(loggedPassword);
             userStorage.createUser(loggedUsername, encryptedPassword);
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            logger.warning("PasswordUtil could not generate encrypted password : " + StringUtil.getDetails(e));
+            logger.severe("PasswordUtil could not generate encrypted password : " + StringUtil.getDetails(e));
         } catch (FileNotFoundException e) {
-            logger.warning("users.json not found in file path : " + StringUtil.getDetails(e));
+            logger.severe("users.json not found in file path : " + StringUtil.getDetails(e));
         } catch (IOException e) {
-            logger.warning("JSONUserStorage could not read or write to users.json : " + StringUtil.getDetails(e));
+            logger.severe("JSONUserStorage could not read or write to users.json : " + StringUtil.getDetails(e));
+        } catch (FileCryptoException e) {
+            logger.severe("Error while encrypting/decrypting locked user file : " + StringUtil.getDetails(e));
         }
     }
 

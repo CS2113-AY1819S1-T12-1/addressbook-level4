@@ -29,7 +29,7 @@ public class JsonUserStorage implements UserStorage {
     private Path lockedPath;
     private Map<String, String> userAccounts;
 
-    public JsonUserStorage(String cryptoKey, Path filePath, Path lockedPath) throws IOException {
+    public JsonUserStorage(String cryptoKey, Path filePath, Path lockedPath) throws IOException, FileCryptoException {
         this.cryptoKey = cryptoKey;
         this.filePath = filePath;
         this.lockedPath = lockedPath;
@@ -46,7 +46,7 @@ public class JsonUserStorage implements UserStorage {
      * Adds a new property in the JSON file.
      */
     @Override
-    public void createUser(String username, String password) throws IOException {
+    public void createUser(String username, String password) throws IOException, FileCryptoException {
         JsonObject jsonObject = getJsonObject();
         jsonObject.addProperty(username, password);
 
@@ -65,7 +65,7 @@ public class JsonUserStorage implements UserStorage {
     /**
      * Sets the user account.
      */
-    private void setUserAccounts() throws IOException {
+    private void setUserAccounts() throws IOException, FileCryptoException {
         Type type = new TypeToken<Map<String, String>>(){}.getType();
         userAccounts = new Gson().fromJson(readJson(), type);
     }
@@ -73,7 +73,7 @@ public class JsonUserStorage implements UserStorage {
     /**
      * Returns the user accounts as a JSON Object.
      */
-    private JsonObject getJsonObject() throws FileNotFoundException {
+    private JsonObject getJsonObject() throws FileNotFoundException, FileCryptoException {
         JsonParser parser = new JsonParser();
         JsonElement jsonElement = parser.parse(readJson());
 
@@ -83,7 +83,7 @@ public class JsonUserStorage implements UserStorage {
     /**
      * Creates a user account JSON file.
      */
-    private void createUserFile() throws IOException {
+    private void createUserFile() throws IOException, FileCryptoException {
         JsonObject jsonObject = new JsonObject();
         writeJson(true, new Gson(), jsonObject);
     }
@@ -91,7 +91,7 @@ public class JsonUserStorage implements UserStorage {
     /**
      * Reads the User JSON.
      */
-    private FileReader readJson() throws FileNotFoundException {
+    private FileReader readJson() throws FileNotFoundException, FileCryptoException {
         decrypt();
         FileReader fileReader = new FileReader(filePathString);
         encrypt();
@@ -101,7 +101,7 @@ public class JsonUserStorage implements UserStorage {
     /**
      * Writes to the User JSON.
      */
-    private void writeJson(boolean isSetup, Gson gson, JsonObject jsonObject) throws IOException {
+    private void writeJson(boolean isSetup, Gson gson, JsonObject jsonObject) throws IOException, FileCryptoException {
         if (isSetup) {
             decrypt();
         }
@@ -116,22 +116,14 @@ public class JsonUserStorage implements UserStorage {
     /**
      * Encrypts file.
      */
-    private void encrypt() {
-        try {
-            FileCryptoUtil.encrypt(cryptoKey, filePath, lockedPath);
-        } catch (FileCryptoException e) {
-            e.printStackTrace();
-        }
+    private void encrypt() throws FileCryptoException {
+        FileCryptoUtil.encrypt(cryptoKey, filePath, lockedPath);
     }
 
     /**
      * Decrypts file.
      */
-    private void decrypt() {
-        try {
-            FileCryptoUtil.decrypt(cryptoKey, lockedPath, filePath);
-        } catch (FileCryptoException e) {
-            e.printStackTrace();
-        }
+    private void decrypt() throws FileCryptoException {
+        FileCryptoUtil.decrypt(cryptoKey, lockedPath, filePath);
     }
 }
