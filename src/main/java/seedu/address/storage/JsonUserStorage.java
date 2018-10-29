@@ -102,7 +102,7 @@ public class JsonUserStorage implements UserStorage {
      * Writes to the User JSON.
      */
     private void writeJson(boolean isSetup, Gson gson, JsonObject jsonObject) throws IOException, FileCryptoException {
-        if (isSetup) {
+        if (!isSetup) {
             decrypt();
         }
 
