@@ -15,15 +15,24 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import seedu.address.commons.exceptions.FileCryptoException;
+import seedu.address.commons.util.FileCryptoUtil;
+
 /**
  * A class to access UserSession stored in the hard disk as a JSON file
  */
 public class JsonUserStorage implements UserStorage {
 
+    private String cryptoKey;
     private String filePathString;
+    private Path filePath;
+    private Path lockedPath;
     private Map<String, String> userAccounts;
 
-    public JsonUserStorage(Path filePath) throws IOException {
+    public JsonUserStorage(String cryptoKey, Path filePath, Path lockedPath) throws IOException {
+        this.cryptoKey = cryptoKey;
+        this.filePath = filePath;
+        this.lockedPath = lockedPath;
         filePathString = "./" + filePath.toString();
 
         if (Files.notExists(filePath)) {
@@ -41,7 +50,7 @@ public class JsonUserStorage implements UserStorage {
         JsonObject jsonObject = getJsonObject();
         jsonObject.addProperty(username, password);
 
-        writeJson(new Gson(), jsonObject);
+        writeJson(false, new Gson(), jsonObject);
         setUserAccounts();
     }
 
@@ -58,7 +67,7 @@ public class JsonUserStorage implements UserStorage {
      */
     private void setUserAccounts() throws IOException {
         Type type = new TypeToken<Map<String, String>>(){}.getType();
-        userAccounts = new Gson().fromJson(new FileReader(filePathString), type);
+        userAccounts = new Gson().fromJson(readJson(), type);
     }
 
     /**
@@ -66,7 +75,7 @@ public class JsonUserStorage implements UserStorage {
      */
     private JsonObject getJsonObject() throws FileNotFoundException {
         JsonParser parser = new JsonParser();
-        JsonElement jsonElement = parser.parse(new FileReader(filePathString));
+        JsonElement jsonElement = parser.parse(readJson());
 
         return jsonElement.getAsJsonObject();
     }
@@ -76,16 +85,53 @@ public class JsonUserStorage implements UserStorage {
      */
     private void createUserFile() throws IOException {
         JsonObject jsonObject = new JsonObject();
-        writeJson(new Gson(), jsonObject);
+        writeJson(true, new Gson(), jsonObject);
+    }
+
+    /**
+     * Reads the User JSON.
+     */
+    private FileReader readJson() throws FileNotFoundException {
+        decrypt();
+        FileReader fileReader = new FileReader(filePathString);
+        encrypt();
+        return fileReader;
     }
 
     /**
      * Writes to the User JSON.
      */
-    private void writeJson(Gson gson, JsonObject jsonObject) throws IOException {
+    private void writeJson(boolean isSetup, Gson gson, JsonObject jsonObject) throws IOException {
+        if (isSetup) {
+            decrypt();
+        }
+
         String json = gson.toJson(jsonObject);
         FileWriter file = new FileWriter(filePathString);
         file.write(json);
         file.flush();
+        encrypt();
+    }
+
+    /**
+     * Encrypts file.
+     */
+    private void encrypt() {
+        try {
+            FileCryptoUtil.encrypt(cryptoKey, filePath, lockedPath);
+        } catch (FileCryptoException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Decrypts file.
+     */
+    private void decrypt() {
+        try {
+            FileCryptoUtil.decrypt(cryptoKey, lockedPath, filePath);
+        } catch (FileCryptoException e) {
+            e.printStackTrace();
+        }
     }
 }

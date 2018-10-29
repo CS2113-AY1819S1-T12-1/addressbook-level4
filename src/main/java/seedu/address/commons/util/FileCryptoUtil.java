@@ -42,9 +42,7 @@ public class FileCryptoUtil {
      * @param outputPath file to be encrypted
      * @throws FileCryptoException
      */
-    public static void decrypt(Path inputPath, Path outputPath) throws FileCryptoException {
-        String[] path = inputPath.toString().split("/");
-        String key = path[1];
+    public static void decrypt(String key, Path inputPath, Path outputPath) throws FileCryptoException {
         executeCipher(Cipher.DECRYPT_MODE, key, inputPath.toFile(), outputPath.toFile());
     }
 

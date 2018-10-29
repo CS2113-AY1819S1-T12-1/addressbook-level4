@@ -30,7 +30,9 @@ public class UserSession {
     private boolean adminStatus;
 
     public UserSession() {
+        final String cryptoKey = "AESneeds16bytes!";
         final Path userFilePath = Paths.get("users.json");
+        final Path lockedFilePath = Paths.get("data", cryptoKey);
         final Username username = new Username("admin");
         final Password password = new Password("root");
         user = new User(username, password);
@@ -38,7 +40,7 @@ public class UserSession {
         adminStatus = false;
 
         try {
-            userStorage = new JsonUserStorage(userFilePath);
+            userStorage = new JsonUserStorage(cryptoKey, userFilePath, lockedFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
