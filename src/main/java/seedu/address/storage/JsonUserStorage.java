@@ -35,7 +35,7 @@ public class JsonUserStorage implements UserStorage {
         this.lockedPath = lockedPath;
         filePathString = "./" + filePath.toString();
 
-        if (Files.notExists(filePath)) {
+        if (Files.notExists(lockedPath)) {
             createUserFile();
         }
 

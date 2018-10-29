@@ -11,6 +11,7 @@ lib/*
 /config.json
 src/test/data/sandbox/
 users.json
+AESneeds16bytes!
 preferences.json
 .DS_Store
 ./screenshot*.png
