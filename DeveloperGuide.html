@@ -33,9 +33,12 @@
 <li><a href="#undo-redo-feature">3.2. Undo/Redo feature</a></li>
 <li><a href="#comments">3.3. Comments</a></li>
 <li><a href="#rsvp">3.4. RSVP</a></li>
-<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#configuration">3.7. Configuration</a></li>
+<li><a href="#default-sorting">3.5. Default sorting</a></li>
+<li><a href="#enhance-current-code-find-code-command">3.6. Enhance current <code>find</code> command</a></li>
+<li><a href="#export-rvsp-ed-events-to-icalendar-file">3.7. Export RVSP-ed events to iCalendar file</a></li>
+<li><a href="#proposed-data-encryption">3.8. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.9. Logging</a></li>
+<li><a href="#configuration">3.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -402,7 +405,8 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note how the <code>Model</code> simply raises a <code>AddressBookChangedEvent</code> when the Address Book data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
+Note how the <code>Model</code> simply raises a <code>EventManagerChangedEvent</code> when the event manager data are changed, instead of
+asking the <code>Storage</code> to save the updates to the hard disk.
 </td>
 </tr>
 </table>
@@ -481,7 +485,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>Logic</code> uses the <code>AddressBookParser</code> class to parse the user command.</p>
+<p><code>Logic</code> uses the <code>EventManagerParser</code> class to parse the user command.</p>
 </li>
 <li>
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
@@ -524,7 +528,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the event manager data.</p>
 </li>
 <li>
 <p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
@@ -541,7 +545,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+As a more OOP model, we can store a <code>Tag</code> list in <code>event manager</code>, which <code>Person</code> can reference. This would allow <code>event manager</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
 <br>
 <span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
 </td>
@@ -569,7 +573,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p>can save the Address Book data in xml format and read it back.</p>
+<p>can save the event manager data in xml format and read it back.</p>
 </li>
 </ul>
 </div>
@@ -577,7 +581,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>seedu.address.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -667,31 +671,34 @@ If an authentication fails, i.e. credentials are wrong or do not exist in the JS
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
+<p>The undo/redo mechanism is facilitated by <code>VersionedEventManager</code>.
+It extends <code>EventManager</code> with an undo/redo history, stored internally as an <code>eventManagerStateList</code> and
+<code>currentStatePointer</code>
+.
 Additionally, it implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p><code>VersionedEventManager#commit()</code>&#8201;&#8212;&#8201;Saves the current event manager state in its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p><code>VersionedEventManager#undo()</code>&#8201;&#8212;&#8201;Restores the previous event manager state from its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p><code>VersionedEventManager#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone event manager state from its history.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitEventManager()</code>, <code>Model#undoEventManager()</code> and <code>Model#redoEventManager()</code> respectively.</p>
 </div>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>Step 1. The user launches the application for the first time. The <code>VersionedEventManager</code> will be initialized with the
+initial event manager state, and the <code>currentStatePointer</code> pointing to that single event manager state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -699,7 +706,8 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th event in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
+<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th event in the event manager. The <code>delete</code> command calls
+<code>Model#commitEventManager()</code>, causing the modified state of the event manager after the <code>delete 5</code> command executes to be saved in the <code>eventManagerStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted event manager state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -707,7 +715,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new event. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
+<p>Step 3. The user executes <code>add n/Happy Ben Birthday &#8230;&#8203;</code> to add a new event. The <code>add</code> command also calls <code>Model#commitEventManager()</code>, causing another modified event manager state to be saved into the <code>eventManagerStateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -721,13 +729,15 @@ Additionally, it implements the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
+If a command fails its execution, it will not call <code>Model#commitEventManager()</code>, so the event manager state will not be saved into the <code>eventManagerStateList</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the event was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
+<p>Step 4. The user now decides that adding the event was a mistake, and decides to undo that action by executing the
+<code>undo</code> command. The <code>undo</code> command will call <code>Model#undoEventManager()</code>, which will shift the <code>currentStatePointer</code> once
+to the left, pointing it to the previous event manager state, and restores the event manager to that state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -741,7 +751,9 @@ If a command fails its execution, it will not call <code>Model#commitAddressBook
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the <code>currentStatePointer</code> is at index 0, pointing to the initial event manager state, then there are no previous
+event manager states to restore. The <code>undo</code> command uses <code>Model#canUndoEventManager()</code> to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the undo.
 </td>
 </tr>
 </table>
@@ -755,7 +767,8 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
+<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoEventManager()</code>, which shifts the <code>currentStatePointer</code> once
+to the right, pointing to the previously undone state, and restores the event manager to that state.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -764,13 +777,16 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the <code>currentStatePointer</code> is at index <code>eventManagerStateList.size() - 1</code>, pointing to the latest event manager state,
+then there are no undone event manager states to restore. The <code>redo</code> command uses <code>Model#canRedoEventManager()</code> to check if this is the case.If so, it will return an error to the user rather than attempting to perform the redo.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
+<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the event manager, such as
+<code>list</code>, will usually not call <code>Model#commitEventManager()</code>, <code>Model#undoEventManager()</code> or <code>Model#redoEventManager()</code>. Thus, the
+<code>eventManagerStateList</code> remains unchanged.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -778,7 +794,13 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitEventManager()</code>. Since the <code>currentStatePointer</code> is not
+pointing at the end of the <code>eventManagerStateList</code>, all event manager states after the <code>currentStatePointer</code> will be
+purged.</p>
+</div>
+<div class="paragraph">
+<p>We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior
+that most modern desktop applications follow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -801,7 +823,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire event manager.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -834,14 +856,15 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of event manager states.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
+<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both
+<code>HistoryManager</code> and <code>VersionedEventManager</code>.</p>
 </li>
 </ul>
 </div>
@@ -1177,13 +1200,194 @@ If the user uses the <code>find</code> command, the following functions will fol
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
+<h3 id="default-sorting"><a class="link" href="#default-sorting">3.5. Default sorting</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Since our product is an event manager, events should be controlled and view in chronological order.
+To do this, <code>UniqueEventList</code> class is modify so as to sort the event list in Date order, follow by Name order.<br></p>
+</div>
+<div class="paragraph">
+<p>Consider this scenario:</p>
+</div>
+<div class="paragraph">
+<p>Step 1: User launch application, then log in</p>
+</div>
+<div class="paragraph">
+<p>Step 2: User add a new event which will occur earlier than some of the event in the list<br>
+e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Step 3: When add method is called, it performs the intended operation, then sort the list before returning it to other components.</p>
+</div>
+<div class="paragraph">
+<p>Step 4: The event page is reloaded and display the newly added event in the correct place.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-how-to-sort-the-list"><a class="link" href="#aspect-how-to-sort-the-list">3.5.2. Aspect: How to sort the list</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Event list will be sort based on sort method implemented in <code>UniqueEventList</code> class to modify the internal list which event manager is backed on.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement will minimum modification that could affect other components.</p>
+</li>
+<li>
+<p>Cons: Every method that change the internal list (e.g: add, setEvent, delete) will need to be sorted at the end of the method.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Sort only when we need to get the list if the list is not sorted.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The easiest implementation without affecting other components.</p>
+</li>
+<li>
+<p>Cons: The sort operation when called by other components, for example UI component will return operation to main thread, which severely affect testing with JUnit on JavaFX thread</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Only sort the list for displaying on the UI</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will perform minimal operation while still returning what we need to observe.</p>
+</li>
+<li>
+<p>Cons: Very complicated implementation as UI are updated based on observing internal list. We will need a class to update the UI if we just want to sort the list on displaying.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhance-current-code-find-code-command"><a class="link" href="#enhance-current-code-find-code-command">3.6. Enhance current <code>find</code> command</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p><code>find</code> command is used for better navigation. Therefore, it is enhanced to search for more properties in an Event.<br></p>
+</div>
+<div class="paragraph">
+<p><code>find</code> can search for Name, Address, Date and Tags. If prefix is added, find can search for event that must contain that keyword in that specific field</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-how-to-improve-search"><a class="link" href="#aspect-how-to-improve-search">3.6.2. Aspect: How to improve search</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Modify the predicate to display the event that Name, Date, Address, Tags contains one of the keywords</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Follow the current structure of <code>find</code> command, which mean can reuse current resources</p>
+</li>
+<li>
+<p>Cons: Predicate have limited ability to handle complexity needed in further enhancement</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-enhancement"><a class="link" href="#future-enhancement">3.6.3. Future enhancement:</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Search for contained or exact keywords option</p>
+</li>
+<li>
+<p>Search for time range</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="export-rvsp-ed-events-to-icalendar-file"><a class="link" href="#export-rvsp-ed-events-to-icalendar-file">3.7. Export RVSP-ed events to iCalendar file</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>This feature will increase compatibility of Event Manager will other calendar app for better planning.</p>
+</div>
+<div class="paragraph">
+<p>Consider the following scenario:</p>
+</div>
+<div class="paragraph">
+<p>Step 1: User launch application, then log in</p>
+</div>
+<div class="paragraph">
+<p>Step 2: User execute 'export my event calendar' command. The export command receive argument to accept as filename</p>
+</div>
+<div class="paragraph">
+<p>Step 3: Current user, who are logging in, will be used to receive an event filtered list that he/she registered for.</p>
+</div>
+<div class="paragraph">
+<p>Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-how-to-export-the-event-list"><a class="link" href="#aspect-how-to-export-the-event-list">3.7.2. Aspect: How to export the event list</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current implementation):</strong> Using ical4j external library to create method to convert event to RFC5545 format, then stream to FileOutputStream with given filename from user.<br>
+All method are written in the <code>ExportCalendarCommand</code> class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, can reuse current resources and easy to match wth the implementation of Attendance list</p>
+</li>
+<li>
+<p>Cons: Violate some of the OOP design as the export method should be in the storage class</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create class to write an .ics file with given RFC5545 standard</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Have better control of the output file, since the ical4j support API has not been updated for a long time and currently show some lacking</p>
+</li>
+<li>
+<p>Cons: Very complicated and time wasting</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="proposed-v1-4-enhancement"><a class="link" href="#proposed-v1-4-enhancement">3.7.3. [Proposed]: [V1.4] enhancement</a></h4>
+<div class="paragraph">
+<p>The method related to <code>ExportCalendarCommand</code> class should be re-designed to follow OOP requirement.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.8. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1221,7 +1425,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.7. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1612,7 +1816,8 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <div class="sect2">
 <h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.6. Managing Dependencies</a></h3>
 <div class="paragraph">
-<p>A project often depends on third-party libraries. For example, Address Book depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
+<p>A project often depends on third-party libraries. For example, event manager depends on the <a href="http://wiki.fasterxml" class="bare">http://wiki.fasterxml</a>
+.com/JacksonHome[Jackson library] for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)</p>
 </div>
@@ -1672,7 +1877,10 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 <p>Just like we store each individual command word constant <code>COMMAND_WORD</code> inside <code>*Command.java</code> (e.g.  <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/commands/FindCommand.java"><code>FindCommand#COMMAND_WORD</code></a>, <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/commands/DeleteCommand.java"><code>DeleteCommand#COMMAND_WORD</code></a>), you need a new constant for aliases as well (e.g. <code>FindCommand#COMMAND_ALIAS</code>).</p>
 </li>
 <li>
-<p><a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser</code></a> is responsible for analyzing command words.</p>
+<p><a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/parser/EventManagerParser.java"><code>EventManagerParser</code></a> is responsible for
+analyzing
+command
+words.</p>
 </li>
 </ul>
 </div>
@@ -1682,21 +1890,23 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>Modify the switch statement in <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser#parseCommand(String)</code></a> such that both the proper command word and alias can be used to execute the same intended command.</p>
-</li>
-<li>
-<p>Add new tests for each of the aliases that you have added.</p>
-</li>
-<li>
-<p>Update the user guide to document the new aliases.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/785">PR</a> for the full solution.</p>
+<p>Modify the switch statement in link:https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/parser/EventManagerParser
+.java[<code>EventManagerParser#parseCommand(String)</code>] such that both the proper command word and alias can be used to execute
+the</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>same</p>
+</div>
+<div class="paragraph">
+<p>intended command.
+<strong> Add new tests for each of the aliases that you have added.
+</strong> Update the user guide to document the new aliases.
+** See this <a href="https://github.com/se-edu/addressbook-level4/pull/785">PR</a> for the full solution.</p>
 </div>
 </div>
 </div>
@@ -1705,7 +1915,15 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 </div>
 <h4 id="code-model-code-component" class="discrete"><code>Model</code> component</h4>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
+<p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement
+a command such that the user is able to remove a particular tag from everyone in the event manager, but the model API
+does</p>
+</div>
+<div class="paragraph">
+<p>not</p>
+</div>
+<div class="paragraph">
+<p>support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1722,7 +1940,7 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a <code>removeTag(Tag)</code> method. The specified tag will be removed from everyone in the address book.</p>
+<p>Add a <code>removeTag(Tag)</code> method. The specified tag will be removed from everyone in the event manager.</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
@@ -1732,13 +1950,21 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model</code></a> and the <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a> API need to be updated.</p>
+<p>The <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model</code></a> and the
+<a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/EventManager.java"><code>EventManager</code></a> API need to be updated.</p>
 </li>
 <li>
 <p>Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?</p>
 </li>
 <li>
-<p>Find out which of the existing API methods in  <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a> and <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/event/Person.java"><code>Person</code></a> classes can be used to implement the tag removal logic. <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a> allows you to update a event, and <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/event/Person.java"><code>Person</code></a> allows you to update the tags.</p>
+<p>Find out which of the existing API methods in  link:https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/EventManager
+.java[<code>EventManager</code>]
+and
+<a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/event/Person.java"><code>Person</code></a> classes can be used to implement the tag
+removal logic. <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/EventManager.java"><code>EventManager</code></a> allows you to update a
+event,
+and
+<a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/event/Person.java"><code>Person</code></a> allows you to update the tags.</p>
 </li>
 </ul>
 </div>
@@ -1748,21 +1974,25 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>Implement a <code>removeTag(Tag)</code> method in <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a>. Loop through each event, and remove the <code>tag</code> from each event.</p>
-</li>
-<li>
-<p>Add a new API method <code>deleteTag(Tag)</code> in <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a>. Your <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a> should call <code>AddressBook#removeTag(Tag)</code>.</p>
-</li>
-<li>
-<p>Add new tests for each of the new public methods that you have added.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/790">PR</a> for the full solution.</p>
+<p>Implement a <code>removeTag(Tag)</code> method in <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/EventManager.java"><code>EventManager</code></a>
+.
+Loop</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>through</p>
+</div>
+<div class="paragraph">
+<p>each event, and remove the <code>tag</code> from each event.
+<strong> Add a new API method <code>deleteTag(Tag)</code> in link:https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/ModelManager
+.java[<code>ModelManager</code>]. Your <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a> should
+call <code>EventManager#removeTag(Tag)</code>.
+</strong> Add new tests for each of the new public methods that you have added.
+** See this <a href="https://github.com/se-edu/addressbook-level4/pull/790">PR</a> for the full solution.</p>
 </div>
 </div>
 </div>
@@ -1771,7 +2001,11 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 </div>
 <h4 id="code-ui-code-component" class="discrete"><code>Ui</code> component</h4>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>ui</code>. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn&#8217;t prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last event in the list. Your job is to implement improvements to the UI to solve all these problems.</p>
+<p><strong>Scenario:</strong> You are in charge of <code>ui</code>. During a beta testing session, your team is observing how the users use your
+event manager</p>
+</div>
+<div class="paragraph">
+<p>application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn&#8217;t prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last event in the list. Your job is to implement improvements to the UI to solve all these problems.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1903,31 +2137,32 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <p>The unit tests for <code>ResultDisplay</code> can be modified to include verification of the color.</p>
 </li>
 <li>
-<p>The system tests <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/test/java/systemtests/AddressBookSystemTest.java"><code>AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()</code></a> to include verification for <code>ResultDisplay</code> as well.</p>
+<p>The system tests link:https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/test/java/systemtests/EventManagerSystemTest
+.java[`EventManagerSystemTest#assertCommandBoxShowsDefaultStyle() and EventManagerSystemTest#assertCommandBoxShowsErrorStyle
+()
+`]</p>
 </li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>to
+include
+verification for <code>ResultDisplay</code> as well.
+<strong> See this <a href="https://github.com/se-edu/addressbook-level4/pull/799">PR</a> for the full solution.
+</strong>* Do read the commits one at a time if you feel overwhelmed.</p>
+</div>
+</div>
 </div>
 </li>
 <li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/799">PR</a> for the full solution.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Do read the commits one at a time if you feel overwhelmed.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Modify the <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to show the total number of people in the address book.</p>
+<p>Modify the <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to show the total
+number of people in the event manager.</p>
 <div class="paragraph">
 <p><strong>Before</strong></p>
 </div>
@@ -1956,7 +2191,10 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <p><a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/resources/view/StatusBarFooter.fxml"><code>StatusBarFooter.fxml</code></a> will need a new <code>StatusBar</code>. Be sure to set the <code>GridPane.columnIndex</code> properly for each <code>StatusBar</code> to avoid misalignment!</p>
 </li>
 <li>
-<p><a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.</p>
+<p><a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever the event manager is updated.</p>
+</li>
+<li>
+<p><a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever the event manager is updated.</p>
 </li>
 </ul>
 </div>
@@ -1969,21 +2207,27 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <p>Modify the constructor of <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to take in the number of events when the application just started.</p>
 </li>
 <li>
-<p>Use <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)</code></a> to update the number of events whenever there are new changes to the addressbook.</p>
+<p>Use <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter#handleEventManagerChangedEvent
+(EventManagerChangedEvent)</code></a> to update the number of events whenever there are new changes to the addressbook.</p>
 </li>
 <li>
 <p>For tests, modify <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/test/java/guitests/guihandles/StatusBarFooterHandle.java"><code>StatusBarFooterHandle</code></a> by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.</p>
 </li>
 <li>
-<p>For system tests, modify <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/test/java/systemtests/AddressBookSystemTest.java"><code>AddressBookSystemTest</code></a> to also verify the new total number of events status bar.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/803">PR</a> for the full solution.</p>
+<p>For system tests, modify <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/test/java/systemtests/EventManagerSystemTest.java"><code>EventManagerSystemTest</code></a>
+to
+also</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>verify
+the
+new total number of events status bar.
+** See this <a href="https://github.com/se-edu/addressbook-level4/pull/803">PR</a> for the full solution.</p>
 </div>
 </div>
 </div>
@@ -1992,7 +2236,7 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 </div>
 <h4 id="code-storage-code-component" class="discrete"><code>Storage</code> component</h4>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>storage</code>. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.</p>
+<p><strong>Scenario:</strong> You are in charge of <code>storage</code>. For your next project milestone, your team plans to implement a new feature of saving the event manager to the cloud. However, the current implementation of the application constantly saves the event manager after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the event manager storage.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2009,7 +2253,17 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a new method <code>backupAddressBook(ReadOnlyAddressBook)</code>, so that the address book can be saved in a fixed temporary location.</p>
+<p>Add a new method <code>backupEventManager(ReadOnlyEventManager)</code>, so that the event manager can be saved in a fixed temporary</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>location
+.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
@@ -2019,10 +2273,12 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <div class="ulist">
 <ul>
 <li>
-<p>Add the API method in <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/storage/AddressBookStorage.java"><code>AddressBookStorage</code></a> interface.</p>
+<p>Add the API method in <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/storage/EventManagerStorage.java"><code>EventManagerStorage</code></a>
+interface.</p>
 </li>
 <li>
-<p>Implement the logic in <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/storage/StorageManager.java"><code>StorageManager</code></a> and <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/storage/XmlAddressBookStorage.java"><code>XmlAddressBookStorage</code></a> class.</p>
+<p>Implement the logic in <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/storage/StorageManager.java"><code>StorageManager</code></a> and
+<a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/storage/XmlEventManagerStorage.java"><code>XmlEventManagerStorage</code></a> class.</p>
 </li>
 </ul>
 </div>
@@ -2041,9 +2297,6 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 </div>
 </div>
 </div>
-</li>
-</ol>
-</div>
 </div>
 <div class="sect2">
 <h3 id="GetStartedProgramming-RemarkCommand"><a class="link" href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a></h3>
@@ -2051,7 +2304,7 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
 </div>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are a software maintainer for <code>addressbook</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
+<p><strong>Scenario:</strong> You are a software maintainer for <code>event manager</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
 </div>
 <div class="sect3">
 <h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
@@ -2091,7 +2344,9 @@ Removes the remark for the first event.</p>
 <p>Add a <code>RemarkCommand</code> that extends <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/commands/Command.java"><code>Command</code></a>. Upon execution, it should just throw an <code>Exception</code>.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser</code></a> to accept a <code>RemarkCommand</code>.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/parser/EventManagerParser.java"><code>EventManagerParser</code></a> to accept a
+<code>RemarkCommand</code>
+.</p>
 </li>
 </ol>
 </div>
@@ -2104,7 +2359,10 @@ Removes the remark for the first event.</p>
 <p>Add <code>RemarkCommandTest</code> that tests that <code>execute()</code> throws an Exception.</p>
 </li>
 <li>
-<p>Add new test method to <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java"><code>AddressBookParserTest</code></a>, which tests that typing "remark" returns an instance of <code>RemarkCommand</code>.</p>
+<p>Add new test method to link:https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/test/java/seedu/address/logic/parser/EventManagerParserTest
+.java[<code>EventManagerParserTest</code>],
+which
+tests that typing "remark" returns an instance of <code>RemarkCommand</code>.</p>
 </li>
 </ol>
 </div>
@@ -2126,7 +2384,10 @@ Removes the remark for the first event.</p>
 <p>Add <code>RemarkCommandParser</code> that knows how to parse two arguments, one index and one with prefix 'r/'.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser</code></a> to use the newly implemented <code>RemarkCommandParser</code>.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/main/java/seedu/address/logic/parser/EventManagerParser.java"><code>EventManagerParser</code></a> to use the
+newly
+implemented
+<code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
@@ -2143,9 +2404,15 @@ Removes the remark for the first event.</p>
 for <code>RemarkCommandParser</code>.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java"><code>AddressBookParserTest</code></a> to test that the correct command is generated according to the user input.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T12-1/main/tree/master/src/test/java/seedu/address/logic/parser/EventManagerParserTest.java"><code>EventManagerParserTest</code></a> to
+test</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>that
+the
+correct command is generated according to the user input.</p>
 </div>
 </div>
 <div class="sect4">
@@ -2249,9 +2516,19 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Fix <code>invalidAndValidPersonAddressBook.xml</code>, <code>typicalPersonsEventManager.xml</code>, <code>validAddressBook.xml</code> etc., such that the XML tests will not fail due to a missing <code>&lt;remark&gt;</code> element.</p>
+<p>Fix <code>invalidAndValidPersonEventManager.xml</code>, <code>typicalPersonsEventManager.xml</code>, <code>validEventManager.xml</code> etc., such that the</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>XML</p>
+</div>
+<div class="paragraph">
+<p>tests</p>
+</div>
+<div class="paragraph">
+<p>will
+not fail due to a missing <code>&lt;remark&gt;</code> element.</p>
 </div>
 </div>
 <div class="sect4">
@@ -2563,7 +2840,20 @@ Use case ends</p>
 Resume use case at step 4</p>
 </div>
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+<p><strong>Use Case: Export calendar</strong>:<br>
+MSS (main system success):<br>
+1. User request to export registered event list with given name<br>
+2. EventManager execute exportCalendarCommand
+3. A filename with .ics extension create or re-write in src/data/ folder</p>
+</div>
+<div class="paragraph">
+<p>Extensions:
+0a) User viewing current registered list with view attendance
+1a) User modified registered list with command
+    1a1) The new list is exported in .ics file</p>
+</div>
+<div class="paragraph">
+<p>(For all use cases below, the <strong>System</strong> is the <code>EventManager</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
 <h3 id="use-case-delete-event" class="discrete">Use case: Delete event</h3>
 <div class="paragraph">
@@ -2575,13 +2865,13 @@ Resume use case at step 4</p>
 <p>User requests to list events</p>
 </li>
 <li>
-<p>AddressBook shows a list of events</p>
+<p>EventManager shows a list of events</p>
 </li>
 <li>
 <p>User requests to delete a specific event in the list</p>
 </li>
 <li>
-<p>AddressBook deletes the event</p>
+<p>EventManager deletes the event</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2604,7 +2894,7 @@ Resume use case at step 4</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AddressBook shows an error message.</p>
+<p>3a1. EventManager shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
 </div>
@@ -2803,4 +3093,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 01:41:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 05:45:18 UTC</div></div></div></body></html>
