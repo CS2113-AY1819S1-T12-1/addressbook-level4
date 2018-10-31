@@ -69,7 +69,7 @@ public class EditCommandParser implements Parser
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editEventDescriptor.setDate(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
-        editEventDescriptor.setComment(new Comment("{span}This is a comment{/span}")); //TODO for Comment
+        editEventDescriptor.setComment(new Comment("{span}Comment Section{/span}")); //TODO for Comment
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEventDescriptor::setTags);
         parseAttendeesForEdit(argMultimap.getAllValues(PREFIX_ATTENDEE)).ifPresent(editEventDescriptor::setAttendees);
 

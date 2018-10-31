@@ -14,6 +14,6 @@ public class EventManagerChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons " + data.getEventList().size();
+        return "number of events " + data.getEventList().size();
     }
 }
