@@ -1275,7 +1275,19 @@ e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8
 <p><code>find</code> command is used for better navigation. Therefore, it is enhanced to search for more properties in an Event.<br></p>
 </div>
 <div class="paragraph">
-<p><code>find</code> can search for Name, Address, Date and Tags. If prefix is added, find can search for event that must contain that keyword in that specific field</p>
+<p><code>find</code> can search for any data with the default keywords and . If specific prefix is added, find can search for event that must contain that keyword in that specific field</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If there are more than 1 prefix of the same type, for example, <code>find n/new n/dark n/meeting</code>, this will be automatically combined together, which means this command will be assumed to be the same as <code>find n/new dark meeting</code>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -1283,14 +1295,14 @@ e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Modify the predicate to display the event that Name, Date, Address, Tags contains one of the keywords</p>
+<p><strong>Alternative 1 (current choice):</strong> Modify the predicate to display the event that date contains one of the keywords</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Follow the current structure of <code>find</code> command, which mean can reuse current resources</p>
 </li>
 <li>
-<p>Cons: Predicate have limited ability to handle complexity needed in further enhancement</p>
+<p>Cons: With the current implementation of the predicate, scaling will severely affect product performance</p>
 </li>
 </ul>
 </div>
@@ -1368,11 +1380,26 @@ All method are written in the <code>ExportCalendarCommand</code> class.</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For the current version of this product, export calendar now will export every events available in the event manager as authentication and RSVP are under test.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="proposed-v1-4-enhancement"><a class="link" href="#proposed-v1-4-enhancement">3.7.3. [Proposed]: [V1.4] enhancement</a></h4>
 <div class="paragraph">
 <p>The method related to <code>ExportCalendarCommand</code> class should be re-designed to follow OOP requirement.</p>
+</div>
+<div class="paragraph">
+<p>Export should be able to export the attendance list of an event according to user preference</p>
 </div>
 </div>
 </div>
@@ -3089,4 +3116,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 09:04:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 12:05:52 UTC</div></div></div></body></html>
