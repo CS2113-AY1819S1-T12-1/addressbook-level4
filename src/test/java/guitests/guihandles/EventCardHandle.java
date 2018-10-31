@@ -21,6 +21,7 @@ public class EventCardHandle extends NodeHandle<Node> {
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String DATETIME_FIELD_ID = "#dateTime";
+    private static final String STATUS_FIELD_ID = "#status";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
@@ -30,6 +31,7 @@ public class EventCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final Label datetimeLabel;
+    private final Label statusLabel;
     private final List<Label> tagLabels;
 
     public EventCardHandle(Node cardNode) {
@@ -42,6 +44,7 @@ public class EventCardHandle extends NodeHandle<Node> {
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
         datetimeLabel = getChildNode(DATETIME_FIELD_ID);
+        statusLabel = getChildNode(STATUS_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -79,6 +82,10 @@ public class EventCardHandle extends NodeHandle<Node> {
         return datetimeLabel.getText();
     }
 
+    public String getStatus() {
+        return statusLabel.getText();
+    }
+
     public List<String> getTags() {
         return tagLabels
                 .stream()
@@ -102,6 +109,7 @@ public class EventCardHandle extends NodeHandle<Node> {
                 && getPhone().equals(event.getPhone().value)
                 && getEmail().equals(event.getEmail().value)
                 && getDatetime().equals(event.getDateTime().toString())
+                && getStatus().equals(event.getStatus().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(event.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));

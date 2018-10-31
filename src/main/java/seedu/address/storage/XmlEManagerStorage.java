@@ -51,9 +51,9 @@ public class XmlEManagerStorage implements EventManagerStorage {
             return Optional.empty();
         }
 
-        XmlSerializableEManager xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableEManager xmlEventManager = XmlFileStorage.loadDataFromSaveFile(filePath);
         try {
-            return Optional.of(xmlAddressBook.toModelType());
+            return Optional.of(xmlEventManager.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);

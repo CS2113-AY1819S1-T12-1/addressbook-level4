@@ -14,6 +14,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_AMY;
@@ -38,6 +40,7 @@ public class TypicalEvents {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withDateTime("22/10/2018 9:30")
+            .withStatus("NULL")
             .withComment("{span}This is a comment{/span}")
             .withTags("friends")
             .withAttendees("Peter Parker").build();
@@ -47,6 +50,7 @@ public class TypicalEvents {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withDateTime("2/10/2018 19:30")
+            .withStatus("NULL")
             .withComment("{span}This is a comment{/span}")
             .withTags("owesMoney", "friends")
             .withAttendees("Mary Kate").build();
@@ -57,6 +61,7 @@ public class TypicalEvents {
             .withEmail("heinz@example.com")
             .withVenue("wall street")
             .withDateTime("22/1/2018 9:30")
+            .withStatus("NULL")
             .withComment("{span}This is a comment{/span}").build();
     public static final Event DANIEL = new EventBuilder().withName("Art and Crafts")
             .withContact("Daniel Meier")
@@ -64,6 +69,7 @@ public class TypicalEvents {
             .withEmail("cornelia@example.com")
             .withVenue("10th street")
             .withDateTime("22/10/2017 9:30")
+            .withStatus("NULL")
             .withComment("{span}This is a comment{/span}")
             .withTags("friends")
             .withAttendees("Scarlet Witch").build();
@@ -73,6 +79,7 @@ public class TypicalEvents {
             .withEmail("werner@example.com")
             .withVenue("michegan ave")
             .withDateTime("12/8/2018 17:30")
+            .withStatus("NULL")
             .withComment("{span}This is a comment{/span}").build();
     public static final Event FIONA = new EventBuilder().withName("Dining In The Dark")
             .withContact("Fiona Kunz")
@@ -80,6 +87,7 @@ public class TypicalEvents {
             .withEmail("lydia@example.com")
             .withVenue("little tokyo")
             .withDateTime("22/10/2018 15:15")
+            .withStatus("NULL")
             .withComment("{span}This is a comment{/span}").build();
     public static final Event GEORGE = new EventBuilder().withName("College Games")
             .withContact("George Best")
@@ -87,6 +95,7 @@ public class TypicalEvents {
             .withEmail("anna@example.com")
             .withVenue("4th street")
             .withDateTime("30/10/2018 14:30")
+            .withStatus("NULL")
             .withComment("{span}This is a comment{/span}").build();
 
     // Manually added
@@ -96,6 +105,7 @@ public class TypicalEvents {
             .withEmail("stefan@example.com")
             .withVenue("little india")
             .withDateTime("1/9/2019 20:00")
+            .withStatus("NULL")
             .withComment("{span}This is a comment{/span}").build();
     public static final Event IDA = new EventBuilder().withName("Yoga Session")
             .withContact("Ida Mueller")
@@ -103,6 +113,7 @@ public class TypicalEvents {
             .withEmail("hans@example.com")
             .withVenue("chicago ave")
             .withDateTime("18/10/2018 10:45")
+            .withStatus("NULL")
             .withComment("{span}This is a comment{/span}").build();
 
     // Manually added - Event's details found in {@code CommandTestUtil}
@@ -110,11 +121,12 @@ public class TypicalEvents {
     public static final Event AMY =
             new EventBuilder().withName(VALID_NAME_AMY).withContact(VALID_CONTACT_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withVenue(VALID_VENUE_AMY).withDateTime(VALID_DATETIME_AMY)
-            .withComment(VALID_COMMENT_AMY).withTags(VALID_TAG_FRIEND).withAttendees(VALID_ATTENDEE_TED).build();
+            .withStatus(VALID_STATUS_AMY).withComment(VALID_COMMENT_AMY).withTags(VALID_TAG_FRIEND)
+            .withAttendees(VALID_ATTENDEE_TED).build();
     public static final Event BOB =
             new EventBuilder().withName(VALID_NAME_BOB).withContact(VALID_CONTACT_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withVenue(VALID_VENUE_BOB).withDateTime(VALID_DATETIME_BOB)
-            .withComment(VALID_COMMENT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withStatus(VALID_STATUS_BOB).withComment(VALID_COMMENT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withAttendees(VALID_ATTENDEE_TED, VALID_ATTENDEE_HAN).build();
 
     // Will match BENSON and ELLE

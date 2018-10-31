@@ -23,6 +23,7 @@ import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Status;
 import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 
@@ -53,11 +54,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        Status status = new Status(Status.STATUS_INTIALISER);
         Comment comment = new Comment("{span}Comment Section{/span}");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Attendee> attendeeList = ParserUtil.parseAttendees(argMultimap.getAllValues(PREFIX_ATTENDEE));
 
-        Event event = new Event(name, contact, phone, email, venue, dateTime, comment, tagList, attendeeList);
+        Event event = new Event(name, contact, phone, email, venue, dateTime, status, comment, tagList, attendeeList);
 
         return new AddCommand(event);
     }

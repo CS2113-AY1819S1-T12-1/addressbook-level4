@@ -15,17 +15,17 @@ public class XmlFileStorage {
     /**
      * Saves the given event manager data to the specified file.
      */
-    public static void saveDataToFile(Path file, XmlSerializableEManager addressBook)
+    public static void saveDataToFile(Path file, XmlSerializableEManager eventManager)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, addressBook);
+            XmlUtil.saveDataToFile(file, eventManager);
         } catch (JAXBException e) {
             throw new AssertionError("Unexpected exception " + e.getMessage(), e);
         }
     }
 
     /**
-     * Returns address book in the file or an empty event manager
+     * Returns event manager in the file or an empty event manager
      */
     public static XmlSerializableEManager loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {

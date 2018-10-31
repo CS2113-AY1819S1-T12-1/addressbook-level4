@@ -18,6 +18,7 @@ import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Status;
 import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 
@@ -41,6 +42,8 @@ public class XmlAdaptedEvent {
     @XmlElement(required = true)
     private String dateTime;
     @XmlElement(required = true)
+    private String status;
+    @XmlElement(required = true)
     private String comment;
 
     @XmlElement
@@ -58,7 +61,8 @@ public class XmlAdaptedEvent {
      * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
     public XmlAdaptedEvent(String name, String contact, String phone, String email, String venue, String datetime,
-                           String comment, List<XmlAdaptedTag> tagged, List<XmlAdaptedAttendee> attending) {
+                           String status, String comment, List<XmlAdaptedTag> tagged,
+                           List<XmlAdaptedAttendee> attending) {
 
         this.name = name;
         this.contact = contact;
@@ -66,6 +70,7 @@ public class XmlAdaptedEvent {
         this.email = email;
         this.venue = venue;
         this.dateTime = datetime;
+        this.status = status;
         this.comment = comment;
 
         if (tagged != null) {
@@ -88,6 +93,7 @@ public class XmlAdaptedEvent {
         email = source.getEmail().value;
         venue = source.getVenue().value;
         dateTime = source.getDateTime().toString();
+        status = source.getStatus().currentStatus;
         comment = source.getComment().toString();
 
         tagged = source.getTags().stream()
@@ -163,6 +169,14 @@ public class XmlAdaptedEvent {
         }
         final DateTime modelDateTime = new DateTime(dateTime);
 
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        if (!Status.isValidStatus(status)) {
+            throw new IllegalValueException(Status.MESSAGE_STATUS_CONSTRAINTS);
+        }
+        final Status modelStatus = new Status(status);
+
         if (comment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
         }
@@ -173,8 +187,8 @@ public class XmlAdaptedEvent {
 
         final Set<Tag> modelTags = new HashSet<>(eventTags);
         final Set<Attendee> modelAttendees = new HashSet<>(eventAttendees);
-        return new Event(modelName, modelContact, modelPhone, modelEmail, modelVenue, modelDateTime, modelComment,
-                modelTags, modelAttendees);
+        return new Event(modelName, modelContact, modelPhone, modelEmail, modelVenue, modelDateTime, modelStatus,
+                modelComment, modelTags, modelAttendees);
     }
 
     @Override
@@ -194,6 +208,7 @@ public class XmlAdaptedEvent {
                 && Objects.equals(email, otherEvent.email)
                 && Objects.equals(venue, otherEvent.venue)
                 && Objects.equals(dateTime, otherEvent.dateTime)
+                && Objects.equals(status, otherEvent.status)
                 && Objects.equals(comment, otherEvent.comment)
                 && tagged.equals(otherEvent.tagged)
                 && attending.equals(otherEvent.attending);

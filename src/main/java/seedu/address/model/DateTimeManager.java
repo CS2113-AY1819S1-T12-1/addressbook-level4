@@ -22,7 +22,7 @@ public class DateTimeManager {
 
     private static AttendanceContainsUserPredicate predicate;
 
-    //Use to get computer current datetime,assuming computer date is set correctly
+    //Use to get computer current datetime, assuming computer date is set correctly
     public static Date getCurrentDateTime() {
         return new Date();
     }

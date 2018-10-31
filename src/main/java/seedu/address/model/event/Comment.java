@@ -16,7 +16,7 @@ public class Comment {
      * The first character of the comment must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String COMMENT_VALIDATION_REGEX = "\\{span\\}Comment Section\\{/span\\}[a-zA-Z0-9<>/ ]*";
+    public static final String COMMENT_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 

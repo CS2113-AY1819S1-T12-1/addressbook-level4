@@ -3,6 +3,8 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -20,6 +22,9 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -75,6 +80,10 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
+        // Start event status update
+        initStatusUpdate();
+
     }
 
     /**
@@ -176,6 +185,29 @@ public class MainApp extends Application {
 
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
+    }
+
+    /**
+     * Starts performing status update for Events listed in event manager by making calls to
+     * {@code execute} method for {@code UpdateStatusCommand}.
+     * First update after {@param delay} milliseconds of delay and
+     * subsequent updates at intervals of {@param period} milliseconds.
+     */
+    private void initStatusUpdate() {
+        Timer timer = new Timer();
+        TimerTask updateEventStatus = new TimerTask() {
+
+            @Override
+            public void run() {
+                try {
+                    CommandResult commandResult = logic.execute("update");
+                } catch (CommandException | ParseException pe) {
+                    // Will never happen
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(updateEventStatus, 60000, 300000);
     }
 
     @Override

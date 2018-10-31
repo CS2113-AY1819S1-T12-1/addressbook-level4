@@ -7,12 +7,31 @@ import java.util.Date;
 
 /**
  * Represents an Event's status in the event manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStatus(String)}
  */
 public class Status {
     public static final String MESSAGE_STATUS_CONSTRAINTS =
-            "Status should either be '[UPCOMING]', '[ONGOING]' or '[COMPLETED]' or 'NULL'.";
+            "Status should either be 'UPCOMING', 'ONGOING' or 'COMPLETED' or 'NULL'.";
+
+    //public static final String STATUS_VALIDATION_REGEX = "(\bUPCOMING\b|\bONGOING\b|\bCOMPLETED\b|\bNULL\b)";
+
+    public static final String STATUS_INTIALISER = "NULL";
+
+    public static final String STATUS_VALIDATION_REGEX = "[^\\s].*";
+
 
     public final String currentStatus;
+
+    /**
+     * Constructs a {@code Status}.
+     *
+     * @param status A status.
+     */
+    public Status(String status) {
+        requireNonNull(status);
+        checkArgument(isValidStatus(status), MESSAGE_STATUS_CONSTRAINTS);
+        currentStatus = status;
+    }
 
     /**
      * Constructs a {@code Status}.
@@ -30,7 +49,9 @@ public class Status {
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {
-        return test == "UPCOMING" || test == "ONGOING" || test == "COMPLETED" || test == "NULL";
+        return test.matches(STATUS_VALIDATION_REGEX);
+        //requireNonNull(test);
+        //return (test == "UPCOMING" || test == "ONGOING" || test == "COMPLETED" || test == "NULL");
     }
 
     /**
@@ -53,6 +74,18 @@ public class Status {
         }
 
         return currentStatus;
+    }
+
+    @Override
+    public String toString() {
+        return currentStatus;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Status // instanceof handles nulls
+                && currentStatus.equals(((Status) other).currentStatus)); // state check
     }
 
     @Override

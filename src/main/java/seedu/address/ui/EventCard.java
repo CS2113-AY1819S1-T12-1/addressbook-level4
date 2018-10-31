@@ -41,9 +41,9 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label dateTime;
     @FXML
-    private FlowPane tags;
-    @FXML
     private Label status;
+    @FXML
+    private FlowPane tags;
 
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
@@ -55,8 +55,8 @@ public class EventCard extends UiPart<Region> {
         venue.setText(event.getVenue().value);
         email.setText(event.getEmail().value);
         dateTime.setText(event.getDateTime().toString());
-        event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         status.setText(event.getStatus().currentStatus);
+        event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

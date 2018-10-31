@@ -8,6 +8,7 @@
         <email isPrivate="false">hans@example.com</email>
         <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
+        <status isPrivate="false">NULL</status>
         <comment isPrivate="false">{span}This is a comment{/span}</comment>
     </events>
     <!-- Event with invalid phone field -->
@@ -18,6 +19,7 @@
         <email isPrivate="false">hans@example.com</email>
         <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
+        <status isPrivate="false">NULL</status>
         <comment isPrivate="false">{span}This is a comment{/span}</comment>
     </events>
 </addressbook>

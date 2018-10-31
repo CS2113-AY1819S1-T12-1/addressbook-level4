@@ -7,6 +7,7 @@
     <email>hans@example</email>
     <venue>4th street</venue>
     <dateTime>10/10/2010 10:10</dateTime>
+    <status>NULL</status>
     <comment>{span}This is a comment{/span}</comment>
     <tagged>friends</tagged>
     <attending>Mary Kate</attending>

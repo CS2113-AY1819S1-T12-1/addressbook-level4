@@ -43,6 +43,7 @@ public class XmlUtilTest {
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_VENUE = "4th street";
     private static final String VALID_DATETIME  = "10/10/2010 10:10";
+    private static final String VALID_STATUS = "NULL";
     private static final String VALID_COMMENT = "{span}This is a comment{/span}";
     private static final List<XmlAdaptedTag> VALID_TAGS =
             Collections.singletonList(new XmlAdaptedTag("friends"));
@@ -87,7 +88,7 @@ public class XmlUtilTest {
         XmlAdaptedEvent actualEvent = XmlUtil.getDataFromFile(
                 MISSING_EVENT_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedEvent = new XmlAdaptedEvent(null, VALID_CONTACT, VALID_PHONE, VALID_EMAIL,
-                VALID_VENUE, VALID_DATETIME, VALID_COMMENT, VALID_TAGS, VALID_ATTENDEES);
+                VALID_VENUE, VALID_DATETIME, VALID_STATUS, VALID_COMMENT, VALID_TAGS, VALID_ATTENDEES);
         assertEquals(expectedEvent, actualEvent);
     }
 
@@ -96,7 +97,7 @@ public class XmlUtilTest {
         XmlAdaptedEvent actualEvent = XmlUtil.getDataFromFile(
                 INVALID_EVENT_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedEvent = new XmlAdaptedEvent(VALID_NAME, VALID_CONTACT, INVALID_PHONE, VALID_EMAIL,
-                VALID_VENUE, VALID_DATETIME, VALID_COMMENT, VALID_TAGS, VALID_ATTENDEES);
+                VALID_VENUE, VALID_DATETIME, VALID_STATUS, VALID_COMMENT, VALID_TAGS, VALID_ATTENDEES);
         assertEquals(expectedEvent, actualEvent);
     }
 
@@ -105,7 +106,7 @@ public class XmlUtilTest {
         XmlAdaptedEvent actualEvent = XmlUtil.getDataFromFile(
                 VALID_EVENT_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedEvent = new XmlAdaptedEvent(VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL,
-                VALID_VENUE, VALID_DATETIME, VALID_COMMENT, VALID_TAGS, VALID_ATTENDEES);
+                VALID_VENUE, VALID_DATETIME, VALID_STATUS, VALID_COMMENT, VALID_TAGS, VALID_ATTENDEES);
         assertEquals(expectedEvent, actualEvent);
     }
 
