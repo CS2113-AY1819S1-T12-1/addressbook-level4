@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -19,6 +20,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -26,8 +29,15 @@ import seedu.address.model.event.Event;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+    private Model model;
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        User user = new UserBuilder().build();
+        model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        model.logUser(user);
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -37,6 +47,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
 
@@ -47,6 +58,8 @@ public class DeleteCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        User user = new UserBuilder().build();
+        model.logUser(user);
 
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
@@ -55,12 +68,16 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
         showNoPerson(expectedModel);
@@ -86,6 +103,7 @@ public class DeleteCommandTest {
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EVENT);
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
 
@@ -128,6 +146,7 @@ public class DeleteCommandTest {
 
         showEventAtIndex(model, INDEX_SECOND_EVENT);
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
 

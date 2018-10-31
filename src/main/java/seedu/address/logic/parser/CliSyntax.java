@@ -18,4 +18,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_PASSWORD = new Prefix("p/");
     public static final Prefix PREFIX_LINE = new Prefix("L/");
     public static final Prefix PREFIX_COMMENT = new Prefix("C/");
+    public static final Prefix PREFIX_KEYWORD = new Prefix("k/");
 }

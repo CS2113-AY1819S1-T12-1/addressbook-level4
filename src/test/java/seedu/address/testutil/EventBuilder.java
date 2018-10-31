@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class EventBuilder {
     public static final String DEFAULT_VENUE = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DATETIME = "31/12/2018 12:00";
     public static final String DEFAULT_STATUS = "NULL";
-    public static final String DEFAULT_COMMENT = "{span}This is a comment{/span}";
+    public static final String DEFAULT_COMMENT = "{span}Comment Section{/span}{ol}{/ol}";
 
     private Name name;
     private Contact contact;
@@ -50,7 +51,7 @@ public class EventBuilder {
         datetime = new DateTime(DEFAULT_DATETIME);
         status = new Status(DEFAULT_STATUS);
         comment = new Comment(DEFAULT_COMMENT);
-
+        
         tags = new HashSet<>();
         attendees = new HashSet<>();
     }
@@ -69,7 +70,7 @@ public class EventBuilder {
         comment = eventToCopy.getComment();
 
         tags = new HashSet<>(eventToCopy.getTags());
-        attendees = new HashSet<>(eventToCopy.getAttendees());
+        attendees = new HashSet<>(eventToCopy.getAttendance());
     }
 
     /**
@@ -89,10 +90,35 @@ public class EventBuilder {
     }
 
     /**
-     * Parses the {@code attendees} into a {@code Set<attendee>} and set it to the {@code Event} that we are building.
+     * Parses the {@code attendees} into a {@code Set<Attendee>} and set it to the {@code Event} that we are building.
      */
     public EventBuilder withAttendees(String ... attendees) {
         this.attendees = SampleDataUtil.getAttendeeSet(attendees);
+        return this;
+    }
+
+    /**
+     * Parses the {@code attendees} and adds it to the {@code Set<Attendee>} for the {@code Event} that we are building.
+     */
+    public EventBuilder withAddAttendees(String ... attendees) {
+        Set<Attendee> newAttendees = this.attendees;
+        Arrays.stream(attendees)
+                .map(Attendee::new)
+                .forEach(newAttendees::add);
+        this.attendees = newAttendees;
+        return this;
+    }
+
+    /**
+     * Parses the {@code attendees} and removes it from the {@code Set<Attendee>}
+     * for the {@code Event} that we are building.
+     */
+    public EventBuilder withRemoveAttendees(String ... attendees) {
+        Set<Attendee> newAttendees = this.attendees;
+        Arrays.stream(attendees)
+                .map(Attendee::new)
+                .forEach(newAttendees::remove);
+        this.attendees = newAttendees;
         return this;
     }
 

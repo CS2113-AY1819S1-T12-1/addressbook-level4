@@ -14,6 +14,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCommentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCalendarCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
@@ -26,6 +27,7 @@ import seedu.address.logic.commands.ReplyCommentCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SignupCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnregisterCommand;
 import seedu.address.logic.commands.UpdateStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -108,6 +110,9 @@ public class EventManagerParser {
         case RegisterCommand.COMMAND_WORD:
             return new RegisterCommandParser().parse(arguments);
 
+        case UnregisterCommand.COMMAND_WORD:
+            return new UnregisterCommandParser().parse(arguments);
+
         case AddCommentCommand.COMMAND_WORD:
             return new AddCommentCommandParser().parse(arguments);
 
@@ -116,6 +121,9 @@ public class EventManagerParser {
 
         case ReplyCommentCommand.COMMAND_WORD:
             return new ReplyCommentCommandParser().parse(arguments);
+
+        case ExportCalendarCommand.COMMAND_WORD:
+            return new ExportCalendarCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

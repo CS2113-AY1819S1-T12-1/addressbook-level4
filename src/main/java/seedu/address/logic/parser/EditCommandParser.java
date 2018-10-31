@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -21,7 +22,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attendee.Attendee;
-import seedu.address.model.event.Comment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,7 +40,7 @@ public class EditCommandParser implements Parser
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG, PREFIX_ATTENDEE);
+                        PREFIX_VENUE, PREFIX_DATETIME, PREFIX_COMMENT, PREFIX_TAG, PREFIX_ATTENDEE);
 
         Index index;
 
@@ -69,7 +69,6 @@ public class EditCommandParser implements Parser
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editEventDescriptor.setDate(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
-        editEventDescriptor.setComment(new Comment("{span}Comment Section{/span}")); //TODO for Comment
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEventDescriptor::setTags);
         parseAttendeesForEdit(argMultimap.getAllValues(PREFIX_ATTENDEE)).ifPresent(editEventDescriptor::setAttendees);
 

@@ -2,7 +2,7 @@ package seedu.address.ui;
 
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
-import static seedu.address.model.DateTimeManager.PAGE_DATE_FORMAT;
+import static seedu.address.model.DateTimeUtil.PAGE_DATE_FORMAT;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
@@ -57,7 +57,12 @@ public class BrowserPanelTest extends GuiUnitTest {
                 + "&status="
                 + ALICE.getStatus()
                 + "&tags="
-                + ALICE.getTagsString());
+                + ALICE.getTagsString().replaceAll(" ", "%20")
+                + "&attendance="
+                + ALICE.getAttendanceString().replaceAll(" ", "%20")
+                + "&comment="
+                + ALICE.getComment().value.replaceAll("[{]", "%3C")
+                .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

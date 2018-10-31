@@ -1,3 +1,4 @@
+//@@author  Geraldcdx
 package seedu.address.logic.comments;
 
 import java.util.Vector;
@@ -23,11 +24,11 @@ public class ReplyComment extends Comments {
     /**
      *  Replies with the comment to event Comment section of index and line
      */
-    public String replyComment(String comment, int line) throws CommandException {
+    public String replyComment(String comment, int line, String username) throws CommandException {
         Vector comments = new Vector();
         try {
             comments = getComments();
-            comments.add(line, "REPLY--->" + comment);
+            comments.add(line,  " (REPLY) " + username + " : " + comment);
         } catch (Exception e) {
             throw new CommandException(ReplyCommentCommand.MESSAGE_LINE_INVALID);
         }

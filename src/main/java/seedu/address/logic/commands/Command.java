@@ -9,6 +9,9 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+    public static final String MESSAGE_LOGIN = "Please login to an account!";
+    public static final String MESSAGE_ADMIN = "You are not authorized to perform this command!";
+
     /**
      * Executes the command and returns the result message.
      *

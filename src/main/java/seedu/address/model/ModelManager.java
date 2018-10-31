@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.EventManagerChangedEvent;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * Represents the in-memory model of the event manager data.
@@ -23,7 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedEventManager versionedEManager;
     private final FilteredList<Event> filteredEvents;
-    private final UserAccount userAccount;
+    private final UserSession userSession;
 
     /**
      * Initializes a ModelManager with the given eventManager and userPrefs.
@@ -35,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with event manager: " + eventManager + " and user prefs " + userPrefs);
 
-        userAccount = new UserAccount();
+        userSession = new UserSession();
         versionedEManager = new VersionedEventManager(eventManager);
         filteredEvents = new FilteredList<>(versionedEManager.getEventList());
     }
@@ -60,39 +61,46 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new EventManagerChangedEvent(versionedEManager));
     }
 
+    //=========== Authentication Accessors  =============================================================
     @Override
-    public boolean authenticate() {
-        return userAccount.authenticate();
+    public boolean getLoginStatus() {
+        return userSession.getLoginStatus();
     }
 
     @Override
     public boolean getAdminStatus() {
-        return userAccount.getAdminStatus();
+        return userSession.getAdminStatus();
     }
 
     @Override
     public boolean userExists(User user) {
         requireNonNull(user);
-        return userAccount.userExists(user);
+        return userSession.userExists(user);
     }
 
     @Override
     public void createUser(User user) {
         requireNonNull(user);
-        userAccount.createUser(user);
+        userSession.createUser(user);
     }
 
     @Override
     public void logUser(User user) {
         requireNonNull(user);
-        userAccount.logUser(user);
+        userSession.logUser(user);
+    }
+
+    @Override
+    public Username getUsername() {
+        return userSession.getUsername();
     }
 
     @Override
     public void clearUser() {
-        userAccount.clearUser();
+        userSession.clearUser();
     }
 
+    //=========== Event List Accessors and Modifiers =============================================================
     @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);
@@ -181,7 +189,8 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedEManager.equals(other.versionedEManager)
-                && filteredEvents.equals(other.filteredEvents);
+                && filteredEvents.equals(other.filteredEvents)
+                && userSession.equals(other.userSession);
     }
 
 }

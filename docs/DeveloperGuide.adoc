@@ -147,7 +147,8 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `EventManagerChangedEvent` when the event manager data are changed, instead of
+asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
@@ -187,7 +188,7 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `EventManagerParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a event) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -208,12 +209,12 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the event manager data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `event manager`, which `Person` can reference. This would allow `event manager` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -228,12 +229,12 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the event manager data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
@@ -274,67 +275,84 @@ image::AuthenticationDiagram.png[width="800"]
 [NOTE]
 If an authentication fails, i.e. credentials are wrong or do not exist in the JSON file, the `login` command will throw a `CommandException`.
 
-==== Future Improvements
-===== Making `JsonUserStorage` more OCP-compliant
-* As of now, `JsonUserStorage` does not abide to the Open-Closed Principle.
-* In the future, `Storage` will implement `JsonUserStorage`.
+[NOTE]
+As of now, only admin account is registered, with `admin` and `root` being used as username and password respectively.
 
-===== Password encryption
-* Stores encrypted password instead of plain text.
+==== Password encryption
+Allows passwords to be encrypted instead of being stored as plain text. Password encryption and validating is done through the `PasswordUtil` class using the _PBKDF2WithHmacSHA1_ encryption algorithm. +
+
+The encrypted password consists of a randomly generated salt and a hash generated from the plain text password, both converted to hexadecimal before being stored inside `users.json`.
 // end::authentication[]
 
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+The undo/redo mechanism is facilitated by `VersionedEventManager`.
+It extends `EventManager` with an undo/redo history, stored internally as an `eventManagerStateList` and
+`currentStatePointer`
+.
 Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
+* `VersionedEventManager#commit()` -- Saves the current event manager state in its history.
+* `VersionedEventManager#undo()` -- Restores the previous event manager state from its history.
+* `VersionedEventManager#redo()` -- Restores a previously undone event manager state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitEventManager()`, `Model#undoEventManager()` and `Model#redoEventManager()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedEventManager` will be initialized with the
+initial event manager state, and the `currentStatePointer` pointing to that single event manager state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th event in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th event in the event manager. The `delete` command calls
+`Model#commitEventManager()`, causing the modified state of the event manager after the `delete 5` command executes to be saved in the `eventManagerStateList`, and the `currentStatePointer` is shifted to the newly inserted event manager state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new event. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/Happy Ben Birthday ...` to add a new event. The `add` command also calls `Model#commitEventManager()`, causing another modified event manager state to be saved into the `eventManagerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitEventManager()`, so the event manager state will not be saved into the `eventManagerStateList`.
 
-Step 4. The user now decides that adding the event was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the event was a mistake, and decides to undo that action by executing the
+`undo` command. The `undo` command will call `Model#undoEventManager()`, which will shift the `currentStatePointer` once
+to the left, pointing it to the previous event manager state, and restores the event manager to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial event manager state, then there are no previous
+event manager states to restore. The `undo` command uses `Model#canUndoEventManager()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite -- it calls `Model#redoEventManager()`, which shifts the `currentStatePointer` once
+to the right, pointing to the previously undone state, and restores the event manager to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `eventManagerStateList.size() - 1`, pointing to the latest event manager state,
+then there are no undone event manager states to restore. The `redo` command uses `Model#canRedoEventManager()` to check if this is the case.If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the event manager, such as
+`list`, will usually not call `Model#commitEventManager()`, `Model#undoEventManager()` or `Model#redoEventManager()`. Thus, the
+`eventManagerStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitEventManager()`. Since the `currentStatePointer` is not
+pointing at the end of the `eventManagerStateList`, all event manager states after the `currentStatePointer` will be
+purged.
+
+We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior
+that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -346,7 +364,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire event manager.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
@@ -355,9 +373,10 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+* **Alternative 1 (current choice):** Use a list to store the history of event manager states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both
+`HistoryManager` and `VersionedEventManager`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
@@ -367,10 +386,10 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // tag::comments[]
 === Comments
 ==== Current Implementation
-`
-The Comments feature is facilitated by `Comments` class in the Logic/Comments folder. `AddComment`, `DeleteComment` and `ReplyComment` classes extend the `Comments` class. The features of the following classes are as such:
 
-* `Comments` -- Handles storage of commenents, contains `parseCommentSection()` to retrieve the comment section from eventmanager.xml and `rewrite()` to store the edited comment section into the eventmanager.xml.
+The Comments features are facilitated by `Comments` class in the Logic/Comments folder. `AddComment`, `DeleteComment` and `ReplyComment` classes extend the `Comments` class. The features of the following classes are as such:
+
+* `Comments` -- Handles storage of comments, contains `parseCommentSection()` to retrieve the comment section from eventmanager.xml and `rewrite()` to store the edited comment section into the eventmanager.xml.
 
 * `AddComment` -- Adds a new comment to the end of the comment section with the `addComment(String comment)` function.
 
@@ -391,7 +410,7 @@ Step 4. The admin executes `deleteComment 1 L/1` to reply the comment in step 2.
 
 
 [NOTE]
-If a command's syntax is wrong, it will prompt the user to try again and suggest a relevant format to abide to. In the case a false indexed event is not present, the functions will return an invalid index message.
+If a command's syntax is wrong, the application will prompt the user to try again and suggest a relevant format to follow. In the case a false indexed event is not present, the functions will return an invalid index message.
 
 The following sequence diagram shows how the addComment operation works:
 
@@ -426,17 +445,30 @@ If the user uses the `find` command, the following functions will follow the ind
 // tag::rsvp[]
 === RSVP
 ==== Current Implementation
-The RSVP feature consists the `register` command. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
+The RSVP feature consists of the `register` & `unregister` command. The implementations of the commands use the `EditEventDescriptor` class and `createEditedEvent` method from `EditCommand` to aid in updating event attendance. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
 
 Below is an example usage scenario and how the RSVP mechanism behaves:
 
 Step 1: The user launches the application, clicks on an event or types `select 2` into the CLI. Details of the 2nd event including event attendance are displayed.
 
-Step 2: The user executes `register 2` to register for the 2nd event. The `register` command gets the username of the current user, and adds it into the event data.
+Step 2: The user executes `register 2` to register for the 2nd event. The `register` command takes in the current model and event at index 2, getting the username of the current user via `Model#getUsername()`, and the current attendance of the event as a `HashSet` with `Event#getAttendance`.
 
-Step 3: An `EventManagerChangedEvent` event is raised by `Model`. `EventCenter` handles the event, calling for `Storage` to update `eventmanager.xml`.
+Step 3: The `register` command tries to add the username into the current attendance with `add()`. If the username already exists in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
 
-Step 4: The event page is reloaded to display the new event attendance.
+Step 4: The model is updated and committed, overwriting `eventmanager.xml`. The event page is reloaded to display the new event attendance.
+
+Step 5: If the user decides to unregister from the event, the user executes `unregister 2`, and the `unregister` command gets the username and attendance in the same manner as the `register` command in Step 2.
+
+Step 6: The `unregister` command command tries to remove the username from the current attendance with `remove()`. If the username does not exist in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
+
+Step 7: The model is updated and committed as in Step 3, and the event page is again reloaded.
+
+[NOTE]
+`TreeSet` is used when retrieving the attendance for display as it allows for easy sorting of attendee usernames. Usernames are sorted in case-insensitive order.
+
+The following sequence diagram shows how the register operation works:
+
+image::registerSD.png[width="800"]
 
 ==== Design Considerations
 ===== Aspect: How to display attendance
@@ -447,7 +479,7 @@ Step 4: The event page is reloaded to display the new event attendance.
 ** Pros: Easier to implement, user can easily see whether they are registered
 ** Cons: New methods will need to be implemented to make many fields for comments.
 
-===== Aspect: How to store attendance
+===== Aspect: Where to store attendance
 * **Alternative 1 (current choice):** Attendance stored in `eventmanager.xml` in similar fashion to tags.
 ** Pros: Methods for parsing tags can be applied to parse attendance
 ** Cons: Inefficient to retrieve list of events which a user has registered for
@@ -455,13 +487,102 @@ Step 4: The event page is reloaded to display the new event attendance.
 ** Pros: Can easily check which events a user has registered for.
 ** Cons: Inefficient to check which users are attending an event.
 
-==== Future Improvements
-===== Adding `unregister` command.
-* Allows users to unregister for events.
+===== Aspect: How to store attendance
+* **Alternative 1 (current choice):** Attendance stored in unsorted order.
+** Pros: Easy to add new attendee to attendance.
+** Cons: Requires sorting whenever attendance is displayed.
+* **Alternative 2:** Attendance stored in sorted order.
+** Pros: No need to sort each time an event is reloaded.
+** Cons: More complexity for inserting in correct location.
 
-===== Adding `listAttending` command.
-* Allows users to view events they have registered for.
+==== Future Improvements
+===== Adding `attending` command.
+* Allows users to view all events they have registered for.
 // end::rsvp[]
+
+// tag::sorting[]
+=== Default sorting
+==== Current Implementation
+Since our product is an event manager, events should be controlled and view in chronological order.
+To do this, `UniqueEventList` class is modify so as to sort the event list in Date order, follow by Name order. +
+
+Consider this scenario:
+
+Step 1: User launch application, then log in
+
+Step 2: User add a new event which will occur earlier than some of the event in the list +
+e.g: `add n/Happy Jack Birthday ... d/10/10/2018 20:30...`
+
+Step 3: When add method is called, it performs the intended operation, then sort the list before returning it to other components.
+
+Step 4: The event page is reloaded and display the newly added event in the correct place.
+
+==== Aspect: How to sort the list
+* **Alternative 1 (current choice):** Event list will be sort based on sort method implemented in `UniqueEventList` class to modify the internal list which event manager is backed on.
+** Pros: Easy to implement will minimum modification that could affect other components.
+** Cons: Every method that change the internal list (e.g: add, setEvent, delete) will need to be sorted at the end of the method.
+
+* **Alternative 2:** Sort only when we need to get the list if the list is not sorted.
+** Pros: The easiest implementation without affecting other components.
+** Cons: The sort operation when called by other components, for example UI component will return operation to main thread, which severely affect testing with JUnit on JavaFX thread
+
+* **Alternative 3:** Only sort the list for displaying on the UI
+** Pros: Will perform minimal operation while still returning what we need to observe.
+** Cons: Very complicated implementation as UI are updated based on observing internal list. We will need a class to update the UI if we just want to sort the list on displaying.
+// end::sorting[]
+
+// tag::`find` command enhancement[]
+=== Enhance current `find` command
+==== Current Implementation
+`find` command is used for better navigation. Therefore, it is enhanced to search for more properties in an Event. +
+
+`find` can search for any data with the default keywords and . If specific prefix is added, find can search for event that must contain that keyword in that specific field
+
+[NOTE]
+If there are more than 1 prefix of the same type, for example, `find n/new n/dark n/meeting`, this will be automatically combined together, which means this command will be assumed to be the same as `find n/new dark meeting`
+
+==== Aspect: How to improve search
+* **Alternative 1 (current choice):** Modify the predicate to display the event that date contains one of the keywords
+** Pros: Follow the current structure of `find` command, which mean can reuse current resources
+** Cons: With the current implementation of the predicate, scaling will severely affect product performance
+
+==== Future enhancement:
+* Search for contained or exact keywords option
+* Search for time range
+//end::`find` command enhancement[]
+
+// tag::export calendar[]
+=== Export RVSP-ed events to iCalendar file
+==== Current implementation
+This feature will increase compatibility of Event Manager will other calendar app for better planning.
+
+Consider the following scenario:
+
+Step 1: User launch application, then log in
+
+Step 2: User execute 'export my event calendar' command. The export command receive argument to accept as filename
+
+Step 3: Current user, who are logging in, will be used to receive an event filtered list that he/she registered for.
+
+Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format
+
+==== Aspect: How to export the event list
+* **Alternative 1 (current implementation):** Using ical4j external library to create method to convert event to RFC5545 format, then stream to FileOutputStream with given filename from user. +
+All method are written in the `ExportCalendarCommand` class.
+** Pros: Easy to implement, can reuse current resources and easy to match wth the implementation of Attendance list
+** Cons: Violate some of the OOP design as the export method should be in the storage class
+* **Alternative 2:** Create class to write an .ics file with given RFC5545 standard
+** Pros: Have better control of the output file, since the ical4j support API has not been updated for a long time and currently show some lacking
+** Cons: Very complicated and time wasting
+
+[NOTE]
+For the current version of this product, export calendar now will export every events available in the event manager as authentication and RSVP are under test.
+
+==== [Proposed]: [V1.4] enhancement
+The method related to `ExportCalendarCommand` class should be re-designed to follow OOP requirement.
+
+Export should be able to export the attendance list of an event according to user preference
+// end::export calendar[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -672,7 +793,8 @@ Here are the steps to create a new release.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
+A project often depends on third-party libraries. For example, event manager depends on the http://wiki.fasterxml
+.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
@@ -704,9 +826,18 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 ****
 * Hints
 ** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
+** link:{repoURL}/src/main/java/seedu/address/logic/parser/EventManagerParser.java[`EventManagerParser`] is responsible for
+analyzing
+command
+words.
 * Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
+** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/EventManagerParser
+.java[`EventManagerParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute
+the
+
+same
+
+intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
 ** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
@@ -715,21 +846,43 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 [discrete]
 ==== `Model` component
 
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
+*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement
+a command such that the user is able to remove a particular tag from everyone in the event manager, but the model API
+does
+
+not
+
+support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
 
 [TIP]
 Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
+. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the event manager.
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
+** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the
+link:{repoURL}/src/main/java/seedu/address/model/EventManager.java[`EventManager`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a event, and link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/EventManager
+.java[`EventManager`]
+and
+link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`] classes can be used to implement the tag
+removal logic. link:{repoURL}/src/main/java/seedu/address/model/EventManager.java[`EventManager`] allows you to update a
+event,
+and
+link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each event, and remove the `tag` from each event.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/EventManager.java[`EventManager`]
+.
+Loop
+
+through
+
+each event, and remove the `tag` from each event.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager
+.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should
+call `EventManager#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****
@@ -737,7 +890,10 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last event in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your
+event manager
+
+application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last event in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
@@ -782,12 +938,20 @@ image::getting-started-ui-result-after.png[width="200"]
 ** Modify link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
+*** The system tests link:{repoURL}/src/test/java/systemtests/EventManagerSystemTest
+.java[`EventManagerSystemTest#assertCommandBoxShowsDefaultStyle() and EventManagerSystemTest#assertCommandBoxShowsErrorStyle
+()
+`]
+
+to
+include
+verification for `ResultDisplay` as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
+. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total
+number of people in the event manager.
 +
 **Before**
 +
@@ -800,29 +964,42 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 * Hints
 ** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
+** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the event manager is updated.
+** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the event manager is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of events when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of events whenever there are new changes to the addressbook.
+** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleEventManagerChangedEvent
+(EventManagerChangedEvent)`] to update the number of events whenever there are new changes to the addressbook.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of events status bar.
+** For system tests, modify link:{repoURL}/src/test/java/systemtests/EventManagerSystemTest.java[`EventManagerSystemTest`]
+to
+also
+
+verify
+the
+new total number of events status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
 ****
 
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the event manager to the cloud. However, the current implementation of the application constantly saves the event manager after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the event manager storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary location.
+. Add a new method `backupEventManager(ReadOnlyEventManager)`, so that the event manager can be saved in a fixed temporary
+
+location
+.
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
+** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/EventManagerStorage.java[`EventManagerStorage`]
+interface.
+** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and
+link:{repoURL}/src/main/java/seedu/address/storage/XmlEventManagerStorage.java[`XmlEventManagerStorage`] class.
 * Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
@@ -832,7 +1009,7 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `event manager`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
 Edits the remark for a event specified in the `INDEX`. +
@@ -853,12 +1030,17 @@ Let's start by teaching the application how to parse a `remark` command. We will
 **Main:**
 
 . Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
+. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/EventManagerParser.java[`EventManagerParser`] to accept a
+`RemarkCommand`
+.
 
 **Tests:**
 
 . Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
+. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/EventManagerParserTest
+.java[`EventManagerParserTest`],
+which
+tests that typing "remark" returns an instance of `RemarkCommand`.
 
 ===== [Step 2] Logic: Teach the app to accept 'remark' arguments
 Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
@@ -867,14 +1049,22 @@ Let's teach the application to parse arguments that our `remark` command will ac
 
 . Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
 . Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
+. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/EventManagerParser.java[`EventManagerParser`] to use the
+newly
+implemented
+`RemarkCommandParser`.
 
 **Tests:**
 
 . Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
 . Add `RemarkCommandParserTest` that tests different boundary values
 for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
+. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/EventManagerParserTest.java[`EventManagerParserTest`] to
+test
+
+that
+the
+correct command is generated according to the user input.
 
 ===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
 Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each event later.
@@ -918,7 +1108,14 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 **Tests:**
 
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsEventManager.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidPersonEventManager.xml`, `typicalPersonsEventManager.xml`, `validEventManager.xml` etc., such that the
+
+XML
+
+tests
+
+will
+not fail due to a missing `<remark>` element.
 
 ===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
 Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`].
@@ -1074,8 +1271,18 @@ Extensions: +
    3a3) “comment delete INDEX”  (only for admin) it will delete the comment at            INDEX +
 Resume use case at step 4
 
+*Use Case: Export calendar*: +
+MSS (main system success): +
+1. User request to export registered event list with given name +
+2. EventManager execute exportCalendarCommand
+3. A filename with .ics extension create or re-write in src/data/ folder
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+Extensions:
+0a) User viewing current registered list with view attendance
+1a) User modified registered list with command
+    1a1) The new list is exported in .ics file
+
+(For all use cases below, the *System* is the `EventManager` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete event
@@ -1083,9 +1290,9 @@ Resume use case at step 4
 *MSS*
 
 1.  User requests to list events
-2.  AddressBook shows a list of events
+2.  EventManager shows a list of events
 3.  User requests to delete a specific event in the list
-4.  AddressBook deletes the event
+4.  EventManager deletes the event
 +
 Use case ends.
 
@@ -1099,7 +1306,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. EventManager shows an error message.
 +
 Use case resumes at step 2.
 

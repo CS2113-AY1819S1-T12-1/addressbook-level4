@@ -24,15 +24,13 @@ Event Manager is a desktop address book application used for managing events in 
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote additional tests for authentication features to increase coverage by 2.3% (Pull request https://github.com/CS2113-AY1819S1-T12-1/main/pull/79[#79])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Updated User and Developer Guides to describe new features: https://github.com/CS2113-AY1819S1-T12-1/main/pull/81[#81]
 ** Community:
-*** PRs reviewed: https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** PRs reviewed: https://github.com/CS2113-AY1819S1-T12-1/main/pull/22[#22], https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58], https://github.com/CS2113-AY1819S1-T12-1/main/pull/59[#59]
 ** Tools:
-*** Integrated a third party library (Gson) to the project (https://github.com[#42])
+*** Integrated a third party library (Gson) to the project (https://github.com/CS2113-AY1819S1-T12-1/main/pull/39[#39])
 *** Integrated a new Github plugin (Coveralls) to the team repo
 
 == Contributions to the User Guide

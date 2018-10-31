@@ -13,6 +13,7 @@ import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.StatusBarFooter;
@@ -27,6 +28,8 @@ public class HelpCommandSystemTest extends EventManagerSystemTest {
             + "tests on headless mode. See UsingGradle.adoc on how to do so.";
 
     private final GuiRobot guiRobot = new GuiRobot();
+
+
 
     @Test
     public void openHelpWindow() {
@@ -60,6 +63,7 @@ public class HelpCommandSystemTest extends EventManagerSystemTest {
         getMainWindowHandle().focus();
 
         // assert that while the help window is open the UI updates correctly for a command execution
+        executeCommand(LoginCommand.COMMAND_WORD + " " + "u/admin" + " " + "p/root");
         executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();

@@ -44,7 +44,8 @@ public class XmlUtilTest {
     private static final String VALID_VENUE = "4th street";
     private static final String VALID_DATETIME  = "10/10/2010 10:10";
     private static final String VALID_STATUS = "NULL";
-    private static final String VALID_COMMENT = "{span}This is a comment{/span}";
+    private static final String VALID_COMMENT = "{span}Comment Section{/span}{ol}{/ol}";
+
     private static final List<XmlAdaptedTag> VALID_TAGS =
             Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedAttendee> VALID_ATTENDEES =

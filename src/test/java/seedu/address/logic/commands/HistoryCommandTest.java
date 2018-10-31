@@ -7,6 +7,8 @@ import org.junit.Test;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 
 public class HistoryCommandTest {
     private CommandHistory history = new CommandHistory();
@@ -15,6 +17,10 @@ public class HistoryCommandTest {
 
     @Test
     public void execute() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+        expectedModel.logUser(new UserBuilder().build());
+
         assertCommandSuccess(new HistoryCommand(), model, history, HistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
 
         String command1 = "clear";

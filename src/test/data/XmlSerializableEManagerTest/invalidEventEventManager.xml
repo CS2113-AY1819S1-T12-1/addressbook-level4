@@ -9,6 +9,6 @@
         <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
 </eventmanager>

@@ -12,7 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.user.User;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.UserBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -24,7 +26,9 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
+        User user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        model.logUser(user);
     }
 
     @Test
@@ -32,6 +36,7 @@ public class AddCommandIntegrationTest {
         Event validEvent = new EventBuilder().build();
 
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(new UserBuilder().build());
         expectedModel.addEvent(validEvent);
         expectedModel.commitEventManager();
 

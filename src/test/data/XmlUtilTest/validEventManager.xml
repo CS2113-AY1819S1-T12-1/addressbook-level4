@@ -8,7 +8,7 @@
         <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">22/10/2018 9:30</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Ruth Mueller</name>
@@ -18,7 +18,7 @@
         <venue isPrivate="false">81th street</venue>
         <dateTime isPrivate="false">2/10/2018 19:30</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Heinz Kurz</name>
@@ -28,7 +28,7 @@
         <venue isPrivate="false">wall street</venue>
         <dateTime isPrivate="false">22/1/2018 9:30</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Cornelia Meier</name>
@@ -38,7 +38,7 @@
         <venue isPrivate="false">10th street</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Werner Meyer</name>
@@ -48,7 +48,7 @@
         <venue isPrivate="false">michegan ave</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Lydia Kunz</name>
@@ -58,7 +58,7 @@
         <venue isPrivate="false">little tokyo</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Anna Best</name>
@@ -68,7 +68,7 @@
         <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Stefan Meier</name>
@@ -78,7 +78,7 @@
         <venue isPrivate="false">little india</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Martin Mueller</name>
@@ -88,6 +88,6 @@
         <venue isPrivate="false">chicago ave</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
         <status isPrivate="false">NULL</status>
-        <comment isPrivate="false">{span}This is a comment{/span}</comment>
+        <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
 </eventmanager>

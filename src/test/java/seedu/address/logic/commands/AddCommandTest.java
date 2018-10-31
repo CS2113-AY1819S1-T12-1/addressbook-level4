@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.EventBuilder;
 
 public class AddCommandTest {
@@ -94,7 +95,8 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called!");
         }
 
-        public boolean authenticate() {
+        @Override
+        public boolean getLoginStatus() {
             throw new AssertionError("This method should not be called!");
         }
 
@@ -110,6 +112,11 @@ public class AddCommandTest {
 
         @Override
         public void logUser(User user) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public Username getUsername() {
             throw new AssertionError("This method should not be called");
         }
 
@@ -196,6 +203,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean getLoginStatus() {
+            return true;
+        }
+
+        @Override
+        public boolean getAdminStatus() {
+            return true;
+        }
+
+        @Override
         public boolean hasEvent(Event event) {
             requireNonNull(event);
             return this.event.isSameEvent(event);
@@ -207,6 +224,16 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Event> personsAdded = new ArrayList<>();
+
+        @Override
+        public boolean getLoginStatus() {
+            return true;
+        }
+
+        @Override
+        public boolean getAdminStatus() {
+            return true;
+        }
 
         @Override
         public boolean hasEvent(Event event) {

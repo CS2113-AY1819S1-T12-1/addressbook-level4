@@ -2,15 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalUsers.ALICE;
 
 import java.util.function.Predicate;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
@@ -19,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
-import seedu.address.storage.UserStorage;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.UserBuilder;
 
 public class LoginCommandTest {
@@ -40,12 +38,8 @@ public class LoginCommandTest {
     @Test
     public void execute_successfulLogin() throws Exception {
         User user = new UserBuilder().build();
-
-        JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
         ModelStubAcceptUser modelStubAcceptUser;
-
-        jsonUserStorageStub.createUser(user.getUsername().toString(), user.getPassword().toString());
-        modelStubAcceptUser = new ModelStubAcceptUser(user, jsonUserStorageStub);
+        modelStubAcceptUser = new ModelStubAcceptUser(user);
 
         CommandResult commandResult = new LoginCommand(user).execute(modelStubAcceptUser, commandHistory);
 
@@ -56,12 +50,10 @@ public class LoginCommandTest {
 
     @Test
     public void execute_failedLogin_noUser() throws Exception {
-        User user = new UserBuilder().build();
-
-        JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
+        User user = new UserBuilder(ALICE).build();
+        User loggedUser = new UserBuilder().build();
         ModelStubAcceptUser modelStubAcceptUser;
-
-        modelStubAcceptUser = new ModelStubAcceptUser(user, jsonUserStorageStub);
+        modelStubAcceptUser = new ModelStubAcceptUser(loggedUser);
 
         LoginCommand loginCommand = new LoginCommand(user);
 
@@ -73,38 +65,13 @@ public class LoginCommandTest {
     @Test
     public void execute_failedLogin_alreadyLogged() throws Exception {
         User user = new UserBuilder().build();
-
-        JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
         ModelStubWithUser modelStubWithUser;
-
-        jsonUserStorageStub.createUser(user.getUsername().toString(), user.getPassword().toString());
         modelStubWithUser = new ModelStubWithUser();
         LoginCommand loginCommand = new LoginCommand(user);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_LOGGED);
         loginCommand.execute(modelStubWithUser, commandHistory);
-    }
-
-    /**
-     * A default JsonUserStorage stub that contains mocks to all the methods.
-     */
-    private class JsonUserStorageStub implements UserStorage {
-        private JsonObject jsonObject;
-
-        JsonUserStorageStub() {
-            jsonObject = new JsonObject();
-        }
-
-        @Override
-        public void createUser(String username, String password) {
-            jsonObject.addProperty(username, password);
-        }
-
-        @Override
-        public JsonObject getUserAccounts() {
-            return jsonObject;
-        }
     }
 
     /**
@@ -116,7 +83,8 @@ public class LoginCommandTest {
             throw new AssertionError("This method should not be called!");
         }
 
-        public boolean authenticate() {
+        @Override
+        public boolean getLoginStatus() {
             throw new AssertionError("This method should not be called!");
         }
 
@@ -132,6 +100,11 @@ public class LoginCommandTest {
 
         @Override
         public void logUser(User user) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public Username getUsername() {
             throw new AssertionError("This method should not be called");
         }
 
@@ -210,39 +183,27 @@ public class LoginCommandTest {
      * A Model stub that simulates a login.
      */
     private class ModelStubAcceptUser extends ModelStub {
-        private JsonUserStorageStub jsonUserStorage;
         private User user;
         private boolean isLogged = false;
 
-        ModelStubAcceptUser(User user, JsonUserStorageStub jsonUserStorage) {
+        ModelStubAcceptUser(User user) {
             requireNonNull(user);
             this.user = user;
-            this.jsonUserStorage = jsonUserStorage;
         }
 
         @Override
         public boolean userExists(User user) {
             requireNonNull(user);
-            boolean isPresent = false;
-            String username = user.getUsername().toString();
-
-            JsonObject userAccounts = jsonUserStorage.getUserAccounts();
-            if (userAccounts.has(username)) {
-                JsonElement password = userAccounts.get(username);
-                isPresent = user.getPassword().toString().equals(password.getAsString());
-            }
-
-            return isPresent;
+            return user.getUsername().equals(this.user.getUsername());
         }
 
         @Override
         public void logUser(User user) {
-            assertEquals(this.user, user);
-            isLogged = true;
+            isLogged = user.equals(this.user);
         }
 
         @Override
-        public boolean authenticate() {
+        public boolean getLoginStatus() {
             return isLogged;
         }
     }
@@ -263,7 +224,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public boolean authenticate() {
+        public boolean getLoginStatus() {
             return isLogged;
         }
     }

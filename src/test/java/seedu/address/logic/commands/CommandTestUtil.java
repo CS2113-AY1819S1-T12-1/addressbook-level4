@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -15,11 +16,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -31,7 +35,8 @@ import seedu.address.testutil.EditEventDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-
+    public static final String VALID_ADMIN_USERNAME = "admin";
+    public static final String VALID_ADMIN_PASSWORD = "root";
     public static final String VALID_USERNAME = "Johnny Bravo";
     public static final String VALID_PASSWORD = "pass@12345";
     public static final String VALID_ATTENDEE_TED = "Ted Bacan";
@@ -50,11 +55,13 @@ public class CommandTestUtil {
     public static final String VALID_DATETIME_BOB = "7/7/2017 7:07";
     public static final String VALID_STATUS_AMY = "NULL";
     public static final String VALID_STATUS_BOB = "NULL";
-    public static final String VALID_COMMENT_AMY = "{span}This is a comment{/span}"; //TODO for Comment
-    public static final String VALID_COMMENT_BOB = "{span}This is a comment{/span}"; //TODO for Comment
+    public static final String VALID_COMMENT_AMY = "{span}Comment Section{/span}{ol}{/ol}";
+    public static final String VALID_COMMENT_BOB = "{span}Comment Section{/span}{ol}{/ol}";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String ADMIN_USERNAME_DESC = " " + PREFIX_USERNAME + VALID_ADMIN_USERNAME;
+    public static final String ADMIN_PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_ADMIN_PASSWORD;
     public static final String USERNAME_DESC = " " + PREFIX_USERNAME + VALID_USERNAME;
     public static final String PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_PASSWORD;
     public static final String ATTENDEE_DESC_TED = " " + PREFIX_ATTENDEE + VALID_ATTENDEE_TED;
@@ -71,6 +78,8 @@ public class CommandTestUtil {
     public static final String VENUE_DESC_BOB = " " + PREFIX_VENUE + VALID_VENUE_BOB;
     public static final String DATETIME_DESC_AMY = " " + PREFIX_DATETIME + VALID_DATETIME_AMY;
     public static final String DATETIME_DESC_BOB = " " + PREFIX_DATETIME + VALID_DATETIME_BOB;
+    public static final String COMMENT_DESC_AMY = " " + PREFIX_COMMENT + VALID_COMMENT_AMY;
+    public static final String COMMENT_DESC_BOB = " " + PREFIX_COMMENT + VALID_COMMENT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -156,9 +165,12 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
 
         Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
-        final String[] splitName = event.getName().fullName.split("\\s+");
-        model.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
+        final String[] splitName = event.getName().fullName.split("\\s+");
+        List<String> nameList = Arrays.asList(splitName[0]);
+        Map<Prefix, List<String> >keywordMap = new HashMap<>();
+        keywordMap.put(PREFIX_NAME, nameList);
+        model.updateFilteredEventList(new EventContainsKeywordsPredicate(keywordMap));
         assertEquals(1, model.getFilteredEventList().size());
     }
 
@@ -170,5 +182,4 @@ public class CommandTestUtil {
         model.deleteEvent(firstEvent);
         model.commitEventManager();
     }
-
 }

@@ -46,7 +46,7 @@ Responsibilities: Event Reminders
 '''
 
 === Ho Phi Long
-image::P_Long.jpg[width="150", align="left"]
+image::Tertium3.jpg[width="150", align="left"]
 {empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +

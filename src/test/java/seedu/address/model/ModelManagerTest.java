@@ -2,17 +2,22 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.testutil.TypicalEvents.BENSON;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.EventContainsKeywordsPredicate;
 import seedu.address.testutil.EventManagerBuilder;
 
@@ -70,7 +75,9 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(keywords)));
+        Map<Prefix, List<String> > keywordMap = new HashMap<>();
+        keywordMap.put(PREFIX_KEYWORD, Arrays.asList(keywords));
+        modelManager.updateFilteredEventList(new EventContainsKeywordsPredicate(keywordMap));
         assertFalse(modelManager.equals(new ModelManager(eventManager, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

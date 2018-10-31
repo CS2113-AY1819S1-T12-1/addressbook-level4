@@ -12,6 +12,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.UserBuilder;
 
 public class UndoCommandTest {
 
@@ -27,10 +28,14 @@ public class UndoCommandTest {
 
         deleteFirstEvent(expectedModel);
         deleteFirstEvent(expectedModel);
+        expectedModel.logUser(new UserBuilder().build());
     }
 
     @Test
     public void execute() {
+        assertCommandSuccess(new LoginCommand(new UserBuilder().build()), model, commandHistory,
+                String.format(LoginCommand.MESSAGE_SUCCESS, "admin"), expectedModel);
+
         // multiple undoable states in model
         expectedModel.undoEventManager();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);

@@ -4,7 +4,7 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.model.DateTimeManager.PAGE_DATE_FORMAT;
+import static seedu.address.model.DateTimeUtil.PAGE_DATE_FORMAT;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -154,7 +154,7 @@ public abstract class EventManagerSystemTest {
      * Displays all Events with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showEventsWithName(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
+        executeCommand(FindCommand.COMMAND_WORD + " n/" + keyword);
         assertTrue(getModel().getFilteredEventList().size() < getModel().getEventManager().getEventList().size());
     }
 
@@ -181,7 +181,7 @@ public abstract class EventManagerSystemTest {
      * and the event list panel displays the Events in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
-            Model expectedModel) {
+                                                     Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new EventManager(expectedModel.getEventManager()), testApp.readStorageAddressBook());
@@ -223,7 +223,7 @@ public abstract class EventManagerSystemTest {
         URL expectedUrl;
         try {
 
-            expectedUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName().toString()
+            expectedUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName()
                     + "?name="
                     + selectedCardHandle.getName().replaceAll(" ", "%20")
                     + "&contact="
@@ -237,7 +237,12 @@ public abstract class EventManagerSystemTest {
                     + "&dateTime="
                     + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime).replaceAll(" ", "%20")
                     + "&tags="
-                    + selectedCardHandle.getTagsString().replaceAll(" ", "%20"));
+                    + selectedCardHandle.getTagsString().replaceAll(" ", "%20")
+                    + "&attendance="
+                    + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20")
+                    + "&comment="
+                    + selectedCardHandle.getComment().replaceAll("[{]", "%3C")
+                    .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }

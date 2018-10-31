@@ -94,12 +94,12 @@ public class XmlAdaptedEvent {
         venue = source.getVenue().value;
         dateTime = source.getDateTime().toString();
         status = source.getStatus().currentStatus;
-        comment = source.getComment().toString();
+        comment = source.getComment().value;
 
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
-        attending = source.getAttendees().stream()
+        attending = source.getAttendance().stream()
                 .map(XmlAdaptedAttendee::new)
                 .collect(Collectors.toList());
     }
@@ -184,7 +184,6 @@ public class XmlAdaptedEvent {
             throw new IllegalValueException(Comment.MESSAGE_COMMENT_CONSTRAINTS);
         }
         final Comment modelComment = new Comment(comment);
-
         final Set<Tag> modelTags = new HashSet<>(eventTags);
         final Set<Attendee> modelAttendees = new HashSet<>(eventAttendees);
         return new Event(modelName, modelContact, modelPhone, modelEmail, modelVenue, modelDateTime, modelStatus,

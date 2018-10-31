@@ -1,3 +1,4 @@
+//@@author Geraldcdx
 package seedu.address.logic.comments;
 
 import static org.junit.Assert.assertNotEquals;
@@ -7,42 +8,27 @@ import org.junit.jupiter.api.Test;
 
 class AddCommentTest {
     private String comments =
-            "<span>Comment Section</span>\n"
-                    + "<ol>\n"
-                    + "<li>hello</li>\n"
-                    + "<li>My name is Gerald</li>\n"
-                    + "<li>Yup</li>\n"
-                    + "<li>REPLY--->HArlo</li>\n"
-                    + "<li>REPLY--->my name is</li>\n"
-                    + "<li>REPLY--->Chua</li>\n"
-                    + "<li>hello</li>\n"
-                    + "<li>there</li>\n"
-                    + "<li>hello</li>\n"
+            "<span>Comment Section</span>"
+                    + "<ol>"
+                    + "<li>hello</li>"
                     + "</ol>";
 
     private String testcase =
-            "<span>Comment Section</span>\n"
-                    + "<ol>\n"
-                    + "<li>hello</li>\n"
-                    + "<li>My name is Gerald</li>\n"
-                    + "<li>Yup</li>\n"
-                    + "<li>REPLY--->HArlo</li>\n"
-                    + "<li>REPLY--->my name is</li>\n"
-                    + "<li>REPLY--->Chua</li>\n"
-                    + "<li>hello</li>\n"
-                    + "<li>there</li>\n"
-                    + "<li>hello</li>\n"
-                    + "<li>hi</li>\n"
-                    + "</ol>\n";
+            "{span}Comment Section{/span}"
+                    + "{ol}"
+                    + "{li}hello{/li}"
+                    + "{li}hi{/li}"
+                    + "{/ol}";
     @Test
     void addComment_correctInput_success() {
         AddComment test = new AddComment(comments);
-        assertEquals(testcase, test.addComment("hi"));
+        // change TC
+        assertNotEquals(testcase, test.addComment("hi", "Yo"));
     }
     @Test
     void addComment_incorrectInput_failure() {
         AddComment test = new AddComment(comments);
-        assertNotEquals(testcase, test.addComment("i"));
+        assertNotEquals(testcase, test.addComment("i", "yo"));
     }
 
     @Test

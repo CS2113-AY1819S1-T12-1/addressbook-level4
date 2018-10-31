@@ -1,0 +1,30 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "chiaxr",
+      "displayName": "CHI...ONG",
+      "authorNames": ["chiaxr"]
+    },
+    {
+      "githubId": "cqinkai",
+      "displayName": "CHU...KAI",
+      "authorNames": ["cqinkai"]
+    },
+    {
+      "githubId": "Geraldcdx",
+      "displayName": "GER...ANG",
+      "authorNames": ["Geraldcdx","Gerald Chua Deng Xiang"]
+    },
+    {
+      "githubId": "Tertium3",
+      "displayName": "HO ...ONG",
+      "authorNames": ["Tertium3"]
+    },
+    {
+      "githubId": "jamesyaputra",
+      "displayName": "JAM...TRA",
+      "authorNames": ["jamesyaputra"]
+    }
+  ]
+}

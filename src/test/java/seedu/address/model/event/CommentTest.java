@@ -1,3 +1,4 @@
+//@@author Geraldcdx
 package seedu.address.model.event;
 
 import static org.junit.Assert.assertFalse;
@@ -28,14 +29,9 @@ public class CommentTest {
         // invalid comment
         assertFalse(Comment.isValidComment("")); // empty string
         assertFalse(Comment.isValidComment(" ")); // spaces only
-        //assertFalse(Comment.isValidComment("^")); // only non-alphanumeric characters
-        //assertFalse(Comment.isValidComment("peter*")); // contains non-alphanumeric characters
 
         // valid comment
-        assertTrue(Comment.isValidComment("{span}peter jack{/span}")); // alphabets only
-        assertTrue(Comment.isValidComment("{span}12345{/span}")); // numbers only
-        assertTrue(Comment.isValidComment("{span}peter the 2nd{/span}")); // alphanumeric characters
-        assertTrue(Comment.isValidComment("{span}Capital Tan{/span}")); // with capital letters
-        assertTrue(Comment.isValidComment("{span}David Roger Jackson Ray Jr 2nd{/span}")); // long comments
+        assertTrue(Comment.isValidComment("{span}Comments Section{/span}{ol}{/ol}")); // alphabets only
+        assertTrue(Comment.isValidComment("{span}Comments Section{/span}{ol}{li}Hello{/li}{/ol}")); // numbers only
     }
 }

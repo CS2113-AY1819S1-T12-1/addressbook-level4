@@ -43,9 +43,6 @@ public class EventUtil {
         event.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
-        event.getAttendees().stream().forEach(
-            s -> sb.append(PREFIX_ATTENDEE + s.attendeeName + " ")
-        );
 
         return sb.toString();
     }

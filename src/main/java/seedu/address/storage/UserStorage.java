@@ -1,11 +1,12 @@
 package seedu.address.storage;
 
 import java.io.IOException;
+import java.util.Map;
 
-import com.google.gson.JsonObject;
+import seedu.address.model.UserSession;
 
 /**
- * Represents a storage for {@link seedu.address.model.UserAccount}.
+ * Represents a storage for {@link UserSession}.
  */
 public interface UserStorage {
 
@@ -17,6 +18,6 @@ public interface UserStorage {
     /**
      * Returns a JsonObject containing user accounts.
      */
-    JsonObject getUserAccounts() throws IOException;
+    Map<String, String> getUserAccounts() throws IOException;
 
 }

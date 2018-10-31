@@ -1,22 +1,34 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_PASSWORD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_USERNAME;
 import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_TRYOUTS;
 
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 
 public class ClearCommandSystemTest extends EventManagerSystemTest {
 
     @Test
     public void clear() {
         final Model defaultModel = getModel();
+
+        User toLogin = new UserBuilder().withUsername(VALID_ADMIN_USERNAME).withPassword(VALID_ADMIN_PASSWORD).build();
+        String command = "   " + LoginCommand.COMMAND_WORD + "  "
+                + ADMIN_USERNAME_DESC + "  " + ADMIN_PASSWORD_DESC + "  ";
+        assertCommandSuccess(command, toLogin);
 
         /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
@@ -25,7 +37,7 @@ public class ClearCommandSystemTest extends EventManagerSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: undo clearing address book -> original address book restored */
-        String command = UndoCommand.COMMAND_WORD;
+        command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command,  expectedResultMessage, defaultModel);
         assertSelectedCardUnchanged();
@@ -69,6 +81,17 @@ public class ClearCommandSystemTest extends EventManagerSystemTest {
     }
 
     /**
+     * Performs a verification as {@code assertCommandSuccess(User)}. Executes {@code command}.
+     */
+    private void assertCommandSuccess(String command, User toLogin) {
+        Model expectedModel = getModel();
+        expectedModel.logUser(toLogin);
+        String expectedResultMessage = String.format(LoginCommand.MESSAGE_SUCCESS, toLogin.getUsername().toString());
+
+        assertCommandSuccessLogin(command, expectedModel, expectedResultMessage);
+    }
+
+    /**
      * Performs the same verification as {@code assertCommandSuccess(String)} except that the result box displays
      * {@code expectedResultMessage} and the model related components equal to {@code expectedModel}.
      * @see ClearCommandSystemTest#assertCommandSuccess(String)
@@ -78,6 +101,20 @@ public class ClearCommandSystemTest extends EventManagerSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchangedExceptSyncStatus();
+    }
+
+    /**
+     * Performs the same verification as {@code assertCommandSuccess(String, Event)} except asserts that
+     * the,<br>
+     * 1. Result display box displays {@code expectedResultMessage}.<br>
+     * 2. {@code Storage} and {@code EventListPanel} equal to the corresponding components in
+     * {@code expectedModel}.<br>
+     */
+    private void assertCommandSuccessLogin(String command, Model expectedModel, String expectedResultMessage) {
+        executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertSelectedCardUnchanged();
+        assertCommandBoxShowsDefaultStyle();
     }
 
     /**

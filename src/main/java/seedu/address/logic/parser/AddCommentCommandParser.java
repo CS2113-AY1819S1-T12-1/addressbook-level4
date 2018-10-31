@@ -1,7 +1,9 @@
+//@@author Geraldcdx
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EMPTY_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 
 import seedu.address.commons.core.index.Index;
@@ -36,6 +38,9 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommentCommand.MESSAGE));
         }
         comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get());
+        if (comment.length() == 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_EMPTY_COMMENT, AddCommentCommand.MESSAGE));
+        }
 
         return new AddCommentCommand(index, comment);
     }

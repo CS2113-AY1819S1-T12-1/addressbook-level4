@@ -21,6 +21,7 @@ public class SignupCommand extends Command {
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD";
 
+    public static final String MESSAGE_LOGGED = "Already logged in!";
     public static final String MESSAGE_SUCCESS = "Signed up: %1$s";
     public static final String MESSAGE_EXISTS = "Username already exists!";
 
@@ -36,6 +37,10 @@ public class SignupCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        if (model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGGED);
+        }
+
         if (model.userExists(toSignup)) {
             throw new CommandException(MESSAGE_EXISTS);
         }

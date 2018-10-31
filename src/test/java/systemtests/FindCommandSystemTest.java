@@ -3,6 +3,10 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_PASSWORD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.ADMIN_USERNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_PASSWORD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADMIN_USERNAME;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.testutil.TypicalEvents.BENSON;
 import static seedu.address.testutil.TypicalEvents.CARL;
@@ -19,57 +23,67 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 
 public class FindCommandSystemTest extends EventManagerSystemTest {
-
+    //TODO: add case when find with multiple prefixes and unknown prefixes
     @Test
     public void find() {
+
+        User toLogin = new UserBuilder().withUsername(VALID_ADMIN_USERNAME).withPassword(VALID_ADMIN_PASSWORD).build();
+        String command = "   " + LoginCommand.COMMAND_WORD + "  "
+                + ADMIN_USERNAME_DESC + "  " + ADMIN_PASSWORD_DESC + "  ";
+        assertCommandSuccess(command, toLogin);
+
         /* Case: find multiple persons in event manager, command with leading spaces and trailing spaces
          * -> 2 persons found
          */
-        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TRYOUTS + "   ";
+
+        command = "   " + FindCommand.COMMAND_WORD + " k/" + KEYWORD_MATCHING_TRYOUTS + "   ";
         Model expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, BENSON, ELLE); // event names of Benson and Daniel include "Tryouts"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: repeat previous find command where event list is displaying the persons we are finding
-         * -> 2 persons found
+        /* Case: repeat previous find command where event list is displaying the events we are finding
+         * -> 2 events found
          */
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TRYOUTS;
+        command = FindCommand.COMMAND_WORD + " k/" + KEYWORD_MATCHING_TRYOUTS;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find event where event list is not displaying the event we are finding -> 1 event found */
-        command = FindCommand.COMMAND_WORD + " Frisbee";
+        command = FindCommand.COMMAND_WORD + " k/Frisbee";
         ModelHelper.setFilteredList(expectedModel, CARL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in event manager, 2 keywords -> 2 persons found */
-        command = FindCommand.COMMAND_WORD + " Dancing Music";
+        /* Case: find multiple events in event manager, 2 keywords -> 2 events found */
+        command = FindCommand.COMMAND_WORD + " k/Dancing Music";
         ModelHelper.setFilteredList(expectedModel, BENSON, ELLE);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in event manager, 2 keywords in reversed order -> 2 persons found */
-        command = FindCommand.COMMAND_WORD + " Music Dancing";
+        /* Case: find multiple events in event manager, 2 keywords in reversed order -> 2 events found */
+        command = FindCommand.COMMAND_WORD + " k/Music Dancing";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in event manager, 2 keywords with 1 repeat -> 2 persons found */
-        command = FindCommand.COMMAND_WORD + " Music Dancing Music";
+        /* Case: find multiple events in event manager, 2 keywords with 1 repeat -> 2 events found */
+        command = FindCommand.COMMAND_WORD + " k/Music Dancing Music";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in event manager, 2 matching keywords and 1 non-matching keyword
-         * -> 2 persons found
+        /* Case: find multiple events in event manager, 2 matching keywords and 1 non-matching keyword
+         * -> 2 events found
          */
-        command = FindCommand.COMMAND_WORD + " Music Dancing NonMatchingKeyWord";
+        command = FindCommand.COMMAND_WORD + " k/Music Dancing NonMatchingKeyWord";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -83,57 +97,58 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: find same persons in event manager after deleting 1 of them -> 1 event found */
+        /* Case: find same events in event manager after deleting 1 of them -> 1 event found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getEventManager().getEventList().contains(ELLE));
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TRYOUTS;
+        command = FindCommand.COMMAND_WORD + " k/" + KEYWORD_MATCHING_TRYOUTS;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, BENSON);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find event in event manager, keyword is same as name but of different case -> 1 event found */
-        command = FindCommand.COMMAND_WORD + " TrYouts";
+        command = FindCommand.COMMAND_WORD + " k/TrYouts";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find event in event manager, keyword is substring of name -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " Try";
+        /* Case: find event in event manager, keyword is substring of name -> 0 events found */
+        command = FindCommand.COMMAND_WORD + " k/Try";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find event in event manager, name is substring of keyword -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " Tryoutser";
+        /* Case: find event in event manager, name is substring of keyword -> 0 events found */
+        command = FindCommand.COMMAND_WORD + " k/Tryoutser";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find event not in event manager -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " Mark";
+        /* Case: find event not in event manager -> 0 events found */
+        command = FindCommand.COMMAND_WORD + " k/Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find phone number of event in event manager -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getPhone().value;
+        /* Case: find phone number of event in event manager -> 1 events found */
+        command = FindCommand.COMMAND_WORD + " k/" + DANIEL.getPhone().value;
+        ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find venue of event in event manager -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getVenue().value;
+        /* Case: find venue of event in event manager -> 3 events found */
+        command = FindCommand.COMMAND_WORD + " k/" + DANIEL.getVenue().value;
         ModelHelper.setFilteredList(expectedModel, GEORGE, DANIEL, CARL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of event in event manager -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
-        ModelHelper.setFilteredList(expectedModel);
+        /* Case: find email of event in event manager -> 1 events found */
+        command = FindCommand.COMMAND_WORD + " k/" + DANIEL.getEmail().value;
+        ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find tags of event in event manager -> 3 persons found */
+        /* Case: find tags of event in event manager -> 3 events found */
         List<Tag> tags = new ArrayList<>(DANIEL.getTags());
-        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
+        command = FindCommand.COMMAND_WORD + " k/" + tags.get(0).tagName;
         ModelHelper.setFilteredList(expectedModel, ALICE, DANIEL, BENSON);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
@@ -142,21 +157,21 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         showAllEvents();
         selectEvent(Index.fromOneBased(1));
         assertFalse(getEventListPanel().getHandleToSelectedCard().getName().equals(ELLE.getName().fullName));
-        command = FindCommand.COMMAND_WORD + " Music";
+        command = FindCommand.COMMAND_WORD + " k/Music";
         ModelHelper.setFilteredList(expectedModel, ELLE);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
-        /* Case: find event in empty event manager -> 0 persons found */
+        /* Case: find event in empty event manager -> 0 events found */
         deleteAllEvents();
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TRYOUTS;
+        command = FindCommand.COMMAND_WORD + " k/" + KEYWORD_MATCHING_TRYOUTS;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, ELLE);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: mixed case command word -> rejected */
-        command = "FiNd Tryouts";
+        command = "FiNd k/Tryouts";
         assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
     }
 
@@ -178,6 +193,31 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchanged();
+    }
+
+    /**
+     * Performs a verification as {@code assertCommandSuccess(User)}. Executes {@code command}.
+     */
+    private void assertCommandSuccess(String command, User toLogin) {
+        Model expectedModel = getModel();
+        expectedModel.logUser(toLogin);
+        String expectedResultMessage = String.format(LoginCommand.MESSAGE_SUCCESS, toLogin.getUsername().toString());
+
+        assertCommandSuccessLogin(command, expectedModel, expectedResultMessage);
+    }
+
+    /**
+     * Performs the same verification as {@code assertCommandSuccess(String, Event)} except asserts that
+     * the,<br>
+     * 1. Result display box displays {@code expectedResultMessage}.<br>
+     * 2. {@code Storage} and {@code EventListPanel} equal to the corresponding components in
+     * {@code expectedModel}.<br>
+     */
+    private void assertCommandSuccessLogin(String command, Model expectedModel, String expectedResultMessage) {
+        executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertSelectedCardUnchanged();
+        assertCommandBoxShowsDefaultStyle();
     }
 
     /**

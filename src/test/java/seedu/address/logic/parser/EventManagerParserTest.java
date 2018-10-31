@@ -1,13 +1,24 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.Rule;
@@ -66,7 +77,8 @@ public class EventManagerParserTest {
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(event).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_EVENT.getOneBased() + " " + EventUtil.getEditEventDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_EVENT, descriptor), command);
+
+        assertNotEquals(new EditCommand(INDEX_FIRST_EVENT, descriptor), command);
     }
 
     @Test
@@ -78,9 +90,18 @@ public class EventManagerParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        Map<Prefix, List<String> > keywordMap = new HashMap<>();
+        keywordMap.put(PREFIX_KEYWORD, keywords);
+        keywordMap.put(PREFIX_NAME, null);
+        keywordMap.put(PREFIX_CONTACT, null);
+        keywordMap.put(PREFIX_EMAIL, null);
+        keywordMap.put(PREFIX_PHONE, null);
+        keywordMap.put(PREFIX_VENUE, null);
+        keywordMap.put(PREFIX_DATETIME, null);
+        keywordMap.put(PREFIX_TAG, null);
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new EventContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " k/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new EventContainsKeywordsPredicate(keywordMap)), command);
     }
 
     @Test

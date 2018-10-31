@@ -44,7 +44,7 @@ public class EditEventDescriptorBuilder {
         descriptor.setDate(event.getDateTime());
         descriptor.setComment(event.getComment());
         descriptor.setTags(event.getTags());
-        descriptor.setAttendees(event.getAttendees());
+        descriptor.setAttendees(event.getAttendance());
     }
 
     /**

@@ -69,6 +69,7 @@ dependencies {
     implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0'
     implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+    implementation group: 'org.mnode.ical4j', name: 'ical4j', version: '3.0.0'
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion, {
@@ -239,8 +240,8 @@ task deployOfflineDocs(type: Copy) {
     }
 }
 
-task copyDummySearchPage(type: Copy) {
-    from 'docs/DummySearchPage.html'
+task copyEventSearchPage(type: Copy) {
+    from 'docs/EventSearchPage.html'
     into "${buildDir}/docs/html5"
 }
 

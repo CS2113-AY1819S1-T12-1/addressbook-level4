@@ -82,6 +82,11 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Event> lastShownList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -117,9 +122,9 @@ public class EditCommand extends Command {
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
         Status updatedStatus = eventToEdit.getStatus();
-        Comment updatedComment = eventToEdit.getComment();
+        Comment updatedComment = editEventDescriptor.getComment().orElse(eventToEdit.getComment());
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
-        Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendees());
+        Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendance());
 
         return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedDateTime,
                 updatedStatus, updatedComment, updatedTags, updatedAttendees);
@@ -172,6 +177,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setVenue(toCopy.venue);
             setDate(toCopy.dateTime);
+            setComment(toCopy.comment);
             setTags(toCopy.tags);
             setAttendees(toCopy.attendees);
         }
@@ -180,7 +186,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, contact, phone, email, venue, dateTime, tags, attendees);
+            return CollectionUtil.isAnyNonNull(name, contact, phone, email, venue, dateTime, comment, tags, attendees);
         }
 
         public void setName(Name name) {
@@ -235,9 +241,10 @@ public class EditCommand extends Command {
             this.comment = comment;
         }
 
-        public Comment getComment() {
-            return comment;
+        public Optional<Comment> getComment() {
+            return Optional.ofNullable(comment);
         }
+
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -294,6 +301,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getVenue().equals(e.getVenue())
                     && getDateTime().equals(e.getDateTime())
+                    && getComment().equals(e.getComment())
                     && getTags().equals(e.getTags())
                     && getAttendees().equals(e.getAttendees());
         }

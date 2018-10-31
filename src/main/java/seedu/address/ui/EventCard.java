@@ -43,7 +43,10 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
-    private FlowPane tags;
+    //private FlowPane tags;
+    private Label comment;
+    @FXML
+    private FlowPane attendance;
 
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
@@ -54,9 +57,11 @@ public class EventCard extends UiPart<Region> {
         phone.setText(event.getPhone().value);
         venue.setText(event.getVenue().value);
         email.setText(event.getEmail().value);
+        comment.setText(event.getComment().value);
         dateTime.setText(event.getDateTime().toString());
         status.setText(event.getStatus().currentStatus);
-        event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        //event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        event.getAttendance().forEach(attendee -> attendance.getChildren().add(new Label(attendee.attendeeName)));
     }
 
     @Override

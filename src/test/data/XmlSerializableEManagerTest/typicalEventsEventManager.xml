@@ -9,7 +9,7 @@
         <venue>123, Jurong West Ave 6, #08-111</venue>
         <dateTime>22/10/2018 9:30</dateTime>
         <status>NULL</status>
-        <comment>{span}This is a comment{/span}</comment>
+        <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>friends</tagged>
         <attending>Peter Parker</attending>
     </events>
@@ -21,7 +21,8 @@
         <venue>311, Clementi Ave 2, #02-25</venue>
         <dateTime>2/10/2018 19:30</dateTime>
         <status>NULL</status>
-        <comment>{span}This is a comment{/span}</comment>
+        <dateTime >2/10/2018 19:30</dateTime>
+        <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
         <attending>Mary Kate</attending>
@@ -34,7 +35,7 @@
         <venue>wall street</venue>
         <dateTime>22/1/2018 9:30</dateTime>
         <status>NULL</status>
-        <comment>{span}This is a comment{/span}</comment>
+        <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Art and Crafts</name>
@@ -44,7 +45,7 @@
         <venue>10th street</venue>
         <dateTime>22/10/2017 9:30</dateTime>
         <status>NULL</status>
-        <comment>{span}This is a comment{/span}</comment>
+        <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>friends</tagged>
         <attending>Scarlet Witch</attending>
     </events>
@@ -56,7 +57,7 @@
         <venue>michegan ave</venue>
         <dateTime>12/8/2018 17:30</dateTime>
         <status>NULL</status>
-        <comment>{span}This is a comment{/span}</comment>
+        <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>Dining In The Dark</name>
@@ -66,7 +67,7 @@
         <venue>little tokyo</venue>
         <dateTime>22/10/2018 15:15</dateTime>
         <status>NULL</status>
-        <comment>{span}This is a comment{/span}</comment>
+        <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
         <name>College Games</name>
@@ -76,6 +77,6 @@
         <venue>4th street</venue>
         <dateTime>30/10/2018 14:30</dateTime>
         <status>NULL</status>
-        <comment>{span}This is a comment{/span}</comment>
+        <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
 </eventmanager>

@@ -1,0 +1,53 @@
+= Chia Xiang Rong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Event Manager
+
+---
+
+== Overview
+
+Event Manager is a desktop address book application used for managing events in the Halls and Residential Colleges of NUS. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+* *Major enhancement*: Added *the ability to register/unregister for events and view event attendance*
+** What it does: Allows users to indicate their attendance for events, and view the usernames of other attendees.
+** Justification: This feature allows event ICs to have an idea of the number of attendees for planning purposes, as well as users to see who else is attending the event so they might connect with people they know.
+** Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Credits: -
+
+* *Minor enhancement*: Created EventSearchPage to display all event details on selection.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
+*** Wrote additional tests for RSVP features to increase coverage (Pull request https://github.com/CS2113-AY1819S1-T12-1/main/pull/99[#99])
+** Documentation:
+*** Updated User and Developer Guides to describe new features: https://github.com/CS2113-AY1819S1-T12-1/main/pull/81[#81]
+** Community:
+*** PRs reviewed: https://github.com/CS2113-AY1819S1-T12-1/main/pull/22[#22], https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58], https://github.com/CS2113-AY1819S1-T12-1/main/pull/59[#59]
+** Tools: -
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=rsvp]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=rsvp]
+

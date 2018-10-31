@@ -36,11 +36,11 @@ public class XmlAdaptedEventTest {
     private static final String VALID_VENUE = BENSON.getVenue().toString();
     private static final String VALID_DATETIME = BENSON.getDateTime().toString();
     private static final String VALID_STATUS = BENSON.getStatus().toString();
-    private static final String VALID_COMMENT = "This is a comment"; //TODO for Comment
+    private static final String VALID_COMMENT = "{span}Comment Section{/span}{ol}{/ol}"; //TODO for Comment
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<XmlAdaptedAttendee> VALID_ATTENDEES = BENSON.getAttendees().stream()
+    private static final List<XmlAdaptedAttendee> VALID_ATTENDEES = BENSON.getAttendance().stream()
             .map(XmlAdaptedAttendee::new)
             .collect(Collectors.toList());
 

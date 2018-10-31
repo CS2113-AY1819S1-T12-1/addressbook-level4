@@ -1,15 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDEE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTACT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -25,8 +22,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_HAN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -45,7 +40,6 @@ import static seedu.address.testutil.TypicalEvents.BOB;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
@@ -61,57 +55,50 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Event expectedEvent = new EventBuilder(BOB).withTags(VALID_TAG_FRIEND).withAttendees(VALID_ATTENDEE_TED)
+        Event expectedEvent = new EventBuilder(BOB).withTags(VALID_TAG_FRIEND).withAttendees()
                 .build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + ATTENDEE_DESC_TED,
+                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedEvent));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + ATTENDEE_DESC_TED,
+                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedEvent));
 
         // multiple contacts - last contact accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_AMY + CONTACT_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + ATTENDEE_DESC_TED,
+                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedEvent));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + ATTENDEE_DESC_TED,
+                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedEvent));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY
-                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + ATTENDEE_DESC_TED,
+                + EMAIL_DESC_BOB + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedEvent));
 
         // multiple venues - last venue accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + VENUE_DESC_AMY + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + ATTENDEE_DESC_TED,
+                + VENUE_DESC_AMY + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedEvent));
 
         // multiple datetime - last datetime accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + VENUE_DESC_AMY + VENUE_DESC_BOB + DATETIME_DESC_AMY + DATETIME_DESC_BOB + TAG_DESC_FRIEND
-                + ATTENDEE_DESC_TED, new AddCommand(expectedEvent));
+                + VENUE_DESC_AMY + VENUE_DESC_BOB + DATETIME_DESC_AMY + DATETIME_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedEvent));
 
         // multiple tags - all accepted
         Event expectedEventMultipleTags = new EventBuilder(BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-                .build();
+                .withAttendees().build();
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDEE_DESC_TED
-                + ATTENDEE_DESC_HAN, new AddCommand(expectedEventMultipleTags));
-
-        // multiple attendees - all accepted
-        Event expectedEventMultipleAttendees = new EventBuilder(BOB).withAttendees(VALID_ATTENDEE_TED,
-                VALID_ATTENDEE_HAN).build();
-        assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + ATTENDEE_DESC_TED
-                + ATTENDEE_DESC_HAN, new AddCommand(expectedEventMultipleAttendees));
+                + VENUE_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                new AddCommand(expectedEventMultipleTags));
     }
 
     @Test
@@ -190,11 +177,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + VENUE_DESC_BOB + DATETIME_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND,
                 Tag.MESSAGE_TAG_CONSTRAINTS);
-
-        // invalid attendee
-        assertParseFailure(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + VENUE_DESC_BOB + DATETIME_DESC_BOB + VALID_TAG_FRIEND + VALID_TAG_HUSBAND + INVALID_ATTENDEE_DESC,
-                Attendee.MESSAGE_ATTENDEE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

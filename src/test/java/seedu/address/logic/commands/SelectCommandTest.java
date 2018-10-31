@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EVENT;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -21,6 +22,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
@@ -33,6 +36,13 @@ public class SelectCommandTest {
     private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        User user = new UserBuilder().build();
+        model.logUser(user);
+        expectedModel.logUser(new UserBuilder().build());
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
