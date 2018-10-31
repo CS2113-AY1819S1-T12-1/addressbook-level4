@@ -67,7 +67,7 @@ public class UpdateStatusCommand extends Command {
         Status updatedStatus = new Status(updatedDateTime);
         Comment updatedComment = eventToUpdate.getComment();
         Set<Tag> updatedTags = eventToUpdate.getTags();
-        Set<Attendee> updatedAttendees = eventToUpdate.getAttendees();
+        Set<Attendee> updatedAttendees = eventToUpdate.getAttendance();
 
         return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedDateTime,
                 updatedStatus, updatedComment, updatedTags, updatedAttendees);
