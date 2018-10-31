@@ -190,7 +190,7 @@ public class MainApp extends Application {
     /**
      * Starts performing status update for Events listed in event manager by making calls to
      * {@code execute} method for {@code UpdateStatusCommand}.
-     * First update after delay of 60,000 milliseconds of 300,000 {@param period} milliseconds.
+     * First update after delay of 60,000 milliseconds of 300,000 milliseconds.
      */
     private void initStatusUpdate() {
         Timer timer = new Timer();
