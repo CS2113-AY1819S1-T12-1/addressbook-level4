@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dummy Search Page</title>
+  <script type="text/javascript">
+      function getJsonFromUrl() {
+          var query = location.search.substr(1);
+          var result = {};
+          query.split("&").forEach(function(part) {
+              var item = part.split("=");
+              result[item[0]] = decodeURIComponent(item[1]);
+          });
+          return result;
+      }
+      document.addEventListener("DOMContentLoaded", function(event) {
+          document.getElementById("name").innerHTML=getJsonFromUrl().name;
+          document.getElementById("contact").innerHTML=getJsonFromUrl().contact;
+          document.getElementById("phone").innerHTML=getJsonFromUrl().phone;
+          document.getElementById("email").innerHTML=getJsonFromUrl().email;
+          document.getElementById("venue").innerHTML=getJsonFromUrl().venue;
+          document.getElementById("dateTime").innerHTML=getJsonFromUrl().dateTime;
+          document.getElementById("attendance").innerHTML=getJsonFromUrl().attendance;
+          document.getElementById("comment").innerHTML=getJsonFromUrl().comment;
+      });
+  </script>
+</head>
+<body>
+  <h2>Event Name: <span id="name"></span><br></h2>
+  <strong>Event IC:</strong> <span id="contact"></span><br>
+  <strong>IC Contact:</strong> <span id="phone"></span><br>
+  <strong>IC Email:</strong> <span id="email"></span><br>
+  <strong>Event Venue:</strong> <span id="venue"></span><br>
+  <strong>Time:</strong> <span id="dateTime"></span><br>
+  <br>
+
+  <strong>Event Attendance:</strong><br>
+  <span id="attendance"></span>
+  <br>
+  <br>
+  <span id = "comment"></span></span>
+
+</body>
+</html>
