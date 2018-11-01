@@ -1,0 +1,564 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Ho Phi Long - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Event Manager</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T12-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Ho Phi Long - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-event-manager"><a class="link" href="#project-event-manager">PROJECT: Event Manager</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Event Manager is a computer application developed base on Address Book - Level 4 and is used to manage events for Residence College(RC) Students of NUS.<br></p>
+</div>
+<div class="paragraph">
+<p>This product prefers users to interact by Command Line  Interface(CLI) with the help of Graphic User Interface(GUI) create by JavaFX.<br></p>
+</div>
+<div class="paragraph">
+<p>Java is used for better compatibility with other platforms.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Main features</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Authentication: Admin/User</p>
+</li>
+<li>
+<p>Basic operation: Create – Read – Edit – Delete (CRUD)</p>
+</li>
+<li>
+<p>Comment sections</p>
+</li>
+<li>
+<p>Event RSVP</p>
+</li>
+<li>
+<p><strong>Search features</strong></p>
+</li>
+<li>
+<p>Undo, redo commands</p>
+</li>
+<li>
+<p>Event reminder</p>
+</li>
+<li>
+<p><strong>Automatic sorting</strong></p>
+</li>
+<li>
+<p><strong>Export events as iCalendar file</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="role"><a class="link" href="#role">Role</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I am in charge of develop <strong>automatic sort</strong>, <strong>search</strong> and <strong>export calendar</strong> features.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: Add the ability to <strong>export all registered events of the currently logging in user to an iCalendar file of user choice name</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>What it does</em>: Allow users to take advantage of the available calendar applications to better manage their events.</p>
+</li>
+<li>
+<p><em>Justification</em>: This feature can improve user management ability since there are many other tasks/events beside RC events that students have.</p>
+</li>
+<li>
+<p><em>Highlights</em>: This enhancement follow command pattern that are currently applied in this project, which open for future expansion or improvement based on existing code.</p>
+</li>
+<li>
+<p><em>Credits</em>: Import [<a href="http://ical4j.github.io/">ical4j</a>] version 3.0.0 to convert event and data to iCalendar format</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major enhancement</strong>: <strong>New modified find command</strong> to search by keywords in varieties of combination for better navigation.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>What it does</em>:User are now allowed to search by any attributes that an event have and can include some must have keywords in certain data attributes instead of just name in the previous version.</p>
+</li>
+<li>
+<p><em>Justification</em>: This enhancement significantly increases user navigation ability in the product compare to the original search by name</p>
+</li>
+<li>
+<p><em>Highlights</em>: this enhancement extends previous find command structure to avoid affecting other components of this application</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Add automatic sorting by event datetime, then by event name for current events that are saved in .xml file and displayed on GUI.</p>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Add new attributes: datetime to the event</p>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases <code>v1.1</code> - <code>v1.4</code> (4 releases) on GitHub</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Fix current tests that are affected by default sorting and new attributes</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Updated User Guide and Developer Guide to reflect latest stage of the product</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed (with non-trivial review comments): (Examples: <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/79">#Pullrequest79</a>)</p>
+</li>
+<li>
+<p>Contributed to forum discussions (examples: <a href="https://github.com/nusCS2113-AY1819S1/forum/issues/47">#CS2113 forum issue 47</a>)</p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tools:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Integrated a third party library (<a href="http://ical4j.github.io/">ical4j</a>) to the project</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Below are all my contributions to different sections in product user guide. This demonstrate my abilities to communicate with end-users:</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Automatic sorting</strong>: events in Event Manager will always be displayed in chronological order, follow by alphabetical order.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-events-code-find-code"><a class="link" href="#locating-events-code-find-code">Locating events: <code>find</code></a></h3>
+<div class="paragraph">
+<p>Admin/User: Finds events whose field contain any of the given keywords with user specify condition.<br>
+Format: <code>find PREFIX/KEYWORD [MORE_PREFIX][MORE_KEYWORDS]</code><br></p>
+</div>
+<div class="paragraph">
+<p>Available prefixes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>k: default search option</p>
+</li>
+<li>
+<p>n: name search</p>
+</li>
+<li>
+<p>c: contact search</p>
+</li>
+<li>
+<p>e: email search</p>
+</li>
+<li>
+<p>p: phone search</p>
+</li>
+<li>
+<p>v: venue search</p>
+</li>
+<li>
+<p>d: datetime search</p>
+</li>
+<li>
+<p>t: tag search</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>sports</code> will match <code>Sports</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Sports Day</code> will match <code>Day Sports</code></p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Sport</code> will not match <code>Sports</code></p>
+</li>
+<li>
+<p>Events matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Sports Day</code> will return <code>Sports games</code>, <code>Good Day</code></p>
+</li>
+<li>
+<p>Command default prefix (k) will allow to search in any field of an event, while other specific prefix will result in event that must have that keyword in the indicate field</p>
+</li>
+<li>
+<p>At least one of the available prefix must be presented.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+1) If there are more than 1 prefix of the same type, for example, <code>find n/new n/dark n/meeting</code>, this will be automatically combined together, which means this command will be assumed to be the same as <code>find n/new dark meeting</code><br>
+2) If there is only prefix without any keyword follow it, no event will be found as there is no event contain default empty keyword<br>
+3) Unknown prefix will be ignored.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find n/Day</code><br>
+Returns event with name <code>Sports Day</code> and <code>Any day</code></p>
+</li>
+<li>
+<p><code>find k/Sports Sci friends</code><br>
+Returns events having name <code>Sports Competition</code>, venue <code>Sci Avenue</code>, or tag <code>friends</code></p>
+</li>
+<li>
+<p><code>find d/12/01/2018 04:30</code>
+Return any event having date <code>12/01/2018</code> or time <code>04:30</code></p>
+</li>
+<li>
+<p><code>find k/Day n/Sports d/12/01/2018
+Return any event having keyword `day</code> with that event name having <code>Sports</code> and with that event date having <code>12/01/2018</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="export-calendar-command-code-export-code"><a class="link" href="#export-calendar-command-code-export-code">Export Calendar Command: <code>export</code></a></h3>
+<div class="paragraph">
+<p>Admin/User: export current user/admin registered/host events to an iCalendar file to use with other calendar application<br>
+Format: <code>export filename</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>export myCalendar</code><br>
+export the iCalendar file with name myCalendar to <strong>src/data</strong> folder</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>File name should not be longer than 500 characters and can not be empty.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="default-sorting"><a class="link" href="#default-sorting">Default sorting</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>Since our product is an event manager, events should be controlled and view in chronological order.
+To do this, <code>UniqueEventList</code> class is modify so as to sort the event list in Date order, follow by Name order.<br></p>
+</div>
+<div class="paragraph">
+<p>Consider this scenario:</p>
+</div>
+<div class="paragraph">
+<p>Step 1: User launch application, then log in</p>
+</div>
+<div class="paragraph">
+<p>Step 2: User add a new event which will occur earlier than some of the event in the list<br>
+e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Step 3: When add method is called, it performs the intended operation, then sort the list before returning it to other components.</p>
+</div>
+<div class="paragraph">
+<p>Step 4: The event page is reloaded and display the newly added event in the correct place.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-how-to-sort-the-list"><a class="link" href="#aspect-how-to-sort-the-list">Aspect: How to sort the list</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Event list will be sort based on sort method implemented in <code>UniqueEventList</code> class to modify the internal list which event manager is backed on.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement will minimum modification that could affect other components.</p>
+</li>
+<li>
+<p>Cons: Every method that change the internal list (e.g: add, setEvent, delete) will need to be sorted at the end of the method.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Sort only when we need to get the list if the list is not sorted.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The easiest implementation without affecting other components.</p>
+</li>
+<li>
+<p>Cons: The sort operation when called by other components, for example UI component will return operation to main thread, which severely affect testing with JUnit on JavaFX thread</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Only sort the list for displaying on the UI</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will perform minimal operation while still returning what we need to observe.</p>
+</li>
+<li>
+<p>Cons: Very complicated implementation as UI are updated based on observing internal list. We will need a class to update the UI if we just want to sort the list on displaying.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhance-current-code-find-code-command"><a class="link" href="#enhance-current-code-find-code-command">Enhance current <code>find</code> command</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="paragraph">
+<p><code>find</code> command is used for better navigation. Therefore, it is enhanced to search for more properties in an Event.<br></p>
+</div>
+<div class="paragraph">
+<p><code>find</code> can search for any data with the default keywords and . If specific prefix is added, find can search for event that must contain that keyword in that specific field</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If there are more than 1 prefix of the same type, for example, <code>find n/new n/dark n/meeting</code>, this will be automatically combined together, which means this command will be assumed to be the same as <code>find n/new dark meeting</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-how-to-improve-search"><a class="link" href="#aspect-how-to-improve-search">Aspect: How to improve search</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Modify the predicate to display the event that date contains one of the keywords</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Follow the current structure of <code>find</code> command, which mean can reuse current resources</p>
+</li>
+<li>
+<p>Cons: With the current implementation of the predicate, scaling will severely affect product performance</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-enhancement"><a class="link" href="#future-enhancement">Future enhancement:</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Search for contained or exact keywords option</p>
+</li>
+<li>
+<p>Search can include option</p>
+</li>
+<li>
+<p>Search for time range</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="export-rvsp-ed-events-to-icalendar-file"><a class="link" href="#export-rvsp-ed-events-to-icalendar-file">Export RVSP-ed events to iCalendar file</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current implementation</a></h4>
+<div class="paragraph">
+<p>This feature will increase compatibility of Event Manager will other calendar app for better planning.</p>
+</div>
+<div class="paragraph">
+<p>Consider the following scenario:</p>
+</div>
+<div class="paragraph">
+<p>Step 1: User launch application, then log in</p>
+</div>
+<div class="paragraph">
+<p>Step 2: User execute 'export my event calendar' command. The export command receive argument to accept as filename</p>
+</div>
+<div class="paragraph">
+<p>Step 3: Current user, who are logging in, will be used to receive an event filtered list that he/she registered for.</p>
+</div>
+<div class="paragraph">
+<p>Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-how-to-export-the-event-list"><a class="link" href="#aspect-how-to-export-the-event-list">Aspect: How to export the event list</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current implementation):</strong> Using ical4j external library to create method to convert event to RFC5545 format, then stream to FileOutputStream with given filename from user.<br>
+All method are written in the <code>ExportCalendarCommand</code> class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, can reuse current resources and easy to match wth the implementation of Attendance list</p>
+</li>
+<li>
+<p>Cons: Violate some of the OOP design as the export method should be in the storage class</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create class to write an .ics file with given RFC5545 standard</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Have better control of the output file, since the ical4j support API has not been updated for a long time and currently show some lacking</p>
+</li>
+<li>
+<p>Cons: Very complicated and time wasting</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Calendar will be exported to your src/data folder.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="proposed-future-enhancement"><a class="link" href="#proposed-future-enhancement">[Proposed]: Future enhancement</a></h4>
+<div class="paragraph">
+<p>Export should be able to export the attendance list of an event according to user preference</p>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 18:34:11 UTC</div></div></div></body></html>
