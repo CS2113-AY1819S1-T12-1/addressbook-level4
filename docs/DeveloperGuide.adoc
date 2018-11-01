@@ -270,13 +270,15 @@ Step 7. After authentication, the user can now start using the application.
 
 Step 8. The user can choose to log out of the application as well with the `logout` command. This command sets the login flag to false and clears `currentUser`.
 
+The sequence diagram below describes the steps elaborated above.
+
 image::AuthenticationDiagram.png[width="800"]
 
 [NOTE]
 If an authentication fails, i.e. credentials are wrong or do not exist in the JSON file, the `login` command will throw a `CommandException`.
 
 [NOTE]
-As of now, only admin account is registered, with `admin` and `root` being used as username and password respectively.
+Only one admin account is registered at any given time, with `admin` and `root` being used as username and password respectively.
 
 ==== Password encryption
 Allows passwords to be encrypted instead of being stored as plain text. Password encryption and validating is done through the `PasswordUtil` class using the _PBKDF2WithHmacSHA1_ encryption algorithm. +

@@ -52,39 +52,53 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
 ====
 
+[IMPORTANT]
+====
+Only `select` and `list` commands can be performed without logging in. Also, `add`, `edit`, `delete` and `deleteComment` can only performed by the admin account.
+====
+
 // tag::authentication[]
 === Signing up for an account : `signup`
 
 User: Creates a *user* account +
-Format: `signup u/USERNAME p/PASSWORD +
+Format: `signup u/USERNAME p/PASSWORD` +
+
+|===
 Examples:
 
 * `signup u/Gerald Chua p/password12345` +
-Creates account with the username Gerald Chua
+Creates account with the username Gerald Chua +
 * `signup u/James Yaputra p/drowssap12345` +
 Creates account with the username James Yaputra
+|===
 
 === Logging into an account : `login`
 
 User: Logs in to account +
 Format: `login u/USERNAME p/PASSWORD` +
+
+|===
 Examples:
 
 * `login n/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
 * `login u/James Yaputra p/drowssap12345` +
 Logs in James Yaputra
+|===
 
 === Logging out of an account : `logout`
 
 User: Logs out of an account +
 Format: `logout` +
+
+|===
 Examples:
 
 * `login u/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
 * `logout` +
 Logs out from Gerald Chua
+|===
 // end::authentication[]
 
 === Viewing help : `help`
@@ -340,8 +354,10 @@ Format: `showReminders`
 
 [NOTE]
 ====
-For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+* For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
 so you need to refresh it yourself.
+* Also, you have to log in first to use the functions.
+* Do not use a hash (#) in the Comments, e.g. addComment 1 C/#hello - this is a bug we will fix
 ====
 
 === Adds Comment : `addComment`
@@ -363,8 +379,10 @@ Adds "What is the attire to wear for this event?" into event 5 comment section w
 
 [NOTE]
 ====
-For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+* For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
 so you need to refresh it yourself.
+* Also, you have to log in first to use the functions.
+* Do not use a hash (#) in the Comments, e.g. replyComment 1 L/2 C/#hello - this is a bug we will fix
 ====
 
 === Reply Comment : `replyComment`
@@ -386,8 +404,9 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 
 [NOTE]
 ====
-For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
+* For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
 so you need to refresh it yourself.
+* Also, you have to log in first to use the functions.
 ====
 
 === Delete Comment : `deleteComment`

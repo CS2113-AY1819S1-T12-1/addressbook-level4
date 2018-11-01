@@ -66,6 +66,10 @@ public class DeleteCommentCommand extends Command {
             throw new CommandException(MESSAGE_LOGIN);
         }
 
+        if (!model.getAdminStatus()) {
+            throw new CommandException(MESSAGE_ADMIN);
+        }
+
         List<Event> filteredEventList = model.getFilteredEventList();
 
 

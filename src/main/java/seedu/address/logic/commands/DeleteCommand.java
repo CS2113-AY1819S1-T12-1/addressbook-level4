@@ -40,6 +40,10 @@ public class DeleteCommand extends Command {
             throw new CommandException(MESSAGE_LOGIN);
         }
 
+        if (!model.getAdminStatus()) {
+            throw new CommandException(MESSAGE_ADMIN);
+        }
+
         List<Event> lastShownList = model.getFilteredEventList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {

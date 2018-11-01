@@ -62,6 +62,10 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_LOGIN);
         }
 
+        if (!model.getAdminStatus()) {
+            throw new CommandException(MESSAGE_ADMIN);
+        }
+
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }

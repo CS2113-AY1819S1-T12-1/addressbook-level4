@@ -87,6 +87,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_LOGIN);
         }
 
+        if (!model.getAdminStatus()) {
+            throw new CommandException(MESSAGE_ADMIN);
+        }
+
         List<Event> lastShownList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
