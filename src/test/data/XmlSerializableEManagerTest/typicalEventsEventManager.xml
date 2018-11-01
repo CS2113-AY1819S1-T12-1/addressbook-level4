@@ -7,7 +7,7 @@
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <venue>123, Jurong West Ave 6, #08-111</venue>
-        <dateTime>22/10/2018 9:30</dateTime>
+        <dateTime>22/10/2018 09:30</dateTime>
         <status>NULL</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>friends</tagged>
@@ -21,7 +21,7 @@
         <venue>311, Clementi Ave 2, #02-25</venue>
         <dateTime>2/10/2018 19:30</dateTime>
         <status>NULL</status>
-        <dateTime >2/10/2018 19:30</dateTime>
+        <dateTime>02/10/2018 19:30</dateTime>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
@@ -33,7 +33,7 @@
         <phone>95352563</phone>
         <email>heinz@example.com</email>
         <venue>wall street</venue>
-        <dateTime>22/1/2018 9:30</dateTime>
+        <dateTime>22/01/2018 09:30</dateTime>
         <status>NULL</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
@@ -43,7 +43,7 @@
         <phone>87652533</phone>
         <email>cornelia@example.com</email>
         <venue>10th street</venue>
-        <dateTime>22/10/2017 9:30</dateTime>
+        <dateTime>22/10/2017 09:30</dateTime>
         <status>NULL</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>friends</tagged>

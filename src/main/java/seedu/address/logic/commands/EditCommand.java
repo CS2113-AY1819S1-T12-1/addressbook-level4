@@ -121,13 +121,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
-        Status updatedStatus = eventToEdit.getStatus();
-        Comment updatedComment = editEventDescriptor.getComment().orElse(eventToEdit.getComment());
+        Status eventStatus = eventToEdit.getStatus();
+        Comment eventComment = eventToEdit.getComment();
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
         Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendance());
 
         return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedDateTime,
-                updatedStatus, updatedComment, updatedTags, updatedAttendees);
+                eventStatus, eventComment, updatedTags, updatedAttendees);
     }
 
     @Override
@@ -186,7 +186,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, contact, phone, email, venue, dateTime, comment, tags, attendees);
+            return CollectionUtil.isAnyNonNull(name, contact, phone, email, venue, dateTime, tags, attendees);
         }
 
         public void setName(Name name) {
@@ -244,7 +244,6 @@ public class EditCommand extends Command {
         public Optional<Comment> getComment() {
             return Optional.ofNullable(comment);
         }
-
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
