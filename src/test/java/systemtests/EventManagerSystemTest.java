@@ -184,7 +184,7 @@ public abstract class EventManagerSystemTest {
                                                      Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new EventManager(expectedModel.getEventManager()), testApp.readStorageAddressBook());
+        assertEquals(new EventManager(expectedModel.getEventManager()), testApp.readStorageEventManager());
         assertListMatching(getEventListPanel(), expectedModel.getFilteredEventList());
     }
 
@@ -236,6 +236,8 @@ public abstract class EventManagerSystemTest {
                     + selectedCardHandle.getVenue().replaceAll(" ", "%20").replaceAll("#", "%23")
                     + "&dateTime="
                     + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime).replaceAll(" ", "%20")
+                    + "&status="
+                    + selectedCardHandle.getStatus()
                     + "&tags="
                     + selectedCardHandle.getTagsString().replaceAll(" ", "%20")
                     + "&attendance="
