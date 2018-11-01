@@ -71,7 +71,7 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
-    public EventManager readStorageAddressBook() {
+    public EventManager readStorageEventManager() {
         try {
             return new EventManager(storage.readEventManager().get());
         } catch (DataConversionException dce) {
