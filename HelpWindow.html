@@ -739,6 +739,9 @@ Format: <code>addComment INDEX C/STRING</code></p>
 <li>
 <p>Comment cannot be blank,. For C/String, String cannot be empty</p>
 </li>
+<li>
+<p>If a user wants to delete an added comment, use the undo CLI command.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -777,6 +780,9 @@ so you need to refresh it yourself.</p>
 <li>
 <p>Do not use a hash (#) in the Comments, e.g. replyComment 1 L/2 C/#hello - this is a bug we will fix</p>
 </li>
+<li>
+<p>If a user wants to delete an added comment, use the undo CLI command.</p>
+</li>
 </ul>
 </div>
 </td>
@@ -801,7 +807,10 @@ Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 <p>Comment cannot be blank. For C/String, String cannot be empty</p>
 </li>
 <li>
-<p>Line has to be a non-zero integer and exist within the comment section</p>
+<p>Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. <code>1. Gerald : Hello</code> the line here is 1. <code>5. Gerald: Hi</code> the line here is 5.</p>
+</li>
+<li>
+<p>All replied comments will fall under a comment that has no (REPLY) in front. Hence, all replies will be towards the same comment.</p>
 </li>
 </ul>
 </div>
@@ -848,7 +857,7 @@ so you need to refresh it yourself.</p>
 <div class="sect2">
 <h3 id="delete-comment-code-deletecomment-code"><a class="link" href="#delete-comment-code-deletecomment-code">3.22. Delete Comment : <code>deleteComment</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Deletes a comment<br>
+<p>Admin: Deletes a comment<br>
 Format: <code>deleteComment INDEX L/LINE</code></p>
 </div>
 <div class="sidebarblock">
@@ -859,7 +868,7 @@ Format: <code>deleteComment INDEX L/LINE</code></p>
 <p>Edits the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>Line has to be a non-zero integer and exist within the comment section</p>
+<p>* Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. <code>1. Gerald : Hello</code> the line here is 1. <code>5. Gerald: Hi</code> the line here is 5.</p>
 </li>
 </ul>
 </div>
@@ -1030,4 +1039,4 @@ e.g. <code>export BobCalendar</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-03 08:20:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-03 13:19:58 UTC</div></div></div></body></html>
