@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -35,6 +36,7 @@ import seedu.address.testutil.EditEventDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final int VALID_LINE = 1;
     public static final String VALID_ADMIN_USERNAME = "admin";
     public static final String VALID_ADMIN_PASSWORD = "root";
     public static final String VALID_USERNAME = "Johnny Bravo";
@@ -59,6 +61,7 @@ public class CommandTestUtil {
     public static final String VALID_COMMENT_BOB = "{span}Comment Section{/span}{ol}{/ol}";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_COMMENT = "Hi";
 
     public static final String ADMIN_USERNAME_DESC = " " + PREFIX_USERNAME + VALID_ADMIN_USERNAME;
     public static final String ADMIN_PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_ADMIN_PASSWORD;
@@ -78,6 +81,10 @@ public class CommandTestUtil {
     public static final String VENUE_DESC_BOB = " " + PREFIX_VENUE + VALID_VENUE_BOB;
     public static final String DATETIME_DESC_AMY = " " + PREFIX_DATETIME + VALID_DATETIME_AMY;
     public static final String DATETIME_DESC_BOB = " " + PREFIX_DATETIME + VALID_DATETIME_BOB;
+    public static final String COMMENT_DESC_ADD = " " + PREFIX_COMMENT + VALID_COMMENT;
+    public static final String COMMENT_DESC_DELETE = " " + PREFIX_LINE + VALID_LINE;
+    public static final String COMMENT_DESC_REPLY = " " + PREFIX_COMMENT + VALID_COMMENT + " "
+            + PREFIX_LINE + VALID_LINE;
     public static final String COMMENT_DESC_AMY = " " + PREFIX_COMMENT + VALID_COMMENT_AMY;
     public static final String COMMENT_DESC_BOB = " " + PREFIX_COMMENT + VALID_COMMENT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;

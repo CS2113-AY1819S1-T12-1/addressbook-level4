@@ -1,0 +1,89 @@
+= Ho Phi Long - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Event Manager
+
+---
+
+== Overview
+
+Event Manager is a computer application developed base on Address Book - Level 4 and is used to manage events for Residence College(RC) Students of NUS. +
+
+This product prefers users to interact by Command Line  Interface(CLI) with the help of Graphic User Interface(GUI) create by JavaFX. +
+
+Java is used for better compatibility with other platforms.
+
+* **Main features**:
+** Authentication: Admin/User
+** Basic operation: Create – Read – Edit – Delete (CRUD)
+** Comment sections
+** Event RSVP
+** *Search features*
+** Undo, redo commands
+** Event reminder
+** *Automatic sorting*
+** *Export events as iCalendar file*
+
+== Role
+I am in charge of develop *automatic sort*, *search* and *export calendar* features.
+
+== Summary of contributions
+* *Major enhancement*: Add the ability to *export all registered events of the currently logging in user to an iCalendar file of user choice name*
+** _What it does_: Allow users to take advantage of the available calendar applications to better manage their events.
+** _Justification_: This feature can improve user management ability since there are many other tasks/events beside RC events that students have.
+** _Highlights_: This enhancement follow command pattern that are currently applied in this project, which open for future expansion or improvement based on existing code.
+** _Credits_: Import [http://ical4j.github.io/[ical4j]] version 3.0.0 to convert event and data to iCalendar format
+
+* *Major enhancement*: *New modified find command* to search by keywords in varieties of combination for better navigation.
+** _What it does_:User are now allowed to search by any attributes that an event have and can include some must have keywords in certain data attributes instead of just name in the previous version.
+** _Justification_: This enhancement significantly increases user navigation ability in the product compare to the original search by name
+** _Highlights_: this enhancement extends previous find command structure to avoid affecting other components of this application
+
+* *Minor enhancement*: Add automatic sorting by event datetime, then by event name for current events that are saved in .xml file and displayed on GUI.
+
+* *Minor enhancement*: Add new attributes: datetime to the event
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
+** Enhancements to existing features:
+*** Fix current tests that are affected by default sorting and new attributes
+** Documentation:
+*** Updated User Guide and Developer Guide to reflect latest stage of the product
+** Community:
+*** PRs reviewed (with non-trivial review comments): (Examples: https://github.com/CS2113-AY1819S1-T12-1/main/pull/79[#Pullrequest79])
+*** Contributed to forum discussions (examples: https://github.com/nusCS2113-AY1819S1/forum/issues/47[#CS2113 forum issue 47])
+*** Reported bugs and suggestions for other teams in the class
+** Tools:
+*** Integrated a third party library (http://ical4j.github.io/[ical4j]) to the project
+
+
+== Contributions to the User Guide
+
+|===
+|_Below are all my contributions to different sections in product user guide. This demonstrate my abilities to communicate with end-users:_
+|===
+
+include::../UserGuide.adoc[tag=autosort]
+
+include::../UserGuide.adoc[tag=find]
+
+include::../UserGuide.adoc[tag=exportcalendar]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=sorting]
+
+include::../DeveloperGuide.adoc[tag=findEnhancement]
+
+include::../DeveloperGuide.adoc[tag=exportcalendar]
+

@@ -10,5 +10,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
     public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d events listed!";
+    public static final String MESSAGE_LINE_INVALID = "Line must be a non-signed integer!"
+            + " Example: deleteComment 1 L/2 or replyComment 1 L/2 C/5";
 
 }

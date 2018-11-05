@@ -386,7 +386,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 
 // tag::comments[]
-=== Comments
+=== CommentsC
 ==== Current Implementation
 
 The Comments features are facilitated by `Comments` class in the Logic/Comments folder. `AddComment`, `DeleteComment` and `ReplyComment` classes extend the `Comments` class. The features of the following classes are as such:
@@ -533,7 +533,7 @@ Step 4: The event page is reloaded and display the newly added event in the corr
 ** Cons: Very complicated implementation as UI are updated based on observing internal list. We will need a class to update the UI if we just want to sort the list on displaying.
 // end::sorting[]
 
-// tag::`find` command enhancement[]
+// tag::findEnhancement[]
 === Enhance current `find` command
 ==== Current Implementation
 `find` command is used for better navigation. Therefore, it is enhanced to search for more properties in an Event. +
@@ -550,10 +550,11 @@ If there are more than 1 prefix of the same type, for example, `find n/new n/dar
 
 ==== Future enhancement:
 * Search for contained or exact keywords option
+* Search can include option
 * Search for time range
-//end::`find` command enhancement[]
+//end::findEnhancement[]
 
-// tag::export calendar[]
+// tag::exportcalendar[]
 === Export RVSP-ed events to iCalendar file
 ==== Current implementation
 This feature will increase compatibility of Event Manager will other calendar app for better planning.
@@ -578,13 +579,13 @@ All method are written in the `ExportCalendarCommand` class.
 ** Cons: Very complicated and time wasting
 
 [NOTE]
-For the current version of this product, export calendar now will export every events available in the event manager as authentication and RSVP are under test.
+====
+Calendar will be exported to your src/data folder.
+====
 
-==== [Proposed]: [V1.4] enhancement
-The method related to `ExportCalendarCommand` class should be re-designed to follow OOP requirement.
-
+==== [Proposed]: Future enhancement
 Export should be able to export the attendance list of an event according to user preference
-// end::export calendar[]
+// end::exportcalendar[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
