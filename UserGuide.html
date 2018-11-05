@@ -711,36 +711,11 @@ Removes a reminder for user for event 5</p>
 <p>Admin/User: Show all events with reminders set<br>
 Format: <code>showReminders</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
-so you need to refresh it yourself.</p>
-</li>
-<li>
-<p>Also, you have to log in first to use the functions.</p>
-</li>
-<li>
-<p>Do not use a hash (#) in the Comments, e.g. addComment 1 C/#hello - this is a bug we will fix</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="adds-comment-code-addcomment-code"><a class="link" href="#adds-comment-code-addcomment-code">3.20. Adds Comment : <code>addComment</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Add comment into event comment section with the username (default non-login username is stub)<br>
+<p>Admin/User: Add comment into event comment section with the username (when you are logged in)<br>
 Format: <code>addComment INDEX C/STRING</code></p>
 </div>
 <div class="sidebarblock">
@@ -751,10 +726,14 @@ Format: <code>addComment INDEX C/STRING</code></p>
 <p>Adds comment at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>Comment cannot be blank,. For C/String, String cannot be empty</p>
+<p>Comment cannot be blank. For C/String, String cannot be empty.</p>
 </li>
 <li>
-<p>If a user wants to delete an added comment, use the undo CLI command.</p>
+<p>Undo and Redo command works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.</p>
+</li>
+<li>
+<p>If you want to revert a comment previously made, use Undo!</p>
 </li>
 </ul>
 </div>
@@ -775,39 +754,11 @@ Adds "What is the attire to wear for this event?" into event 5 comment section w
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
-so you need to refresh it yourself.</p>
-</li>
-<li>
-<p>Also, you have to log in first to use the functions.</p>
-</li>
-<li>
-<p>Do not use a hash (#) in the Comments, e.g. replyComment 1 L/2 C/#hello - this is a bug we will fix</p>
-</li>
-<li>
-<p>If a user wants to delete an added comment, use the undo CLI command.</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.21. Reply Comment : <code>replyComment</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Replies a comment with the username (default non-login username is stub) <br>
+<p>Admin/User: Replies a comment with the username (when you are logged in) <br>
 Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 </div>
 <div class="sidebarblock">
@@ -821,10 +772,14 @@ Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 <p>Comment cannot be blank. For C/String, String cannot be empty</p>
 </li>
 <li>
-<p>Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. <code>1. Gerald : Hello</code> the line here is 1. <code>5. Gerald: Hi</code> the line here is 5.</p>
+<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are for the line parameter to as a comment below the line.</p>
 </li>
 <li>
-<p>All replied comments will fall under a comment that has no (REPLY) in front. Hence, all replies will be towards the same comment.</p>
+<p>Undo and redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.</p>
+</li>
+<li>
+<p>If you want to revert a comment previously made, use Undo!</p>
 </li>
 </ul>
 </div>
@@ -845,33 +800,11 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>For comments, the undo and redo function works! However, every time you undo and redo, the BrowserPanel will not refresh itself
-so you need to refresh it yourself.</p>
-</li>
-<li>
-<p>Also, you have to log in first to use the functions.</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="delete-comment-code-deletecomment-code"><a class="link" href="#delete-comment-code-deletecomment-code">3.22. Delete Comment : <code>deleteComment</code></a></h3>
 <div class="paragraph">
-<p>Admin: Deletes a comment<br>
+<p>Admin: Deletes a comment (when you are logged in as admin)<br>
 Format: <code>deleteComment INDEX L/LINE</code></p>
 </div>
 <div class="sidebarblock">
@@ -882,7 +815,11 @@ Format: <code>deleteComment INDEX L/LINE</code></p>
 <p>Edits the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>* Line refers to the number of the comment indicated in  of the comment section. It has to be a non-zero integer and exist within the comment section. E.g. <code>1. Gerald : Hello</code> the line here is 1. <code>5. Gerald: Hi</code> the line here is 5.</p>
+<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are for the line parameter to delete that comment line.</p>
+</li>
+<li>
+<p>Undo and Redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.</p>
 </li>
 </ul>
 </div>
@@ -1053,4 +990,4 @@ e.g. <code>export BobCalendar</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-03 13:30:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 02:58:10 UTC</div></div></div></body></html>
