@@ -729,7 +729,7 @@ Format: <code>addComment INDEX C/STRING</code></p>
 <p>Adds comment at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>Comment cannot be blank. For C/String, String cannot be empty.</p>
+<p>For <code>C/STRING</code>, <code>STRING</code> cannot be empty. <code>STRING</code> is the comment.</p>
 </li>
 <li>
 <p>Undo and Redo command works! However, every time you undo or redo, the BrowserPanel will not refresh itself
@@ -775,10 +775,10 @@ Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 <p>Replies a comment to the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>Comment cannot be blank. For C/String, String cannot be empty</p>
+<p>For <code>C/STRING</code>, <code>STRING</code> cannot be empty. <code>STRING</code> is the comment.</p>
 </li>
 <li>
-<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are for the line parameter to as a comment below the line.</p>
+<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index every comment. The comment will be replied under the line index given.</p>
 </li>
 <li>
 <p>Undo and redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
@@ -824,7 +824,7 @@ Format: <code>deleteComment INDEX L/LINE</code></p>
 <p>Edits the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are for the line parameter to delete that comment line.</p>
+<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index each comment. The line parameter provided will delete the corresponding comment index.</p>
 </li>
 <li>
 <p>Undo and Redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
@@ -1002,4 +1002,4 @@ e.g. <code>export BobCalendar</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 08:44:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 08:49:06 UTC</div></div></div></body></html>
