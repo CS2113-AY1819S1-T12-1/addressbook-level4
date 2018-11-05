@@ -13,7 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.comments.ReplyComment;
+import seedu.address.logic.comments.CommentFacade;
 import seedu.address.model.Model;
 import seedu.address.model.event.Comment;
 import seedu.address.model.event.Event;
@@ -37,17 +37,17 @@ public class ReplyCommentCommand extends Command {
 
     public static final String MESSAGE_REPLY_COMMENT = "Comment [%1$s] replied for Event %2$s at Line %3$s";
     public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again. Example: replyComment 1 L/1 C/Hello";
-    public static final String MESSAGE_LINE_STRING_INVALID = "Line cannot be a string!"
-            + " Example: replyComment 1 L/1 C/Hello";
 
-    private final Index index;
     private final EditCommand.EditEventDescriptor editCommentDescriptor;
     private int line = 0;
-    private String comment = null;
+    private String comment;
+    private String username;
+    private Index index;
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editEventDescriptor details to edit the event with
+     * @param line to reply to in the comment section
+     * @param comment to add to comment section
      */
     public ReplyCommentCommand(Index index, int line, String comment) {
         requireNonNull(index);
@@ -68,6 +68,25 @@ public class ReplyCommentCommand extends Command {
         return this.line;
     }
 
+    public Index getIndex() { return this.index; }
+
+    public void setIndex(Index index) { this.index = index; }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Save edited information in model
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return
+     * @throws CommandException
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -80,17 +99,27 @@ public class ReplyCommentCommand extends Command {
         if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
-
+        setUsername(model.getUsername().toString());
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        ReplyComment comments = new ReplyComment(eventToEdit.getComment().toString());
-        Comment newComments = new Comment(comments.replyComment(getComment(), getLine(),
-                model.getUsername().toString()));
-        editCommentDescriptor.setComment(newComments);
-        Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
+        Event editedEvent = replyComment(eventToEdit, getUsername());
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         return new CommandResult(String.format(MESSAGE_REPLY_COMMENT, getComment(), index.getOneBased(), getLine()));
+    }
+
+    /**
+     * Replies Comments
+     * @param eventToEdit event to edit
+     * @param username username to add to comment
+     * @return event of edited comment section
+     */
+    public Event replyComment(Event eventToEdit, String username) throws CommandException {
+        CommentFacade comments = new CommentFacade();
+        String repliedComment = comments.replyComment(eventToEdit.getComment().toString(), getComment(),
+                getLine(), username);
+        editCommentDescriptor.setComment(new Comment(repliedComment));
+        return EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
     }
 
 }

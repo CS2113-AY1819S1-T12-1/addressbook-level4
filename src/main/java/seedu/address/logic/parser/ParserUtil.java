@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_LINE_INVALID;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -78,7 +79,7 @@ public class ParserUtil {
     public static int parseLine(String line) throws ParseException {
         String trimmedLine = line.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedLine)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(MESSAGE_LINE_INVALID);
         }
         return Integer.parseInt(trimmedLine);
     }

@@ -12,7 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.comments.DeleteComment;
+import seedu.address.logic.comments.CommentFacade;
 import seedu.address.model.Model;
 import seedu.address.model.event.Comment;
 import seedu.address.model.event.Event;
@@ -35,15 +35,14 @@ public class DeleteCommentCommand extends Command {
 
     public static final String MESSAGE_DELETE_COMMENT = "Comment deleted for Event %1$s at Line %2$s";
     public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again. Example: deleteComment 1 L/2";
-    public static final String MESSAGE_LINE_STRING_INVALID = "Line cannot be a string! Example: deleteComment 1 L/2";
 
-    private final Index index;
-    private final EditCommand.EditEventDescriptor editCommentDescriptor;
+    private final EditCommand.EditEventDescriptor editCommentDescriptor = new EditCommand.EditEventDescriptor();
     private int line = 0;
+    private Index index;
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param line details to edit the event with
+     * @param line to delete comment section
      */
     public DeleteCommentCommand(Index index, int line) {
         requireNonNull(index);
@@ -51,13 +50,24 @@ public class DeleteCommentCommand extends Command {
 
         this.index = index;
         this.line = line;
-        this.editCommentDescriptor = new EditCommand.EditEventDescriptor();
     }
 
     public int getLine() {
         return this.line;
     }
+    public Index getIndex() { return this.index; }
 
+    public void setLine(int line) { this.line = line; }
+
+    public void setIndex(Index index) { this.index = index; }
+
+    /**
+     * Save edited information in model
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return CommandResult
+     * @throws CommandException login failed, not admin, invalid index
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -72,21 +82,28 @@ public class DeleteCommentCommand extends Command {
 
         List<Event> filteredEventList = model.getFilteredEventList();
 
-
         if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        DeleteComment comments = new DeleteComment(eventToEdit.getComment().toString());
-        Comment newComments = new Comment(comments.deleteComment(getLine()));
-        editCommentDescriptor.setComment(newComments);
-        Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
-
+        Event editedEvent = deleteComment(eventToEdit);
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         return new CommandResult(String.format(MESSAGE_DELETE_COMMENT, index.getOneBased(), getLine()));
+    }
+
+    /**
+     * Removes comment with given line parameter
+     * @param eventToEdit event to edit
+     * @return updated comment section
+     */
+    public Event deleteComment(Event eventToEdit) throws CommandException {
+        CommentFacade comments = new CommentFacade();
+        String deletedComment = comments.deleteComment(eventToEdit.getComment().toString(), getLine());
+        editCommentDescriptor.setComment(new Comment(deletedComment));
+        return EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
     }
 
 }

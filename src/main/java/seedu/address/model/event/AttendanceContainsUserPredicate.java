@@ -2,7 +2,7 @@ package seedu.address.model.event;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * Predicate to find user with given name
@@ -10,15 +10,12 @@ import seedu.address.model.user.User;
 public class AttendanceContainsUserPredicate implements Predicate<Event> {
     private final String username;
 
-    public AttendanceContainsUserPredicate(User name) {
-        this.username = name.getUsername().value;
+    public AttendanceContainsUserPredicate(Username userName) {
+        this.username = userName.value;
     }
-    //Todo: to reimplement later
 
-    //Todo: To reimplement later when Attendance field is add
     @Override
     public boolean test (Event event) {
-        return true;
-        //username.equalsIgnoreCase(event.getAttendance().toString());
+        return event.getAttendance().stream().anyMatch(attendee -> attendee.attendeeName == username);
     }
 }

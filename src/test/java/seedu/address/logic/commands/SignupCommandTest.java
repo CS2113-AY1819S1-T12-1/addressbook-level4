@@ -60,6 +60,17 @@ public class SignupCommandTest {
         signupCommand.execute(modelStubAcceptUser, commandHistory);
     }
 
+    @Test
+    public void execute_failedSignup_alreadyLogged() throws Exception {
+        User user = new UserBuilder().build();
+        ModelStubAcceptUser modelStubAcceptUser = new ModelStubAcceptUser();
+
+        SignupCommand command = new SignupCommand(user);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(String.format(SignupCommand.MESSAGE_LOGGED, user.getUsername().toString()));
+        command.execute(modelStubAcceptUser, commandHistory);
+    }
+
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -139,6 +150,11 @@ public class SignupCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getAttendingEventList(Username currentUser) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoEventManager() {
             throw new AssertionError("This method should not be called.");
         }
@@ -174,6 +190,11 @@ public class SignupCommandTest {
         ModelStubAcceptUser(User user) {
             requireNonNull(user);
             this.user = user;
+            isLogged = false;
+        }
+
+        ModelStubAcceptUser() {
+            isLogged = true;
         }
 
         @Override

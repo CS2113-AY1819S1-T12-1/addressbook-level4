@@ -70,7 +70,7 @@ public class LoginCommandTest {
         LoginCommand loginCommand = new LoginCommand(user);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(LoginCommand.MESSAGE_LOGGED);
+        thrown.expectMessage(String.format(LoginCommand.MESSAGE_LOGGED, user.getUsername().toString()));
         loginCommand.execute(modelStubWithUser, commandHistory);
     }
 
@@ -150,6 +150,11 @@ public class LoginCommandTest {
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getAttendingEventList(Username currentUser) {
             throw new AssertionError("This method should not be called.");
         }
 

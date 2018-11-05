@@ -89,6 +89,13 @@ public interface Model {
     void updateFilteredEventList(Predicate<Event> predicate);
 
     /**
+     * Get the current list of event that the current user
+     * @param  currentUser current User
+     * @return an user registered event list
+     */
+    ObservableList<Event> getAttendingEventList(Username currentUser);
+
+    /**
      * Returns true if the model has previous event manager states to restore.
      */
     boolean canUndoEventManager();

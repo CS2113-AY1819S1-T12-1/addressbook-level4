@@ -37,10 +37,6 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.getLoginStatus()) {
-            throw new CommandException(MESSAGE_LOGIN);
-        }
-
         List<Event> filteredEventList = model.getFilteredEventList();
 
         if (targetIndex.getZeroBased() >= filteredEventList.size()) {

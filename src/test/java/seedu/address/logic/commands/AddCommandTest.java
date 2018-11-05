@@ -166,6 +166,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getAttendingEventList(Username currentUser) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoEventManager() {
             throw new AssertionError("This method should not be called.");
         }

@@ -29,12 +29,10 @@ import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.util.UidGenerator;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.AttendanceContainsUserPredicate;
-import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
-import seedu.address.model.user.Password;
-import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
 /**
@@ -45,7 +43,7 @@ public class ExportCalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "filename"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " filename\n"
             + "export current user registered event as an iCalender file\n"
             + "filename should not be empty or longer than 255 character\n"
             + "Example: export myCalendar";
@@ -56,9 +54,9 @@ public class ExportCalendarCommand extends Command {
     public static final String MESSAGE_FILE_ERROR = "File %1$s.ics has existed in other folder\n"
             + "or file has errors and cannot be opened";
 
-    private static final String CALENDAR_FILE_PATH = "data/";
+    public static final String MESSAGE_ZERO_EVENT_REGISTERED = "User %1$s has not registered for any event";
 
-    private static AttendanceContainsUserPredicate predicate;
+    private static final String CALENDAR_FILE_PATH = "data/";
 
     private final String fileName;
 
@@ -66,12 +64,22 @@ public class ExportCalendarCommand extends Command {
         fileName = filename;
     }
 
-    //Todo: Update when have a method to get the current logging in user
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-        User currentUser = new User(new Username("John"), new Password("12345678"));
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
+        Username currentUser = model.getUsername();
+        ObservableList<Event> registeredEventList = model.getAttendingEventList(currentUser);
+
+        //Check if no event has been registered
+        if (registeredEventList.size() <= 0) {
+            return new CommandResult(String.format(MESSAGE_ZERO_EVENT_REGISTERED, currentUser.value));
+        }
+
         try {
-            exportICalenderFile(getAttendingEventList(model, currentUser), fileName);
+            exportICalenderFile(registeredEventList, fileName);
         } catch (IOException e) {
             return new CommandResult(String.format(MESSAGE_FILE_ERROR, fileName));
         }
@@ -80,17 +88,22 @@ public class ExportCalendarCommand extends Command {
     }
 
     //*****************************Method related to the new export calendar command********************************
-    //TODO: Write test case for new command in test/logic/command
     /**
      * Get the current list of event that the current user
      * @param  model current Event Manager model
      * @param  currentUser current User
      * @return an user registered event list
      */
-    public static ObservableList<Event> getAttendingEventList(Model model, User currentUser) {
+    public static ObservableList<Event> getAttendingEventList(Model model, Username currentUser)
+            throws CommandException {
         requireAllNonNull(model, currentUser);
-        //currentUser.getUsername();
-        model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        model.updateFilteredEventList(new AttendanceContainsUserPredicate(currentUser));
+
+        //No events has benn register
+        if (model.getFilteredEventList().size() <= 0) {
+            throw new CommandException(MESSAGE_ZERO_EVENT_REGISTERED);
+        }
+
         return model.getFilteredEventList();
     }
 
@@ -101,7 +114,7 @@ public class ExportCalendarCommand extends Command {
      * NOTE: Currently, due to the limit of java.util.Date so event are default to last from start time to end of the
      * day
      */
-    public static List<VEvent> convertEventListToVEventList(ObservableList<Event> registeredEventList) {
+    public List<VEvent> convertEventListToVEventList(ObservableList<Event> registeredEventList) {
         List<VEvent> calendarEvents =  new ArrayList<>();
 
         for (Event event : registeredEventList) {
@@ -117,9 +130,9 @@ public class ExportCalendarCommand extends Command {
      * @param  event an Event in Event Manager
      * @return a VEvent with given properties in event
      */
-    public static VEvent convertEventToVEvent(Event event) {
+    public VEvent convertEventToVEvent(Event event) {
         VEvent vEvent = new VEvent(new net.fortuna.ical4j.model.DateTime(event.getDateTime().dateTime),
-                new net.fortuna.ical4j.model.DateTime(new DateTime("3/1/2019 11:20").dateTime),
+                new net.fortuna.ical4j.model.DateTime(event.getDateTime().dateTime.getTime() + 1000 * 60 * 60),
                 event.getName().toString());
 
         //Event properties
@@ -159,7 +172,7 @@ public class ExportCalendarCommand extends Command {
      * @param  filename user preferences file name
      * @return userCalendar
      */
-    private static Calendar writeToUserCalendar(ObservableList<Event> eventsList, String filename) {
+    private Calendar writeToUserCalendar(ObservableList<Event> eventsList, String filename) {
         Calendar userCalendar = buildCalendar(filename);
         List<VEvent> userRegisteredEvents = convertEventListToVEventList(eventsList);
 
@@ -175,7 +188,7 @@ public class ExportCalendarCommand extends Command {
      * @param filename user preferences file name
      * @return Calendar
      */
-    private static Calendar buildCalendar(String filename) {
+    private Calendar buildCalendar(String filename) {
         Calendar calendar = new Calendar();
         calendar.getProperties().add(new ProdId(String.format("-//%1$s//iCal4j 1.0//EN", filename)));
         calendar.getProperties().add(Version.VERSION_2_0);
@@ -191,8 +204,7 @@ public class ExportCalendarCommand extends Command {
      * @param  fileName user preferences file name
      * @throws IOException when file stream have problems
      */
-    public static void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName)
-            throws IOException {
+    public void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName) throws IOException {
         FileOutputStream fileOut = new FileOutputStream(CALENDAR_FILE_PATH
                 + String.format("%1$s.ics", fileName), false);
         CalendarOutputter outPutter = new CalendarOutputter();

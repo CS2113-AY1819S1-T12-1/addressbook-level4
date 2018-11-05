@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * A utility class for Event.
@@ -58,6 +60,7 @@ public class EventUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getVenue().ifPresent(venue -> sb.append(PREFIX_VENUE).append(venue.value).append(" "));
+        descriptor.getComment().ifPresent(comment -> sb.append(PREFIX_COMMENT).append(comment.value).append(" "));
         descriptor.getDateTime()
                 .ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {

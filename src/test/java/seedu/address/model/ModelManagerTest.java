@@ -32,7 +32,7 @@ public class ModelManagerTest {
         thrown.expect(NullPointerException.class);
         modelManager.hasEvent(null);
     }
-
+    //Todo: Test new get attending list method
     @Test
     public void hasPerson_personNotInEventManager_returnsFalse() {
         assertFalse(modelManager.hasEvent(ALICE));
