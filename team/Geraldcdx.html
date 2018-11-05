@@ -13,7 +13,7 @@
 <li><a href="#summary-of-contributions">2. Summary of contributions</a></li>
 <li><a href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a>
 <ul class="sectlevel2">
-<li><a href="#adds-comment-code-addcomment-code">3.1. Adds Comment : <code>addComment</code></a></li>
+<li><a href="#add-comment-code-addcomment-code">3.1. Add Comment : <code>addComment</code></a></li>
 <li><a href="#reply-comment-code-replycomment-code">3.2. Reply Comment : <code>replyComment</code></a></li>
 <li><a href="#delete-comment-code-deletecomment-code">3.3. Delete Comment : <code>deleteComment</code></a></li>
 </ul>
@@ -23,7 +23,7 @@
 <li><a href="#comments">4.1. Comments</a></li>
 </ul>
 </li>
-<li><a href="#project-powerpointlabs">5. PROJECT: PowerPointLabs</a></li>
+<li><a href="#other-projects">5. Other Projects</a></li>
 </ul>
 </div>
 </div>
@@ -34,7 +34,7 @@
 <ol class="loweralpha" type="a">
 <li>
 <p><strong>Introduction</strong><br>
-This portfolio is a record of my contribution towards the project, highlighting the features and it’s detailed implementation to show technical competence in software engineering, and soft skills such as stellar writing for documentation. This will be further elaborated in the “Summary of Contributions”, “Contributions to User Guide” and “Contributions to Developer Guide” below.</p>
+This portfolio is a record of my contribution towards this project. It highlights the developed features and it’s detailed implementation to show technical competence in software engineering, and soft skills such as stellar writing for documentation. This will be further elaborated in the “Summary of Contributions”, “Contributions to User Guide” and “Contributions to Developer Guide” below.</p>
 </li>
 <li>
 <p><strong>Product Summary</strong><br>
@@ -132,7 +132,7 @@ Admin can add, reply, delete and reset comments. Whereas, Users can only add and
 </li>
 <li>
 <p><strong>Justification</strong><br>
-This functionality supports the additional challenged posed in CS2101 such that there is social responsiveness in the project. The interaction through the comments section will allow residents to clarify any doubts with the organisers. Additionally, the organisers can use the comments section as a feedback platform to get information on how to improve events.</p>
+This functionality supports the additional challenged posed in CS2101 such that there is social responsiveness in the project. The interaction through the comments section will allow residents to clarify any doubts with the organisers. Additionally, the organisers can use the comments section as a feedback platform to get feedback on improvements.</p>
 </li>
 <li>
 <p><strong>Highlights</strong><br>
@@ -150,7 +150,7 @@ Jsoup v1.11.3 library was used to manipulate Hyper Text Markup Language (HTML) t
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p><code>AddCommand</code> had to be added to intialise a comment section</p>
+<p><code>AddCommand</code> had to be revised to intialise a comment section</p>
 </li>
 <li>
 <p><code>EditCommand</code> was edited to accomodate a new field for the comments section and the admin would be able to reset the comment section if there is a need.</p>
@@ -254,7 +254,7 @@ Jsoup v1.11.3 library was used to manipulate Hyper Text Markup Language (HTML) t
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="adds-comment-code-addcomment-code"><a class="link" href="#adds-comment-code-addcomment-code">3.1. Adds Comment : <code>addComment</code></a></h3>
+<h3 id="add-comment-code-addcomment-code"><a class="link" href="#add-comment-code-addcomment-code">3.1. Add Comment : <code>addComment</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Add comment into event comment section with the username (when you are logged in)<br>
 Format: <code>addComment INDEX C/STRING</code></p>
@@ -295,8 +295,11 @@ Adds "What is the attire to wear for this event?" into event 5 comment section w
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/addComment.png" alt="addComment" width="790"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addComment.png" alt="addComment" width="600">
+</div>
+<div class="title">Figure 1. Adding a comment</div>
 </div>
 </div>
 <div class="sect2">
@@ -344,8 +347,11 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/replyComment.png" alt="replyComment" width="790"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/replyComment.png" alt="replyComment" width="790">
+</div>
+<div class="title">Figure 2. Replying a comment</div>
 </div>
 </div>
 <div class="sect2">
@@ -387,8 +393,11 @@ Deletes comment of event 2 at line 2</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/deleteComment.png" alt="deleteComment" width="790"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/deleteComment.png" alt="deleteComment" width="790">
+</div>
+<div class="title">Figure 3. Deleting a comment</div>
 </div>
 </div>
 </div>
@@ -491,9 +500,16 @@ Deletes comment of event 2 at line 2</p>
 </table>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the addComment operation works:
-image::addCommentSequenceDiagram.png[width="800"]
-The <code>replyComment</code> and <code>deleteComment</code> command does similar methods and need not be elaborated.</p>
+<p>The following sequence diagram shows how the AddCommentCommand operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addCommentSequenceDiagram.png" alt="addCommentSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 4. Sequence Diagram for AddCommentCommand</div>
+</div>
+<div class="paragraph">
+<p>The <code>replyComment</code> and <code>deleteComment</code> command does similar methods and need not be elaborated.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -581,11 +597,18 @@ If the user uses the <code>find</code> command, the following functions will fol
 </div>
 </div>
 <div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">5. PROJECT: PowerPointLabs</a></h2>
+<h2 id="other-projects"><a class="link" href="#other-projects">5. Other Projects</a></h2>
 <div class="sectionbody">
 <hr>
-<div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<div class="olist quanda">
+<ol class="quanda">
+<li>
+<p>[<a href="https://github.com/Geraldcdx/IVLEDownloader">Offline IVLE</a>] - This is an application that will be used by National University of Singapore(NUS) students to access files from the Integrated Virtual Learning Environment(IVLE) offline.</p>
+</li>
+<li>
+<p>[<a href="https://github.com/Geraldcdx/HTMLChatbot">HTML ChatBot</a>] - A Fullstack Webapp hosted on Google to run code for a self-sustainable attendance taking chatbot.</p>
+</li>
+</ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 11:32:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 13:44:19 UTC</div></div></div></body></html>
