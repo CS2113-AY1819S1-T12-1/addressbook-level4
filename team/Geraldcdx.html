@@ -1,0 +1,591 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><meta name="author" content="---"><title>Gerald Chua Deng Xiang - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Event Manager</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T12-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Gerald Chua Deng Xiang - Project Portfolio</h1><div class="details"><span class="author" id="author">---</span><br><span id="revdate">---</span></div></div><div id="content"><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><span class="big RED">PROJECT: Event Manager</span></p>
+</div>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#overview">1. Overview</a></li>
+<li><a href="#summary-of-contributions">2. Summary of contributions</a></li>
+<li><a href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a>
+<ul class="sectlevel2">
+<li><a href="#adds-comment-code-addcomment-code">3.1. Adds Comment : <code>addComment</code></a></li>
+<li><a href="#reply-comment-code-replycomment-code">3.2. Reply Comment : <code>replyComment</code></a></li>
+<li><a href="#delete-comment-code-deletecomment-code">3.3. Delete Comment : <code>deleteComment</code></a></li>
+</ul>
+</li>
+<li><a href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a>
+<ul class="sectlevel2">
+<li><a href="#comments">4.1. Comments</a></li>
+</ul>
+</li>
+<li><a href="#project-powerpointlabs">5. PROJECT: PowerPointLabs</a></li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">1. Overview</a></h2>
+<div class="sectionbody">
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><strong>Introduction</strong><br>
+This portfolio is a record of my contribution towards the project, highlighting the features and it’s detailed implementation to show technical competence in software engineering, and soft skills such as stellar writing for documentation. This will be further elaborated in the “Summary of Contributions”, “Contributions to User Guide” and “Contributions to Developer Guide” below.</p>
+</li>
+<li>
+<p><strong>Product Summary</strong><br>
+Event Manager (EM) is a desktop application that a Residential College (RC) in National University of Singapore (NUS) can use to manage events in RCs. Using the Command Line Interface (CLI), the Head of Events of an RC can promote events effectively to RC’s residents. The detailed features will be listed in the “List of Main Features”.</p>
+</li>
+<li>
+<p><strong>Problem Statement</strong><br>
+Currently, events in RCs are promoted through multiple groups in Whatsapp or Telegram and this is an inefficient process which wastes time and effort for residents and event organisers.</p>
+</li>
+<li>
+<p><strong>Our Solution</strong><br>
+My team developed the EM so that residents can have a centralised event platform to host a concise list of detailed events for RC residents to RSVP and be reminded when the event is drawing closer. Further, this application will better allow the organisers to prepare for the event.</p>
+</li>
+<li>
+<p><strong>List of Main Features</strong></p>
+</li>
+</ol>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 0%;">
+<col style="width: 0%;">
+<col style="width: 100.0%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">no</th>
+<th class="tableblock halign-left valign-top">Feature</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authentication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Head of Events can get requests for residents to add events as an Admin.
+ Whereas, residents can sign up as Users and browse through events.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Find</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Both Admin and Users can search for events based on keywords. E.g. If the user wants to find a sporting event, he can type find sports and the relevant events will be displayed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RSVP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Both Admin and Users can indicate their attendance for events.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reminders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Both Admin and Users can set reminders, and these reminders will alert them when the event is drawing near.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comment Section</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Both Admin and Users have a comments section for each event. Users can add a comment or reply to comments, whereas, Admin has all these functionalities and able to delete inappropriate comments.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CRUD of Events</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Admin can create, reply, update and delete(CRUD) events through relevant commands.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undo and Redo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Both Admin and Users can undo or redo any command that was committed previously.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sorting</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Events are sorted autonomously based on date and time; Events that are commencing earlier will be at the top of the event list.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin and users can export the list of events as a calendar to their local directory</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">2. Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><strong>Major enhancement</strong>: A comment section for users to interact and clarify doubts on the events</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><strong>Functionality</strong><br>
+Admin can add, reply, delete and reset comments. Whereas, Users can only add and reply comments. The relevant commands can be typed out in the CLI to achieve the previous statement.</p>
+</li>
+<li>
+<p><strong>Justification</strong><br>
+This functionality supports the additional challenged posed in CS2101 such that there is social responsiveness in the project. The interaction through the comments section will allow residents to clarify any doubts with the organisers. Additionally, the organisers can use the comments section as a feedback platform to get information on how to improve events.</p>
+</li>
+<li>
+<p><strong>Highlights</strong><br>
+This enhancement is tedious as it requires a new field to display the comments in a relevant format and onto the User Interface (UI). Many test cases written by the developers had to be edited to ensure that the testability of the project remained.</p>
+</li>
+<li>
+<p><strong>Credits</strong><br>
+Jsoup v1.11.3 library was used to manipulate Hyper Text Markup Language (HTML) tags so that we did not need to rewrite code but instead reuse efficient code. Furthermore, online user forums such as Stack Overflow was used to clarify doubts or find our develop code.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong><br></p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>AddCommand</code> had to be added to intialise a comment section</p>
+</li>
+<li>
+<p><code>EditCommand</code> was edited to accomodate a new field for the comments section and the admin would be able to reset the comment section if there is a need.</p>
+</li>
+<li>
+<p>Added comments into the <code>BrowserPanel</code> to be displayed in tht GUI.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=gerald&amp;sort=displayName&amp;since=2018-09-12&amp;until=2018-11-05&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">Click Here</a>]</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Scheduling regular meetings for CS2113T and CS2101</p>
+</li>
+<li>
+<p>Constantly ensure that our team was fulfilled milestones</p>
+</li>
+<li>
+<p>Offered help to team members</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Added code to <code>EditCommand</code> to take in another parameter for comments</p>
+</li>
+<li>
+<p>Adding test cases to improve coverage</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ported User Guide from team&#8217;s Google docs to the repository&#8217;s User Guide and making tweaks to the User guide.</p>
+</li>
+<li>
+<p>Ported a huge section of Developer Guide from team&#8217;s Google docs to the repository&#8217;s Developer guide.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed by Geraldcdx [<a href="https://github.com/CS2113-AY1819S1-T12-1/main/pulls?q=is%3Apr+is%3Aclosed">Github closed PRs</a>]</p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com/CS2113-AY1819S1-F10-2/main/issues/101">1</a>, <a href="https://github.com/CS2113-AY1819S1-F10-2/main/issues/100">2</a>, <a href="https://github.com/CS2113-AY1819S1-F10-2/main/issues/98">3</a>, <a href="https://github.com/CS2113-AY1819S1-F10-2/main/issues/106">4</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tools:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Integrated Reposense into the project</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="adds-comment-code-addcomment-code"><a class="link" href="#adds-comment-code-addcomment-code">3.1. Adds Comment : <code>addComment</code></a></h3>
+<div class="paragraph">
+<p>Admin/User: Add comment into event comment section with the username (when you are logged in)<br>
+Format: <code>addComment INDEX C/STRING</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Adds comment at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>For <code>C/STRING</code>, <code>STRING</code> cannot be empty. <code>STRING</code> is the comment.</p>
+</li>
+<li>
+<p>Undo and Redo command works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.</p>
+</li>
+<li>
+<p>If you want to revert a comment previously made, use Undo!</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addComment 1 C/What is the attire to wear for the event?</code><br>
+Adds "What is the attire to wear for the event?" into event 1 comment section with username</p>
+</li>
+<li>
+<p><code>addComment 5 C/What is the attire to wear for this event?</code><br>
+Adds "What is the attire to wear for this event?" into event 5 comment section with username</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/addComment.png" alt="addComment" width="790"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.2. Reply Comment : <code>replyComment</code></a></h3>
+<div class="paragraph">
+<p>Admin/User: Replies a comment with the username (when you are logged in) <br>
+Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Replies a comment to the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>For <code>C/STRING</code>, <code>STRING</code> cannot be empty. <code>STRING</code> is the comment.</p>
+</li>
+<li>
+<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index every comment. The comment will be replied under the line index given.</p>
+</li>
+<li>
+<p>Undo and redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.</p>
+</li>
+<li>
+<p>If you want to revert a comment previously made, use Undo!</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>replyComment 1 L/5 C/What is the attire to wear for the event?</code><br>
+Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5 with username</p>
+</li>
+<li>
+<p><code>replyComment 2 L/2 C/What is the attire to wear for the event?</code><br>
+Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2 with username</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/replyComment.png" alt="replyComment" width="790"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-comment-code-deletecomment-code"><a class="link" href="#delete-comment-code-deletecomment-code">3.3. Delete Comment : <code>deleteComment</code></a></h3>
+<div class="paragraph">
+<p>Admin: Deletes a comment (when you are logged in as admin)<br>
+Format: <code>deleteComment INDEX L/LINE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index each comment. The line parameter provided will delete the corresponding comment index.</p>
+</li>
+<li>
+<p>Undo and Redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+so you need to refresh it yourself.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteComment 1 L/5</code><br>
+Deletes comment of event 1 at line 5</p>
+</li>
+<li>
+<p><code>deleteComment 2 L/2</code><br>
+Deletes comment of event 2 at line 2</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/deleteComment.png" alt="deleteComment" width="790"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="comments"><a class="link" href="#comments">4.1. Comments</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The comments feature is facilitated by <code>Comments</code> class in the Logic/Comments folder. <code>AddComment</code>, <code>DeleteComment</code> and <code>ReplyComment</code> classes extend the <code>Comments</code> class. <code>CommentFacade</code> class creates objects of <code>AddComment</code>, <code>DeleteComment</code> and <code>ReplyComment</code>. The features of the following classes are as such:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Comments</code>&#8201;&#8212;&#8201;Handles storage of comments, contains <code>initComments(String input)</code> to reformat comment section to HTML, <code>parseCommentSection(String input)</code> to format the comment section into a vector and <code>rewrite(Vector commentsVector)</code> to obtain the edited comment section.</p>
+</li>
+<li>
+<p><code>AddComment</code>&#8201;&#8212;&#8201;Adds a new comment to the end of the comment section with the <code>addComment(String comment, String username)</code></p>
+</li>
+<li>
+<p><code>DeleteComment</code>&#8201;&#8212;&#8201;Deletes a comment given the line parameter in <code>deleteComment(int line)</code></p>
+</li>
+<li>
+<p><code>ReplyComment</code>&#8201;&#8212;&#8201;Replies a comment given the line parameter in <code>replyComment(String comment, int line, String username)</code></p>
+</li>
+<li>
+<p><code>CommentFacade</code>&#8201;&#8212;&#8201;An implementation of the Facade design pattern to interact with <code>AddCommentCommand</code>, <code>DeleteCommentCommand</code> and <code>ReplyCommentCommand</code>. It contains <code>addComment(String input, String comment, String username)</code> to be used in the <code>AddCommentCommand</code> to add a comment, <code>deleteComment(String input, int line)</code> to be used in <code>DeleteCommentCommand</code> to delete a comment and <code>deleteComment(String input, int line)</code> to be used in <code>ReplyCommentCommand</code> to reply comments.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Comand Line Interface uses <code>AddCommentCommand</code>, <code>DeleteCommentCommand</code>, <code>ReplyCommentCommand</code> and <code>EditCommand</code> for the user to interact with the comment section. The features of the following classes are as such:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AddCommentCommand</code>&#8201;&#8212;&#8201;Adds a comment using <code>CommentFacade</code> and <code>AddCommentCommandParser</code></p>
+</li>
+<li>
+<p><code>DeleteCommentCommand</code>&#8201;&#8212;&#8201;Deletes a comment using <code>CommentFacade</code> and <code>DeleteCommentCommandParser</code></p>
+</li>
+<li>
+<p><code>ReplyCommentCommand</code>&#8201;&#8212;&#8201;Replies a comment using <code>CommentFacade</code> and <code>ReplyCommentCommandParser</code></p>
+</li>
+<li>
+<p><code>EditComamnd</code>&#8201;&#8212;&#8201;Resets the whole comment section using <code>editEventDescriptor</code> and <code>EditCommandParser</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the Comments mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application, click on an event or types <code>select INDEX</code> into the CLI. The comment section will be seen.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user/admin executes <code>addComment 1 C/May I ask, what is the attire for the event?</code> to add a comment to the first event in the Event Manager. <code>AddCommentCommand</code> command obtains the comment section from <code>eventmanager.xml</code> calls <code>CommentFacade</code> to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into <code>eventmanager.xml</code></p>
+</div>
+<div class="paragraph">
+<p>Step 3. The user/admin executes <code>replyComment 1 L/1 C/Athletic attire</code> to reply the comment in step 2. <code>ReplyCommentCommand</code> command obtains the comment section from <code>eventmanager.xml</code> calls <code>CommentFacade</code> to reply comment with "Athletic attire", into the comment section and stores the comment section into <code>eventmanager.xml</code></p>
+</div>
+<div class="paragraph">
+<p>Step 4. The admin executes <code>deleteComment 1 L/1</code> to delete a comment at index 1, line 1 of comment section. <code>DeleteCommentCommand</code> command obtains the comment section from <code>eventmanager.xml</code> calls <code>CommentFacade</code> to delete "Athletic attire" from the comment section and stores the comment section into <code>eventmanager.xml</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If a command&#8217;s syntax is wrong, the application will prompt the user to try again and suggest a relevant format to follow.</p>
+</li>
+<li>
+<p>In the case a false indexed event is not present, the functions will return an invalid index message.</p>
+</li>
+<li>
+<p>In the case a false comment section line is given, the functions will return an invalid line message.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the addComment operation works:
+image::addCommentSequenceDiagram.png[width="800"]
+The <code>replyComment</code> and <code>deleteComment</code> command does similar methods and need not be elaborated.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the user uses the <code>find</code> command, the following functions will follow the indexing of the <code>find</code> command.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-comment-section-is-stored"><a class="link" href="#aspect-how-comment-section-is-stored">Aspect: How comment section is stored</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Comment section stored in a single field in <code>eventmanager.xml</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to parse because one field is used for comment section.</p>
+</li>
+<li>
+<p>Cons: If a developer wants to manipulate specific comments through eventmanager.xml file, there is no functions created for it.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store each comment as a seperate field and extract each comment individually.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No HTML tags will be stored in the field.</p>
+</li>
+<li>
+<p>Cons: New methods will need to be implemented to make many fields for comments.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-data-structure-to-support-the-comment-function-commands"><a class="link" href="#aspect-data-structure-to-support-the-comment-function-commands">Aspect: Data structure to support the comment function commands</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Vector is used to store the comment section.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: A simple data structure that has vector.add() and vector.delete() to help add comments easily.</p>
+</li>
+<li>
+<p>Cons: Additional code is needed to parse the comment section into a vector.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> An arrayList or List</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Library functions can help parse the comment section into the arrayList.</p>
+</li>
+<li>
+<p>Cons: More code is needed to simply insert or delete elements inside the data structure.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">5. PROJECT: PowerPointLabs</a></h2>
+<div class="sectionbody">
+<hr>
+<div class="paragraph">
+<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 11:32:58 UTC</div></div></div></body></html>
