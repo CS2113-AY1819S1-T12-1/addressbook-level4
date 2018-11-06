@@ -55,8 +55,8 @@ public class CommandTestUtil {
     public static final String VALID_VENUE_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_DATETIME_AMY = "17/8/2018 21:15";
     public static final String VALID_DATETIME_BOB = "7/7/2017 7:07";
-    public static final String VALID_STATUS_AMY = "NULL";
-    public static final String VALID_STATUS_BOB = "NULL";
+    public static final String VALID_STATUS_AMY = "COMPLETED";
+    public static final String VALID_STATUS_BOB = "COMPLETED";
     public static final String VALID_COMMENT_AMY = "{span}Comment Section{/span}{ol}{/ol}";
     public static final String VALID_COMMENT_BOB = "{span}Comment Section{/span}{ol}{/ol}";
     public static final String VALID_TAG_HUSBAND = "husband";
