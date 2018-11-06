@@ -28,6 +28,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SignupCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnregisterCommand;
+import seedu.address.logic.commands.UpdateStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -108,6 +109,9 @@ public class EventManagerParser {
 
         case UnregisterCommand.COMMAND_WORD:
             return new UnregisterCommandParser().parse(arguments);
+
+        case UpdateStatusCommand.COMMAND_WORD:
+            return new UpdateStatusCommand();
 
         case AddCommentCommand.COMMAND_WORD:
             return new AddCommentCommandParser().parse(arguments);
