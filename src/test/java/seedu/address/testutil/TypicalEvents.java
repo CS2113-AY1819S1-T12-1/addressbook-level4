@@ -121,7 +121,7 @@ public class TypicalEvents {
     public static final Event AMY =
             new EventBuilder().withName(VALID_NAME_AMY).withContact(VALID_CONTACT_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withVenue(VALID_VENUE_AMY).withDateTime(VALID_DATETIME_AMY)
-            .withStatus(VALID_STATUS_AMY).withComment(VALID_COMMENT_AMY).withTags(VALID_TAG_FRIEND)
+            .withComment(VALID_COMMENT_AMY).withStatus(VALID_STATUS_AMY).withTags(VALID_TAG_FRIEND)
             .withAttendees(VALID_ATTENDEE_TED).build();
     public static final Event BOB =
             new EventBuilder().withName(VALID_NAME_BOB).withContact(VALID_CONTACT_BOB).withPhone(VALID_PHONE_BOB)

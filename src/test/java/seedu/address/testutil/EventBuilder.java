@@ -28,7 +28,6 @@ public class EventBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_VENUE = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DATETIME = "31/12/2018 12:00";
-    public static final String DEFAULT_STATUS = "UPCOMING";
     public static final String DEFAULT_COMMENT = "{span}Comment Section{/span}{ol}{/ol}";
 
     private Name name;
@@ -49,7 +48,7 @@ public class EventBuilder {
         email = new Email(DEFAULT_EMAIL);
         venue = new Venue(DEFAULT_VENUE);
         datetime = new DateTime(DEFAULT_DATETIME);
-        status = new Status(DEFAULT_STATUS);
+        status = new Status(Status.setStatus(datetime));
         comment = new Comment(DEFAULT_COMMENT);
         tags = new HashSet<>();
         attendees = new HashSet<>();
