@@ -51,6 +51,7 @@ class ReplyCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
+                .withStatus("COMPLETED")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{li} (REPLY) Gerald : Hi{/li}{/ol}")
                 .withTags("friends")
                 .withAttendees("Scarlet Witch").build();
@@ -87,6 +88,7 @@ class ReplyCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
+                .withStatus("COMPLETED")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{li} (REPLY) Gerald : Hi{/li}{/ol}")
                 .withTags("friends")
                 .withAttendees("Scarlet Witch").build();
@@ -136,6 +138,7 @@ class ReplyCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
+                .withStatus("COMPLETED")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{li}comment 2{/li}"
                         + "{li}comment 3{li}{/ol}")
                 .withTags("friends")
@@ -166,6 +169,7 @@ class ReplyCommentCommandTest {
                 .withEmail("cornelia@example.com")
                 .withVenue("10th street")
                 .withDateTime("22/10/2017 9:30")
+                .withStatus("COMPLETED")
                 .withComment("{span}Comment Section{/span}{ol}{li}admin : Hi{/li}{/ol}")
                 .withTags("friends")
                 .withAttendees("Scarlet Witch").build();

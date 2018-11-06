@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
-        Status status = new Status("NULL");
+        Status status = new Status(Status.setStatus(dateTime));
         Comment comment = new Comment("{span}Comment Section{/span}{ol}{/ol}");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Attendee> attendeeSet = new HashSet<>();

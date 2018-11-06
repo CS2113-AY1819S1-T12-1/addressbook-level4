@@ -8,7 +8,7 @@
         <email>alice@example.com</email>
         <venue>123, Jurong West Ave 6, #08-111</venue>
         <dateTime>10/10/2010 10:10</dateTime>
-        <status>NULL</status>
+        <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>friends</tagged>
         <attending>Peter Parker</attending>
@@ -22,7 +22,7 @@
         <email>pauline@example.com</email>
         <venue>4th street</venue>
         <dateTime>10/10/2010 10:10</dateTime>
-        <status>NULL</status>
+        <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
 

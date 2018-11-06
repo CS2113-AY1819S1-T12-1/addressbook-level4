@@ -8,7 +8,7 @@
         <email>alice@example.com</email>
         <venue>123, Jurong West Ave 6, #08-111</venue>
         <dateTime>22/10/2018 9:30</dateTime>
-        <status>NULL</status>
+        <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>friends</tagged>
         <attending>Peter Parker</attending>
@@ -20,7 +20,7 @@
         <email>johnd@example.com</email>
         <venue>311, Clementi Ave 2, #02-25</venue>
         <dateTime >2/10/2018 19:30</dateTime>
-        <status>NULL</status>
+        <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
@@ -33,7 +33,7 @@
         <email>heinz@example.com</email>
         <venue>wall street</venue>
         <dateTime>22/1/2018 9:30</dateTime>
-        <status>NULL</status>
+        <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
@@ -43,7 +43,7 @@
         <email>cornelia@example.com</email>
         <venue>10th street</venue>
         <dateTime>22/10/2017 9:30</dateTime>
-        <status>NULL</status>
+        <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
         <tagged>friends</tagged>
         <attending>Scarlet Witch</attending>
@@ -55,7 +55,7 @@
         <email>werner@example.com</email>
         <venue>michegan ave</venue>
         <dateTime>12/8/2018 17:30</dateTime>
-        <status>NULL</status>
+        <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
@@ -65,7 +65,7 @@
         <email>lydia@example.com</email>
         <venue>little tokyo</venue>
         <dateTime>22/10/2018 15:15</dateTime>
-        <status>NULL</status>
+        <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
     <events>
@@ -75,7 +75,7 @@
         <email>anna@example.com</email>
         <venue>4th street</venue>
         <dateTime>30/10/2018 14:30</dateTime>
-        <status>NULL</status>
+        <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
 </eventmanager>

@@ -34,7 +34,6 @@ public class StatusTest {
 
         // valid status
         assertTrue(Status.isValidStatus("UPCOMING")); // UPCOMING
-        assertTrue(Status.isValidStatus("ONGOING")); // ONGOING
         assertTrue(Status.isValidStatus("COMPLETED")); // COMPLETED
         assertTrue(Status.isValidStatus("NULL")); // NULL
     }

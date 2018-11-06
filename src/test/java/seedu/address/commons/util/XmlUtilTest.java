@@ -43,7 +43,7 @@ public class XmlUtilTest {
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_VENUE = "4th street";
     private static final String VALID_DATETIME  = "10/10/2010 10:10";
-    private static final String VALID_STATUS = "NULL";
+    private static final String VALID_STATUS = "COMPLETED";
     private static final String VALID_COMMENT = "{span}Comment Section{/span}{ol}{/ol}";
     private static final List<XmlAdaptedTag> VALID_TAGS =
             Collections.singletonList(new XmlAdaptedTag("friends"));

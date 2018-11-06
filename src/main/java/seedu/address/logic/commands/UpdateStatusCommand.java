@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -54,7 +53,7 @@ public class UpdateStatusCommand extends Command {
             model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
             try {
-                Thread.sleep(20);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -77,34 +76,12 @@ public class UpdateStatusCommand extends Command {
         Email updatedEmail = eventToUpdate.getEmail();
         Venue updatedVenue = eventToUpdate.getVenue();
         DateTime updatedDateTime = eventToUpdate.getDateTime();
-        Status updatedStatus = new Status(setStatus(updatedDateTime));
+        Status updatedStatus = new Status(Status.setStatus(updatedDateTime));
         Comment updatedComment = eventToUpdate.getComment();
         Set<Tag> updatedTags = eventToUpdate.getTags();
         Set<Attendee> updatedAttendees = eventToUpdate.getAttendance();
 
         return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedDateTime,
                 updatedStatus, updatedComment, updatedTags, updatedAttendees);
-    }
-
-    /**
-     * Gets the status of the event based on current date {@code Date()}.
-     *
-     * @param datetime Datetime of event.
-     */
-    private static final String setStatus(DateTime datetime) {
-        requireNonNull(datetime);
-        Date currentDate = new Date();
-        Date eventDate = datetime.dateTime;
-        String newStatus;
-
-        if (eventDate.before(currentDate)) {
-            newStatus = "COMPLETED";
-        } else if (eventDate.after(currentDate)) {
-            newStatus = "UPCOMING";
-        } else {
-            newStatus = "NULL";
-        }
-
-        return newStatus;
     }
 }

@@ -8,7 +8,7 @@
         <email isPrivate="false">hans@exam!32ple</email>
         <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
-        <status isPrivate="false">NULL</status>
+        <status isPrivate="false">COMPLETED</status>
         <comment isPrivate="false">{span}Comment Section{/span}{ol}{/ol}</comment>
     </events>
 </eventmanager>
