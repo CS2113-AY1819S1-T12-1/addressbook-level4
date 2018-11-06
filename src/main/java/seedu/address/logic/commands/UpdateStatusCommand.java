@@ -48,11 +48,16 @@ public class UpdateStatusCommand extends Command {
 
         for (Event event : lastShownList) {
             Event updatedEvent = createUpdatedStatusEvent(event);
-            //Index targetIndex = Index.fromZeroBased(index++);
+            Index targetIndex = Index.fromZeroBased(index++);
 
             model.updateEvent(event, updatedEvent);
             model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-            //EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         return new CommandResult(MESSAGE_SUCCESS);
