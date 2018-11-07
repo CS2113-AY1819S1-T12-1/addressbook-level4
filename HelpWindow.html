@@ -244,9 +244,9 @@ User: Shows User commands</p>
 <div class="sect2">
 <h3 id="adding-a-event-code-add-code"><a class="link" href="#adding-a-event-code-add-code">3.5. Adding a event: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Admin: Adds an event to tthe Event Manager<br>
+<p>Admin: Adds an event to the Event Manager<br>
 Adds a event to the Event Manager<br>
-Format: <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL v/VENUE [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -266,10 +266,10 @@ An event can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/Com Sci Workshop c/John Doe cp/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
+<p><code>add n/Com Sci Workshop c/John Doe cp/98765432 e/johnd@example.com p/9876543 v/John street, block 123, #01-01</code> d/20/10/2017 10:30</p>
 </li>
 <li>
-<p><code>add n/Sports Day c/Betsy Crow t/Sports e/betsycrowe@example.com a/COM2 #02-01 p/1234567 t/leisure</code></p>
+<p><code>add n/Sports Day c/Betsy Crow t/Sports e/betsycrowe@example.com v/COM2 #02-01 p/1234567 d/20/10/2017 10:30 t/leisure</code></p>
 </li>
 </ul>
 </div>
@@ -285,7 +285,7 @@ Format: <code>list</code></p>
 <h3 id="editing-a-event-code-edit-code"><a class="link" href="#editing-a-event-code-edit-code">3.7. Editing a event : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Admin: Edits an existing event in the Event Manager.<br>
-Format: <code>edit INDEX [n/EVENT] [c/CONTACT NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>edit INDEX [n/EVENT] [c/CONTACT NAME] [p/PHONE] [e/EMAIL] [v/VENUE] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -371,22 +371,25 @@ Format: <code>find PREFIX/KEYWORD [MORE_PREFIX][MORE_KEYWORDS]</code><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>sports</code> will match <code>Sports</code></p>
+<p>The search is case insensitive. e.g <code>sports</code> will match <code>Sports</code>.</p>
 </li>
 <li>
-<p>The order of the keywords does not matter. e.g. <code>Sports Day</code> will match <code>Day Sports</code></p>
+<p>The order of the keywords does not matter. e.g. <code>Sports Day</code> will match <code>Day Sports</code>.</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Sport</code> will not match <code>Sports</code></p>
+<p>Only full words will be matched e.g. <code>Sport</code> will not match <code>Sports</code>.</p>
 </li>
 <li>
-<p>Events matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Sports Day</code> will return <code>Sports games</code>, <code>Good Day</code></p>
+<p>Events matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Sports Day</code> will return <code>Sports games</code>, <code>Good Day</code>.</p>
 </li>
 <li>
-<p>Command default prefix (k) will allow to search in any field of an event, while other specific prefix will result in event that must have that keyword in the indicate field</p>
+<p>Command default prefix (k) will allow to search in any field of an event, while other specific prefix will result in event that must have that keyword in the indicate field.</p>
 </li>
 <li>
 <p>At least one of the available prefix must be presented.</p>
+</li>
+<li>
+<p>When using different prefixes together, <em>logic AND operator</em> is used. This mean if there is one prefix or morev in the combination that don&#8217;t have any follow keywords, results search will always be zero.</p>
 </li>
 </ul>
 </div>
@@ -425,7 +428,7 @@ Return any event having date <code>12/01/2018</code> or time <code>04:30</code><
 </li>
 <li>
 <p><code>find k/Day n/Sports d/12/01/2018
-Return any event having keyword `day</code> with that event name having <code>Sports</code> and with that event date having <code>12/01/2018</code></p>
+Return any event having keyword `day</code> with name must have <code>Sports</code> and with date must have <code>12/01/2018</code></p>
 </li>
 </ul>
 </div>
@@ -883,7 +886,7 @@ Format: <code>export filename</code></p>
 <ul>
 <li>
 <p><code>export myCalendar</code><br>
-export the iCalendar file with name myCalendar to <strong>src/data</strong> folder</p>
+export the iCalendar file with name myCalendar to your <strong>src/data</strong> folder</p>
 </li>
 </ul>
 </div>
@@ -947,7 +950,7 @@ e.g. <code>signup n/Gerald Chua p/password12345 c/password12345</code></p>
 e.g. <code>login n/Gerald Chua p/password12345</code></p>
 </li>
 <li>
-<p><strong>Add</strong> <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Add</strong> <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL v/VENUE [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/Sports Day c/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
 </li>
 <li>
@@ -958,7 +961,7 @@ e.g. <code>add n/Sports Day c/James Ho p/22224444 e/jamesho@example.com a/123, C
 e.g. <code>delete 3</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/EVENT] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Edit</strong> : <code>edit INDEX [n/EVENT] [p/PHONE_NUMBER] [e/EMAIL] [v/VENUE] [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>edit 2 n/Good Day e/jameslee@example.com</code></p>
 </li>
 <li>
@@ -1019,4 +1022,4 @@ e.g. <code>export BobCalendar</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 12:27:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 16:05:27 UTC</div></div></div></body></html>

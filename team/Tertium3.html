@@ -244,22 +244,25 @@ Format: <code>find PREFIX/KEYWORD [MORE_PREFIX][MORE_KEYWORDS]</code><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>sports</code> will match <code>Sports</code></p>
+<p>The search is case insensitive. e.g <code>sports</code> will match <code>Sports</code>.</p>
 </li>
 <li>
-<p>The order of the keywords does not matter. e.g. <code>Sports Day</code> will match <code>Day Sports</code></p>
+<p>The order of the keywords does not matter. e.g. <code>Sports Day</code> will match <code>Day Sports</code>.</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Sport</code> will not match <code>Sports</code></p>
+<p>Only full words will be matched e.g. <code>Sport</code> will not match <code>Sports</code>.</p>
 </li>
 <li>
-<p>Events matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Sports Day</code> will return <code>Sports games</code>, <code>Good Day</code></p>
+<p>Events matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Sports Day</code> will return <code>Sports games</code>, <code>Good Day</code>.</p>
 </li>
 <li>
-<p>Command default prefix (k) will allow to search in any field of an event, while other specific prefix will result in event that must have that keyword in the indicate field</p>
+<p>Command default prefix (k) will allow to search in any field of an event, while other specific prefix will result in event that must have that keyword in the indicate field.</p>
 </li>
 <li>
 <p>At least one of the available prefix must be presented.</p>
+</li>
+<li>
+<p>When using different prefixes together, <em>logic AND operator</em> is used. This mean if there is one prefix or morev in the combination that don&#8217;t have any follow keywords, results search will always be zero.</p>
 </li>
 </ul>
 </div>
@@ -298,7 +301,7 @@ Return any event having date <code>12/01/2018</code> or time <code>04:30</code><
 </li>
 <li>
 <p><code>find k/Day n/Sports d/12/01/2018
-Return any event having keyword `day</code> with that event name having <code>Sports</code> and with that event date having <code>12/01/2018</code></p>
+Return any event having keyword `day</code> with name must have <code>Sports</code> and with date must have <code>12/01/2018</code></p>
 </li>
 </ul>
 </div>
@@ -316,7 +319,7 @@ Format: <code>export filename</code></p>
 <ul>
 <li>
 <p><code>export myCalendar</code><br>
-export the iCalendar file with name myCalendar to <strong>src/data</strong> folder</p>
+export the iCalendar file with name myCalendar to your <strong>src/data</strong> folder</p>
 </li>
 </ul>
 </div>
@@ -439,7 +442,8 @@ e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If there are more than 1 prefix of the same type, for example, <code>find n/new n/dark n/meeting</code>, this will be automatically combined together, which means this command will be assumed to be the same as <code>find n/new dark meeting</code>
+If there are more than 1 prefix of the same type, for example, <code>find n/new n/dark n/meeting</code>, this will be automatically combined together, which means this command will be assumed to be the same as <code>find n/new dark meeting</code><br>
+Current version implementation using logic AND operator for different prefixes choice.
 </td>
 </tr>
 </table>
@@ -473,7 +477,7 @@ If there are more than 1 prefix of the same type, for example, <code>find n/new 
 <p>Search for contained or exact keywords option</p>
 </li>
 <li>
-<p>Search can include option</p>
+<p>Search with  both <code>logic AND and OR operator</code> with different prefixes</p>
 </li>
 <li>
 <p>Search for time range</p>
@@ -561,4 +565,4 @@ All method are written in the <code>ExportCalendarCommand</code> class.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 12:27:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 16:05:27 UTC</div></div></div></body></html>
