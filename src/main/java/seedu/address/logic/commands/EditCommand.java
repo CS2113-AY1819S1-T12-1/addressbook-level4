@@ -125,13 +125,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
-        Status eventStatus = editEventDescriptor.getStatus().orElse(new Status(Status.setStatus(updatedDateTime)));
+        Status updatedStatus = new Status(Status.setStatus(updatedDateTime));
         Comment updatedComment = editEventDescriptor.getComment().orElse(eventToEdit.getComment());
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
         Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendance());
 
         return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedDateTime,
-                eventStatus, updatedComment, updatedTags, updatedAttendees);
+                updatedStatus, updatedComment, updatedTags, updatedAttendees);
     }
 
     @Override
@@ -192,7 +192,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, contact, phone, email, venue, dateTime, status, comment, tags,
+            return CollectionUtil.isAnyNonNull(name, contact, phone, email, venue, dateTime, comment, tags,
                     attendees);
         }
 
@@ -316,10 +316,8 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getVenue().equals(e.getVenue())
                     && getDateTime().equals(e.getDateTime())
-                    && getStatus().equals(e.getStatus())
                     && getComment().equals(e.getComment())
-                    && getTags().equals(e.getTags())
-                    && getAttendees().equals(e.getAttendees());
+                    && getTags().equals(e.getTags());
         }
     }
 }

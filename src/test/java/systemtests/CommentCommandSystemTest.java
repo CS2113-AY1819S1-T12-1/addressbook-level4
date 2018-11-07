@@ -41,10 +41,10 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
         Model model = getModel();
 
         //Login
-        User toLogin = new UserBuilder().withUsername(VALID_ADMIN_USERNAME).withPassword(VALID_ADMIN_PASSWORD).build();
+        //User toLogin = new UserBuilder().withUsername(VALID_ADMIN_USERNAME).withPassword(VALID_ADMIN_PASSWORD).build();
         String command = "   " + LoginCommand.COMMAND_WORD + "  "
                 + ADMIN_USERNAME_DESC + "  " + ADMIN_PASSWORD_DESC + "  ";
-        assertCommandSuccess(command, toLogin);
+        //assertCommandSuccess(command, toLogin);
 
         //Add a comment
         Index index = INDEX_FIRST_EVENT;

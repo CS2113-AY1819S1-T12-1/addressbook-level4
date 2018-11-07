@@ -49,11 +49,11 @@ public class UpdateStatusCommand extends Command {
             model.updateEvent(updatingEvent, updatedEvent);
             model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-            try {
+            /*try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
         return new CommandResult(MESSAGE_SUCCESS);

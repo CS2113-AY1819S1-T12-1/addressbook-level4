@@ -13,6 +13,7 @@ import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Status;
 import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 
@@ -42,6 +43,7 @@ public class EditEventDescriptorBuilder {
         descriptor.setEmail(event.getEmail());
         descriptor.setVenue(event.getVenue());
         descriptor.setDate(event.getDateTime());
+        descriptor.setStatus(event.getStatus());
         descriptor.setComment(event.getComment());
         descriptor.setTags(event.getTags());
         descriptor.setAttendees(event.getAttendance());

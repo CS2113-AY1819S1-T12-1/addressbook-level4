@@ -172,7 +172,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parse a{@code String datetimeAsString into an {@code DateTime}}
+     * Parse a {@code String datetimeAsString into an {@code DateTime}}
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code datetimeAsString} is invalid.

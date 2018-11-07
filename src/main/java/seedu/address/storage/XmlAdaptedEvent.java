@@ -208,7 +208,7 @@ public class XmlAdaptedEvent {
                 && Objects.equals(email, otherEvent.email)
                 && Objects.equals(venue, otherEvent.venue)
                 && Objects.equals(dateTime, otherEvent.dateTime)
-                && Objects.equals(status, otherEvent.status)
+                //&& Objects.equals(status, otherEvent.status) TODO
                 && Objects.equals(comment, otherEvent.comment)
                 && tagged.equals(otherEvent.tagged)
                 && attending.equals(otherEvent.attending);
