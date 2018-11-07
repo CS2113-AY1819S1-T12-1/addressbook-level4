@@ -29,16 +29,17 @@
 <li><a href="#clearing-all-entries-code-clear-code">3.14. Clearing all entries : <code>clear</code></a></li>
 <li><a href="#register-for-event-code-register-code">3.15. Register for event : <code>register</code></a></li>
 <li><a href="#remove-registration-from-event-code-unregister-code">3.16. Remove registration from event : <code>unregister</code></a></li>
-<li><a href="#set-reminders-code-setreminder-code-proposed">3.17. Set reminders : <code>setReminder</code> [Proposed]</a></li>
-<li><a href="#clear-reminders-code-removereminder-code-proposed">3.18. Clear reminders : <code>removeReminder</code> [Proposed]</a></li>
-<li><a href="#show-reminders-code-showreminders-code-proposed">3.19. show reminders : <code>showReminders</code> [Proposed]</a></li>
-<li><a href="#add-comment-code-addcomment-code">3.20. Add Comment : <code>addComment</code></a></li>
-<li><a href="#reply-comment-code-replycomment-code">3.21. Reply Comment : <code>replyComment</code></a></li>
-<li><a href="#delete-comment-code-deletecomment-code">3.22. Delete Comment : <code>deleteComment</code></a></li>
-<li><a href="#export-calendar-command-code-export-code">3.23. Export Calendar Command: <code>export</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.24. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.25. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.26. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#list-all-registered-events-code-attending-code">3.17. List all registered events : <code>attending</code></a></li>
+<li><a href="#set-reminders-code-setreminder-code-proposed">3.18. Set reminders : <code>setReminder</code> [Proposed]</a></li>
+<li><a href="#clear-reminders-code-removereminder-code-proposed">3.19. Clear reminders : <code>removeReminder</code> [Proposed]</a></li>
+<li><a href="#show-reminders-code-showreminders-code-proposed">3.20. show reminders : <code>showReminders</code> [Proposed]</a></li>
+<li><a href="#add-comment-code-addcomment-code">3.21. Add Comment : <code>addComment</code></a></li>
+<li><a href="#reply-comment-code-replycomment-code">3.22. Reply Comment : <code>replyComment</code></a></li>
+<li><a href="#delete-comment-code-deletecomment-code">3.23. Delete Comment : <code>deleteComment</code></a></li>
+<li><a href="#export-calendar-command-code-export-code">3.24. Export Calendar Command: <code>export</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.25. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.26. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -653,19 +654,26 @@ Format: <code>unregister INDEX</code></p>
 <ul>
 <li>
 <p><code>list</code><br>
-<code>register 1</code><br>
+<code>unregister 1</code><br>
 Unregisters user from the 1st event of the Event Manager.</p>
 </li>
 <li>
 <p><code>find Sports</code><br>
-<code>register 2</code><br>
+<code>unregister 2</code><br>
 Unregisters User from the 2nd event in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="set-reminders-code-setreminder-code-proposed"><a class="link" href="#set-reminders-code-setreminder-code-proposed">3.17. Set reminders : <code>setReminder</code> [Proposed]</a></h3>
+<h3 id="list-all-registered-events-code-attending-code"><a class="link" href="#list-all-registered-events-code-attending-code">3.17. List all registered events : <code>attending</code></a></h3>
+<div class="paragraph">
+<p>User: Lists all events that the user has registered for.<br>
+Format: <code>attending</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="set-reminders-code-setreminder-code-proposed"><a class="link" href="#set-reminders-code-setreminder-code-proposed">3.18. Set reminders : <code>setReminder</code> [Proposed]</a></h3>
 <div class="paragraph">
 <p>Admin/User: Sets a reminder for the event identified by the index number used in the displayed event list. Reminder will alert the user 1 hour before the commencement time of the event.<br>
 Format: <code>setReminder INDEX</code></p>
@@ -687,7 +695,7 @@ Sets a reminder for user for event 5</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clear-reminders-code-removereminder-code-proposed"><a class="link" href="#clear-reminders-code-removereminder-code-proposed">3.18. Clear reminders : <code>removeReminder</code> [Proposed]</a></h3>
+<h3 id="clear-reminders-code-removereminder-code-proposed"><a class="link" href="#clear-reminders-code-removereminder-code-proposed">3.19. Clear reminders : <code>removeReminder</code> [Proposed]</a></h3>
 <div class="paragraph">
 <p>Admin/User: Removes the reminder for the event identified by the index number used in the displayed event list.<br>
 Format: <code>removeReminder INDEX</code></p>
@@ -709,14 +717,14 @@ Removes a reminder for user for event 5</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="show-reminders-code-showreminders-code-proposed"><a class="link" href="#show-reminders-code-showreminders-code-proposed">3.19. show reminders : <code>showReminders</code> [Proposed]</a></h3>
+<h3 id="show-reminders-code-showreminders-code-proposed"><a class="link" href="#show-reminders-code-showreminders-code-proposed">3.20. show reminders : <code>showReminders</code> [Proposed]</a></h3>
 <div class="paragraph">
 <p>Admin/User: Show all events with reminders set<br>
 Format: <code>showReminders</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-comment-code-addcomment-code"><a class="link" href="#add-comment-code-addcomment-code">3.20. Add Comment : <code>addComment</code></a></h3>
+<h3 id="add-comment-code-addcomment-code"><a class="link" href="#add-comment-code-addcomment-code">3.21. Add Comment : <code>addComment</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Add comment into event comment section with the username (when you are logged in)<br>
 Format: <code>addComment INDEX C/STRING</code></p>
@@ -765,7 +773,7 @@ Adds "What is the attire to wear for this event?" into event 5 comment section w
 </div>
 </div>
 <div class="sect2">
-<h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.21. Reply Comment : <code>replyComment</code></a></h3>
+<h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.22. Reply Comment : <code>replyComment</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Replies a comment with the username (when you are logged in) <br>
 Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
@@ -817,7 +825,7 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-comment-code-deletecomment-code"><a class="link" href="#delete-comment-code-deletecomment-code">3.22. Delete Comment : <code>deleteComment</code></a></h3>
+<h3 id="delete-comment-code-deletecomment-code"><a class="link" href="#delete-comment-code-deletecomment-code">3.23. Delete Comment : <code>deleteComment</code></a></h3>
 <div class="paragraph">
 <p>Admin: Deletes a comment (when you are logged in as admin)<br>
 Format: <code>deleteComment INDEX L/LINE</code></p>
@@ -863,7 +871,7 @@ Deletes comment of event 2 at line 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-calendar-command-code-export-code"><a class="link" href="#export-calendar-command-code-export-code">3.23. Export Calendar Command: <code>export</code></a></h3>
+<h3 id="export-calendar-command-code-export-code"><a class="link" href="#export-calendar-command-code-export-code">3.24. Export Calendar Command: <code>export</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: export current user/admin registered/host events to an iCalendar file to use with other calendar application<br>
 Format: <code>export filename</code></p>
@@ -895,21 +903,21 @@ export the iCalendar file with name myCalendar to <strong>src/data</strong> fold
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.24. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.25. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.25. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.26. Saving the data</a></h3>
 <div class="paragraph">
 <p>Event Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.26. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -1011,4 +1019,4 @@ e.g. <code>export BobCalendar</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 07:12:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 09:04:18 UTC</div></div></div></body></html>
