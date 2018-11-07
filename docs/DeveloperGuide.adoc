@@ -254,7 +254,8 @@ Additionally, a `JsonUserStorage` class has been created to handle the reading, 
 
 Given below is an example usage scenario and how authentication behaves at each step.
 
-Step 1. The user launches the application for the first time. The `JsonUserStorage` class will create a default JSON file in `data/users.json` that stores the basic `admin` account information.
+|===
+|Step 1. The user launches the application for the first time. The `JsonUserStorage` class will create a default JSON file in `data/users.json` that stores the basic `admin` account information.
 
 Step 2. The user has the option to create a new account using the command `signup u/USERNAME p/PASSWORD`. This will trigger the method `createUser(user)` in the `Model Manager` class, which is linked to `UserAccount`.
 
@@ -269,6 +270,7 @@ Step 6. The `currentUser` in the `Command` class will then be set and the login 
 Step 7. After authentication, the user can now start using the application.
 
 Step 8. The user can choose to log out of the application as well with the `logout` command. This command sets the login flag to false and clears `currentUser`.
+|===
 
 The sequence diagram below describes the steps elaborated above.
 
@@ -428,8 +430,9 @@ Step 4. The admin executes `deleteComment 1 L/1` to delete a comment at index 1,
 * In the case a false comment section line is given, the functions will return an invalid line message.
 ====
 
-The following sequence diagram shows how the addComment operation works:
+The following sequence diagram shows how the AddCommentCommand operation works:
 
+.Sequence Diagram for AddCommentCommand
 image::addCommentSequenceDiagram.png[width="800"]
 
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
@@ -456,6 +459,7 @@ If the user uses the `find` command, the following functions will follow the ind
 * **Alternative 2:** An arrayList or List
 ** Pros: Library functions can help parse the comment section into the arrayList.
 ** Cons: More code is needed to simply insert or delete elements inside the data structure.
+
 // end::comments[]
 
 // tag::rsvp[]
@@ -510,10 +514,6 @@ image::registerSD.png[width="800"]
 * **Alternative 2:** Attendance stored in sorted order.
 ** Pros: No need to sort each time an event is reloaded.
 ** Cons: More complexity for inserting in correct location.
-
-==== Future Improvements
-===== Adding `attending` command.
-* Allows users to view all events they have registered for.
 // end::rsvp[]
 
 // tag::sorting[]

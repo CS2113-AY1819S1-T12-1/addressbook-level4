@@ -217,5 +217,10 @@ public class SignupCommandTest {
         public boolean getLoginStatus() {
             return isLogged;
         }
+
+        @Override
+        public Username getUsername() {
+            return new Username("admin");
+        }
     }
 }

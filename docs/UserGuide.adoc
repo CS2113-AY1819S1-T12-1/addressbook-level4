@@ -334,11 +334,16 @@ Format: `unregister INDEX`
 Examples:
 
 * `list` +
-`register 1` +
+`unregister 1` +
 Unregisters user from the 1st event of the Event Manager.
 * `find Sports` +
-`register 2` +
+`unregister 2` +
 Unregisters User from the 2nd event in the results of the `find` command.
+
+=== List all registered events : `attending`
+
+User: Lists all events that the user has registered for. +
+Format: `attending`
 // end::rsvp[]
 
 === Set reminders : `setReminder` [Proposed]
@@ -370,7 +375,10 @@ Removes a reminder for user for event 5
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
 
+
+//tag::comment[]
 === Add Comment : `addComment`
+
 
 Admin/User: Add comment into event comment section with the username (when you are logged in) +
 Format: `addComment INDEX C/STRING`
@@ -390,7 +398,11 @@ Adds "What is the attire to wear for the event?" into event 1 comment section wi
 * `addComment 5 C/What is the attire to wear for this event?` +
 Adds "What is the attire to wear for this event?" into event 5 comment section with username
 
-image:addComment.png[width="790"]
+.Adding a comment
+image::addComment.png[width="600"]
+
+
+
 
 === Reply Comment : `replyComment`
 
@@ -412,7 +424,8 @@ Adds the comment "What is the attire to wear for the event?" into event 1 commen
 * `replyComment 2 L/2 C/What is the attire to wear for the event?` +
 Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2 with username
 
-image:replyComment.png[width="790"]
+.Replying a comment
+image::replyComment.png[width="790"]
 
 === Delete Comment : `deleteComment`
 
@@ -434,7 +447,9 @@ Deletes comment of event 1 at line 5
 * `deleteComment 2 L/2` +
 Deletes comment of event 2 at line 2
 
-image:deleteComment.png[width="790"]
+.Deleting a comment
+image::deleteComment.png[width="790"]
+//end::comment[]
 
 // tag::exportcalendar[]
 === Export Calendar Command: `export`

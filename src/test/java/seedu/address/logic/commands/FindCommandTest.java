@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -203,7 +204,7 @@ public class FindCommandTest {
         //Add space in case of missing
         userInput = " " + userInput;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_KEYWORD, PREFIX_NAME,
-                PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG);
+                PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG, PREFIX_ATTENDEE);
 
         Map<Prefix, List<String> > keywordsMap = new HashMap<>();
         for (Prefix prefix : PREFIXES) {

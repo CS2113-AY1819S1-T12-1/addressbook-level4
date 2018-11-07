@@ -232,5 +232,10 @@ public class LoginCommandTest {
         public boolean getLoginStatus() {
             return isLogged;
         }
+
+        @Override
+        public Username getUsername() {
+            return new Username("admin");
+        }
     }
 }

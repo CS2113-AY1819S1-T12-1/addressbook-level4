@@ -1,0 +1,145 @@
+= Gerald Chua Deng Xiang - Project Portfolio
+---
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:site-section: Geraldcdx
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:xrefstyle: full
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:warning-caption: :warning:
+endif::[]
+:repoURL: https://github.com/CS2113-AY1819S1-T12-1/main
+---
+
+[big RED]#PROJECT: Event Manager#
+
+== Overview
+
+[.result]
+
+[loweralpha]
+. *Introduction* +
+This portfolio is a record of my contribution towards this project. It highlights the developed features and it’s detailed implementation to show technical competence in software engineering, and soft skills such as stellar writing for documentation. This will be further elaborated in the “Summary of Contributions”, “Contributions to User Guide” and “Contributions to Developer Guide” below.
+
+. *Product Summary* +
+Event Manager (EM) is a desktop application that a Residential College (RC) in National University of Singapore (NUS) can use to manage events in RCs. Using the Command Line Interface (CLI), the Head of Events of an RC can promote events effectively to RC’s residents. The detailed features will be listed in the “List of Main Features”.
+
+. *Problem Statement* +
+Currently, events in RCs are promoted through multiple groups in Whatsapp or Telegram and this is an inefficient process which wastes time and effort for residents and event organisers.
+
+. *Our Solution* +
+My team developed the EM so that residents can have a centralised event platform to host a concise list of detailed events for RC residents to RSVP and be reminded when the event is drawing closer. Further, this application will better allow the organisers to prepare for the event.
+
+. *List of Main Features*
+
+[cols="1,2,3000000", options="header"]
+|============================
+|no|Feature|Description
+|1
+|Authentication
+|The Head of Events can get requests for residents to add events as an Admin.
+ Whereas, residents can sign up as Users and browse through events.
+
+|2
+|Find
+|Both Admin and Users can search for events based on keywords. E.g. If the user wants to find a sporting event, he can type find sports and the relevant events will be displayed.
+
+|3
+|RSVP
+|Both Admin and Users can indicate their attendance for events.
+
+|4
+|Reminders
+|Both Admin and Users can set reminders, and these reminders will alert them when the event is drawing near.
+
+|5
+|Comment Section
+|Both Admin and Users have a comments section for each event. Users can add a comment or reply to comments, whereas, Admin has all these functionalities and able to delete inappropriate comments.
+
+
+|6
+| CRUD of Events
+|The Admin can create, reply, update and delete(CRUD) events through relevant commands.
+
+|7
+|Undo and Redo
+|Both Admin and Users can undo or redo any command that was committed previously.
+
+|8
+|Sorting
+|Events are sorted autonomously based on date and time; Events that are commencing earlier will be at the top of the event list.
+
+|9
+|Export
+|Admin and users can export the list of events as a calendar to their local directory
+|============================
+
+== Summary of contributions
+
+[loweralpha]
+. *Major enhancement*: A comment section for users to interact and clarify doubts on the events
+[lowerroman]
+.. *Functionality* +
+ Admin can add, reply, delete and reset comments. Whereas, Users can only add and reply comments. The relevant commands can be typed out in the CLI to achieve the previous statement.
+.. *Justification* +
+This functionality supports the additional challenged posed in CS2101 such that there is social responsiveness in the project. The interaction through the comments section will allow residents to clarify any doubts with the organisers. Additionally, the organisers can use the comments section as a feedback platform to get feedback on improvements.
+.. *Highlights* +
+This enhancement is tedious as it requires a new field to display the comments in a relevant format and onto the User Interface (UI). Many test cases written by the developers had to be edited to ensure that the testability of the project remained.
+.. *Credits* +
+ Jsoup v1.11.3 library was used to manipulate Hyper Text Markup Language (HTML) tags so that we did not need to rewrite code but instead reuse efficient code. Furthermore, online user forums such as Stack Overflow was used to clarify doubts or find our develop code.
+. *Minor enhancement* +
+[lowerroman]
+.. `AddCommand` had to be revised to intialise a comment section
+.. `EditCommand` was edited to accomodate a new field for the comments section and the admin would be able to reset the comment section if there is a need.
+.. Added comments into the `BrowserPanel` to be displayed in tht GUI.
+
+. *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=gerald&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Click Here]]
+
+. *Other contributions*:
+
+** Project management:
+*** Scheduling regular meetings for CS2113T and CS2101
+*** Constantly ensure that our team was fulfilled milestones
+*** Offered help to team members
+** Enhancements to existing features:
+*** Added code to `EditCommand` to take in another parameter for comments
+*** Adding test cases to improve coverage
+** Documentation:
+*** Ported User Guide from team's Google docs to the repository's User Guide and making tweaks to the User guide.
+*** Ported a huge section of Developer Guide from team's Google docs to the repository's Developer guide.
+
+** Community:
+*** PRs reviewed by Geraldcdx [https://github.com/CS2113-AY1819S1-T12-1/main/pulls?q=is%3Apr+author%3Ageraldcdx[Github closed PRs]]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-F10-2/main/issues/101[1], https://github.com/CS2113-AY1819S1-F10-2/main/issues/100[2], https://github.com/CS2113-AY1819S1-F10-2/main/issues/98[3], https://github.com/CS2113-AY1819S1-F10-2/main/issues/106[4])
+** Tools:
+*** Integrated Reposense into the project
+
+== Contributions to the User Guide
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+include::../UserGuide.adoc[tag=comment]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=comments]
+
+== Other Projects
+---
+[quanda]
+
+. [https://github.com/Geraldcdx/IVLEDownloader[Offline IVLE]] - This is an application that will be used by National University of Singapore(NUS) students to access files from the Integrated Virtual Learning Environment(IVLE) offline.
+. [https://github.com/Geraldcdx/HTMLChatbot[HTML ChatBot]] - A Fullstack Webapp hosted on Google to run code for a self-sustainable attendance taking chatbot.
+
+
+

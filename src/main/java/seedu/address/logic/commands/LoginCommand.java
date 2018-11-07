@@ -38,10 +38,9 @@ public class LoginCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String username = toLogin.getUsername().toString();
 
         if (model.getLoginStatus()) {
-            throw new CommandException(String.format(MESSAGE_LOGGED, username));
+            throw new CommandException(String.format(MESSAGE_LOGGED, model.getUsername().toString()));
         }
 
         model.logUser(toLogin);
@@ -49,7 +48,7 @@ public class LoginCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, username));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin.getUsername().toString()));
     }
 
     @Override

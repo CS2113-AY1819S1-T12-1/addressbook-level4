@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -37,7 +38,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 && checkPhoneKeywordsMatchEventPhone(keywords.get(PREFIX_PHONE), event)
                 && checkVenueKeywordsMatchEventVenue(keywords.get(PREFIX_VENUE), event)
                 && checkDateTimeKeywordsMatchEventDateTime(keywords.get(PREFIX_DATETIME), event)
-                && checkTagKeywordsMatchEventTag(keywords.get(PREFIX_TAG), event);
+                && checkTagKeywordsMatchEventTag(keywords.get(PREFIX_TAG), event)
+                && checkAttendeeKeywordsMatchEventAttendee(keywords.get(PREFIX_ATTENDEE), event);
     }
 
     /**
@@ -58,7 +60,9 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                             || StringUtil.containsWordIgnoreCase(event.getVenue().value, keyword)
                             || StringUtil.containsWordIgnoreCase(event.getDateTime().toString(), keyword)
                             || event.getTags().stream()
-                .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))));
+                .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))
+                            || event.getAttendance().stream()
+                .anyMatch(attendee -> StringUtil.containsWordIgnoreCase(attendee.attendeeName, keyword))));
     }
 
     /**
@@ -165,6 +169,22 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
         return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
                     && event.getTags().stream()
                 .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
+    }
+
+    /**
+     * To check if any of tag prefix keywords match with any of event tags
+     * @param keywords list of keywords
+     * @param event event to compare
+     * @return a boolean indicate matching
+     */
+    public boolean checkAttendeeKeywordsMatchEventAttendee (List<String> keywords, Event event) {
+        if (keywords == null) {
+            return true;
+        }
+
+        return keywords.stream().anyMatch(keyword -> !keyword.isEmpty()
+                && event.getAttendance().stream()
+                .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.attendeeName, keyword)));
     }
 
     @Override

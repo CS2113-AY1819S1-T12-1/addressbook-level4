@@ -38,10 +38,9 @@ public class SignupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String username = toSignup.getUsername().toString();
 
         if (model.getLoginStatus()) {
-            throw new CommandException(String.format(MESSAGE_LOGGED, username));
+            throw new CommandException(String.format(MESSAGE_LOGGED, model.getUsername().toString()));
         }
 
         if (model.userExists(toSignup)) {
@@ -49,7 +48,7 @@ public class SignupCommand extends Command {
         }
 
         model.createUser(toSignup);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, username));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toSignup.getUsername().toString()));
     }
 
     @Override
