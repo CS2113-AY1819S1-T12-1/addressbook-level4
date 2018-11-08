@@ -2829,23 +2829,45 @@ not fail due to a missing <code>&lt;remark&gt;</code> element.</p>
 <div class="paragraph">
 <p>For all the use cases below, System refers to the EventManager, Actor refers to the admin/user.</p>
 </div>
+<h3 id="use-case-authentication" class="discrete">Use Case: Authentication</h3>
 <div class="paragraph">
-<p><strong>Use Case: Authentication</strong><br>
-MSS (main system success):<br>
-1. EventManager prompts user for username and password.<br>
-2. User inputs correct username and password.<br>
-3. EventManager grants access to User and displays welcome message.<br>
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User signs up for an account in the Event Manager.<br></p>
+</li>
+<li>
+<p>User logs in by entering correct username and password.<br></p>
+</li>
+<li>
+<p>Event Manager grants access to User and displays welcome message.<br>
 Use case ends.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Extensions:<br>
-     2a. User inputs incorrect password.<br>
-	2a1. EventManager denies access to user and displays error message.<br>
+<p>Extensions:<br></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. User inputs incorrect password.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. Event Manager denies access to the user and displays error message.<br>
 Use Case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><strong>Use Case: View events, RSVP and Reminders</strong><br>
-MSS (main system success):<br>
+<strong>MSS</strong><br>
 1. User requests for list of events.<br>
 2. EventManager displays list of events.<br>
 3. User selects event.<br>
@@ -3179,4 +3201,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 09:43:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 11:38:45 UTC</div></div></div></body></html>
