@@ -940,7 +940,7 @@ that most modern desktop applications follow.</p>
 <p>Given below is an example usage scenario and how the Comments mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application, click on an event or types <code>select INDEX</code> into the CLI. The comment section will be seen.</p>
+<p>Step 1. The user launches the application, logs in and click on an event or types <code>select INDEX</code> into the CLI. The comment section will be seen along with other details in the <code>BrowserPanel</code></p>
 </div>
 <div class="paragraph">
 <p>Step 2. The user/admin executes <code>addComment 1 C/May I ask, what is the attire for the event?</code> to add a comment to the first event in the Event Manager. <code>AddCommentCommand</code> command obtains the comment section from <code>eventmanager.xml</code> calls <code>CommentFacade</code> to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into <code>eventmanager.xml</code></p>
@@ -950,6 +950,9 @@ that most modern desktop applications follow.</p>
 </div>
 <div class="paragraph">
 <p>Step 4. The admin executes <code>deleteComment 1 L/1</code> to delete a comment at index 1, line 1 of comment section. <code>DeleteCommentCommand</code> command obtains the comment section from <code>eventmanager.xml</code> calls <code>CommentFacade</code> to delete "Athletic attire" from the comment section and stores the comment section into <code>eventmanager.xml</code></p>
+</div>
+<div class="paragraph">
+<p>Step 5. If the admin wants to reset or make a new comment section of an event, the valid command of <code>edit INDEX C/{span}Comment Section{/span}{ol}{/ol}</code> can be used</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1011,7 +1014,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to parse because one field is used for comment section.</p>
+<p>Pros: Comment section will be easy to parse because only one field is used for comment section.</p>
 </li>
 <li>
 <p>Cons: If a developer wants to manipulate specific comments through eventmanager.xml file, there is no functions created for it.</p>
@@ -1027,7 +1030,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 <p>Pros: No HTML tags will be stored in the field.</p>
 </li>
 <li>
-<p>Cons: New methods will need to be implemented to make many fields for comments.</p>
+<p>Cons: New methods or data structures will need to be implemented to make many fields for comments.</p>
 </li>
 </ul>
 </div>
@@ -1040,14 +1043,14 @@ If the user uses the <code>find</code> command, the following functions will fol
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Vector is used to store the comment section.</p>
+<p><strong>Alternative 1 (current choice):</strong> A vector is used to store the comment section to add, insert or delete relevant comments.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: A simple data structure that has vector.add() and vector.delete() to help add comments easily.</p>
+<p>Pros: A simple data structure that has vector.add() and vector.delete() methods to help edit the comment section easily.</p>
 </li>
 <li>
-<p>Cons: Additional code is needed to parse the comment section into a vector.</p>
+<p>Cons: Additional method is needed to parse the comment section into a vector.</p>
 </li>
 </ul>
 </div>
@@ -3201,4 +3204,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 12:03:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 12:10:18 UTC</div></div></div></body></html>
