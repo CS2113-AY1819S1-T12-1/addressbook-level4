@@ -647,11 +647,11 @@ If an authentication fails, i.e. credentials are wrong or do not exist in the JS
 </tr>
 </table>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
 Only one admin account is registered at any given time, with <code>admin</code> and <code>root</code> being used as username and password respectively.
@@ -667,6 +667,21 @@ Only one admin account is registered at any given time, with <code>admin</code> 
 </div>
 <div class="paragraph">
 <p>The encrypted password consists of a randomly generated salt and a hash generated from the plain text password, both converted to hexadecimal before being stored inside <code>users.json</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.3. Design Considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Instead of encrypting each user&#8217;s password, we initially considered encrypting the entire <code>users.json</code> file instead. However, after careful consideration, we decided that it would be sub-optimal due to the
+inefficiency of having to constantly encypt and decrypt the files while the application is running.</p>
+</li>
+<li>
+<p>Instead of having the authentication feature being a part of the <code>logic</code> component, we initially considered having <code>authentication</code> as a component of its own, which precedes the entire running of the <code>MainApp</code>. However,
+we decided that it would introduce redundancies in the codebase as it requires rewriting a handful of functionalities that are already present within the <code>logic</code> component, thus we opted for our current implementation.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -821,7 +836,7 @@ that most modern desktop applications follow.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -1004,7 +1019,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-comment-section-is-stored"><a class="link" href="#aspect-how-comment-section-is-stored">Aspect: How comment section is stored</a></h5>
 <div class="ulist">
@@ -1126,7 +1141,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-display-attendance"><a class="link" href="#aspect-how-to-display-attendance">Aspect: How to display attendance</a></h5>
 <div class="ulist">
@@ -3204,4 +3219,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 08:33:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 16:23:51 UTC</div></div></div></body></html>
