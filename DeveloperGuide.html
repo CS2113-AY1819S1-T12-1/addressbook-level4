@@ -617,10 +617,10 @@ Additional methods are also added to check the login and admin status of the use
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Step 1. The user launches the application for the first time. The <code>JsonUserStorage</code> class will create a default JSON file in <code>data/users.json</code> that stores the basic <code>admin</code> account information.</p>
-<p class="tableblock">Step 2. The user has the option to create a new account using the command <code>signup u/USERNAME p/PASSWORD</code>. This will trigger the method <code>createUser(user)</code> in the <code>Model Manager</code> class, which is linked to <code>UserAccount</code>.</p>
+<p class="tableblock">Step 2. The user has the option to create a new account using the command <code>signup u/USERNAME p/PASSWORD</code>. This will trigger the method <code>createUser(user)</code> in the <code>Model Manager</code> class, which is linked to <code>UserSession</code>.</p>
 <p class="tableblock">Step 3. The user executes the command <code>login u/USERNAME p/PASSWORD</code>. This will trigger the method <code>userExists(user)</code> in the <code>ModelManager</code> class.</p>
-<p class="tableblock">Step 4. <code>UserAccount</code> will prompt <code>JsonUserStorage</code> to read the JSON file and return to it the JSONObject parsed from the file.</p>
-<p class="tableblock">Step 5. <code>UserAccount</code> will then compare the logged username and password with the ones stored in the JSON file. If the comparisons return true, the <code>userExists</code> method will return true.</p>
+<p class="tableblock">Step 4. <code>UserSession</code> will prompt <code>JsonUserStorage</code> to read the JSON file and return to it the JSONObject parsed from the file.</p>
+<p class="tableblock">Step 5. <code>UserSession</code> will then compare the logged username and password with the ones stored in the JSON file. If the comparisons return true, the <code>userExists</code> method will return true.</p>
 <p class="tableblock">Step 6. The <code>currentUser</code> in the <code>Command</code> class will then be set and the login flag will be set to true. If the user is an admin, the admin flag will be set to true as well.</p>
 <p class="tableblock">Step 7. After authentication, the user can now start using the application.</p>
 <p class="tableblock">Step 8. The user can choose to log out of the application as well with the <code>logout</code> command. This command sets the login flag to false and clears <code>currentUser</code>.</p></td>
@@ -628,11 +628,16 @@ Additional methods are also added to check the login and admin status of the use
 </tbody>
 </table>
 <div class="paragraph">
-<p>The sequence diagram below describes the steps elaborated above.</p>
+<p>The sequence diagrams below describes the steps elaborated above.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AuthenticationDiagram.png" alt="AuthenticationDiagram" width="800">
+<img src="images/SignupDiagram.png" alt="SignupDiagram" width="800">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LoginDiagram.png" alt="LoginDiagram" width="800">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -3219,4 +3224,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 16:23:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 16:32:28 UTC</div></div></div></body></html>
