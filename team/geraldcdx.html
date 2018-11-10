@@ -14,7 +14,7 @@
 <li><a href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a>
 <ul class="sectlevel2">
 <li><a href="#add-a-comment-code-addcomment-code">3.1. Add a comment : <code>addComment</code></a></li>
-<li><a href="#reply-comment-code-replycomment-code">3.2. Reply Comment : <code>replyComment</code></a></li>
+<li><a href="#reply-to-a-comment-code-replycomment-code">3.2. Reply to a comment : <code>replyComment</code></a></li>
 <li><a href="#delete-a-comment-code-deletecomment-code">3.3. Delete a comment : <code>deleteComment</code></a></li>
 </ul>
 </li>
@@ -256,7 +256,7 @@ Jsoup v1.11.3 library was used to manipulate Hyper Text Markup Language (HTML) t
 <div class="sect2">
 <h3 id="add-a-comment-code-addcomment-code"><a class="link" href="#add-a-comment-code-addcomment-code">3.1. Add a comment : <code>addComment</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Adds comment into event comment section with the username (when you are logged in)<br>
+<p>Admin/User: Adds a comment into the specified event&#8217;s comment section, with the username preceding the comment (when you are logged in).<br>
 Format: <code>addComment INDEX C/STRING</code></p>
 </div>
 <div class="sidebarblock">
@@ -264,17 +264,17 @@ Format: <code>addComment INDEX C/STRING</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Adds comment at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Adds a comment at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
 <p>For <code>C/STRING</code>, <code>STRING</code> cannot be empty. <code>STRING</code> is the comment.</p>
 </li>
 <li>
-<p>Undo and Redo command works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+<p>Undo and Redo command works with this! However, every time you undo or redo, the Browser Panel will not refresh itself
 so you need to refresh it yourself.</p>
 </li>
 <li>
-<p>If you want to revert a comment previously made, use Undo!</p>
+<p>If you want to revert a comment previously made, use <code>undo</code>!</p>
 </li>
 </ul>
 </div>
@@ -287,11 +287,11 @@ so you need to refresh it yourself.</p>
 <ul>
 <li>
 <p><code>addComment 1 C/What is the attire to wear for the event?</code><br>
-Adds "What is the attire to wear for the event?" into event 1 comment section with username</p>
+Adds "What is the attire to wear for the event?" into the comment section of the 1st event, preceded by the user&#8217;s username.</p>
 </li>
 <li>
 <p><code>addComment 5 C/What is the attire to wear for this event?</code><br>
-Adds "What is the attire to wear for this event?" into event 5 comment section with username</p>
+Adds "What is the attire to wear for this event?" into the comment section of the 5th event, preceded by the user&#8217;s username.</p>
 </li>
 </ul>
 </div>
@@ -303,9 +303,9 @@ Adds "What is the attire to wear for this event?" into event 5 comment section w
 </div>
 </div>
 <div class="sect2">
-<h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.2. Reply Comment : <code>replyComment</code></a></h3>
+<h3 id="reply-to-a-comment-code-replycomment-code"><a class="link" href="#reply-to-a-comment-code-replycomment-code">3.2. Reply to a comment : <code>replyComment</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Replies a comment with the username (when you are logged in) <br>
+<p>Admin/User: Reply to a comment with the username preceding the comment (when you are logged in). <br>
 Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 </div>
 <div class="sidebarblock">
@@ -313,20 +313,20 @@ Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Replies a comment to the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Replies to a comment of the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
 <p>For <code>C/STRING</code>, <code>STRING</code> cannot be empty. <code>STRING</code> is the comment.</p>
 </li>
 <li>
-<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index every comment. The comment will be replied under the line index given.</p>
+<p>Line has to be a non-zero integer and has to exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index every comment. The comment will be replied under the line index given.</p>
 </li>
 <li>
-<p>Undo and redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+<p>Undo and redo works! However, every time you undo or redo, the Browser Panel will not refresh itself
 so you need to refresh it yourself.</p>
 </li>
 <li>
-<p>If you want to revert a comment previously made, use Undo!</p>
+<p>If you want to revert a comment previously made, use <code>undo</code>!</p>
 </li>
 </ul>
 </div>
@@ -339,11 +339,11 @@ so you need to refresh it yourself.</p>
 <ul>
 <li>
 <p><code>replyComment 1 L/5 C/What is the attire to wear for the event?</code><br>
-Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5 with username</p>
+Adds the comment "What is the attire to wear for the event?" to line 6 of the comment section of the 1st event, preceded by the user&#8217;s username.</p>
 </li>
 <li>
 <p><code>replyComment 2 L/2 C/What is the attire to wear for the event?</code><br>
-Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2 with username</p>
+Adds the comment "What is the attire to wear for the event?" into line 3 of the comment section of the 2nd event, preceded by the user&#8217;s username.</p>
 </li>
 </ul>
 </div>
@@ -357,7 +357,7 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 <div class="sect2">
 <h3 id="delete-a-comment-code-deletecomment-code"><a class="link" href="#delete-a-comment-code-deletecomment-code">3.3. Delete a comment : <code>deleteComment</code></a></h3>
 <div class="paragraph">
-<p>Admin: Deletes a comment (when you are logged in as admin)<br>
+<p>Admin: Deletes a comment (when you are logged in as admin).<br>
 Format: <code>deleteComment INDEX L/LINE</code></p>
 </div>
 <div class="sidebarblock">
@@ -368,11 +368,10 @@ Format: <code>deleteComment INDEX L/LINE</code></p>
 <p>Edits the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index each comment. The line parameter provided will delete the corresponding comment index.</p>
+<p>Line has to be a non-zero integer and has to exist within the comment section. The numbers below the "Comment Section" in the Brower Panel are the line parameters to index each comment. The line parameter provided will delete the corresponding comment index.</p>
 </li>
 <li>
-<p>Undo and Redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
-so you need to refresh it yourself.</p>
+<p>Undo and Redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself so you need to refresh it yourself.</p>
 </li>
 </ul>
 </div>
@@ -385,11 +384,11 @@ so you need to refresh it yourself.</p>
 <ul>
 <li>
 <p><code>deleteComment 1 L/5</code><br>
-Deletes comment of event 1 at line 5</p>
+Deletes the comment at line 5 of the 1st event.</p>
 </li>
 <li>
 <p><code>deleteComment 2 L/2</code><br>
-Deletes comment of event 2 at line 2</p>
+Deletes the comment at line 2 of the 2nd event.</p>
 </li>
 </ul>
 </div>
@@ -614,4 +613,4 @@ If the user uses the <code>find</code> command, the following functions will fol
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 16:32:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 02:49:08 UTC</div></div></div></body></html>

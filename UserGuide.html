@@ -21,8 +21,8 @@
 <li><a href="#listing-all-events-code-list-code">3.6. Listing all events : <code>list</code></a></li>
 <li><a href="#editing-a-event-code-edit-code">3.7. Editing a event : <code>edit</code></a></li>
 <li><a href="#locating-events-code-find-code">3.8. Locating events: <code>find</code></a></li>
-<li><a href="#deleting-a-event-code-delete-code">3.9. Deleting a event : <code>delete</code></a></li>
-<li><a href="#selecting-a-event-code-select-code">3.10. Selecting a event : <code>select</code></a></li>
+<li><a href="#deleting-an-event-code-delete-code">3.9. Deleting an event : <code>delete</code></a></li>
+<li><a href="#selecting-an-event-code-select-code">3.10. Selecting an event : <code>select</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">3.13. Redoing the previously undone command : <code>redo</code></a></li>
@@ -30,16 +30,15 @@
 <li><a href="#register-for-event-code-register-code">3.15. Register for event : <code>register</code></a></li>
 <li><a href="#remove-registration-from-event-code-unregister-code">3.16. Remove registration from event : <code>unregister</code></a></li>
 <li><a href="#list-all-registered-events-code-attending-code">3.17. List all registered events : <code>attending</code></a></li>
-<li><a href="#set-reminders-code-setreminder-code-proposed">3.18. Set reminders : <code>setReminder</code> [Proposed]</a></li>
-<li><a href="#clear-reminders-code-removereminder-code-proposed">3.19. Clear reminders : <code>removeReminder</code> [Proposed]</a></li>
-<li><a href="#show-reminders-code-showreminders-code-proposed">3.20. show reminders : <code>showReminders</code> [Proposed]</a></li>
-<li><a href="#add-a-comment-code-addcomment-code">3.21. Add a comment : <code>addComment</code></a></li>
-<li><a href="#reply-comment-code-replycomment-code">3.22. Reply Comment : <code>replyComment</code></a></li>
-<li><a href="#delete-a-comment-code-deletecomment-code">3.23. Delete a comment : <code>deleteComment</code></a></li>
-<li><a href="#export-calendar-command-code-export-code">3.24. Export Calendar Command: <code>export</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.25. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.26. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#show-event-reminders-code-reminder-code">3.18. Show event reminders : <code>reminder</code></a></li>
+<li><a href="#updates-the-statuses-of-events-code-update-code">3.19. Updates the statuses of events : <code>update</code></a></li>
+<li><a href="#add-a-comment-code-addcomment-code">3.20. Add a comment : <code>addComment</code></a></li>
+<li><a href="#reply-to-a-comment-code-replycomment-code">3.21. Reply to a comment : <code>replyComment</code></a></li>
+<li><a href="#delete-a-comment-code-deletecomment-code">3.22. Delete a comment : <code>deleteComment</code></a></li>
+<li><a href="#exports-calendar-code-export-code">3.23. Exports calendar: <code>export</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.24. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.25. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.26. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -89,7 +88,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all events</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/Computer Science Workshop c/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>Computer Science</code> to the Event Manager.</p>
+<p><strong><code>add</code></strong><code>n/Computer Science Workshop c/John Doe p/98765432 e/johnd@example.com v/John street, block 123, #01-01 d/12/03/2018 15:30</code> : adds an event named <code>Computer Science Workshop</code> to the Event Manager.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd event shown in the current list</p>
@@ -113,7 +112,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>Automatic sorting</strong>: events in Event Manager will always be displayed in chronological order, follow by alphabetical order.</p>
+<p><strong>Automatic sorting</strong>: Events in Event Manager will always be displayed in chronological order, followed by alphabetical order.</p>
 </div>
 </div>
 </div>
@@ -147,9 +146,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Only <code>select</code> and <code>list</code> commands can be performed without logging in. Also, <code>add</code>, <code>edit</code>, <code>delete</code> and <code>deleteComment</code> can only performed by the admin account.</p>
-</div>
+Only <code>select</code>, <code>list</code> and <code>update</code> commands can be performed without logging in. Also, <code>add</code>, <code>edit</code>, <code>delete</code> and <code>deleteComment</code> can only performed by the admin account.
 </td>
 </tr>
 </table>
@@ -161,9 +158,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>As of now, there is only one admin account, with the username being <code>admin</code> and the password being <code>root</code>.</p>
-</div>
+As of now, there is only one admin account, with the username being <code>admin</code> and the password being <code>root</code>.
 </td>
 </tr>
 </table>
@@ -245,8 +240,8 @@ User: Shows User commands</p>
 <h3 id="adding-a-event-code-add-code"><a class="link" href="#adding-a-event-code-add-code">3.5. Adding a event: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Admin: Adds an event to the Event Manager<br>
-Adds a event to the Event Manager<br>
-Format: <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL v/VENUE [t/TAG]&#8230;&#8203;</code></p>
+Adds an event to the Event Manager<br>
+Format: <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL v/VENUE d/DATETIME [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -255,7 +250,7 @@ Format: <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL v/VENUE [t/
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-An event can have any number of tags (including 0)
+An event can have any number of tags (including 0).
 </td>
 </tr>
 </table>
@@ -266,10 +261,10 @@ An event can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/Com Sci Workshop c/John Doe cp/98765432 e/johnd@example.com p/9876543 v/John street, block 123, #01-01</code> d/20/10/2017 10:30</p>
+<p><code>add n/Com Sci Workshop c/John Doe p/98765432 e/johnd@example.com v/John street, block 123, #01-01 d/20/10/2017 10:30</code></p>
 </li>
 <li>
-<p><code>add n/Sports Day c/Betsy Crow t/Sports e/betsycrowe@example.com v/COM2 #02-01 p/1234567 d/20/10/2017 10:30 t/leisure</code></p>
+<p><code>add n/Sports Day c/Betsy Crow t/Sports e/betsycrow@example.com v/COM2 #02-01 p/12345678 d/21/02/2019 08:30 t/Leisure</code></p>
 </li>
 </ul>
 </div>
@@ -277,7 +272,7 @@ An event can have any number of tags (including 0)
 <div class="sect2">
 <h3 id="listing-all-events-code-list-code"><a class="link" href="#listing-all-events-code-list-code">3.6. Listing all events : <code>list</code></a></h3>
 <div class="paragraph">
-<p>User/Admin: Shows a list of all events in chronological order in the Event Manager.<br>
+<p>User/Admin: Lists all events in the Event Manager in chronological order.<br>
 Format: <code>list</code></p>
 </div>
 </div>
@@ -285,7 +280,7 @@ Format: <code>list</code></p>
 <h3 id="editing-a-event-code-edit-code"><a class="link" href="#editing-a-event-code-edit-code">3.7. Editing a event : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Admin: Edits an existing event in the Event Manager.<br>
-Format: <code>edit INDEX [n/EVENT] [c/CONTACT NAME] [p/PHONE] [e/EMAIL] [v/VENUE] [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>edit INDEX [n/EVENT] [c/CONTACT NAME] [p/PHONE] [e/EMAIL] [v/VENUE] [d/DATETIME] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -307,7 +302,7 @@ Format: <code>edit INDEX [n/EVENT] [c/CONTACT NAME] [p/PHONE] [e/EMAIL] [v/VENUE
 <p>You can remove all the event&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
 </li>
 <li>
-<p>If you want to reset the comments section you can <code>C/{span}Comment Section{/span}{ol}{/ol}</code> as a field.</p>
+<p>If you want to reset the comments section you can input <code>C/{span}Comment Section{/span}{ol}{/ol}</code> as a field.</p>
 </li>
 </ul>
 </div>
@@ -323,7 +318,7 @@ Format: <code>edit INDEX [n/EVENT] [c/CONTACT NAME] [p/PHONE] [e/EMAIL] [v/VENUE
 Edits the phone number and email address of the 1st event to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
 </li>
 <li>
-<p><code>edit 2 n/Sports Day t/</code><br>
+<p><code>edit 2 n/Sports Meet t/</code><br>
 Edits the name of the 2nd event to be <code>Sports Day</code> and clears all existing tags.</p>
 </li>
 </ul>
@@ -332,7 +327,7 @@ Edits the name of the 2nd event to be <code>Sports Day</code> and clears all exi
 <div class="sect2">
 <h3 id="locating-events-code-find-code"><a class="link" href="#locating-events-code-find-code">3.8. Locating events: <code>find</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Finds events whose field contain any of the given keywords with user specify condition.<br>
+<p>Admin/User: Finds events whose field contains any of the given keywords specified by the user.<br>
 Format: <code>find PREFIX/KEYWORD [MORE_PREFIX][MORE_KEYWORDS]</code><br></p>
 </div>
 <div class="paragraph">
@@ -341,28 +336,31 @@ Format: <code>find PREFIX/KEYWORD [MORE_PREFIX][MORE_KEYWORDS]</code><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>k: default search option</p>
+<p>k/ Default search option</p>
 </li>
 <li>
-<p>n: name search</p>
+<p>n/ Name search</p>
 </li>
 <li>
-<p>c: contact search</p>
+<p>c/ Contact search</p>
 </li>
 <li>
-<p>e: email search</p>
+<p>e/ Email search</p>
 </li>
 <li>
-<p>p: phone search</p>
+<p>p/ Phone search</p>
 </li>
 <li>
-<p>v: venue search</p>
+<p>v/ Venue search</p>
 </li>
 <li>
-<p>d: datetime search</p>
+<p>d/ Datetime search</p>
 </li>
 <li>
-<p>t: tag search</p>
+<p>t/ Tag search</p>
+</li>
+<li>
+<p>a/ Attendee search</p>
 </li>
 </ul>
 </div>
@@ -383,31 +381,30 @@ Format: <code>find PREFIX/KEYWORD [MORE_PREFIX][MORE_KEYWORDS]</code><br></p>
 <p>Events matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Sports Day</code> will return <code>Sports games</code>, <code>Good Day</code>.</p>
 </li>
 <li>
-<p>Command default prefix (k) will allow to search in any field of an event, while other specific prefix will result in event that must have that keyword in the indicate field.</p>
+<p>Command default prefix (k/) will allow searches in any field of an event, while other prefixes will result in events that must have that keyword in the indicated field.</p>
 </li>
 <li>
-<p>At least one of the available prefix must be presented.</p>
+<p>At least one of the available prefixes must be presented.</p>
 </li>
 <li>
-<p>When using different prefixes together, <em>logic AND operator</em> is used. This mean if there is one prefix or morev in the combination that don&#8217;t have any follow keywords, results search will always be zero.</p>
+<p>When using different prefixes together, <em>logic AND operator</em> is used. This means that if there is one or more prefixes in the combination that does not have any keywords following it, search results will always be empty.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-1) If there are more than 1 prefix of the same type, for example, <code>find n/new n/dark n/meeting</code>, this will be automatically combined together, which means this command will be assumed to be the same as <code>find n/new dark meeting</code><br>
-2) If there is only prefix without any keyword follow it, no event will be found as there is no event contain default empty keyword<br>
-3) Unknown prefix will be ignored.
-</td>
-</tr>
-</table>
+<div class="olist NOTE">
+<ol class="NOTE">
+<li>
+<p>If there are more than 1 prefixes of the same type, for example, <code>find n/new n/dark n/meeting</code>, they will be automatically combined together, which means this command will be assumed to be the same as <code>find n/new dark meeting</code><br></p>
+</li>
+<li>
+<p>If there is only the prefix without any keywords following it, no events will be found as there are no events with the required fields left empty<br></p>
+</li>
+<li>
+<p>Unknown prefixes will be ignored.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -416,25 +413,25 @@ Format: <code>find PREFIX/KEYWORD [MORE_PREFIX][MORE_KEYWORDS]</code><br></p>
 <ul>
 <li>
 <p><code>find n/Day</code><br>
-Returns event with name <code>Sports Day</code> and <code>Any day</code></p>
+Returns events with names <code>Sports Day</code> and <code>Any day</code></p>
 </li>
 <li>
 <p><code>find k/Sports Sci friends</code><br>
-Returns events having name <code>Sports Competition</code>, venue <code>Sci Avenue</code>, or tag <code>friends</code></p>
+Returns events having the name <code>Sports Competition</code>, venue <code>Sci Avenue</code>, and tag <code>friends</code></p>
 </li>
 <li>
-<p><code>find d/12/01/2018 04:30</code>
-Return any event having date <code>12/01/2018</code> or time <code>04:30</code></p>
+<p><code>find d/12/01/2018 04:30</code><br>
+Returns any event having date <code>12/01/2018</code> or time <code>04:30</code></p>
 </li>
 <li>
-<p><code>find k/Day n/Sports d/12/01/2018
-Return any event having keyword `day</code> with name must have <code>Sports</code> and with date must have <code>12/01/2018</code></p>
+<p><code>find k/Day n/Sports d/12/01/2018</code><br>
+Returns any event having keyword <code>day</code> with names including <code>Sports</code> and with dates <code>12/01/2018</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-event-code-delete-code"><a class="link" href="#deleting-a-event-code-delete-code">3.9. Deleting a event : <code>delete</code></a></h3>
+<h3 id="deleting-an-event-code-delete-code"><a class="link" href="#deleting-an-event-code-delete-code">3.9. Deleting an event : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Admin: Deletes the specified event from the Event Manager.<br>
 Format: <code>delete INDEX</code></p>
@@ -475,9 +472,9 @@ Deletes the 1st event in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-event-code-select-code"><a class="link" href="#selecting-a-event-code-select-code">3.10. Selecting a event : <code>select</code></a></h3>
+<h3 id="selecting-an-event-code-select-code"><a class="link" href="#selecting-an-event-code-select-code">3.10. Selecting an event : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Selects the event identified by the index number used in the displayed event list.<br>
+<p>Admin/User: Selects the event identified by the index number in the displayed event list.<br>
 Format: <code>select INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -485,7 +482,7 @@ Format: <code>select INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the event and loads the Google search page the event at the specified <code>INDEX</code>.</p>
+<p>Selects the event and loads the Browser Panel of the event at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the displayed event list.</p>
@@ -550,7 +547,7 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code>, <code>clear</code>, <code>register</code>, <code>addComment</code> and <code>replyComment</code>).</p>
 </div>
 </td>
 </tr>
@@ -623,7 +620,7 @@ Format: <code>clear</code></p>
 <div class="sect2">
 <h3 id="register-for-event-code-register-code"><a class="link" href="#register-for-event-code-register-code">3.15. Register for event : <code>register</code></a></h3>
 <div class="paragraph">
-<p>User: Registers for an event, adding current user&#8217;s username to attendance list.<br>
+<p>User: Registers for an event by adding the current user&#8217;s username to the attendance list.<br>
 Format: <code>register INDEX</code></p>
 </div>
 <div class="paragraph">
@@ -634,12 +631,12 @@ Format: <code>register INDEX</code></p>
 <li>
 <p><code>list</code><br>
 <code>register 3</code><br>
-Registers user to the 3rd event of the Event Manager.</p>
+Registers user for the 3rd event of the Event Manager.</p>
 </li>
 <li>
 <p><code>find Sports</code><br>
 <code>register 1</code><br>
-Registers User to the 1st event in the results of the <code>find</code> command.</p>
+Registers User for the 1st event in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
@@ -647,7 +644,7 @@ Registers User to the 1st event in the results of the <code>find</code> command.
 <div class="sect2">
 <h3 id="remove-registration-from-event-code-unregister-code"><a class="link" href="#remove-registration-from-event-code-unregister-code">3.16. Remove registration from event : <code>unregister</code></a></h3>
 <div class="paragraph">
-<p>User: Unregisters for an event, removing current user&#8217;s username to attendance list.<br>
+<p>User: Unregisters for an event by removing the current user&#8217;s username from the attendance list.<br>
 Format: <code>unregister INDEX</code></p>
 </div>
 <div class="paragraph">
@@ -663,7 +660,7 @@ Unregisters user from the 1st event of the Event Manager.</p>
 <li>
 <p><code>find Sports</code><br>
 <code>unregister 2</code><br>
-Unregisters User from the 2nd event in the results of the <code>find</code> command.</p>
+Unregisters user from the 2nd event in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
@@ -676,60 +673,78 @@ Format: <code>attending</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="set-reminders-code-setreminder-code-proposed"><a class="link" href="#set-reminders-code-setreminder-code-proposed">3.18. Set reminders : <code>setReminder</code> [Proposed]</a></h3>
+<h3 id="show-event-reminders-code-reminder-code"><a class="link" href="#show-event-reminders-code-reminder-code">3.18. Show event reminders : <code>reminder</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Sets a reminder for the event identified by the index number used in the displayed event list. Reminder will alert the user 1 hour before the commencement time of the event.<br>
-Format: <code>setReminder INDEX</code></p>
+<p>Admin/User: Shows event reminders for all upcoming events that the user has registered for.
+Format: <code>reminder</code></p>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Upcoming events are those that are occurring within the next 24 hours.
+</td>
+</tr>
+</table>
 </div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><code>setReminder 1</code><br>
-Sets a reminder for user for event 1</p>
+<p>Users will only receive reminders for events that they have registered for.</p>
 </li>
 <li>
-<p><code>setReminder 5</code><br>
-Sets a reminder for user for event 5</p>
+<p>Reminders are automatically sent out every 6 hours, unless the user initiates the command.</p>
 </li>
 </ul>
 </div>
 </div>
+</div>
+</div>
 <div class="sect2">
-<h3 id="clear-reminders-code-removereminder-code-proposed"><a class="link" href="#clear-reminders-code-removereminder-code-proposed">3.19. Clear reminders : <code>removeReminder</code> [Proposed]</a></h3>
+<h3 id="updates-the-statuses-of-events-code-update-code"><a class="link" href="#updates-the-statuses-of-events-code-update-code">3.19. Updates the statuses of events : <code>update</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Removes the reminder for the event identified by the index number used in the displayed event list.<br>
-Format: <code>removeReminder INDEX</code></p>
+<p>Admin/User: Updates the statuses of events.<br>
+Format: <code>update</code></p>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><code>removeReminder 1</code><br>
-Removes a reminder for user for event 1</p>
+<p>Events that have already occurred will have the [COMPLETED] status. Events that have yet to occur will have the [UPCOMING] status.</p>
 </li>
 <li>
-<p><code>removeReminder 5</code><br>
-Removes a reminder for user for event 5</p>
+<p>The <code>update</code> command can be used without the user having to log in.</p>
+</li>
+<li>
+<p>Event statuses are automatically updated every 5 minutes.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="show-reminders-code-showreminders-code-proposed"><a class="link" href="#show-reminders-code-showreminders-code-proposed">3.20. show reminders : <code>showReminders</code> [Proposed]</a></h3>
-<div class="paragraph">
-<p>Admin/User: Show all events with reminders set<br>
-Format: <code>showReminders</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load, and if the problem still persists, use the <code>update</code> command.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-a-comment-code-addcomment-code"><a class="link" href="#add-a-comment-code-addcomment-code">3.21. Add a comment : <code>addComment</code></a></h3>
+<h3 id="add-a-comment-code-addcomment-code"><a class="link" href="#add-a-comment-code-addcomment-code">3.20. Add a comment : <code>addComment</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Adds comment into event comment section with the username (when you are logged in)<br>
+<p>Admin/User: Adds a comment into the specified event&#8217;s comment section, with the username preceding the comment (when you are logged in).<br>
 Format: <code>addComment INDEX C/STRING</code></p>
 </div>
 <div class="sidebarblock">
@@ -737,17 +752,17 @@ Format: <code>addComment INDEX C/STRING</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Adds comment at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Adds a comment at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
 <p>For <code>C/STRING</code>, <code>STRING</code> cannot be empty. <code>STRING</code> is the comment.</p>
 </li>
 <li>
-<p>Undo and Redo command works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+<p>Undo and Redo command works with this! However, every time you undo or redo, the Browser Panel will not refresh itself
 so you need to refresh it yourself.</p>
 </li>
 <li>
-<p>If you want to revert a comment previously made, use Undo!</p>
+<p>If you want to revert a comment previously made, use <code>undo</code>!</p>
 </li>
 </ul>
 </div>
@@ -760,11 +775,11 @@ so you need to refresh it yourself.</p>
 <ul>
 <li>
 <p><code>addComment 1 C/What is the attire to wear for the event?</code><br>
-Adds "What is the attire to wear for the event?" into event 1 comment section with username</p>
+Adds "What is the attire to wear for the event?" into the comment section of the 1st event, preceded by the user&#8217;s username.</p>
 </li>
 <li>
 <p><code>addComment 5 C/What is the attire to wear for this event?</code><br>
-Adds "What is the attire to wear for this event?" into event 5 comment section with username</p>
+Adds "What is the attire to wear for this event?" into the comment section of the 5th event, preceded by the user&#8217;s username.</p>
 </li>
 </ul>
 </div>
@@ -776,9 +791,9 @@ Adds "What is the attire to wear for this event?" into event 5 comment section w
 </div>
 </div>
 <div class="sect2">
-<h3 id="reply-comment-code-replycomment-code"><a class="link" href="#reply-comment-code-replycomment-code">3.22. Reply Comment : <code>replyComment</code></a></h3>
+<h3 id="reply-to-a-comment-code-replycomment-code"><a class="link" href="#reply-to-a-comment-code-replycomment-code">3.21. Reply to a comment : <code>replyComment</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: Replies a comment with the username (when you are logged in) <br>
+<p>Admin/User: Reply to a comment with the username preceding the comment (when you are logged in). <br>
 Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 </div>
 <div class="sidebarblock">
@@ -786,20 +801,20 @@ Format: <code>replyComment INDEX L/LINE C/STRING</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Replies a comment to the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Replies to a comment of the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
 <p>For <code>C/STRING</code>, <code>STRING</code> cannot be empty. <code>STRING</code> is the comment.</p>
 </li>
 <li>
-<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index every comment. The comment will be replied under the line index given.</p>
+<p>Line has to be a non-zero integer and has to exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index every comment. The comment will be replied under the line index given.</p>
 </li>
 <li>
-<p>Undo and redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
+<p>Undo and redo works! However, every time you undo or redo, the Browser Panel will not refresh itself
 so you need to refresh it yourself.</p>
 </li>
 <li>
-<p>If you want to revert a comment previously made, use Undo!</p>
+<p>If you want to revert a comment previously made, use <code>undo</code>!</p>
 </li>
 </ul>
 </div>
@@ -812,11 +827,11 @@ so you need to refresh it yourself.</p>
 <ul>
 <li>
 <p><code>replyComment 1 L/5 C/What is the attire to wear for the event?</code><br>
-Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5 with username</p>
+Adds the comment "What is the attire to wear for the event?" to line 6 of the comment section of the 1st event, preceded by the user&#8217;s username.</p>
 </li>
 <li>
 <p><code>replyComment 2 L/2 C/What is the attire to wear for the event?</code><br>
-Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2 with username</p>
+Adds the comment "What is the attire to wear for the event?" into line 3 of the comment section of the 2nd event, preceded by the user&#8217;s username.</p>
 </li>
 </ul>
 </div>
@@ -828,9 +843,9 @@ Adds the comment "What is the attire to wear for the event?" into event 2 commen
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-a-comment-code-deletecomment-code"><a class="link" href="#delete-a-comment-code-deletecomment-code">3.23. Delete a comment : <code>deleteComment</code></a></h3>
+<h3 id="delete-a-comment-code-deletecomment-code"><a class="link" href="#delete-a-comment-code-deletecomment-code">3.22. Delete a comment : <code>deleteComment</code></a></h3>
 <div class="paragraph">
-<p>Admin: Deletes a comment (when you are logged in as admin)<br>
+<p>Admin: Deletes a comment (when you are logged in as admin).<br>
 Format: <code>deleteComment INDEX L/LINE</code></p>
 </div>
 <div class="sidebarblock">
@@ -841,11 +856,10 @@ Format: <code>deleteComment INDEX L/LINE</code></p>
 <p>Edits the event at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed event list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>Line has to be a non-zero integer and exist within the comment section. The numbers below the "Comment Section" in the BrowerPanel are the line parameters to index each comment. The line parameter provided will delete the corresponding comment index.</p>
+<p>Line has to be a non-zero integer and has to exist within the comment section. The numbers below the "Comment Section" in the Brower Panel are the line parameters to index each comment. The line parameter provided will delete the corresponding comment index.</p>
 </li>
 <li>
-<p>Undo and Redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself
-so you need to refresh it yourself.</p>
+<p>Undo and Redo works! However, every time you undo or redo, the BrowserPanel will not refresh itself so you need to refresh it yourself.</p>
 </li>
 </ul>
 </div>
@@ -858,11 +872,11 @@ so you need to refresh it yourself.</p>
 <ul>
 <li>
 <p><code>deleteComment 1 L/5</code><br>
-Deletes comment of event 1 at line 5</p>
+Deletes the comment at line 5 of the 1st event.</p>
 </li>
 <li>
 <p><code>deleteComment 2 L/2</code><br>
-Deletes comment of event 2 at line 2</p>
+Deletes the comment at line 2 of the 2nd event.</p>
 </li>
 </ul>
 </div>
@@ -874,10 +888,10 @@ Deletes comment of event 2 at line 2</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-calendar-command-code-export-code"><a class="link" href="#export-calendar-command-code-export-code">3.24. Export Calendar Command: <code>export</code></a></h3>
+<h3 id="exports-calendar-code-export-code"><a class="link" href="#exports-calendar-code-export-code">3.23. Exports calendar: <code>export</code></a></h3>
 <div class="paragraph">
-<p>Admin/User: export current user/admin registered/host events to an iCalendar file to use with other calendar application<br>
-Format: <code>export filename</code></p>
+<p>Admin/User: Exports current registered/hosted events of the user/admin to an iCalendar file to use with other calendar application<br>
+Format: <code>export FILENAME</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -886,7 +900,7 @@ Format: <code>export filename</code></p>
 <ul>
 <li>
 <p><code>export myCalendar</code><br>
-export the iCalendar file with name myCalendar to your <strong>src/data</strong> folder</p>
+Exports the iCalendar file with name 'myCalendar' to your <strong>src/data</strong> folder</p>
 </li>
 </ul>
 </div>
@@ -906,21 +920,21 @@ export the iCalendar file with name myCalendar to your <strong>src/data</strong>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.25. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.24. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Admin/User: Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.26. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.25. Saving the data</a></h3>
 <div class="paragraph">
-<p>Event Manager data are saved in the hard disk automatically after any command that changes the data.<br>
+<p>Event Manager&#8217;s data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.26. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -950,8 +964,8 @@ e.g. <code>signup n/Gerald Chua p/password12345 c/password12345</code></p>
 e.g. <code>login n/Gerald Chua p/password12345</code></p>
 </li>
 <li>
-<p><strong>Add</strong> <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL v/VENUE [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/Sports Day c/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
+<p><strong>Add</strong> <code>add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL v/VENUE d/DATETIME [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/Sports Day c/James Ho p/22224444 e/jamesho@example.com v/123, Clementi Rd, 1234665 d/12/08/2018 08:30 t/friend t/colleague</code></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
@@ -961,7 +975,7 @@ e.g. <code>add n/Sports Day c/James Ho p/22224444 e/jamesho@example.com a/123, C
 e.g. <code>delete 3</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/EVENT] [p/PHONE_NUMBER] [e/EMAIL] [v/VENUE] [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Edit</strong> : <code>edit INDEX [n/EVENT] [p/PHONE_NUMBER] [e/EMAIL] [v/VENUE] [d/DATETIME] [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>edit 2 n/Good Day e/jameslee@example.com</code></p>
 </li>
 <li>
@@ -996,30 +1010,28 @@ e.g. <code>register 1</code></p>
 e.g. <code>unregister 1</code></p>
 </li>
 <li>
-<p><strong>Set reminders</strong> : <code>setReminder INDEX</code><br>
-e.g. <code>setReminder 1</code></p>
+<p><strong>Show reminders</strong> : <code>reminder</code></p>
 </li>
 <li>
-<p><strong>View Reminders</strong> : <code>reminders</code><br>
-e.g. <code>reminder</code></p>
+<p><strong>Update event statuses</strong> : <code>update</code></p>
 </li>
 <li>
-<p><strong>addComment</strong> : <code>addComment INDEX C/STRING</code><br>
+<p><strong>AddComment</strong> : <code>addComment INDEX C/STRING</code><br>
 e.g. <code>addComment 1 C/HELLO</code></p>
 </li>
 <li>
-<p><strong>replyComment</strong> : <code>replyComment INDEX L/LINE C/STRING</code><br>
+<p><strong>ReplyComment</strong> : <code>replyComment INDEX L/LINE C/STRING</code><br>
 e.g. <code>replyComment 1 L/2 C/Hello</code></p>
 </li>
 <li>
-<p><strong>deleteComment</strong> : <code>deleteComment INDEX L/LINE</code><br>
+<p><strong>DeleteComment</strong> : <code>deleteComment INDEX L/LINE</code><br>
 e.g. <code>deleteComment 1 L/2</code></p>
 </li>
 <li>
-<p><strong>exportCalendarCommand</strong> : export filename<br>
+<p><strong>ExportCalendarCommand</strong> : <code>export FILENAME</code><br>
 e.g. <code>export BobCalendar</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 16:32:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 02:49:08 UTC</div></div></div></body></html>
