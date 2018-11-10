@@ -441,7 +441,7 @@ Deletes the comment at line 2 of the 2nd event.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Comand Line Interface uses <code>AddCommentCommand</code>, <code>DeleteCommentCommand</code>, <code>ReplyCommentCommand</code> and <code>EditCommand</code> for the user to interact with the comment section. The features of the following classes are as such:</p>
+<p>The Command Line Interface uses <code>AddCommentCommand</code>, <code>DeleteCommentCommand</code>, <code>ReplyCommentCommand</code> and <code>EditCommand</code> for the user to interact with the comment section. The features of the following classes are as such:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -455,7 +455,7 @@ Deletes the comment at line 2 of the 2nd event.</p>
 <p><code>ReplyCommentCommand</code>&#8201;&#8212;&#8201;Replies a comment using <code>CommentFacade</code> and <code>ReplyCommentCommandParser</code></p>
 </li>
 <li>
-<p><code>EditComamnd</code>&#8201;&#8212;&#8201;Resets the whole comment section using <code>editEventDescriptor</code> and <code>EditCommandParser</code></p>
+<p><code>EditCommand</code>&#8201;&#8212;&#8201;Resets the whole comment section using <code>editEventDescriptor</code> and <code>EditCommandParser</code></p>
 </li>
 </ul>
 </div>
@@ -463,10 +463,29 @@ Deletes the comment at line 2 of the 2nd event.</p>
 <p>Given below is an example usage scenario and how the Comments mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application, logs in and click on an event or types <code>select INDEX</code> into the CLI. The comment section will be seen along with other details in the <code>BrowserPanel</code></p>
+<p>Step 1. The user launches the application, logs in and click on an event or types <code>select INDEX</code> into the CLI. The comment section will be seen along with other details in the <code>BrowserPanel</code>.</p>
 </div>
 <div class="paragraph">
 <p>Step 2. The user/admin executes <code>addComment 1 C/May I ask, what is the attire for the event?</code> to add a comment to the first event in the Event Manager. <code>AddCommentCommand</code> command obtains the comment section from <code>eventmanager.xml</code> calls <code>CommentFacade</code> to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into <code>eventmanager.xml</code></p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the AddCommentCommand operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addCommentSequenceDiagram.png" alt="addCommentSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 4. Sequence Diagram for AddCommentCommand</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Detailed description of diagram</strong>: The user inputs "addComment 1 C/Hi". <code>LogicManager#execute("addComment 1 C/Hi")</code> and calls <code>EventManagerParser#parseCommand("addComment 1 C/Hi")</code>. Then, <code>AddCommentCommandParser#parse("1 C/Hi")</code> will be called and <code>AddCommentCommand#execute()</code> will obtain the event needed from <code>eventmanager.xml</code>. Finally, <code>CommandFacade#addComment</code> will be called and <code>AddComment#addComment</code> will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.</p>
+</div>
+<div class="paragraph">
+<p>The <code>replyComment</code> and <code>deleteComment</code> command does similar methods and need not be elaborated.</p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Step 3. The user/admin executes <code>replyComment 1 L/1 C/Athletic attire</code> to reply the comment in step 2. <code>ReplyCommentCommand</code> command obtains the comment section from <code>eventmanager.xml</code> calls <code>CommentFacade</code> to reply comment with "Athletic attire", into the comment section and stores the comment section into <code>eventmanager.xml</code></p>
@@ -493,34 +512,11 @@ Deletes the comment at line 2 of the 2nd event.</p>
 <p>In the case a false indexed event is not present, the functions will return an invalid index message.</p>
 </li>
 <li>
-<p>In the case a false comment section line is given, the functions will return an invalid line message.</p>
+<p>In the case a false comment section line is given, the functions will return an invalid line message.
+If the user uses the <code>find</code> command, the following functions will follow the indexing of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the AddCommentCommand operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/addCommentSequenceDiagram.png" alt="addCommentSequenceDiagram" width="800">
-</div>
-<div class="title">Figure 4. Sequence Diagram for AddCommentCommand</div>
-</div>
-<div class="paragraph">
-<p>The <code>replyComment</code> and <code>deleteComment</code> command does similar methods and need not be elaborated.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the user uses the <code>find</code> command, the following functions will follow the indexing of the <code>find</code> command.
 </td>
 </tr>
 </table>
@@ -613,4 +609,4 @@ If the user uses the <code>find</code> command, the following functions will fol
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 03:18:04 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 03:48:08 UTC</div></div></div></body></html>
