@@ -2884,39 +2884,133 @@ Use Case resumes at step 1.</p>
 </li>
 </ul>
 </div>
+<h3 id="use-case-registration-reminders" class="discrete">Use case: Registration &amp; Reminders</h3>
 <div class="paragraph">
-<p><strong>Use Case: View events, RSVP and Reminders</strong><br>
-<strong>MSS</strong><br>
-1. User requests for list of events.<br>
-2. EventManager displays list of events.<br>
-3. User selects event.<br>
-4. EventManager displays details of selected event.<br>
-5. User indicates attendance.<br>
-6. EventManager records attendance and displays confirmation message<br>
-Use case ends</p>
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list events.</p>
+</li>
+<li>
+<p>EventManager displays list of events.</p>
+</li>
+<li>
+<p>User selects event.</p>
+</li>
+<li>
+<p>EventManager displays details of selected event, including current attendance list.</p>
+</li>
+<li>
+<p>User requests to register for the event.</p>
+</li>
+<li>
+<p>EventManager adds user to attendance list and displays confirmation message.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Extensions:<br>
-     1a) Display by filter:<br>
-	1a1) User selected filter (Date and time, Tags of events).<br>
-	1a2) Apply filter in the list.<br>
-     4a) User requests for list of attendees.<br>
-	4a1) EventManager displays list of attendees in alphabetical order<br>
-     5a) User sets reminder for event.<br>
-5a1) Reminder will alert user 1 hour before the commencement of the event if the user is logged in.<br>
-5a2) User removes reminder for event.<br>
-Use Case resumes at step 5.</p>
+<p><strong>Extensions:</strong></p>
 </div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a. User is already registered for event.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a1. EventManager displays error message.</p>
 <div class="paragraph">
-<p><strong>Use Case: View event with reminders and remove reminder</strong><br>
-MSS (main system success):<br>
-1. User requests for list of events with reminder set.<br>
-2. EventManager displays list of events.<br>
-3. User selects event.<br>
-4. EventManager displays details of selected event.<br>
-5. User removes reminder on event.<br>
-6. EventManager removes reminder for the event and displays confirmation message.<br>
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6a. User unregisters from event.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6a1. User requests to unregister for the event.</p>
+</li>
+<li>
+<p>6a2. EventManager removes user from attendance list and displays confirmation message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>6b. User sets reminder.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6b1. User sets reminder for event.</p>
+</li>
+<li>
+<p>6b2. EventManager sets reminder, alerting user 1 hour before the commencement of the event if the user is logged in.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>6c. User is banned from event.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6c1. Admin requests to remove user from event.</p>
+</li>
+<li>
+<p>6c2. EventManager removes user from attendance list and displays confirmation message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-view-event-with-reminders-and-remove-reminder-br" class="discrete">Use case: View event with reminders and remove reminder<br></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests for list of events with reminder set.<br></p>
+</li>
+<li>
+<p>EventManager displays list of events.<br></p>
+</li>
+<li>
+<p>User selects event.<br></p>
+</li>
+<li>
+<p>EventManager displays details of selected event.<br></p>
+</li>
+<li>
+<p>User removes reminder on event.<br></p>
+</li>
+<li>
+<p>EventManager removes reminder for the event and displays confirmation message.<br>
 Use case ends</p>
+</li>
+</ol>
 </div>
 <h3 id="use-case-comments" class="discrete">Use case: Comments</h3>
 <div class="paragraph">
@@ -2966,18 +3060,32 @@ Resume use case at step 4.</p>
 </li>
 </ul>
 </div>
+<h3 id="use-case-export-calendar" class="discrete">Use Case: Export calendar:</h3>
 <div class="paragraph">
-<p><strong>Use Case: Export calendar</strong>:<br>
-MSS (main system success):<br>
-1. User request to export registered event list with given name<br>
-2. EventManager execute exportCalendarCommand
-3. A filename with .ics extension create or re-write in src/data/ folder</p>
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User request to export registered event list with given name<br></p>
+</li>
+<li>
+<p>EventManager execute exportCalendarCommand</p>
+</li>
+<li>
+<p>A filename with .ics extension create or re-write in src/data/ folder</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Extensions:
-0a) User viewing current registered list with view attendance
-1a) User modified registered list with command
-    1a1) The new list is exported in .ics file</p>
+<p><strong>Extensions</strong></p>
+</div>
+<div class="paragraph">
+<p>0a) User viewing current list of registered events.</p>
+</div>
+<div class="paragraph">
+<p>1a) User modified registered list with command.
+    1a1) The new list is exported in .ics file.</p>
 </div>
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>EventManager</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
@@ -3204,4 +3312,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 15:19:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 16:47:46 UTC</div></div></div></body></html>
