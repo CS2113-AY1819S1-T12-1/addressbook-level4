@@ -361,23 +361,23 @@ Exports the iCalendar file with name 'myCalendar' to your <strong>data</strong> 
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
 <p>Since our product is an event manager, events should be controlled and view in chronological order.
-To do this, <code>UniqueEventList</code> class is modify so as to sort the event list in Date order, follow by Name order.<br></p>
+To do this, <code>UniqueEventList</code> class was modified so as to sort the event list in Date order, follow by Name order.<br></p>
 </div>
 <div class="paragraph">
 <p>Consider this scenario:</p>
 </div>
 <div class="paragraph">
-<p>Step 1: User launch application, then log in</p>
+<p>Step 1: User launches application, then logs in</p>
 </div>
 <div class="paragraph">
-<p>Step 2: User add a new event which will occur earlier than some of the event in the list<br>
-e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8203;</code></p>
+<p>Step 2: User adds a new event which will occur before some of the other events in the list<br>
+e.g: <code>add n/Jack Birthday Party &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
-<p>Step 3: When add method is called, it performs the intended operation, then sort the list before returning it to other components.</p>
+<p>Step 3: When add method is called, it performs the intended operation, then sorts the list before returning it to other components.</p>
 </div>
 <div class="paragraph">
-<p>Step 4: The event page is reloaded and display the newly added event in the correct place.</p>
+<p>Step 4: The event list panel is reloaded and displays the newly added event in the correct place.</p>
 </div>
 </div>
 <div class="sect3">
@@ -385,14 +385,14 @@ e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Event list will be sort based on sort method implemented in <code>UniqueEventList</code> class to modify the internal list which event manager is backed on.</p>
+<p><strong>Alternative 1 (current choice):</strong> Event list will be sorted based on sort method implemented in <code>UniqueEventList</code> class to modify the internal list which event manager is backed on.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement will minimum modification that could affect other components.</p>
+<p>Pros: Easy to implement with minimum modification that could affect other components.</p>
 </li>
 <li>
-<p>Cons: Every method that change the internal list (e.g: add, setEvent, delete) will need to be sorted at the end of the method.</p>
+<p>Cons: Every method that changes the internal list (e.g: add, setEvent, delete) will need to implement the sorting method again at the end of the method.</p>
 </li>
 </ul>
 </div>
@@ -405,7 +405,7 @@ e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8
 <p>Pros: The easiest implementation without affecting other components.</p>
 </li>
 <li>
-<p>Cons: The sort operation when called by other components, for example UI component will return operation to main thread, which severely affect testing with JUnit on JavaFX thread</p>
+<p>Cons: The sort operation when called by other components, for example the UI component, will return operations to the main thread, which will severely affect testing with JUnit on JavaFX thread.</p>
 </li>
 </ul>
 </div>
@@ -418,7 +418,7 @@ e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8
 <p>Pros: Will perform minimal operation while still returning what we need to observe.</p>
 </li>
 <li>
-<p>Cons: Very complicated implementation as UI are updated based on observing internal list. We will need a class to update the UI if we just want to sort the list on displaying.</p>
+<p>Cons: Very complicated implementation as the UI is updated based on observing internal list. We will need a class to update the UI if we only want to sort the list on display.</p>
 </li>
 </ul>
 </div>
@@ -428,14 +428,14 @@ e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8
 </div>
 </div>
 <div class="sect2">
-<h3 id="enhance-current-code-find-code-command"><a class="link" href="#enhance-current-code-find-code-command">Enhance current <code>find</code> command</a></h3>
+<h3 id="enhance-current-find-command"><a class="link" href="#enhance-current-find-command">Enhance current find command</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
 <div class="paragraph">
 <p><code>find</code> command is used for better navigation. Therefore, it is enhanced to search for more properties in an Event.<br></p>
 </div>
 <div class="paragraph">
-<p><code>find</code> can search for any data with the default keywords and . If specific prefix is added, find can search for event that must contain that keyword in that specific field</p>
+<p><code>find</code> can search for any data with the default keywords and . If specific prefixes are added, find can search for events that must contain that keyword in the specific fields.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -444,8 +444,8 @@ e.g: <code>add n/Happy Jack Birthday &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If there are more than 1 prefix of the same type, for example, <code>find n/new n/dark n/meeting</code>, this will be automatically combined together, which means this command will be assumed to be the same as <code>find n/new dark meeting</code><br>
-Current version implementation using logic AND operator for different prefixes choice.
+If there are more than 1 prefixes of the same type, for example, <code>find n/new n/dark n/meeting</code>, they will be automatically combined together, which means that this command will be assumed to be the same as <code>find n/new dark meeting</code>.<br>
+Current version implementation uses logic AND operator for different prefixes.
 </td>
 </tr>
 </table>
@@ -456,14 +456,14 @@ Current version implementation using logic AND operator for different prefixes c
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Modify the predicate to display the event that date contains one of the keywords</p>
+<p><strong>Alternative 1 (current choice):</strong> Modify the predicate to display the events that contain one of the keywords.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Follow the current structure of <code>find</code> command, which mean can reuse current resources</p>
+<p>Pros: Follows the current structure of <code>find</code> command, which means that current resources can be reused.</p>
 </li>
 <li>
-<p>Cons: With the current implementation of the predicate, scaling will severely affect product performance</p>
+<p>Cons: With the current implementation of the predicate, scaling will severely affect product performance.</p>
 </li>
 </ul>
 </div>
@@ -472,17 +472,17 @@ Current version implementation using logic AND operator for different prefixes c
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancement-v2-0"><a class="link" href="#future-enhancement-v2-0">Future enhancement: V2.0</a></h4>
+<h4 id="future-enhancement"><a class="link" href="#future-enhancement">Future enhancement:</a></h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Search for contained or exact keywords option</p>
+<p>Search options for keywords contained or for the exact keywords.</p>
 </li>
 <li>
-<p>Search with  both <code>logic AND and OR operator</code> with different prefixes</p>
+<p>Search with  both <code>logic AND and OR operator</code> with different prefixes.</p>
 </li>
 <li>
-<p>Search for time range</p>
+<p>Search for events within a time range.</p>
 </li>
 </ul>
 </div>
@@ -493,22 +493,22 @@ Current version implementation using logic AND operator for different prefixes c
 <div class="sect3">
 <h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current implementation</a></h4>
 <div class="paragraph">
-<p>This feature will increase compatibility of Event Manager will other calendar app for better planning.</p>
+<p>This feature will increase the compatibility of Event Manager with other calendar app for better planning.</p>
 </div>
 <div class="paragraph">
 <p>Consider the following scenario:</p>
 </div>
 <div class="paragraph">
-<p>Step 1: User launch application, then log in</p>
+<p>Step 1: User launches the application, then logs in.</p>
 </div>
 <div class="paragraph">
-<p>Step 2: User execute 'export my event calendar' command. The export command receive argument to accept as filename</p>
+<p>Step 2: User executes <code>export my event calendar</code> command. The export command receive argument to accept as filename</p>
 </div>
 <div class="paragraph">
-<p>Step 3: Current user, who are logging in, will be used to receive an event filtered list that he/she registered for.</p>
+<p>Step 3: Current user, who is logged in, will be used to receive an event filtered list that he/she has registered for.</p>
 </div>
 <div class="paragraph">
-<p>Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in <strong>data</strong> folder</p>
+<p>Step 4: A FileOutputStream will be created to create new file/re-write if the file exists with the data from the filtered event list converted to iCalendar file format</p>
 </div>
 </div>
 <div class="sect3">
@@ -516,28 +516,28 @@ Current version implementation using logic AND operator for different prefixes c
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current implementation):</strong> Using ical4j external library to create method to convert event to RFC5545 format, then stream to FileOutputStream with given filename from user.<br>
+<p><strong>Alternative 1 (current implementation):</strong> Using ical4j external library to create methods to convert events to RFC5545 format, then stream to FileOutputStream with given filename from user.<br>
 All method are written in the <code>ExportCalendarCommand</code> class.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement, can reuse current resources and easy to match wth the implementation of Attendance list</p>
+<p>Pros: Easy to implement, can reuse current resources and easy to match wth the implementation of Attendance list.</p>
 </li>
 <li>
-<p>Cons: Violate some of the OOP design as the export method should be in the storage class</p>
+<p>Cons: Violates some of the OOP design as the export method should be in the storage class.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Create class to write an .ics file with given RFC5545 standard</p>
+<p><strong>Alternative 2:</strong> Create a class to write an .ics file with given RFC5545 standard.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Have better control of the output file, since the ical4j support API has not been updated for a long time and currently show some lacking</p>
+<p>Pros: Have better control of the output file, since the ical4j support API has not been updated for a long time and currently shows some areas which are lacking.</p>
 </li>
 <li>
-<p>Cons: Very complicated and time wasting</p>
+<p>Cons: Very complicated and time consuming.</p>
 </li>
 </ul>
 </div>
@@ -562,9 +562,9 @@ All method are written in the <code>ExportCalendarCommand</code> class.</p>
 <div class="sect3">
 <h4 id="proposed-future-enhancement"><a class="link" href="#proposed-future-enhancement">[Proposed]: Future enhancement</a></h4>
 <div class="paragraph">
-<p>Export should be able to export the attendance list of an event according to user preference</p>
+<p>Export should be able to export the attendance list of an event according to user preference.</p>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 16:47:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 19:52:45 UTC</div></div></div></body></html>
