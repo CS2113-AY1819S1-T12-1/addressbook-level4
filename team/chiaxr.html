@@ -1,45 +1,106 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Chia Xiang Rong - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Event Manager</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T12-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Chia Xiang Rong - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-event-manager"><a class="link" href="#project-event-manager">PROJECT: Event Manager</a></h2>
-<div class="sectionbody">
-<hr>
-</div>
-</div>
-<div class="sect1">
-<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Event Manager</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T12-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Chia Xiang Rong - Project Portfolio</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Event Manager is a desktop address book application used for managing events in the Halls and Residential Colleges of NUS. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p><span class="big">PROJECT: Event Manager</span></p>
+</div>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#overview">1. Overview</a></li>
+<li><a href="#summary-of-contributions">2. Summary of contributions</a></li>
+<li><a href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a>
+<ul class="sectlevel2">
+<li><a href="#register-for-event-code-register-code">3.1. Register for event : <code>register</code></a></li>
+<li><a href="#remove-registration-from-event-code-unregister-code">3.2. Remove registration from event : <code>unregister</code></a></li>
+<li><a href="#list-all-registered-events-code-attending-code">3.3. List all registered events : <code>attending</code></a></li>
+<li><a href="#remove-user-from-event-code-removeattendee-code">3.4. Remove user from event : <code>removeAttendee</code></a></li>
+</ul>
+</li>
+<li><a href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a>
+<ul class="sectlevel2">
+<li><a href="#rsvp">4.1. RSVP</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">1. Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document provides a summary of my contributions as a developer of the Event Manager project. It showcases both my proficiency in software engineering and clarity in technical writing.</p>
+</div>
+<div class="paragraph">
+<p>Event Manager is a cross-platform desktop application that manages events, targeted at the Halls and Residential Colleges of NUS. These residences tend to host many events for their students, and it can be difficult to keep track of events amidst the students' daily lives. Our application aims to consolidate these events and present them in a clear manner, allowing the residents to easily sieve through upcoming events that they are interested in.</p>
+</div>
+<div class="paragraph">
+<p>Other main features include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Authentication</p>
+</li>
+<li>
+<p>Registration</p>
+</li>
+<li>
+<p>Reminders</p>
+</li>
+<li>
+<p>Comments</p>
+</li>
+<li>
+<p>Searching &amp; Sorting</p>
+</li>
+<li>
+<p>Export of calendar file</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The user interacts with the application using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. All features can be used by typing commands in the CLI, but the GUI provides important information as well as some ease of use to the user. It is written in Java, and has about 10 kLoC.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">2. Summary of contributions</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>My contributions to the project are described below.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: Added <strong>the ability to register/unregister for events and view event attendance</strong></p>
+<p><strong>Major enhancement</strong>: Added <strong>the ability to register/unregister for events and view attending events</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: Allows users to indicate their attendance for events, and view the usernames of other attendees.</p>
+<p><strong>What it does</strong>:</p>
+<div class="paragraph">
+<p>Users can indicate their attendance for events, and view the usernames of other attendees. Events that the user are attending can be filtered out and displayed.</p>
+</div>
 </li>
 <li>
-<p>Justification: This feature allows event ICs to have an idea of the number of attendees for planning purposes, as well as users to see who else is attending the event so they might connect with people they know.</p>
+<p><strong>Justification</strong>:</p>
+<div class="paragraph">
+<p>This feature encourages users to attend events and connect with other users they know who are attending the same event, promoting social engagement in the community. It also provides event coordinators with a rough estimate of the turnout, allowing them to plan accordingly and make suitable preparations.</p>
+</div>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: -</p>
+<p><strong>Highlights</strong>:</p>
+<div class="paragraph">
+<p>This enhancement required an in-depth analysis of design alternatives. The implementation too was moderately difficult as it required modification to the existing storage format.</p>
+</div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Created EventSearchPage to display all event details on selection.</p>
+<p><strong>Minor enhancement</strong>: Formatting and display of event details in event page</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>]</p>
@@ -56,7 +117,7 @@
 <p>Managed releases <code>v1.3</code> - <code>v1.4</code> (2 releases) on GitHub</p>
 </li>
 <li>
-<p>Wrote additional tests for RSVP features to increase coverage (Pull request <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/99">#99</a>)</p>
+<p>Wrote additional integration tests for registration features to increase coverage (Pull request <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/99">#99</a>)</p>
 </li>
 </ul>
 </div>
@@ -81,9 +142,6 @@
 </ul>
 </div>
 </li>
-<li>
-<p>Tools: -</p>
-</li>
 </ul>
 </div>
 </li>
@@ -92,7 +150,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -105,7 +163,7 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="register-for-event-code-register-code"><a class="link" href="#register-for-event-code-register-code">Register for event : <code>register</code></a></h3>
+<h3 id="register-for-event-code-register-code"><a class="link" href="#register-for-event-code-register-code">3.1. Register for event : <code>register</code></a></h3>
 <div class="paragraph">
 <p>User: Registers for an event by adding the current user&#8217;s username to the attendance list.<br>
 Format: <code>register INDEX</code></p>
@@ -147,9 +205,15 @@ Registers User for the 1st event in the results of the <code>find</code> command
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/registerUG.png" alt="registerUG" width="800">
+</div>
+<div class="title">Figure 1. Expected outcome after user Peter Parker registers for the event at index 5 (annotations in red).</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="remove-registration-from-event-code-unregister-code"><a class="link" href="#remove-registration-from-event-code-unregister-code">Remove registration from event : <code>unregister</code></a></h3>
+<h3 id="remove-registration-from-event-code-unregister-code"><a class="link" href="#remove-registration-from-event-code-unregister-code">3.2. Remove registration from event : <code>unregister</code></a></h3>
 <div class="paragraph">
 <p>User: Unregisters for an event by removing the current user&#8217;s username from the attendance list.<br>
 Format: <code>unregister INDEX</code></p>
@@ -193,14 +257,20 @@ Unregisters user from the 2nd event in the results of the <code>find</code> comm
 </div>
 </div>
 <div class="sect2">
-<h3 id="list-all-registered-events-code-attending-code"><a class="link" href="#list-all-registered-events-code-attending-code">List all registered events : <code>attending</code></a></h3>
+<h3 id="list-all-registered-events-code-attending-code"><a class="link" href="#list-all-registered-events-code-attending-code">3.3. List all registered events : <code>attending</code></a></h3>
 <div class="paragraph">
 <p>User: Lists all events that the user has registered for.<br>
 Format: <code>attending</code></p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/attendingUG.png" alt="attendingUG" width="700">
+</div>
+<div class="title">Figure 2. Events that user Peter Parker is registered to are displayed, similar to find operation (annotations in red).</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="remove-user-from-event-code-removeattendee-code"><a class="link" href="#remove-user-from-event-code-removeattendee-code">Remove user from event : <code>removeAttendee</code></a></h3>
+<h3 id="remove-user-from-event-code-removeattendee-code"><a class="link" href="#remove-user-from-event-code-removeattendee-code">3.4. Remove user from event : <code>removeAttendee</code></a></h3>
 <div class="paragraph">
 <p>Admin: Removes a user registered for an event.<br>
 Format: <code>removeAttendee INDEX u/USERNAME</code></p>
@@ -246,7 +316,7 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 </div>
 </div>
 <div class="sect1">
-<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -259,35 +329,43 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="rsvp"><a class="link" href="#rsvp">RSVP</a></h3>
+<h3 id="rsvp"><a class="link" href="#rsvp">4.1. RSVP</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The RSVP feature consists of the <code>register</code> &amp; <code>unregister</code> command. The implementations of the commands use the <code>EditEventDescriptor</code> class and <code>createEditedEvent</code> method from <code>EditCommand</code> to aid in updating event attendance. Attendees of an event are stored in the <code>eventmanager.xml</code> file, in a similar fashion to the storage of tags.</p>
+<p>The RSVP feature consists of the <code>register</code> &amp; <code>unregister</code> command. A <code>removeAttendee</code> command is included for admin use to remove users forcibly if required. The implementations of the commands use the <code>EditEventDescriptor</code> class and <code>createEditedEvent</code> method from <code>EditCommand</code> to aid in updating event attendance. Attendees of an event are stored in the <code>eventmanager.xml</code> file, in a similar fashion to the storage of tags.</p>
 </div>
 <div class="paragraph">
 <p>Below is an example usage scenario and how the RSVP mechanism behaves:</p>
 </div>
-<div class="paragraph">
-<p>Step 1: The user launches the application, clicks on an event or types <code>select 2</code> into the CLI. Details of the 2nd event including event attendance are displayed.</p>
-</div>
-<div class="paragraph">
-<p>Step 2: The user executes <code>register 2</code> to register for the 2nd event. The <code>register</code> command takes in the current model and event at index 2, getting the username of the current user via <code>Model#getUsername()</code>, and the current attendance of the event as a <code>HashSet</code> with <code>Event#getAttendance</code>.</p>
-</div>
-<div class="paragraph">
-<p>Step 3: The <code>register</code> command tries to add the username into the current attendance with <code>add()</code>. If the username already exists in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
-</div>
-<div class="paragraph">
-<p>Step 4: The model is updated and committed, overwriting <code>eventmanager.xml</code>. The event page is reloaded to display the new event attendance.</p>
-</div>
-<div class="paragraph">
-<p>Step 5: If the user decides to unregister from the event, the user executes <code>unregister 2</code>, and the <code>unregister</code> command gets the username and attendance in the same manner as the <code>register</code> command in Step 2.</p>
-</div>
-<div class="paragraph">
-<p>Step 6: The <code>unregister</code> command tries to remove the username from the current attendance with <code>remove()</code>. If the username does not exist in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
-</div>
-<div class="paragraph">
-<p>Step 7: The model is updated and committed as in Step 3, and the event page is again reloaded.</p>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Step 1: The user launches the application, and logs in.</p>
+<p class="tableblock">Step 2: The user clicks on an event or types <code>select 2</code> into the CLI. Details of the 2nd event including event attendance are displayed.</p>
+<p class="tableblock">Step 3: The user executes <code>register 2</code> to register for the 2nd event. The <code>register</code> command takes in the current model and event at index 2, getting the username of the current user via <code>Model#getUsername</code>, and the current attendance of the event as a <code>HashSet</code> with <code>Event#getAttendance</code>.</p>
+<p class="tableblock">Step 4: The <code>register</code> command tries to add the username into the current attendance with <code>HashSet#add</code>. If the username already exists in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
+<p class="tableblock">Step 5: The model is updated and committed, overwriting <code>eventmanager.xml</code>. The event page is reloaded to display the new event attendance.</p>
+<p class="tableblock">Step 6: If the user decides to unregister from the event, the user executes <code>unregister 2</code>, and the <code>unregister</code> command gets the username and attendance in the same manner as the <code>register</code> command in Step 3.</p>
+<p class="tableblock">Step 7: The <code>unregister</code> command command tries to remove the username from the current attendance with <code>HashSet#remove</code>. If the username does not exist in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
+<p class="tableblock">Step 8: The model is updated and committed as in Step 4, and the event page is again reloaded.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>removeAttendee</code> works in similar manner to <code>unregister</code>, except the username of the target attendee is used when calling <code>HashSet#remove</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -296,22 +374,30 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>TreeSet</code> is used when retrieving the attendance for display as it allows for easy sorting of attendee usernames. Usernames are sorted in case-insensitive order.
+<div class="title">Sorting of attendance</div>
+<code>TreeSet</code> is used when retrieving the attendance for display as it allows for easy sorting of attendee usernames. Usernames are sorted in case-insensitive lexicographical order.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the register operation works:</p>
+<p>The following sequence diagrams show how the <code>register</code> and <code>removeAttendee</code> operations work:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/registerSD.png" alt="registerSD" width="800">
 </div>
+<div class="title">Figure 3. Sequence diagram for register operation</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/removeAttendeeSD.png" alt="removeAttendeeSD" width="800">
+</div>
+<div class="title">Figure 4. Sequence diagram for removeAttendee operation</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-display-attendance"><a class="link" href="#aspect-how-to-display-attendance">Aspect: How to display attendance</a></h5>
 <div class="ulist">
@@ -324,7 +410,7 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 <p>Pros: Can see which other users are attending the event</p>
 </li>
 <li>
-<p>Cons: More complex to implement</p>
+<p>Cons: Attendees might have privacy concerns regarding how other users can see whether they are attending an event.</p>
 </li>
 </ul>
 </div>
@@ -337,7 +423,7 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 <p>Pros: Easier to implement, user can easily see whether they are registered</p>
 </li>
 <li>
-<p>Cons: New methods will need to be implemented to make many fields for comments.</p>
+<p>Cons: Cannot see other attendees.</p>
 </li>
 </ul>
 </div>
@@ -363,7 +449,7 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Store with user details</p>
+<p><strong>Alternative 2:</strong> Store in user profile</p>
 <div class="ulist">
 <ul>
 <li>
@@ -371,6 +457,19 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 </li>
 <li>
 <p>Cons: Inefficient to check which users are attending an event.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Store in both <code>eventmanager.xml</code> and user profile.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows for efficient retrieval of both event attendance and events that user has registered for.</p>
+</li>
+<li>
+<p>Cons: Additional complexity to implement storage in user profile, data redundancy.</p>
 </li>
 </ul>
 </div>
@@ -404,6 +503,86 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 </li>
 <li>
 <p>Cons: More complexity for inserting in correct location.</p>
+<h3 id="use-case-registration" class="discrete">Use case: Registration</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list events.</p>
+</li>
+<li>
+<p>EventManager displays list of events.</p>
+</li>
+<li>
+<p>User selects event with status [UPCOMNG].</p>
+</li>
+<li>
+<p>EventManager displays details of selected event, including current attendance list.</p>
+</li>
+<li>
+<p>User requests to register for the event.</p>
+</li>
+<li>
+<p>EventManager adds user to attendance list and displays confirmation message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Extensions:</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a. User is already registered for event.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a1. EventManager displays error message.
+Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6a. User unregisters from event.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6a1. User requests to unregister for the event.</p>
+</li>
+<li>
+<p>6a2. EventManager removes user from attendance list and displays confirmation message.
+Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6b. User is banned from event.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>6c1. Admin requests to remove user from event.</p>
+</li>
+<li>
+<p>6c2. EventManager removes user from attendance list and displays confirmation message.
+Use case ends.</p>
 </li>
 </ul>
 </div>
@@ -414,4 +593,4 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:28:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:33:24 UTC</div></div></div></body></html>

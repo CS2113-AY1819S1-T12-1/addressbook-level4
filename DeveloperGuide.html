@@ -1088,31 +1088,39 @@ If the user uses the <code>find</code> command, the following functions will fol
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The RSVP feature consists of the <code>register</code> &amp; <code>unregister</code> command. The implementations of the commands use the <code>EditEventDescriptor</code> class and <code>createEditedEvent</code> method from <code>EditCommand</code> to aid in updating event attendance. Attendees of an event are stored in the <code>eventmanager.xml</code> file, in a similar fashion to the storage of tags.</p>
+<p>The RSVP feature consists of the <code>register</code> &amp; <code>unregister</code> command. A <code>removeAttendee</code> command is included for admin use to remove users forcibly if required. The implementations of the commands use the <code>EditEventDescriptor</code> class and <code>createEditedEvent</code> method from <code>EditCommand</code> to aid in updating event attendance. Attendees of an event are stored in the <code>eventmanager.xml</code> file, in a similar fashion to the storage of tags.</p>
 </div>
 <div class="paragraph">
 <p>Below is an example usage scenario and how the RSVP mechanism behaves:</p>
 </div>
-<div class="paragraph">
-<p>Step 1: The user launches the application, clicks on an event or types <code>select 2</code> into the CLI. Details of the 2nd event including event attendance are displayed.</p>
-</div>
-<div class="paragraph">
-<p>Step 2: The user executes <code>register 2</code> to register for the 2nd event. The <code>register</code> command takes in the current model and event at index 2, getting the username of the current user via <code>Model#getUsername()</code>, and the current attendance of the event as a <code>HashSet</code> with <code>Event#getAttendance</code>.</p>
-</div>
-<div class="paragraph">
-<p>Step 3: The <code>register</code> command tries to add the username into the current attendance with <code>add()</code>. If the username already exists in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
-</div>
-<div class="paragraph">
-<p>Step 4: The model is updated and committed, overwriting <code>eventmanager.xml</code>. The event page is reloaded to display the new event attendance.</p>
-</div>
-<div class="paragraph">
-<p>Step 5: If the user decides to unregister from the event, the user executes <code>unregister 2</code>, and the <code>unregister</code> command gets the username and attendance in the same manner as the <code>register</code> command in Step 2.</p>
-</div>
-<div class="paragraph">
-<p>Step 6: The <code>unregister</code> command tries to remove the username from the current attendance with <code>remove()</code>. If the username does not exist in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
-</div>
-<div class="paragraph">
-<p>Step 7: The model is updated and committed as in Step 3, and the event page is again reloaded.</p>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Step 1: The user launches the application, and logs in.</p>
+<p class="tableblock">Step 2: The user clicks on an event or types <code>select 2</code> into the CLI. Details of the 2nd event including event attendance are displayed.</p>
+<p class="tableblock">Step 3: The user executes <code>register 2</code> to register for the 2nd event. The <code>register</code> command takes in the current model and event at index 2, getting the username of the current user via <code>Model#getUsername</code>, and the current attendance of the event as a <code>HashSet</code> with <code>Event#getAttendance</code>.</p>
+<p class="tableblock">Step 4: The <code>register</code> command tries to add the username into the current attendance with <code>HashSet#add</code>. If the username already exists in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
+<p class="tableblock">Step 5: The model is updated and committed, overwriting <code>eventmanager.xml</code>. The event page is reloaded to display the new event attendance.</p>
+<p class="tableblock">Step 6: If the user decides to unregister from the event, the user executes <code>unregister 2</code>, and the <code>unregister</code> command gets the username and attendance in the same manner as the <code>register</code> command in Step 3.</p>
+<p class="tableblock">Step 7: The <code>unregister</code> command command tries to remove the username from the current attendance with <code>HashSet#remove</code>. If the username does not exist in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
+<p class="tableblock">Step 8: The model is updated and committed as in Step 4, and the event page is again reloaded.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>removeAttendee</code> works in similar manner to <code>unregister</code>, except the username of the target attendee is used when calling <code>HashSet#remove</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1121,18 +1129,26 @@ If the user uses the <code>find</code> command, the following functions will fol
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>TreeSet</code> is used when retrieving the attendance for display as it allows for easy sorting of attendee usernames. Usernames are sorted in case-insensitive order.
+<div class="title">Sorting of attendance</div>
+<code>TreeSet</code> is used when retrieving the attendance for display as it allows for easy sorting of attendee usernames. Usernames are sorted in case-insensitive lexicographical order.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the register operation works:</p>
+<p>The following sequence diagrams show how the <code>register</code> and <code>removeAttendee</code> operations work:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/registerSD.png" alt="registerSD" width="800">
 </div>
+<div class="title">Figure 11. Sequence diagram for register operation</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/removeAttendeeSD.png" alt="removeAttendeeSD" width="800">
+</div>
+<div class="title">Figure 12. Sequence diagram for removeAttendee operation</div>
 </div>
 </div>
 <div class="sect3">
@@ -1149,7 +1165,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 <p>Pros: Can see which other users are attending the event</p>
 </li>
 <li>
-<p>Cons: More complex to implement</p>
+<p>Cons: Attendees might have privacy concerns regarding how other users can see whether they are attending an event.</p>
 </li>
 </ul>
 </div>
@@ -1162,7 +1178,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 <p>Pros: Easier to implement, user can easily see whether they are registered</p>
 </li>
 <li>
-<p>Cons: New methods will need to be implemented to make many fields for comments.</p>
+<p>Cons: Cannot see other attendees.</p>
 </li>
 </ul>
 </div>
@@ -1188,7 +1204,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Store with user details</p>
+<p><strong>Alternative 2:</strong> Store in user profile</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1196,6 +1212,19 @@ If the user uses the <code>find</code> command, the following functions will fol
 </li>
 <li>
 <p>Cons: Inefficient to check which users are attending an event.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Store in both <code>eventmanager.xml</code> and user profile.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows for efficient retrieval of both event attendance and events that user has registered for.</p>
+</li>
+<li>
+<p>Cons: Additional complexity to implement storage in user profile, data redundancy.</p>
 </li>
 </ul>
 </div>
@@ -1258,7 +1287,7 @@ If the user uses the <code>find</code> command, the following functions will fol
 <div class="content">
 <img src="images/Update-sequenceDiagram.png" alt="Update sequenceDiagram" width="800">
 </div>
-<div class="title">Figure 11. Sequence Diagram for UpdateStatusCommand</div>
+<div class="title">Figure 13. Sequence Diagram for UpdateStatusCommand</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1299,7 +1328,7 @@ The Event Status feature is supported by the <code>Status</code> and <code>DateT
 <div class="content">
 <img src="images/Reminder-sequenceDiagram.png" alt="Reminder sequenceDiagram" width="800">
 </div>
-<div class="title">Figure 12. Sequence Diagram for ReminderCommand</div>
+<div class="title">Figure 14. Sequence Diagram for ReminderCommand</div>
 </div>
 </div>
 <div class="sect3">
@@ -1787,7 +1816,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 13. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 15. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2330,7 +2359,7 @@ Use Case resumes at step 1.</p>
 <p>EventManager displays list of events.</p>
 </li>
 <li>
-<p>User selects event that is [UPCOMNG].</p>
+<p>User selects event with status [UPCOMNG].</p>
 </li>
 <li>
 <p>EventManager displays details of selected event, including current attendance list.</p>
@@ -2759,4 +2788,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:28:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:33:24 UTC</div></div></div></body></html>
