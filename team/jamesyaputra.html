@@ -21,6 +21,7 @@
 <li><a href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a>
 <ul class="sectlevel2">
 <li><a href="#authentication">4.1. Authentication</a></li>
+<li><a href="#authentication-2">4.2. Authentication</a></li>
 </ul>
 </li>
 </ul>
@@ -349,5 +350,73 @@ Use Case resumes at step 1.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="authentication-2"><a class="link" href="#authentication-2">4.2. Authentication</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Signing up for an account with a taken username
+=== Deleting a event</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Signed up for an account with a non-taken username.</p>
+</li>
+<li>
+<p>Test case: <code>signup u/TAKENUSERNAME p/VALIDPASSWORD</code><br>
+Expected: Will display an error saying that account already exists.</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:09:27 UTC</div></div></div></body></html>
+</li>
+<li>
+<p>Deleting a event while all events are listed</p>
+</li>
+<li>
+<p>Signing up or logging in to an account while already logged in</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Already logged in to an existing account.</p>
+</li>
+<li>
+<p>Test case: <code>signup u/NEWUSERNAME p/VALIDPASSWORD</code><br>
+Expected: Will display an error saying that the current user is logged in.</p>
+</li>
+<li>
+<p>Test case: <code>login u/EXISTINGUSER p/VALIDPASSWORD</code><br>
+Expected: Will display an error saying that the current user is logged in.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Logging in to a non-existent account</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>login u/NEWUSERNAME p/VALIDPASSWORD</code><br>
+Expected: Will display an error saying that credentials are incorrect.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Using admin commands while logged in as a normal user</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Signed up and logged in to a user account.</p>
+</li>
+<li>
+<p>Test case: A valid add, edit, or delete command.<br>
+Expected: Will display an error saying that user is not authorized to do the command.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:47:07 UTC</div></div></div></body></html>

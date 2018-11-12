@@ -3,16 +3,15 @@
 <link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Event Manager</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T12-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Qin Kai - Project Portfolio</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This portfolio summarizes my contributions to the <a href="https://github.com/CS2113-AY1819S1-T12-1/main/releases/download/v1.3/eventmanager.jar">Event Manager</a> Application, whereby our team of 5 (<a href="http://github.com/chiaxr">Xiang Rong</a>, <a href="https://github.com/Geraldcdx">Gerald</a>, <a href="http://github.com/jamesyaputra">James</a>, <a href="http://github.com/tertium3">Long</a>, <a href="http://github.com/cqinkai">Qin Kai</a>) worked on it as part of our module on software engineering, over a period of 8 weeks. I was the developer in charge of the Event Status feature and the Event Reminder feature in Event Manager.</p>
+<p>This portfolio summarizes my contributions to the <a href="https://github.com/CS2113-AY1819S1-T12-1/main/releases/download/v1.3/eventmanager.jar">Event Manager</a> Application, whereby our team of 5 (<a href="http://github.com/chiaxr">Xiang Rong</a>, <a href="https://github.com/Geraldcdx">Gerald</a>, <a href="http://github.com/jamesyaputra">James</a>, <a href="http://github.com/tertium3">Long</a>, <a href="http://github.com/cqinkai">myself</a>) worked on it as part of our module on software engineering in the National University of Singapore (NUS), over a period of 8 weeks. I was the developer in charge of the Event Status feature and the Event Reminder feature in Event Manager.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="project-event-manager"><a class="link" href="#project-event-manager">PROJECT: Event Manager</a></h2>
+<h2 id="project-event-manager"><a class="link" href="#project-event-manager">Project: Event Manager</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Event Manager is an enhanced version of the <a href="https://github.com/se-edu/addressbook-level4/releases/download/v0.8/addressbook.jar">Address Book</a> Application
----</p>
+<p>Event Manager is a morphed and enhanced version of the <a href="https://github.com/se-edu/addressbook-level4/releases/download/v0.8/addressbook.jar">Address Book</a> Application. It is a desktop application for students living in Residential Colleges to manage all the activities happening throughout the college. The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 10k lines of code (LoC).</p>
 </div>
 </div>
 </div>
@@ -20,32 +19,47 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Event Manager is a desktop application for students living in Residential Colleges to manage all the activities happening throughout the college. The user interacts with it using a Command Line Interface (CLI), and it has a GUI created with JavaFX. It is written in Java, and has about 10k lines of code (LoC).</p>
+<p>This section presents the purpose of developing the Event Manager Application and the scope of our project.</p>
 </div>
 <div class="paragraph">
-<p>The following is a list of the main features in Event Manager:</p>
+<p>Students living in Residential Colleges are presented with a myraid of activities on a daily basis. These activities vary from Interest Group (IG) activities, House events and Master&#8217;s Tea (where the college invites a notable guest speaker for a sharing session with the students) among many others. With so many events going on in the colleges while meeting the academic requirements of the university life, many students often find it a struggle to balance the conflicting demands.<br></p>
+</div>
+<div class="paragraph">
+<p>Thus, Event Manager offers a pragmatic solution to the students' problem of managing events in colleges, by allowing them to view and register for any event in one setting. Additionally, it is supported by other features to enhance the user&#8217;s experience, such as the Comment feature and the Reminder feature.<br></p>
 </div>
 <div class="exampleblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>The following is a list of the main features in Event Manager:</strong><br></p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Authentication</strong>&#8201;&#8212;&#8201;Admin accounts to manage events and user accounts to identify users.</p>
+<p><strong>Authentication:</strong> Admin accounts to manage events and user accounts to register for events.</p>
 </li>
 <li>
-<p><strong>Find</strong>&#8201;&#8212;&#8201;A search feature to filter events based on keywords in the events' data fields.</p>
+<p><strong>Find:</strong> A search feature to filter events based on keywords in the events' data fields.</p>
 </li>
 <li>
-<p><strong>Registration</strong>&#8201;&#8212;&#8201;Users can indicate their attendance for events. Attendance is displayed to all other users.</p>
+<p><strong>Registration:</strong> Users can indicate their attendance for events. Attendance is displayed to all other users.</p>
 </li>
 <li>
-<p><strong>Reminder</strong>&#8201;&#8212;&#8201;Automated reminders are sent to users who have registered for events that are happening in the next 24 hours.</p>
+<p><strong>Reminder</strong>:* Automated reminders are sent to users who have registered for events that are happening in the next 24 hours.</p>
 </li>
 <li>
-<p><strong>Comment</strong>&#8201;&#8212;&#8201;A comment section to facilitate interactions amongst the users for an event.</p>
+<p><strong>Comment:</strong> A comment section to facilitate interactions amongst the users for an event.</p>
 </li>
 <li>
-<p><strong>Status</strong>&#8201;&#8212;&#8201;Displays the status of an event to users. Statuses can be 'Completed' or 'Upcoming'.</p>
+<p><strong>Status</strong>:* Displays the status of an event to users. Statuses can either be 'Completed' or 'Upcoming'.</p>
+</li>
+<li>
+<p><strong>Export:</strong> Allows users to export their registered events as a calendar file, compatible with other calendar applications.</p>
+</li>
+<li>
+<p><strong>Undo/Redo:</strong> Allows users to undo/redo previous commands one at a time.</p>
+</li>
+<li>
+<p><strong>Basic features:</strong> Allows admin users to create, update, edit and delete events.</p>
 </li>
 </ol>
 </div>
@@ -56,64 +70,80 @@
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This section outlines the breadth of my contributions in order of magnitude, starting with my biggest contributions.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement #1</strong>:<br></p>
+<p><strong>Major enhancement #1:</strong><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>added <strong>a new self-updating status field for events</strong></p>
+<p>Added <strong>a reminder mechanism for user-registered events</strong></p>
 </li>
 <li>
-<p>What it does: allows the user to easily discern completed events from upcoming ones. Completed events are events that have taken place while the upcoming events are those that have yet to occur.</p>
+<p><strong>What it does</strong><br>
+Sends a reminder to users for any upcoming events (those happening in the next 24 hours) that they have registered for.</p>
 </li>
 <li>
-<p>Justification: This feature is important and enhances the product because a user would have to strain his/her eyes to look through each event&#8217;s details to ascertain which events have occurred and which ones are coming up.</p>
+<p><strong>Justification</strong><br>
+This feature significantly increases the capacity of Event Manager, by maximizing its potential to create meaningful interactions with the user, apart from the user&#8217;s interactions with the CLI.</p>
 </li>
 <li>
-<p>Highlights: This enhancement changes the current model and increases the list of commands available to users. It required an in-depth analysis of design alternatives.</p>
+<p><strong>Highlights</strong><br>
+This enhancement is the first software-driven feature in Event Manager, whereby the feature runs without any user/operator interactions. This feature required a good understanding of the overall system architecture to implement, in particular the event-driven nature of interactions between components in the Event Manager.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Major enhancement #2</strong>:<br></p>
+<p><strong>Major enhancement #2:</strong><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>added <strong>a reminder mechanism for user-registered events</strong></p>
+<p>Added <strong>a new self-updating status field for events</strong></p>
 </li>
 <li>
-<p>What it does: Sends a reminder to users for any upcoming events (those happening in the next 24 hours) that they have registered for.</p>
+<p><strong>What it does</strong><br>
+Allows the user to easily discern completed events from upcoming ones. Completed events are events that have taken place while upcoming events are those that have yet to occur.</p>
 </li>
 <li>
-<p>Justification: This</p>
+<p><strong>Justification</strong><br>
+This feature enhances the product remarkably because before its implementation, a user would have to strain his/her eyes to look through each event&#8217;s details to ascertain which events have occurred and which ones are coming up.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
+<p><strong>Highlights</strong><br>
+This enhancement changes the current model and greatly boosts the productivity of Event Manager&#8217;s users. Its implementation was the result of thorough analysis of several design alternatives, based on their efficiency and effectiveness.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added new information fields for the events.</p>
+<p><strong>Minor enhancement:</strong><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>a contact field for the name of the person in-charge of the event. (<a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/14">#14</a>)</p>
+<p>Added <strong>new information fields for events</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A <strong>Contact field</strong> for the organiser/person-in-charge of the event. (<a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/14">#14</a>)</p>
 </li>
 <li>
-<p>a comment field for the comment section. (<a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/91">#91</a>)</p>
+<p>A <strong>Comment field</strong> for the comment section. (<a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/91">#91</a>)</p>
 </li>
 <li>
-<p>an attendee field for the event&#8217;s attendees. (<a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/58">#58</a>)</p>
+<p>An <strong>Attendee field</strong> for the event&#8217;s attendees. (<a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/58">#58</a>)</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: [<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=chuang%20qin%20kai&amp;sort=displayName&amp;since=2018-09-12&amp;until=2018-11-05&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">Functional code</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -136,9 +166,6 @@
 <li>
 <p>Morphed the address field into a venue field (<a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/53">#53</a>)</p>
 </li>
-<li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
 </ul>
 </div>
 </li>
@@ -147,7 +174,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a>)</p>
+<p>Tweaked existing contents of the Developer Guide as well as checked for grammatical errors (view changes <a href="https://github.com/CS2113-AY1819S1-T12-1/main/commit/87e7879549630f0d7cee12d5855eb63bb4501698#diff-d23c8091515dc18149f4f2e759e1e288">here</a>)</p>
 </li>
 </ul>
 </div>
@@ -291,16 +318,16 @@ Format: <code>update</code></p>
 </table>
 <div class="sect2">
 <h3 id="event-status-and-reminders"><a class="link" href="#event-status-and-reminders">Event Status and Reminders</a></h3>
+<div class="paragraph">
+<p>The Event Status feature displays the status of events based on their <code>DateTime</code> field. Events whose <code>DateTime</code> has passed the <code>DateTime</code> at the time of updating will adopt the <strong>COMPLETED</strong> status while events whose <code>DateTime</code> has yet to pass will take on the <strong>UPCOMING</strong> status. The Event Reminders feature sends reminders to the logged-in user for upcoming events which the user has registered for.</p>
+</div>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The Event Status and Reminder feature consists of two commands periodically executed by <code>LogicManager</code>. Specifically, the <code>UpdateStatusCommand</code> and the <code>ReminderCommand</code>. The automated process is facilitated by the <code>Timer</code> and <code>TimerTask</code> classes in the <code>java.util</code> package. The <code>TimerTask</code> <code>updateEventStatus</code> has a period of 300,000 ms where it will execute an instance of the <code>UpdateStatusCommand</code>, while the <code>TimerTask</code> <code>checkEventReminders</code> has a period of 36,000,000 ms where it will execute an instance of the <code>ReminderCommand</code>.</p>
+<p>The Event Status and Reminder feature consists of two commands periodically executed by <code>LogicManager</code>. Specifically, the <code>UpdateStatusCommand</code> and the <code>ReminderCommand</code>. The automated process is facilitated by the <code>Timer</code> and <code>TimerTask</code> classes in the <code>java.util</code> package. Both commands initially calls the model#getFilteredEventList() method to obtain the displayed list of events as <code>lastShownList</code>.</p>
 </div>
 <div class="paragraph">
-<p>Both commands initially calls the model#getFilteredEventList() method to obtain the displayed list of events as <code>lastShownList</code>.</p>
-</div>
-<div class="paragraph">
-<p>The <strong>UpdateStatusCommand</strong> updates the status of each event in the <code>lastShownList</code> using <code>Status#setStatus()</code> and <code>model#updateEvent()</code>. It then refreshes the displayed list by calling <code>model#updateFilteredEventList()</code>.</p>
+<p>The <strong>UpdateStatusCommand</strong> is periodically called in <code>TimerTask</code> <code>updateEventStatus</code> every 5 minutes and it loops through every event in <code>lastShownList</code> to update the event&#8217;s status using <code>Status#setStatus()</code> and <code>model#updateEvent()</code>. It then refreshes the displayed list by calling <code>model#updateFilteredEventList()</code>.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the UpdateStatusCommand works:</p>
@@ -324,7 +351,7 @@ The Event Status feature is supported by the <code>Status</code> and <code>DateT
 </table>
 </div>
 <div class="paragraph">
-<p>The <strong>ReminderCommand</strong> checks for the following in each event:</p>
+<p>The <strong>ReminderCommand</strong> is periodically called in <code>TimerTask</code> <code>checkEventReminders</code> every 6 hours and it loops through every event in the <code>lastShownList</code> to check for the following:</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -356,7 +383,7 @@ The Event Status feature is supported by the <code>Status</code> and <code>DateT
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-to-automate-the-commands-or-make-them-user-enabled"><a class="link" href="#aspect-to-automate-the-commands-or-make-them-user-enabled">Aspect: To automate the commands or make them user-enabled</a></h5>
+<h5 id="aspect-whether-to-automate-the-commands-or-make-them-user-enabled"><a class="link" href="#aspect-whether-to-automate-the-commands-or-make-them-user-enabled">Aspect: Whether to automate the commands or make them user-enabled</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -567,14 +594,98 @@ Use case ends</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="requesting-a-reminder"><a class="link" href="#requesting-a-reminder">Requesting a reminder</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Requesting for reminders as a user registered for an upcoming event</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+Added an event that is happening in the next 24 hours<br>
+Logged in as user<br>
+Registered to upcoming event</p>
+</li>
+<li>
+<p>Testcase: <code>reminder</code><br>
+Expected: An alert dialog shows up for the relevant event, showing the name of the event and the event&#8217;s start time. Hitting 'enter' should close the alert dialog.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Requesting for reminders as a user not registered for an upcoming event</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+Added an event that is happening in the next 24 hours<br>
+Logged in as user</p>
+</li>
+<li>
+<p>Testcase: <code>reminder</code><br>
+Expected: Event Manager shows message that there are no upcoming events for you in the logger.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Requesting for reminders as a user not logged in</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+Not logged in</p>
+</li>
+<li>
+<p>Testcase: <code>reminder</code><br>
+Expected: Event Manager shows message that you have to be logged in in the logger.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="updating-event-statuses"><a class="link" href="#updating-event-statuses">Updating event statuses</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Updating event status for an event that has just passed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+Added an event that will happen in 1-2 minutes' time</p>
+</li>
+<li>
+<p>Testcase: <code>update</code><br>
+Expected: The event&#8217;s status should change from UPCOMING to COMPLETED</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Updating event status without any events</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+Event Manager is empty of events (Use the <code>clear</code> command)</p>
+</li>
+<li>
+<p>Testcase: <code>update</code><br>
+Expected: Event Manager shows message that there are no events to be updated in the logger.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
 <hr>
-<div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:09:27 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:47:07 UTC</div></div></div></body></html>
