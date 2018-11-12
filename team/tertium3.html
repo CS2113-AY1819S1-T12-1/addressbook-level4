@@ -373,11 +373,23 @@ To do this, <code>UniqueEventList</code> class was modified so as to sort the ev
 <p>Step 2: User adds a new event which will occur before some of the other events in the list<br>
 e.g: <code>add n/Jack Birthday Party &#8230;&#8203; d/10/10/2018 20:30&#8230;&#8203;</code></p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autoSortingBefore.png" alt="autoSortingBefore">
+</div>
+<div class="title">Figure 1. Add new event that need to be sorted</div>
+</div>
 <div class="paragraph">
 <p>Step 3: When add method is called, it performs the intended operation, then sorts the list before returning it to other components.</p>
 </div>
 <div class="paragraph">
 <p>Step 4: The event list panel is reloaded and displays the newly added event in the correct place.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autoSortingAfter.png" alt="autoSortingAfter">
+</div>
+<div class="title">Figure 2. Auto sorting results</div>
 </div>
 </div>
 <div class="sect3">
@@ -472,7 +484,7 @@ Current version implementation uses logic AND operator for different prefixes.
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-enhancement"><a class="link" href="#future-enhancement">Future enhancement:</a></h4>
+<h4 id="future-enhancement-v2-0"><a class="link" href="#future-enhancement-v2-0">Future enhancement: [V2.0]</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -502,22 +514,40 @@ Current version implementation uses logic AND operator for different prefixes.
 <p>Step 1: User launches the application, then logs in.</p>
 </div>
 <div class="paragraph">
-<p>Step 2: User executes <code>export my event calendar</code> command. The export command receive argument to accept as filename</p>
+<p>Step 2: User executes <code>export mycal</code> command. The export command receive argument to accept as filename</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/exportCalendarCommand.png" alt="exportCalendarCommand">
+</div>
+<div class="title">Figure 3. User execute export command</div>
 </div>
 <div class="paragraph">
 <p>Step 3: Current user, who is logged in, will be used to receive an event filtered list that he/she has registered for.</p>
 </div>
 <div class="paragraph">
-<p>Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in <strong>folder that you store EventManager</strong></p>
+<p>Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in <strong>folder that you store EventManager.jar</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/exportCommandResultUI.png" alt="exportCommandResultUI">
+</div>
+<div class="title">Figure 4. Command result show in the UI</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/exportCommandResultFile.png" alt="exportCommandResultFile">
+</div>
+<div class="title">Figure 5. Command result show in file folder</div>
 </div>
 <div class="paragraph">
 <p>The process is illustrated in the following diagram: (Fig 15)</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/exportCalendarCommandSequencesDiagram.png" alt="exportCalendarCommandSequencesDiagram" width="800">
+<img src="../images/exportCalendarCommandSequencesDiagram.png" alt="exportCalendarCommandSequencesDiagram">
 </div>
-<div class="title">Figure 1. ExportCalendarCommand sequence diagram</div>
+<div class="title">Figure 6. ExportCalendarCommand sequence diagram</div>
 </div>
 </div>
 <div class="sect3">
@@ -569,11 +599,11 @@ All method are written in the <code>ExportCalendarCommand</code> class.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="proposed-future-enhancement"><a class="link" href="#proposed-future-enhancement">[Proposed]: Future enhancement</a></h4>
+<h4 id="proposed-future-enhancement-v2-0"><a class="link" href="#proposed-future-enhancement-v2-0">[Proposed]: Future enhancement [V2.0]</a></h4>
 <div class="paragraph">
 <p>Export should be able to export the attendance list of an event according to user preference.</p>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 08:18:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 08:39:09 UTC</div></div></div></body></html>
