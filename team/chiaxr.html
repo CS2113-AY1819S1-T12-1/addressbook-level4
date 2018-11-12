@@ -13,15 +13,21 @@
 <li><a href="#summary-of-contributions">2. Summary of contributions</a></li>
 <li><a href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a>
 <ul class="sectlevel2">
-<li><a href="#register-for-event-code-register-code">3.1. Register for event : <code>register</code></a></li>
-<li><a href="#remove-registration-from-event-code-unregister-code">3.2. Remove registration from event : <code>unregister</code></a></li>
-<li><a href="#list-all-registered-events-code-attending-code">3.3. List all registered events : <code>attending</code></a></li>
-<li><a href="#remove-user-from-event-code-removeattendee-code">3.4. Remove user from event : <code>removeAttendee</code></a></li>
+<li><a href="#registering-for-an-event-code-register-code">3.1. Registering for an event : <code>register</code></a></li>
+<li><a href="#unregistering-from-an-event-code-unregister-code">3.2. Unregistering from an event : <code>unregister</code></a></li>
+<li><a href="#listing-all-registered-events-code-attending-code">3.3. Listing all registered events : <code>attending</code></a></li>
+<li><a href="#removing-user-from-event-code-removeattendee-code">3.4. Removing user from event : <code>removeAttendee</code></a></li>
 </ul>
 </li>
 <li><a href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a>
 <ul class="sectlevel2">
 <li><a href="#rsvp">4.1. RSVP</a></li>
+<li><a href="#use-cases">4.2. Use Cases</a></li>
+<li><a href="#displaying-event-details">4.3. Displaying event details</a></li>
+<li><a href="#registering-for-an-event">4.4. Registering for an event</a></li>
+<li><a href="#unregistering-for-an-event">4.5. Unregistering for an event</a></li>
+<li><a href="#viewing-all-attending-events">4.6. Viewing all attending events</a></li>
+<li><a href="#removing-an-attendee-from-event">4.7. Removing an attendee from event</a></li>
 </ul>
 </li>
 </ul>
@@ -64,6 +70,9 @@
 <div class="paragraph">
 <p>The user interacts with the application using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. All features can be used by typing commands in the CLI, but the GUI provides important information as well as some ease of use to the user. It is written in Java, and has about 10 kLoC.</p>
 </div>
+<div class="paragraph">
+<p>This project was developed as part of CS2113T (Software Engineering &amp; Object-Oriented Programming) by a team of 5 students, over a period of 8 weeks.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -87,7 +96,7 @@
 <li>
 <p><strong>Justification</strong>:</p>
 <div class="paragraph">
-<p>This feature encourages users to attend events and connect with other users they know who are attending the same event, promoting social engagement in the community. It also provides event coordinators with a rough estimate of the turnout, allowing them to plan accordingly and make suitable preparations.</p>
+<p>This feature encourages users to attend events and connect with other users they know who are attending the same event, promoting social engagement in the community. It also provides event coordinators with a rough estimate of the turnout, allowing them to make suitable preparations for the event, e.g. ensuring ample logistics and manpower.</p>
 </div>
 </li>
 <li>
@@ -100,10 +109,20 @@
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Formatting and display of event details in event page</p>
+<p><strong>Minor enhancement</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Formatting and display of event details in event page, with proper URL encoding</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>]</p>
+<p>Assisted morphing of product to fit context of project</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=chiaxr&amp;sort=displayName&amp;since=2018-09-12&amp;until=2018-10-23&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">RepoSense link</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -114,10 +133,20 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.4</code> (2 releases) on GitHub</p>
+<p>Ensure milestones are met and assist teammates in debugging</p>
 </li>
 <li>
-<p>Wrote additional integration tests for registration features to increase coverage (Pull request <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/99">#99</a>)</p>
+<p>Wrote additional tests for registration features to increase coverage (Pull request <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/109">#109</a>, <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/182">#182</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Implemented URL encoding for display of event page (<a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/182">#182</a>)</p>
 </li>
 </ul>
 </div>
@@ -127,7 +156,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated User and Developer Guides to describe new features: <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/81">#81</a></p>
+<p>Updated User and Developer Guides to describe new features: <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/103">#103</a>, <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/186">#186</a>, <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/188">#188</a></p>
 </li>
 </ul>
 </div>
@@ -137,7 +166,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed: <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/22">#22</a>, <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/58">#58</a>, <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/59">#59</a></p>
+<p>PRs merged: <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/90">#90</a>, <a href="https://github.com/CS2113-AY1819S1-T12-1/main/pull/97">#97</a></p>
 </li>
 </ul>
 </div>
@@ -163,7 +192,7 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="register-for-event-code-register-code"><a class="link" href="#register-for-event-code-register-code">3.1. Register for event : <code>register</code></a></h3>
+<h3 id="registering-for-an-event-code-register-code"><a class="link" href="#registering-for-an-event-code-register-code">3.1. Registering for an event : <code>register</code></a></h3>
 <div class="paragraph">
 <p>User: Registers for an event by adding the current user&#8217;s username to the attendance list.<br>
 Format: <code>register INDEX</code></p>
@@ -213,7 +242,7 @@ Registers User for the 1st event in the results of the <code>find</code> command
 </div>
 </div>
 <div class="sect2">
-<h3 id="remove-registration-from-event-code-unregister-code"><a class="link" href="#remove-registration-from-event-code-unregister-code">3.2. Remove registration from event : <code>unregister</code></a></h3>
+<h3 id="unregistering-from-an-event-code-unregister-code"><a class="link" href="#unregistering-from-an-event-code-unregister-code">3.2. Unregistering from an event : <code>unregister</code></a></h3>
 <div class="paragraph">
 <p>User: Unregisters for an event by removing the current user&#8217;s username from the attendance list.<br>
 Format: <code>unregister INDEX</code></p>
@@ -257,7 +286,7 @@ Unregisters user from the 2nd event in the results of the <code>find</code> comm
 </div>
 </div>
 <div class="sect2">
-<h3 id="list-all-registered-events-code-attending-code"><a class="link" href="#list-all-registered-events-code-attending-code">3.3. List all registered events : <code>attending</code></a></h3>
+<h3 id="listing-all-registered-events-code-attending-code"><a class="link" href="#listing-all-registered-events-code-attending-code">3.3. Listing all registered events : <code>attending</code></a></h3>
 <div class="paragraph">
 <p>User: Lists all events that the user has registered for.<br>
 Format: <code>attending</code></p>
@@ -270,7 +299,7 @@ Format: <code>attending</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="remove-user-from-event-code-removeattendee-code"><a class="link" href="#remove-user-from-event-code-removeattendee-code">3.4. Remove user from event : <code>removeAttendee</code></a></h3>
+<h3 id="removing-user-from-event-code-removeattendee-code"><a class="link" href="#removing-user-from-event-code-removeattendee-code">3.4. Removing user from event : <code>removeAttendee</code></a></h3>
 <div class="paragraph">
 <p>Admin: Removes a user registered for an event.<br>
 Format: <code>removeAttendee INDEX u/USERNAME</code></p>
@@ -333,10 +362,10 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The RSVP feature consists of the <code>register</code> &amp; <code>unregister</code> command. A <code>removeAttendee</code> command is included for admin use to remove users forcibly if required. The implementations of the commands use the <code>EditEventDescriptor</code> class and <code>createEditedEvent</code> method from <code>EditCommand</code> to aid in updating event attendance. Attendees of an event are stored in the <code>eventmanager.xml</code> file, in a similar fashion to the storage of tags.</p>
+<p>The RSVP feature consists of the <code>register</code>, <code>unregister</code>, and <code>attending</code> command. A <code>removeAttendee</code> command is included for admin use to remove users forcibly if required. The implementations of the commands use the <code>EditEventDescriptor</code> class and <code>createEditedEvent</code> method from <code>EditCommand</code> to aid in updating event attendance. The <code>AttendanceContainsUserPredicate</code> class is used to filter events that the user has registered for. Attendees of an event are stored in the <code>eventmanager.xml</code> file, in a similar fashion to the storage of tags.</p>
 </div>
 <div class="paragraph">
-<p>Below is an example usage scenario and how the RSVP mechanism behaves:</p>
+<p>Below is an example usage scenario and how the RSVP mechanism behaves during a <code>register</code> operation:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -346,12 +375,26 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Step 1: The user launches the application, and logs in.</p>
 <p class="tableblock">Step 2: The user clicks on an event or types <code>select 2</code> into the CLI. Details of the 2nd event including event attendance are displayed.</p>
-<p class="tableblock">Step 3: The user executes <code>register 2</code> to register for the 2nd event. The <code>register</code> command takes in the current model and event at index 2, getting the username of the current user via <code>Model#getUsername</code>, and the current attendance of the event as a <code>HashSet</code> with <code>Event#getAttendance</code>.</p>
+<p class="tableblock">Step 3: The user executes <code>register 2</code> to register for the 2nd event. With the <code>Model</code>, the <code>RegisterCommand#execute</code> method gets the event at index 2, the username of the current user, and the current attendance of the event as a <code>HashSet</code> with <code>Event#getAttendance</code>.</p>
 <p class="tableblock">Step 4: The <code>register</code> command tries to add the username into the current attendance with <code>HashSet#add</code>. If the username already exists in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
-<p class="tableblock">Step 5: The model is updated and committed, overwriting <code>eventmanager.xml</code>. The event page is reloaded to display the new event attendance.</p>
-<p class="tableblock">Step 6: If the user decides to unregister from the event, the user executes <code>unregister 2</code>, and the <code>unregister</code> command gets the username and attendance in the same manner as the <code>register</code> command in Step 3.</p>
-<p class="tableblock">Step 7: The <code>unregister</code> command command tries to remove the username from the current attendance with <code>HashSet#remove</code>. If the username does not exist in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
-<p class="tableblock">Step 8: The model is updated and committed as in Step 4, and the event page is again reloaded.</p></td>
+<p class="tableblock">Step 5: The model is updated with the edited event and committed. The event page is reloaded to display the new event attendance.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Below is another example usage scenario illustrating how the RSVP mechanism behaves during an <code>unregister</code> operation, with the use of <code>attending</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Step 1: The user launches the application, and logs in.</p>
+<p class="tableblock">Step 2: The user types <code>attending</code> into the CLI. <code>AttendingCommand#execute</code> retrieves the current user&#8217;s username from <code>Model</code> and creates a <code>AttendanceContainsUsernamePredicate</code> predicate. The predicate is used with <code>Model#updateFilteredEventList</code> to filter out events without the user&#8217;s username in their attendance. Events that the user has registered for are displayed.</p>
+<p class="tableblock">Step 3: The user executes <code>unregister 2</code> to unregister from the 2nd event. With the <code>Model</code>, the <code>UnregisterCommand#execute</code> method gets the event at index 2, the username of the current user, and the current attendance of the event as a <code>HashSet</code> with <code>Event#getAttendance</code>.</p>
+<p class="tableblock">Step 4: The <code>unregister</code> command command tries to remove the username from the current attendance with <code>HashSet#remove</code>. If the username does not exist in the attendance, a <code>CommandException</code> is thrown. Else, <code>EditCommand#EditEventDescriptor</code> is used with the new attendance to create an edited event.</p>
+<p class="tableblock">Step 5: The model is updated with the edited event and committed. The event page is reloaded to display the new event attendance..</p></td>
 </tr>
 </tbody>
 </table>
@@ -503,6 +546,17 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 </li>
 <li>
 <p>Cons: More complexity for inserting in correct location.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-cases"><a class="link" href="#use-cases">4.2. Use Cases</a></h3>
 <h3 id="use-case-registration" class="discrete">Use case: Registration</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -528,12 +582,6 @@ Removes the user with username <code>Alice</code> from the attendance of the 2nd
 <p>EventManager adds user to attendance list and displays confirmation message.</p>
 </li>
 </ol>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
 </div>
 <div class="paragraph">
 <p><strong>Extensions:</strong></p>
@@ -590,7 +638,164 @@ Use case ends.</p>
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="displaying-event-details"><a class="link" href="#displaying-event-details">4.3. Displaying event details</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Viewing event details with special characters</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+First event in list contains special characters in details, e.g. <code>?</code>, <code>#</code>, <code>&amp;</code>, <code>=</code>, <code>/</code>, <code>@</code>, <code>:</code>.</p>
+</li>
+<li>
+<p>Test case: <code>select 1</code><br>
+Expected: Event page displays all special characters. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="registering-for-an-event"><a class="link" href="#registering-for-an-event">4.4. Registering for an event</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Registering for an event while all events are listed/filtered</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+Username is not in attendance of first event.<br>
+Username is in attendance of second event.</p>
+</li>
+<li>
+<p>Test case: <code>register 1</code><br>
+Expected: Username is added to attendance of first event. Index of the event is shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>register 2</code><br>
+Expected: No duplicate username in attendance of second event. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>register x</code> (where x is non-positive, larger than the list size or not an integer)+
+Expected: Username is not added to attendance of any event. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unregistering-for-an-event"><a class="link" href="#unregistering-for-an-event">4.5. Unregistering for an event</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Unregistering for an event while all events are listed/filtered</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+Username is in attendance of first event.<br>
+Username is not in attendance of second event.</p>
+</li>
+<li>
+<p>Test case: <code>unregister 1</code><br>
+Expected: Username is removed from attendance of first event. Index of the event is shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>unregister 2</code><br>
+Expected: Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>unregister x</code> (where x is non-positive, larger than the list size or not an integer)+
+Expected: Username is not removed from attendance of any event. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-all-attending-events"><a class="link" href="#viewing-all-attending-events">4.6. Viewing all attending events</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Viewing attending events while all events are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+List all events using the <code>list</code> command. Multiple events in the list.<br>
+User has registered for some events using the <code>register</code> command.</p>
+</li>
+<li>
+<p>Test case: <code>attending</code><br>
+Expected: Only events which the user has registered for are shown. Number of events the user has registered for are shown in the status message. Timestamp in the status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Viewing attending events while events are filtered</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+Filter events with the <code>find</code> command.<br>
+User has registered for some events using the <code>register</code> command.</p>
+</li>
+<li>
+<p>Test case: <code>attending</code><br>
+Expected: Only events which the user has registered for are shown, including events not in the filtered list. Number of events the user has registered for are shown in the status message. Timestamp in the status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="removing-an-attendee-from-event"><a class="link" href="#removing-an-attendee-from-event">4.7. Removing an attendee from event</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Removing an attendee by username from an event while all events are listed/filtered</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites:<br>
+Logged in as admin.<br>
+Username of target attendee <code>Charlotte Oliveiro</code> is in the attendance of the first event.
+Username of target attendee <code>Charlotte Oliveiro</code> is not in the attendance of the second event.</p>
+</li>
+<li>
+<p>Test case: <code>removeAttendee 1 u/Charlotte Oliveiro</code><br>
+Expected: Target attendee is removed from attendance of first event. Username of target attendee and index of the event is shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>removeAttendee 1 u/charlotte oliveiro</code><br>
+Expected: Target attendee username is case-sensitive. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>removeAttendee 2 u/Charlotte Oliveiro</code><br>
+Expected: Target attendee does not exist in second event. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>removeAttendee x u/Charlotte Oliveiro</code> (where x is non-positive, larger than the list size or not an integer)<br>
+Expected: Target user is not removed from attendance of any event. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:49:59 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:09:27 UTC</div></div></div></body></html>
